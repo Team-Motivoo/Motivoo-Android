@@ -28,14 +28,22 @@ jobs:
           distribution: 'temurin'
           cache: gradle
 
-      - name: Create Local Properties
-        run: touch local.properties
+      - name: Change gradlew permissions
+        run: chmod +x ./gradlew
+
+      - name: Access HD_BASE_URL
+        env:
+          HFM_BASE_URL: ${{ secrets.BASE_URL }}
+        run: echo "base_url=\"$base_url\"" >> local.properties
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
+      - name: Touch local properties
+        run: touch local.properties
+
       - name: Lint Check
-        run: ./gradlew ktlintCheck
+        run: ./gradlew ktlintCheck 
 
       - name: Build with Gradle
         run: ./gradlew build
