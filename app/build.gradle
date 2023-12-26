@@ -119,3 +119,10 @@ dependencies {
     implementation 'androidx.core:core-splashscreen:1.0.1'
 
 }
+ktlint {
+    android = true
+    debug = true
+    coloredOutput = true
+    verbose = true
+    outputToConsole = true
+}
