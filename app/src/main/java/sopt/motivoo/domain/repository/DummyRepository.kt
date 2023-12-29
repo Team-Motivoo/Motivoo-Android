@@ -6,5 +6,4 @@ import sopt.motivoo.domain.entity.dummy.DummyInfoList
 interface DummyRepository {
 
     suspend fun postDummyData(dummyRequestData: DummyRequestData): Result<DummyInfoList>
-
 }

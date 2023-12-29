@@ -12,5 +12,4 @@ class DummyRepositoryImpl @Inject constructor(
 
     override suspend fun postDummyData(dummyRequestData: DummyRequestData): Result<DummyInfoList> =
         runCatching { dummyDataSource.postDummyData(dummyRequestData).toDummyInfo() }
-
 }

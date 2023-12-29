@@ -11,5 +11,4 @@ class DummyDataSource @Inject constructor(
 
     suspend fun postDummyData(dummyRequestData: DummyRequestData): DummyResponseData =
         dummyService.postData(dummyRequestData)
-
 }

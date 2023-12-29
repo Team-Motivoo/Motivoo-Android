@@ -10,7 +10,4 @@ import javax.inject.Inject
 class DummyViewModel @Inject constructor(
     private val dummyRepository: DummyRepository,
     private val motivooStorage: MotivooStorage
-) : ViewModel() {
-
-
-}
+) : ViewModel()
