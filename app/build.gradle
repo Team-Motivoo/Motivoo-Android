@@ -88,9 +88,6 @@ dependencies {
     // define a BOM and its version
     implementation(platform("com.squareup.okhttp3:okhttp-bom:4.10.0"))
 
-    // kakao login
-    implementation "com.kakao.sdk:v2-user:2.11.0"
-
     // Google Play services
     implementation 'com.google.gms:google-services:4.3.15'
     implementation 'com.google.firebase:firebase-auth:22.0.0'
