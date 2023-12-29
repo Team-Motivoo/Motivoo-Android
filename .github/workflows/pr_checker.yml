@@ -47,3 +47,25 @@ jobs:
 
       - name: Build with Gradle
         run: ./gradlew build
+
+      - name: On Success!! Congratulations
+        if: ${{ success() }}
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_COLOR: '#4AC3BE'
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_TITLE: 'MOTIVOO/PR Check S.U.C.C.E.S.S 🎉🎉🎉'
+          MSG_MINIMAL: true
+          SLACK_USERNAME: MOTIVOO-AOS
+          SLACK_MESSAGE: 'PR이 완료되었습니다!!! 🎉🎉🎉'
+
+      - name: On Failed, Notify in Slack
+        if: ${{ failure() }}
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_COLOR: '#ff0000'
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_TITLE: 'MOTIVOO/Android Debug build Fail❌'
+          MSG_MINIMAL: true
+          SLACK_USERNAME: MOTIVOO-AOS
+          SLACK_MESSAGE: '에러를 확인하세요'
