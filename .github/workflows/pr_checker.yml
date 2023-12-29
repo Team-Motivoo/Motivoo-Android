@@ -31,7 +31,12 @@ jobs:
       - name: Change gradlew permissions
         run: chmod +x ./gradlew
 
-      - name: Access HD_BASE_URL
+      - name: Create google-services.json
+        env:
+          FIREBASE_SECRET: ${{ secrets.FIREBASE_SECRET }}
+        run: echo $FIREBASE_SECRET > app/google-services.json
+
+      - name: Access BASE_URL
         env:
           HFM_BASE_URL: ${{ secrets.BASE_URL }}
         run: echo "base_url=\"$base_url\"" >> local.properties
@@ -43,10 +48,10 @@ jobs:
         run: touch local.properties
 
       - name: Lint Check
-        run: ./gradlew ktlintCheck 
+        run: ./gradlew ktlintCheck -PcompileSdkVersion=34
 
       - name: Build with Gradle
-        run: ./gradlew build
+        run: ./gradlew build -PcompileSdkVersion=34
 
       - name: On Success!! Congratulations
         if: ${{ success() }}
