@@ -22,16 +22,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object RetrofitModule {
 
-    private val client by lazy {
-        OkHttpClient.Builder()
-            .addInterceptor(
-                HttpLoggingInterceptor()
-                    .apply {
-                        level = HttpLoggingInterceptor.Level.BODY
-                    },
-            ).build()
-    }
-
     @Provides
     @Singleton
     fun provideDataStore(motivooStorageImpl: MotivooStorageImpl): MotivooStorage =
