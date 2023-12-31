@@ -8,11 +8,12 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import sopt.motivoo.R
 
 abstract class BindingBottomSheetDialogFragment<B : ViewDataBinding>(@LayoutRes private val layoutResId: Int) :
     BottomSheetDialogFragment() {
     private var _binding: B? = null
-    val binding get() = requireNotNull(_binding!!) { "${this::class.java.simpleName}에서 에러가 발생했습니다." }
+    protected val binding get() = _binding ?: error(getString(R.string.binding_error))
 
     override fun onCreateView(
         inflater: LayoutInflater,
