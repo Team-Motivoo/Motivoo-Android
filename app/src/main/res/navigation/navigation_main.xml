@@ -28,4 +28,8 @@
         android:id="@+id/myPageFragment"
         android:name="sopt.motivoo.presentation.MyPageFragment"
         android:label="MyPageFragment" />
+    <fragment
+        android:id="@+id/exerciseFragment"
+        android:name="sopt.motivoo.presentation.ExerciseFragment"
+        android:label="ExerciseFragment" />
 </navigation>
