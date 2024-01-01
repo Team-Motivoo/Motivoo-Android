@@ -23,11 +23,7 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="sopt.motivoo.presentation.HomeFragment"
-        android:label="HomeFragment">
-        <action
-            android:id="@+id/action_homeFragment_to_myPageFragment"
-            app:destination="@id/myPageFragment" />
-    </fragment>
+        android:label="HomeFragment" />
     <fragment
         android:id="@+id/myPageFragment"
         android:name="sopt.motivoo.presentation.MyPageFragment"
