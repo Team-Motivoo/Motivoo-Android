@@ -8,6 +8,7 @@ buildscript {
         hiltVersion = "2.47"
         coilVersion = "2.2.2"
         viewModelVersion = "2.6.2"
+        navVersion = "2.5.3"
     }
     dependencies {
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hiltVersion"
