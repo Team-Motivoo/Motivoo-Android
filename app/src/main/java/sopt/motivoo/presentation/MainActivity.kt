@@ -41,6 +41,7 @@ class MainActivity : AppCompatActivity() {
             binding.bnvMain.visibility = if (destination.id in listOf(
                     R.id.splashFragment,
                     R.id.loginFragment,
+                    R.id.webViewFragment,
                 )
             ) {
                 View.GONE
