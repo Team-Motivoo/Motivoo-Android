@@ -39,14 +39,14 @@ class MainActivity : AppCompatActivity() {
     private fun setBottomVisible(navController: NavController) {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             binding.bnvMain.visibility = if (destination.id in listOf(
-                    R.id.splashFragment,
-                    R.id.loginFragment,
-                    R.id.webViewFragment,
+                    R.id.homeFragment,
+                    R.id.myPageFragment,
+                    R.id.exerciseFragment,
                 )
             ) {
-                View.GONE
-            } else {
                 View.VISIBLE
+            } else {
+                View.GONE
             }
         }
     }
