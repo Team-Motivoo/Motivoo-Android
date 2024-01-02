@@ -11,6 +11,9 @@
         <action
             android:id="@+id/action_splashFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_webViewFragment"
+            app:destination="@id/webViewFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -32,4 +35,12 @@
         android:id="@+id/exerciseFragment"
         android:name="sopt.motivoo.presentation.ExerciseFragment"
         android:label="ExerciseFragment" />
+    <fragment
+        android:id="@+id/webViewFragment"
+        android:name="sopt.motivoo.presentation.WebViewFragment"
+        android:label="WebViewFragment">
+        <argument
+            android:name="url"
+            app:argType="string" />
+    </fragment>
 </navigation>
