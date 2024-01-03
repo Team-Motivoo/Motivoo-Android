@@ -7,9 +7,14 @@
 [![minSdkVersion](https://img.shields.io/badge/minSdkVersion-24-red)](https://developer.android.com/distribute/best-practices/develop/target-sdk)
 [![targetSdkVersion](https://img.shields.io/badge/targetSdkVersion-34-orange)](https://developer.android.com/distribute/best-practices/develop/target-sdk)
 
-> 부모님의 건강이 걱정되시나요?
+> 부모님의 건강이 걱정되시나요? 부모님의 운동에 부담감을 느끼는 자녀들이 있을까? 어떤 방법으로 운동을 돕고 있을까? 에 대한 궁금증을 가지고 모티부의 서비스가 시작되었습니다. 모티부는 부모와 자녀에게 매일 맞춤형 미션을 부여하여, 부모의 운동 전 과정을 도와줍니다! 
 
 > 모티부와 함께 걷기로 건강을 챙겨보아요! 🏃‍♂️🏃‍♀️
+
+### Motivoo 핵심 가치
+> 🧡 <strong>신뢰</strong> : 부모님의 운동은 믿고 맡길 수 있도록<br>
+💛 <strong>동기 부여</strong> : 부모가 운동을 더이상 숙제처럼 느끼지 않도록<br>
+💙 <strong>연결</strong> : 부모와 자녀가 서로 함께하고 있다고 느낄 수 있도록
 
 ## Development
 ### Libraries
@@ -70,8 +75,16 @@
 
 
 ## Convention
-- [Git Convention](https://gayeong04.notion.site/Android-Coding-Convention-e503175f631043fda4fe63180e6e867e?pvs=4)
-- [Android Coding Convention](https://gayeong04.notion.site/Git-Convention-79ba08a6f1444d4aaf9a1f53ce1eb91c?pvs=4)
+- [Git Convention](https://gayeong04.notion.site/Git-Convention-79ba08a6f1444d4aaf9a1f53ce1eb91c?pvs=4)
+- [Android Coding Convention](https://gayeong04.notion.site/Android-Coding-Convention-e503175f631043fda4fe63180e6e867e?pvs=4)
+
+## Projects Progress Board
+- 1️⃣ [Phase1](https://github.com/orgs/Team-Motivoo/projects/1/views/1)
+    - 합숙 전 : 프로젝트 기초세팅, 뷰 관련 작업
+- 2️⃣ [Phase2](https://github.com/orgs/Team-Motivoo/projects/3)
+    - 합숙 1주차 : 뷰 관련 작업 + 서버 연결
+- 3️⃣ [Phase3](https://github.com/orgs/Team-Motivoo/projects/4)
+    - 합숙 2주차 : 서버 연결 마무리 + QA + 1차 릴리즈
 
 ## Developer
 |이준희(리드)|조관희|엄현지|김준서(명예 OB)|
