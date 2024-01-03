@@ -9,6 +9,7 @@ plugins {
     id 'com.google.gms.google-services'
     id 'com.google.firebase.crashlytics'
     id "io.sentry.android.gradle" version "4.1.1"
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 Properties properties = new Properties()

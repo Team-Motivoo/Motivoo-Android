@@ -40,4 +40,5 @@ fun Context.loadingImage(imageUrl: String, imageView: ImageView, loadingImage: I
 fun Context.hideKeyboard(view: View) {
     val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
     inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+    view.clearFocus()
 }

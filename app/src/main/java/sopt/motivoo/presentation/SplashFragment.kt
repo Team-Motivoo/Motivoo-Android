@@ -15,9 +15,19 @@ class SplashFragment : BindingFragment<FragmentSplashBinding>(R.layout.fragment_
         binding.btnSplash.setOnClickListener {
             navigateToLogin()
         }
+
+        binding.btnWebview.setOnClickListener {
+            navigateToWebView()
+        }
     }
 
     private fun navigateToLogin() {
         findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
+    }
+
+    private fun navigateToWebView() {
+        val action = SplashFragmentDirections
+            .actionSplashFragmentToWebViewFragment("https://velog.io/@gnwjd309/GitHub-commit-history")
+        findNavController().navigate(action)
     }
 }
