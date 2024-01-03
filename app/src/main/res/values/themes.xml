@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.MOTIVOOAOS" parent="Theme.Material3.Light.NoActionBar">
         <!-- Customize your light theme here. -->
-        <item name="android:statusBarColor">@color/black</item>
+        <item name="android:statusBarColor">@color/Black</item>
         <item name="android:windowLightStatusBar">true</item>
         <!-- Customize your theme here. -->
         <item name="android:includeFontPadding">false</item>
