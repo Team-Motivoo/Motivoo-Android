@@ -1,0 +1,88 @@
+<resources>
+
+    <style name="H1_med">
+        <item name="android:textSize">48sp</item>
+        <item name="fontFamily">@font/pretendard_regular</item>
+        <item name="android:lineSpacingExtra">23.04sp</item>
+        <item name="android:letterSpacing">-0.03</item>
+    </style>
+
+    <style name="H2_semi">
+        <item name="android:textSize">24sp</item>
+        <item name="fontFamily">@font/pretendard_semibold</item>
+        <item name="android:lineSpacingExtra">9.6sp</item>
+    </style>
+
+    <style name="H3_med">
+        <item name="android:textSize">24sp</item>
+        <item name="fontFamily">@font/pretendard_medium</item>
+        <item name="android:lineSpacingExtra">9.6sp</item>
+    </style>
+
+    <style name="H4_semi">
+        <item name="android:textSize">18sp</item>
+        <item name="fontFamily">@font/pretendard_semibold</item>
+        <item name="android:lineSpacingExtra">8.64sp</item>
+    </style>
+
+    <style name="H5_semi">
+        <item name="android:textSize">17sp</item>
+        <item name="fontFamily">@font/pretendard_semibold</item>
+        <item name="android:lineSpacingExtra">8.16sp</item>
+    </style>
+
+    <style name="H6_semi">
+        <item name="android:textSize">16sp</item>
+        <item name="fontFamily">@font/pretendard_semibold</item>
+        <item name="android:lineSpacingExtra">7.68sp</item>
+    </style>
+
+    <style name="B1_med">
+        <item name="android:textSize">18sp</item>
+        <item name="fontFamily">@font/pretendard_medium</item>
+        <item name="android:lineSpacingExtra">8.64sp</item>
+    </style>
+
+    <style name="B2_re">
+        <item name="android:textSize">18sp</item>
+        <item name="fontFamily">@font/pretendard_regular</item>
+        <item name="android:lineSpacingExtra">8.64sp</item>
+    </style>
+
+    <style name="B3_med">
+        <item name="android:textSize">17sp</item>
+        <item name="fontFamily">@font/pretendard_medium</item>
+        <item name="android:lineSpacingExtra">8.16sp</item>
+    </style>
+
+    <style name="B4_re">
+        <item name="android:textSize">17sp</item>
+        <item name="fontFamily">@font/pretendard_regular</item>
+        <item name="android:lineSpacingExtra">8.16sp</item>
+    </style>
+
+    <style name="B5_med">
+        <item name="android:textSize">16sp</item>
+        <item name="fontFamily">@font/pretendard_medium</item>
+        <item name="android:lineSpacingExtra">7.68sp</item>
+    </style>
+
+    <style name="B6_re">
+        <item name="android:textSize">16sp</item>
+        <item name="fontFamily">@font/pretendard_regular</item>
+        <item name="android:lineSpacingExtra">7.68sp</item>
+    </style>
+
+    <style name="Caption1_semi">
+        <item name="android:textSize">15sp</item>
+        <item name="fontFamily">@font/pretendard_semibold</item>
+        <item name="android:lineSpacingExtra">7.2sp</item>
+    </style>
+
+    <style name="Caption2_re">
+        <item name="android:textSize">15sp</item>
+        <item name="fontFamily">@font/pretendard_regular</item>
+        <item name="android:lineSpacingExtra">7.2sp</item>
+    </style>
+
+</resources>
