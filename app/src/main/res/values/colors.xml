@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="Black">#090909</color>
-    <color name="White">#FFFFFF</color>
-    <color name="Blue_100">#D7F6FF</color>
-    <color name="Blue_400">#65DBFF</color>
-    <color name="Primary_Blue_500">#00C3FF</color>
-    <color name="Blue_700">#065066</color>
-    <color name="Gray_50">#FBFCFC</color>
-    <color name="Gray_100">#F4F5F9</color>
-    <color name="Gray_200">#ECEDF1</color>
-    <color name="Gray_300">#D5D5D7</color>
-    <color name="Gray_400">#C0C1C3</color>
-    <color name="Gray_500">#9D9EA0</color>
-    <color name="Gray_600">#707276</color>
-    <color name="Gray_700">#464747</color>
-    <color name="Gray_800">#303031</color>
-    <color name="Gray_900">#161616</color>
-    <color name="Blue_50">#EAFAFF</color>
-    <color name="Blue_200">#B4EEFF</color>
-    <color name="Blue_300">#87E3FF</color>
-    <color name="Blue_500">#00C3FF</color>
-    <color name="Blue_600">#2E9ABB</color>
-    <color name="Blue_800">#072D39</color>
-    <color name="Pink">#FF19A3</color>
-
+    <color name="black_090909">#090909</color>
+    <color name="white_FFFFFF">#FFFFFF</color>
+    <color name="pink_FF19A3">#FF19A3</color>
+    <!--Blue-->
+    <color name="blue_50_EAFAFF">#EAFAFF</color>
+    <color name="blue_100_D7F6FF">#D7F6FF</color>
+    <color name="blue_200_B4EEFF">#B4EEFF</color>
+    <color name="blue_300_87E3FF">#87E3FF</color>
+    <color name="blue_400_65DBFF">#65DBFF</color>
+    <color name="blue_500_00C3FF">#00C3FF</color>
+    <color name="blue_600_2E9ABB">#2E9ABB</color>
+    <color name="blue_700_065066">#065066</color>
+    <color name="blue_800_072D39">#072D39</color>
+    <!--Gray-->
+    <color name="gray_50_FBFCFC">#FBFCFC</color>
+    <color name="gray_100_F4F5F9">#F4F5F9</color>
+    <color name="gray_200_ECEDF1">#ECEDF1</color>
+    <color name="gray_300_D5D5D7">#D5D5D7</color>
+    <color name="gray_400_C0C1C3">#C0C1C3</color>
+    <color name="gray_500_9D9EA0">#9D9EA0</color>
+    <color name="gray_600_707276">#707276</color>
+    <color name="gray_700_464747">#464747</color>
+    <color name="gray_800_303031">#303031</color>
+    <color name="gray_900_161616">#161616</color>
 </resources>
