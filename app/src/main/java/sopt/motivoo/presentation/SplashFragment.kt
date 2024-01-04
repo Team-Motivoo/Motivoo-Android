@@ -2,7 +2,10 @@ package sopt.motivoo.presentation
 
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import sopt.motivoo.R
 import sopt.motivoo.databinding.FragmentSplashBinding
 import sopt.motivoo.util.binding.BindingFragment
@@ -12,12 +15,13 @@ class SplashFragment : BindingFragment<FragmentSplashBinding>(R.layout.fragment_
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnSplash.setOnClickListener {
-            navigateToLogin()
-        }
+        showSplash()
+    }
 
-        binding.btnWebview.setOnClickListener {
-            navigateToWebView()
+    private fun showSplash() {
+        lifecycleScope.launch {
+            delay(2000)
+            navigateToLogin()
         }
     }
 
