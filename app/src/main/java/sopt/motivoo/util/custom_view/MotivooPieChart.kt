@@ -11,7 +11,7 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
 import sopt.motivoo.R
-import sopt.motivoo.util.extension.fromDpToPx
+import sopt.motivoo.util.extension.px
 
 class MotivooPieChart @JvmOverloads constructor(
     context: Context,
@@ -19,23 +19,18 @@ class MotivooPieChart @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : View(context, attributeSet, defStyleAttr) {
     private var stepCount = 0f
-    private val layoutSize = LAYOUT_SIZE.fromDpToPx().toInt()
+    private val layoutSize = LAYOUT_SIZE.px.toInt()
     private val progressBarPaint: Paint = Paint()
     private val progressBarInnerPaint: Paint = Paint()
     private val drawRectArea =
-        RectF(
-            LAYOUT_SPACING.fromDpToPx(),
-            LAYOUT_SPACING.fromDpToPx(),
-            DRAW_AREA_SIZE.fromDpToPx(),
-            DRAW_AREA_SIZE.fromDpToPx()
-        )
+        RectF(LAYOUT_SPACING.px, LAYOUT_SPACING.px, DRAW_AREA_SIZE.px, DRAW_AREA_SIZE.px)
     private var logoImage: Bitmap?
 
-    private val logoSpacing = LOGO_IMAGE_SPACING.fromDpToPx()
+    private val logoSpacing = LOGO_IMAGE_SPACING.px
 
     init {
         logoImage = ContextCompat.getDrawable(context, R.drawable.ic_launcher_foreground)?.run {
-            toBitmap(LOGO_IMAGE_SIZE.fromDpToPx().toInt(), LOGO_IMAGE_SIZE.fromDpToPx().toInt())
+            toBitmap(LOGO_IMAGE_SIZE.px.toInt(), LOGO_IMAGE_SIZE.px.toInt())
         }
 
         context.theme.obtainStyledAttributes(
@@ -44,12 +39,12 @@ class MotivooPieChart @JvmOverloads constructor(
             progressBarPaint.apply {
                 color = getColor(R.styleable.MotivooPieChart_progressBarColor, Color.GRAY)
                 style = Paint.Style.STROKE
-                strokeWidth = STROKE_SIZE.fromDpToPx()
+                strokeWidth = STROKE_SIZE.px
             }
             progressBarInnerPaint.apply {
                 color = getColor(R.styleable.MotivooPieChart_progressBarInnerColor, Color.BLUE)
                 style = Paint.Style.STROKE
-                strokeWidth = STROKE_SIZE.fromDpToPx()
+                strokeWidth = STROKE_SIZE.px
             }
             recycle()
         }
