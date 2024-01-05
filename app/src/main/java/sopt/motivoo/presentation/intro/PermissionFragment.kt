@@ -1,10 +1,12 @@
 package sopt.motivoo.presentation.intro
 
 import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import sopt.motivoo.R
 import sopt.motivoo.databinding.FragmentPermissionBinding
@@ -36,7 +38,7 @@ class PermissionFragment :
         super.onViewCreated(view, savedInstanceState)
 
         initRequiredPermissions()
-        if (checkPermissionsStatus()) {
+        if (checkPermissionsStatus() || isAllPermissionsGranted()) {
             navigateToLogin()
         } else {
             getPermission()
@@ -79,6 +81,16 @@ class PermissionFragment :
         }
         return true
     }
+
+    private fun isAllPermissionsGranted(): Boolean {
+        return requiredPermissions.all {
+            ContextCompat.checkSelfPermission(
+                requireContext(),
+                it
+            ) == PackageManager.PERMISSION_GRANTED
+        }
+    }
+
 
     private fun getPermission() {
         binding.btnPermissionDone.setOnClickListener { checkAndRequestPermissions() }
