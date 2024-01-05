@@ -55,16 +55,14 @@ class PermissionFragment :
             Manifest.permission.READ_EXTERNAL_STORAGE
         }
 
-        val activityRecognitionPermission = if (isAndroidQOrAbove) {
-            Manifest.permission.ACTIVITY_RECOGNITION
-        } else {
-            Manifest.permission.BODY_SENSORS
-        }
-        val permissions = listOf(
+        val permissions = mutableListOf(
             Manifest.permission.CAMERA,
-            storagePermission,
-            activityRecognitionPermission
+            storagePermission
         )
+
+        if (isAndroidQOrAbove) {
+            permissions.add(Manifest.permission.ACTIVITY_RECOGNITION)
+        }
 
         for (permission in permissions) {
             if (!shouldShowRequestPermissionRationale(permission)) {
@@ -90,7 +88,6 @@ class PermissionFragment :
             ) == PackageManager.PERMISSION_GRANTED
         }
     }
-
 
     private fun getPermission() {
         binding.btnPermissionDone.setOnClickListener { checkAndRequestPermissions() }
