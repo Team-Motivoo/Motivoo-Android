@@ -2,4 +2,9 @@
     <string name="app_name">MOTIVOO</string>
     <string name="application_terminate">\'뒤로\' 버튼 한 번 더 누르면 종료됩니다.</string>
     <string name="binding_error">에러가 발생했습니다</string>
+
+    <!--  permission  -->
+    <string name="permission_back">이전</string>
+    <string name="permission_title">접근 권한 안내</string>
+    <string name="permission_description">원활한 이용을 위해\n다음 권한의 허용이 필요해요.</string>
 </resources>
