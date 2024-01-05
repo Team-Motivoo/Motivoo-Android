@@ -1,12 +1,14 @@
 package sopt.motivoo.util.custom_view
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.RectF
 import android.util.AttributeSet
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
 import sopt.motivoo.R
 import sopt.motivoo.util.extension.fromDpToPx
@@ -17,14 +19,47 @@ class MotivooPieChart @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : View(context, attributeSet, defStyleAttr) {
     private var stepCount = 0f
+    private val layoutSize = LAYOUT_SIZE.fromDpToPx().toInt()
+    private val progressBarPaint: Paint = Paint()
+    private val progressBarInnerPaint: Paint = Paint()
+    private val drawRectArea =
+        RectF(
+            LAYOUT_SPACING.fromDpToPx(),
+            LAYOUT_SPACING.fromDpToPx(),
+            DRAW_AREA_SIZE.fromDpToPx(),
+            DRAW_AREA_SIZE.fromDpToPx()
+        )
+    private var logoImage: Bitmap?
+
+    private val logoSpacing = LOGO_IMAGE_SPACING.fromDpToPx()
+
+    init {
+        logoImage = ContextCompat.getDrawable(context, R.drawable.ic_launcher_foreground)?.run {
+            toBitmap(LOGO_IMAGE_SIZE.fromDpToPx().toInt(), LOGO_IMAGE_SIZE.fromDpToPx().toInt())
+        }
+
+        context.theme.obtainStyledAttributes(
+            attributeSet, R.styleable.MotivooPieChart, defStyleAttr, defStyleAttr
+        ).apply {
+            progressBarPaint.apply {
+                color = getColor(R.styleable.MotivooPieChart_progressBarColor, Color.GRAY)
+                style = Paint.Style.STROKE
+                strokeWidth = STROKE_SIZE.fromDpToPx()
+            }
+            progressBarInnerPaint.apply {
+                color = getColor(R.styleable.MotivooPieChart_progressBarInnerColor, Color.BLUE)
+                style = Paint.Style.STROKE
+                strokeWidth = STROKE_SIZE.fromDpToPx()
+            }
+            recycle()
+        }
+    }
 
     /**
      * wrap_content 대응을 위한 분기 처리 + 기기 화면 별 대응
      */
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-
-        val layoutSize = LAYOUT_SIZE.fromDpToPx().toInt()
 
         if (measureMode(widthMeasureSpec) && measureMode(heightMeasureSpec)) {
             setMeasuredDimension(
@@ -42,29 +77,14 @@ class MotivooPieChart @JvmOverloads constructor(
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
-        val drawAreaSize = (LAYOUT_SPACING + DIAMETER + DIAMETER_SPACING * 2).fromDpToPx()
-        val drawRectArea =
-            RectF(LAYOUT_SPACING.toFloat(), LAYOUT_SPACING.toFloat(), drawAreaSize, drawAreaSize)
-
         /** 회색 원형 막대 */
-        Paint().apply {
-            color = Color.GRAY
-            style = Paint.Style.STROKE
-            strokeWidth = STROKE_SIZE.toFloat()
-        }.let {
-            canvas.drawArc(drawRectArea, START_ANGLE, SWEEP_ANGLE, false, it)
-            /** 하늘색 원형 막대 */
-            it.color = Color.BLUE
-            canvas.drawArc(drawRectArea, START_ANGLE, stepCount, false, it)
-        }
+        canvas.drawArc(drawRectArea, START_ANGLE, SWEEP_ANGLE, false, progressBarPaint)
+
+        /** 하늘색 원형 막대 */
+        canvas.drawArc(drawRectArea, START_ANGLE, stepCount, false, progressBarInnerPaint)
 
         /** 로고 이미지 */
-        context.getDrawable(R.drawable.ic_launcher_foreground)?.run {
-            toBitmap(LOGO_IMAGE_SIZE.fromDpToPx().toInt(), LOGO_IMAGE_SIZE.fromDpToPx().toInt())
-        }?.let {
-            val logoSpacing = LOGO_IMAGE_SPACING.fromDpToPx()
-            canvas.drawBitmap(it, logoSpacing, logoSpacing, null)
-        }
+        logoImage?.let { canvas.drawBitmap(it, logoSpacing, logoSpacing, null) }
     }
 
     /**
@@ -93,10 +113,12 @@ class MotivooPieChart @JvmOverloads constructor(
         private const val LAYOUT_SPACING = STROKE_SIZE / 2 + DIAMETER_SPACING
         private const val LAYOUT_SIZE = LAYOUT_SPACING * 2 + DIAMETER + DIAMETER_SPACING * 2
 
-        private const val START_ANGLE = -115f
-        private const val SWEEP_ANGLE = 320f
+        private const val DRAW_AREA_SIZE = (LAYOUT_SPACING + DIAMETER + DIAMETER_SPACING * 2)
 
-        private const val LOGO_IMAGE_SIZE = 48
+        private const val START_ANGLE = -115f // fix
+        private const val SWEEP_ANGLE = 320f // fix
+
+        private const val LOGO_IMAGE_SIZE = 48 // fix
         private const val LOGO_IMAGE_SPACING = LAYOUT_SPACING + 5
     }
 }
