@@ -3,6 +3,7 @@ package sopt.motivoo.presentation
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -26,7 +27,11 @@ class SplashFragment : BindingFragment<FragmentSplashBinding>(R.layout.fragment_
     }
 
     private fun navigateToLogin() {
-        findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
+        val navOptions = NavOptions.Builder()
+            .setPopUpTo(R.id.splashFragment, true)
+            .build()
+
+        findNavController().navigate(R.id.action_splashFragment_to_loginFragment, null, navOptions)
     }
 
     private fun navigateToWebView() {
