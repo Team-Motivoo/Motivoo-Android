@@ -47,49 +47,112 @@
     <fragment
         android:id="@+id/ageQuestionFragment"
         android:name="sopt.motivoo.presentation.onboarding.AgeQuestionFragment"
-        android:label="AgeQuestionFragment" >
+        android:label="AgeQuestionFragment">
         <action
             android:id="@+id/action_ageQuestionFragment_to_doExerciseQuestionFragment"
-            app:destination="@id/doExerciseQuestionFragment" />
+            app:destination="@id/doExerciseQuestionFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/doExerciseQuestionFragment"
         android:name="sopt.motivoo.presentation.onboarding.DoExerciseQuestionFragment"
-        android:label="DoExerciseQuestionFragment" >
+        android:label="DoExerciseQuestionFragment">
         <action
             android:id="@+id/action_doExerciseQuestionFragment_to_whatExerciseQuestionFragment"
-            app:destination="@id/whatExerciseQuestionFragment" />
+            app:destination="@id/whatExerciseQuestionFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_doExerciseQuestionFragment_to_frequencyActivityQuestionFragment"
+            app:destination="@id/frequencyActivityQuestionFragment" />
     </fragment>
     <fragment
         android:id="@+id/frequencyExerciseQuestionFragment"
         android:name="sopt.motivoo.presentation.onboarding.FrequencyExerciseQuestionFragment"
-        android:label="FrequencyExerciseQuestionFragment" >
+        android:label="FrequencyExerciseQuestionFragment">
         <action
             android:id="@+id/action_frequencyExerciseQuestionFragment_to_timeExerciseQuestionFragment"
-            app:destination="@id/timeExerciseQuestionFragment" />
+            app:destination="@id/timeExerciseQuestionFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/soreSpotQuestionFragment"
         android:name="sopt.motivoo.presentation.onboarding.SoreSpotQuestionFragment"
-        android:label="SoreSpotQuestionFragment" >
+        android:label="SoreSpotQuestionFragment">
         <action
             android:id="@+id/action_soreSpotQuestionFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/timeExerciseQuestionFragment"
         android:name="sopt.motivoo.presentation.onboarding.TimeExerciseQuestionFragment"
-        android:label="TimeExerciseQuestionFragment" >
+        android:label="TimeExerciseQuestionFragment">
         <action
             android:id="@+id/action_timeExerciseQuestionFragment_to_soreSpotQuestionFragment"
-            app:destination="@id/soreSpotQuestionFragment" />
+            app:destination="@id/soreSpotQuestionFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/whatExerciseQuestionFragment"
         android:name="sopt.motivoo.presentation.onboarding.WhatExerciseQuestionFragment"
-        android:label="WhatExerciseQuestionFragment" >
+        android:label="WhatExerciseQuestionFragment">
         <action
             android:id="@+id/action_whatExerciseQuestionFragment_to_frequencyExerciseQuestionFragment"
-            app:destination="@id/frequencyExerciseQuestionFragment" />
+            app:destination="@id/frequencyExerciseQuestionFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/frequencyActivityQuestionFragment"
+        android:name="sopt.motivoo.presentation.onboarding.FrequencyActivityQuestionFragment"
+        android:label="FrequencyActivityQuestionFragment">
+        <action
+            android:id="@+id/action_frequencyActivityQuestionFragment_to_timeActivityQuestionFragment"
+            app:destination="@id/timeActivityQuestionFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/timeActivityQuestionFragment"
+        android:name="sopt.motivoo.presentation.onboarding.TimeActivityQuestionFragment"
+        android:label="TimeActivityQuestionFragment">
+        <action
+            android:id="@+id/action_timeActivityQuestionFragment_to_whatActivityQuestionFragment"
+            app:destination="@id/whatActivityQuestionFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/whatActivityQuestionFragment"
+        android:name="sopt.motivoo.presentation.onboarding.WhatActivityQuestionFragment"
+        android:label="WhatActivityQuestionFragment">
+        <action
+            android:id="@+id/action_whatActivityQuestionFragment_to_soreSpotQuestionFragment"
+            app:destination="@id/soreSpotQuestionFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 </navigation>
