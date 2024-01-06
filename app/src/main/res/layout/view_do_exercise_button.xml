@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="userType"
-            type="sopt.motivoo.presentation.type.UserType" />
+            name="doExerciseType"
+            type="sopt.motivoo.presentation.type.DoExerciseType" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,12 +22,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingVertical="20dp"
-            android:text="@{userType.titleRes}"
+            android:text="@{doExerciseType.titleRes}"
             android:textColor="@color/gray_800_303031"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="부모" />
+            tools:text="네" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

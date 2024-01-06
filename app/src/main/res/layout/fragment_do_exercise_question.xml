@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="sopt.motivoo.presentation.type.DoExerciseType" />
+
+        <variable
+            name="onboardingViewModel"
+            type="sopt.motivoo.presentation.onboarding.OnboardingViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_do_exercise_title"
+            style="@style/H2_semi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="51dp"
+            android:text="@string/do_exercise_title"
+            android:textColor="@color/gray_900_161616"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <include
+            android:id="@+id/include_do_exercise_yes"
+            layout="@layout/view_do_exercise_button"
+            selected="@{onboardingViewModel.doExerciseType == DoExerciseType.YES}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="70dp"
+            android:onClick="@{()->onboardingViewModel.setDoExerciseType(DoExerciseType.YES)}"
+            app:doExerciseType="@{DoExerciseType.YES}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_do_exercise_title" />
+
+        <include
+            android:id="@+id/include_do_exercise_no"
+            layout="@layout/view_do_exercise_button"
+            selected="@{onboardingViewModel.doExerciseType == DoExerciseType.NO}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            android:onClick="@{()->onboardingViewModel.setDoExerciseType(DoExerciseType.NO)}"
+            app:doExerciseType="@{DoExerciseType.NO}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include_do_exercise_yes" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

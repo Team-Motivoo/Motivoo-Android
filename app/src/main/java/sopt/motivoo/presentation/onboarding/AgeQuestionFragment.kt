@@ -22,12 +22,12 @@ import sopt.motivoo.util.extension.setOnSingleClickListener
 class AgeQuestionFragment :
     BindingFragment<FragmentAgeQusetionBinding>(R.layout.fragment_age_qusetion) {
 
-    private val onboardingViewModel by activityViewModels<OnboardingViewModel>()
+    private val ageQuestionViewModel by activityViewModels<OnboardingViewModel>()
     private var isAnimationPlayed = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.onboardingViewModel = onboardingViewModel
+        binding.onboardingViewModel = ageQuestionViewModel
 
         collectData()
         clickNextButton()
@@ -40,7 +40,7 @@ class AgeQuestionFragment :
     }
 
     private fun collectData() {
-        onboardingViewModel.userType.flowWithLifecycle(lifecycle).onEach { userType ->
+        ageQuestionViewModel.userType.flowWithLifecycle(lifecycle).onEach { userType ->
             if (userType != null) {
                 showAgeLayout(
                     binding.clAgeQuestion,
@@ -50,7 +50,7 @@ class AgeQuestionFragment :
             }
         }.launchIn(lifecycleScope)
 
-        onboardingViewModel.isValidAge.flowWithLifecycle(lifecycle).onEach { isValidAge ->
+        ageQuestionViewModel.isValidAge.flowWithLifecycle(lifecycle).onEach { isValidAge ->
             when (isValidAge) {
                 null, true -> {
                     binding.etAgeQuestion.background =
@@ -66,7 +66,7 @@ class AgeQuestionFragment :
             }
         }.launchIn(lifecycleScope)
 
-        onboardingViewModel.isValidNext.flowWithLifecycle(lifecycle).onEach { isValidNext ->
+        ageQuestionViewModel.isValidNext.flowWithLifecycle(lifecycle).onEach { isValidNext ->
             binding.btnAgeQuestionDone.isEnabled = isValidNext
         }.launchIn(lifecycleScope)
     }
