@@ -2,4 +2,7 @@
     <string name="app_name">MOTIVOO</string>
     <string name="application_terminate">\'뒤로\' 버튼 한 번 더 누르면 종료됩니다.</string>
     <string name="binding_error">에러가 발생했습니다</string>
+
+    <!-- home -->
+    <string name="my_step_count">내 걸음</string>
 </resources>
