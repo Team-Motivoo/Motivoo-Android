@@ -11,6 +11,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import sopt.motivoo.R
 import sopt.motivoo.databinding.ActivityMainBinding
 import sopt.motivoo.util.extension.hideKeyboard
+import sopt.motivoo.util.extension.setOnSingleClickListener
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -35,6 +36,8 @@ class MainActivity : AppCompatActivity() {
             }
         }
         navController?.let { setBottomVisible(it) }
+
+        binding.includeToolbar.tvToolbarBack.setOnSingleClickListener { navController?.popBackStack() }
     }
 
     private fun setBottomVisible(navController: NavController) {
@@ -68,19 +71,19 @@ class MainActivity : AppCompatActivity() {
                 View.GONE
             }
 
-            val progressValue = getProgressValue(destination.id.toFloat())
+            val progressValue = getProgressValue(destination.id)
             binding.onboardingProgress.progress = progressValue
         }
     }
 
-    private fun getProgressValue(destinationId: Float): Float {
+    private fun getProgressValue(destinationId: Int): Float {
         return when (destinationId) {
-            R.id.ageQuestionFragment.toFloat() -> 1f
-            R.id.doExerciseQuestionFragment.toFloat() -> 2f
-            R.id.whatExerciseQuestionFragment.toFloat() -> 3f
-            R.id.frequencyExerciseQuestionFragment.toFloat() -> 4f
-            R.id.timeExerciseQuestionFragment.toFloat() -> 5f
-            R.id.soreSpotQuestionFragment.toFloat() -> 6f
+            R.id.ageQuestionFragment -> 1f
+            R.id.doExerciseQuestionFragment -> 2f
+            R.id.whatExerciseQuestionFragment -> 3f
+            R.id.frequencyExerciseQuestionFragment -> 4f
+            R.id.timeExerciseQuestionFragment -> 5f
+            R.id.soreSpotQuestionFragment -> 6f
             else -> 0f
         }
     }

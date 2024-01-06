@@ -10,12 +10,14 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import sopt.motivoo.R
 import sopt.motivoo.databinding.FragmentAgeQusetionBinding
 import sopt.motivoo.util.binding.BindingFragment
 import sopt.motivoo.util.extension.drawableOf
+import sopt.motivoo.util.extension.setOnSingleClickListener
 
 class AgeQuestionFragment :
     BindingFragment<FragmentAgeQusetionBinding>(R.layout.fragment_age_qusetion) {
@@ -28,6 +30,13 @@ class AgeQuestionFragment :
         binding.onboardingViewModel = onboardingViewModel
 
         collectData()
+        clickNextButton()
+    }
+
+    private fun clickNextButton() {
+        binding.btnAgeQuestionDone.setOnSingleClickListener {
+            findNavController().navigate(R.id.action_ageQuestionFragment_to_doExerciseQuestionFragment)
+        }
     }
 
     private fun collectData() {
