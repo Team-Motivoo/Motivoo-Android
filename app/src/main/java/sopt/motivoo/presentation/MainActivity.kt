@@ -67,6 +67,21 @@ class MainActivity : AppCompatActivity() {
             } else {
                 View.GONE
             }
+
+            val progressValue = getProgressValue(destination.id.toFloat())
+            binding.onboardingProgress.progress = progressValue
+        }
+    }
+
+    private fun getProgressValue(destinationId: Float): Float {
+        return when (destinationId) {
+            R.id.ageQuestionFragment.toFloat() -> 1f
+            R.id.doExerciseQuestionFragment.toFloat() -> 2f
+            R.id.whatExerciseQuestionFragment.toFloat() -> 3f
+            R.id.frequencyExerciseQuestionFragment.toFloat() -> 4f
+            R.id.timeExerciseQuestionFragment.toFloat() -> 5f
+            R.id.soreSpotQuestionFragment.toFloat() -> 6f
+            else -> 0f
         }
     }
 
