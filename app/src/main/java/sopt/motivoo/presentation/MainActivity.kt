@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity() {
             bnvMain.itemIconTintList = null
             navController?.let { navController ->
                 bnvMain.setupWithNavController(navController)
+                setTopVisible(navController)
             }
         }
         navController?.let { setBottomVisible(it) }
@@ -42,6 +43,24 @@ class MainActivity : AppCompatActivity() {
                     R.id.homeFragment,
                     R.id.myPageFragment,
                     R.id.exerciseFragment,
+                )
+            ) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
+        }
+    }
+
+    private fun setTopVisible(navController: NavController) {
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            binding.clOnboardingToolbar.visibility = if (destination.id in listOf(
+                    R.id.ageQuestionFragment,
+                    R.id.doExerciseQuestionFragment,
+                    R.id.frequencyExerciseQuestionFragment,
+                    R.id.soreSpotQuestionFragment,
+                    R.id.timeExerciseQuestionFragment,
+                    R.id.whatExerciseQuestionFragment,
                 )
             ) {
                 View.VISIBLE
