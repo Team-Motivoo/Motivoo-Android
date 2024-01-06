@@ -3,4 +3,17 @@
     <string name="application_terminate">\'뒤로\' 버튼 한 번 더 누르면 종료됩니다.</string>
     <string name="binding_error">에러가 발생했습니다</string>
     <string name="permission_back">이전</string>
+    <string name="next">다음</string>
+
+    <!--onboarding-->
+    <string name="age_question_title_first">당신은\n부모인가요 자녀인가요?</string>
+    <string name="age_question_description_first">맞춤 운동을 제공해드려요!</string>
+    <string name="age_question_title_second">나이를 알려주세요</string>
+    <string name="age_question_description_second">정확한 운동 추천을 위해 필요해요</string>
+    <string name="onboarding_parent">부모</string>
+    <string name="onboarding_chile">자녀</string>
+    <string name="onboarding_age">나이</string>
+    <string name="onboarding_hint">나이를 입력해주세요</string>
+    <string name="onboarding_error_message">14세부터 99세까지 사용 가능해요.</string>
+    <string name="onboarding_parent_or_child">부모 or 자녀</string>
 </resources>
