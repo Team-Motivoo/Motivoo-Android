@@ -127,6 +127,9 @@ dependencies {
     //jetpack navigation
     implementation "androidx.navigation:navigation-fragment-ktx:$navVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$navVersion"
+
+    //progress Bar
+    implementation "com.github.skydoves:progressview:1.1.3"
 }
 
 ktlint {
