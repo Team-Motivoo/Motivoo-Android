@@ -64,6 +64,10 @@ class PermissionFragment :
             permissions.add(Manifest.permission.ACTIVITY_RECOGNITION)
         }
 
+        if (isAndroidTOrAbove) {
+            permissions.add(Manifest.permission.POST_NOTIFICATIONS)
+        }
+
         for (permission in permissions) {
             if (!shouldShowRequestPermissionRationale(permission)) {
                 requiredPermissions.add(permission)
