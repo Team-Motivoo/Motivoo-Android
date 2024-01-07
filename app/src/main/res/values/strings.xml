@@ -41,4 +41,19 @@
     <string name="frequency_one_to_three">1일 - 3일 이내</string>
     <string name="frequency_three_to_five">3일 - 5일 이내</string>
     <string name="frequency_over_five">5일 - 매일</string>
+    <string name="time_under_thirty">30분 미만</string>
+    <string name="time_thirty_to_one">30분 - 1시간</string>
+    <string name="time_one_to_two">1시간 - 2시간</string>
+    <string name="time_over_two">2시간 이상</string>
+    <string name="time_exercise_title">하루에 몇 시간 정도\n운동하시나요?</string>
+    <string name="time_activity_title">하루에 몇 시간 정도\n해당 활동을 하시나요?</string>
+    <string name="sore_spot_title">평소 활동 중에 불편했거나\n걱정되는 곳을 선택해주세요</string>
+    <string name="sore_spot_description">최대 3개까지 선택할 수 있어요</string>
+    <string name="sore_spot_neck">목</string>
+    <string name="sore_spot_shoulder">어꺠</string>
+    <string name="sore_spot_waist">허리</string>
+    <string name="sore_spot_knee">무릎</string>
+    <string name="sore_spot_wrist">손목</string>
+    <string name="sore_spot_ankle">발목</string>
+    <string name="onboarding_motivoo_start">모티부 시작하기</string>
 </resources>

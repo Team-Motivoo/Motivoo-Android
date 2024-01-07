@@ -14,6 +14,8 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import sopt.motivoo.presentation.type.DoExerciseType
 import sopt.motivoo.presentation.type.FrequencyType
+import sopt.motivoo.presentation.type.SoreSpotType
+import sopt.motivoo.presentation.type.TimeType
 import sopt.motivoo.presentation.type.UserType
 import sopt.motivoo.presentation.type.WhatActivityType
 import sopt.motivoo.presentation.type.WhatExerciseType
@@ -35,6 +37,9 @@ class OnboardingViewModel : ViewModel() {
     private val _frequencyType = MutableStateFlow<FrequencyType?>(null)
     val frequencyType get() = _frequencyType.asStateFlow()
 
+    private val _timeType = MutableStateFlow<TimeType?>(null)
+    val timeType get() = _timeType.asStateFlow()
+
     private val _navigateToForthPage = MutableSharedFlow<DoExerciseType>()
     val navigateToForthPage = _navigateToForthPage.asSharedFlow()
 
@@ -46,6 +51,9 @@ class OnboardingViewModel : ViewModel() {
 
     private val _navigateToSixthPage = MutableSharedFlow<FrequencyType>()
     val navigateToSixthPage = _navigateToSixthPage.asSharedFlow()
+
+    private val _navigateToLastPage = MutableSharedFlow<TimeType>()
+    val navigateToLastPage = _navigateToLastPage.asSharedFlow()
 
 
     fun setDoExerciseType(doExerciseType: DoExerciseType) {
@@ -76,6 +84,13 @@ class OnboardingViewModel : ViewModel() {
         }
     }
 
+    fun setTimeType(timeType: TimeType) {
+        _timeType.value = timeType
+        viewModelScope.launch {
+            _navigateToLastPage.emit(timeType)
+        }
+    }
+
     val age = MutableStateFlow<String?>(null)
 
     val isValidAge: StateFlow<Boolean?> = age.map { ageString ->
@@ -95,25 +110,30 @@ class OnboardingViewModel : ViewModel() {
         }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), false)
 
 
-//    val userFilterType: MutableStateFlow<Map<UserType, Boolean>> = MutableStateFlow(
-//        mapOf(
-//            UserType.PARENT to false,
-//            UserType.CHILD to false,
-//        ),
-//    )
+    val soreSpotFilterType: MutableStateFlow<Map<SoreSpotType, Boolean>> = MutableStateFlow(
+        mapOf(
+            SoreSpotType.NECK to false,
+            SoreSpotType.SHOULDER to false,
+            SoreSpotType.WAIST to false,
+            SoreSpotType.KNEE to false,
+            SoreSpotType.WRIST to false,
+            SoreSpotType.ANKLE to false,
+        ),
+    )
 
-//    fun setUserFilterType(userType: UserType) {
-//        val isSelected = userFilterType.value[userType] ?: return
-//        userFilterType.value = userFilterType.value.toMutableMap().apply {
-//            this[userType] = !isSelected
-//        }
-//    }
+    fun setSoreSpotFilterType(soreSpotType: SoreSpotType) {
+        val isSelected = soreSpotFilterType.value[soreSpotType] ?: return
+        val selectedCount = soreSpotFilterType.value.count { it.value }
+
+        if (selectedCount >= 3 && !isSelected) {
+            return
+        }
+        soreSpotFilterType.value = soreSpotFilterType.value.toMutableMap().apply {
+            this[soreSpotType] = !isSelected
+        }
+    }
 
     fun setUserType(userType: UserType) {
         _userType.value = userType
     }
-
-//    fun setDoExerciseType(doExerciseType: DoExerciseType) {
-//        _doExerciseType.value = doExerciseType
-//    }
 }

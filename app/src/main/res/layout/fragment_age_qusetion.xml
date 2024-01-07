@@ -117,7 +117,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintGuide_begin="206dp" />
+                app:layout_constraintGuide_percent="0.5" />
 
             <include
                 android:id="@+id/include_user_type_parent"
