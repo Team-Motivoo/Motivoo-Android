@@ -4,6 +4,8 @@ import android.content.Context
 import android.os.Bundle
 import android.transition.TransitionManager
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -18,6 +20,7 @@ import sopt.motivoo.databinding.FragmentAgeQusetionBinding
 import sopt.motivoo.util.binding.BindingFragment
 import sopt.motivoo.util.extension.drawableOf
 import sopt.motivoo.util.extension.setOnSingleClickListener
+import sopt.motivoo.util.extension.setVisible
 
 class AgeQuestionFragment :
     BindingFragment<FragmentAgeQusetionBinding>(R.layout.fragment_age_qusetion) {
@@ -55,13 +58,13 @@ class AgeQuestionFragment :
                 null, true -> {
                     binding.etAgeQuestion.background =
                         requireContext().drawableOf(R.drawable.selector_edittext_input)
-                    binding.tvAgeQuestionErrorMessage.visibility = View.GONE
+                    binding.tvAgeQuestionErrorMessage.setVisible(GONE)
                 }
 
                 false -> {
                     binding.etAgeQuestion.background =
                         requireContext().drawableOf(R.drawable.bg_edittext_error)
-                    binding.tvAgeQuestionErrorMessage.visibility = View.VISIBLE
+                    binding.tvAgeQuestionErrorMessage.setVisible(VISIBLE)
                 }
             }
         }.launchIn(lifecycleScope)
@@ -78,7 +81,7 @@ class AgeQuestionFragment :
             showKeyboard()
             isAnimationPlayed = true
         }
-        view.visibility = View.VISIBLE
+        view.setVisible(VISIBLE)
         changeTopMargin()
         changeText(newTitle, newDescription)
     }

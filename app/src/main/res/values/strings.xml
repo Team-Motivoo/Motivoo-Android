@@ -19,4 +19,20 @@
     <string name="do_exercise_title">평소 운동을 하시나요?</string>
     <string name="do_exercise_yes">네</string>
     <string name="do_exercise_no">아니요</string>
+    <string name="what_exercise_title">평소 하는 운동을 알려주세요</string>
+    <string name="what_exercise_description">운동 강도에 따라 선택해주세요</string>
+    <string name="hard_exercise_title">고강도 운동</string>
+    <string name="hard_exercise_description">등산, 에어로빅, 크로스핏, 헬스 등</string>
+    <string name="middle_exercise_title">중강도 운동</string>
+    <string name="middle_exercise_description">빠르게 걷기, 골프, 필라테스 등</string>
+    <string name="low_exercise_title">저강도 운동</string>
+    <string name="low_exercise_description">걷기, 요가, 스트레칭 등</string>
+    <string name="hard_activity_title">고강도 신체 활동</string>
+    <string name="hard_activity_description">계단으로 물건 나르기, 육아 등</string>
+    <string name="middle_activity_title">중강도 신체 활동</string>
+    <string name="middle_activity_description">가벼운 물건 나르기 등</string>
+    <string name="low_activity_title">저강도 신체 활동</string>
+    <string name="low_activity_description">출퇴근, 청소, 쇼핑 등</string>
+    <string name="what_activity_title">자주 하는 활동을 알려주세요</string>
+    <string name="what_activity_description">가장 많이 하는 활동을 기준으로 선택해주세요</string>
 </resources>

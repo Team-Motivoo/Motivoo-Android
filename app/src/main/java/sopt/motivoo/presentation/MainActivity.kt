@@ -65,8 +65,6 @@ class MainActivity : AppCompatActivity() {
                     R.id.timeExerciseQuestionFragment,
                     R.id.whatExerciseQuestionFragment,
                     R.id.whatActivityQuestionFragment,
-                    R.id.frequencyActivityQuestionFragment,
-                    R.id.timeActivityQuestionFragment,
                 )
             ) {
                 View.VISIBLE
@@ -86,9 +84,7 @@ class MainActivity : AppCompatActivity() {
             R.id.whatExerciseQuestionFragment -> 3f
             R.id.whatActivityQuestionFragment -> 3f
             R.id.frequencyExerciseQuestionFragment -> 4f
-            R.id.frequencyActivityQuestionFragment -> 4f
             R.id.timeExerciseQuestionFragment -> 5f
-            R.id.timeActivityQuestionFragment -> 5f
             R.id.soreSpotQuestionFragment -> 6f
             else -> 0f
         }

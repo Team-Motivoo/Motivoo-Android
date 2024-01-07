@@ -26,13 +26,12 @@ class DoExerciseQuestionFragment :
     }
 
     private fun collectData() {
-        doExerciseQuestionViewModel.navigateTo.flowWithLifecycle(lifecycle)
+        doExerciseQuestionViewModel.navigateToForthPage.flowWithLifecycle(lifecycle)
             .onEach { doExercise ->
                 if (findNavController().currentDestination?.id == R.id.doExerciseQuestionFragment) {
                     when (doExercise) {
                         DoExerciseType.YES -> findNavController().navigate(R.id.action_doExerciseQuestionFragment_to_whatExerciseQuestionFragment)
                         DoExerciseType.NO -> findNavController().navigate(R.id.action_doExerciseQuestionFragment_to_whatActivityQuestionFragment)
-                        else -> Unit
                     }
                 }
             }.launchIn(lifecycleScope)
