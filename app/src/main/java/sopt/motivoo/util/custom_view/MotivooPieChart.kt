@@ -29,7 +29,7 @@ class MotivooPieChart @JvmOverloads constructor(
     private val logoSpacing = LOGO_IMAGE_SPACING.px
 
     init {
-        logoImage = ContextCompat.getDrawable(context, R.drawable.ic_launcher_foreground)?.run {
+        logoImage = ContextCompat.getDrawable(context, R.drawable.ic_clap_sound)?.run {
             toBitmap(LOGO_IMAGE_SIZE.px.toInt(), LOGO_IMAGE_SIZE.px.toInt())
         }
 
