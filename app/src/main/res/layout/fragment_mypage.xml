@@ -6,18 +6,127 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="여긴 마이페이지"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:background="@color/gray_100_F4F5F9">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/tv_mypage_nickname"
+                style="@style/B1_med"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="39dp"
+                android:text="@string/mypage_nickname"
+                android:textColor="@color/gray_900_161616"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_mypage_name"
+                style="@style/H2_semi"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:text="김뿡뿡"
+                android:textColor="@color/gray_900_161616"
+                app:layout_constraintStart_toStartOf="@id/tv_mypage_nickname"
+                app:layout_constraintTop_toBottomOf="@id/tv_mypage_nickname" />
+
+            <TextView
+                style="@style/B6_re"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/mypage_myinfo_bg"
+                android:text="@string/mypage_myinfo"
+                android:textColor="@color/gray_700_464747"
+                app:layout_constraintBottom_toBottomOf="@id/tv_mypage_name"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <View
+                android:id="@+id/view_mypage_ex_info"
+                android:layout_width="0dp"
+                android:layout_height="90dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="28dp"
+                android:background="@drawable/mypage_box_bg"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_mypage_name" />
+
+            <ImageView
+                android:id="@+id/iv_mypage_ex_img"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginVertical="26dp"
+                android:layout_marginStart="20dp"
+                android:background="@color/gray_100_F4F5F9"
+                app:layout_constraintBottom_toBottomOf="@id/view_mypage_ex_info"
+                app:layout_constraintDimensionRatio="1"
+                app:layout_constraintStart_toStartOf="@id/view_mypage_ex_info"
+                app:layout_constraintTop_toTopOf="@id/view_mypage_ex_info" />
+
+            <TextView
+                android:id="@+id/tv_mypage_ex_info"
+                style="@style/H6_semi"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="-3dp"
+                android:text="@string/mypage_ex_info"
+                android:textColor="@color/gray_900_161616"
+                app:layout_constraintStart_toEndOf="@id/iv_mypage_ex_img"
+                app:layout_constraintTop_toTopOf="@id/iv_mypage_ex_img" />
+
+            <TextView
+                style="@style/Caption2_re"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/mypage_check_ex_info"
+                android:textColor="@color/gray_500_9D9EA0"
+                app:layout_constraintBottom_toBottomOf="@id/iv_mypage_ex_img"
+                app:layout_constraintStart_toStartOf="@id/tv_mypage_ex_info" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="20dp"
+                android:src="@drawable/ic_arrow"
+                app:layout_constraintEnd_toEndOf="@id/view_mypage_ex_info"
+                app:layout_constraintTop_toTopOf="@id/view_mypage_ex_info" />
+
+
+            <View
+                android:id="@+id/view_mypage_app_info"
+                android:layout_width="0dp"
+                android:layout_height="310dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/mypage_box_bg"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/view_mypage_ex_info" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="64dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="21dp"
+                android:background="@drawable/mypage_box_bg"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/view_mypage_app_info" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </layout>

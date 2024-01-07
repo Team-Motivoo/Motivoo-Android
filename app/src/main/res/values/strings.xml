@@ -7,4 +7,11 @@
     <string name="today_exercise">오늘 할 운동을 고르세요!</string>
     <string name="my_step_count">내 걸음</string>
     <string name="motivoo_logo">motivoo_logo</string>
+
+    <!-- my page -->
+    <string name="mypage_nickname">의지뿜뿜 부모님</string>
+    <string name="mypage_myinfo">내 정보</string>
+    <string name="mypage_ex_info">운동 정보</string>
+    <string name="mypage_check_ex_info">내 운동 정보를 확인하세요!</string>
+
 </resources>
