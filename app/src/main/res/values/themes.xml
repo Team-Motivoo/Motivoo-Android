@@ -2,10 +2,17 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.MOTIVOOAOS" parent="Theme.Material3.Light.NoActionBar">
         <!-- Customize your light theme here. -->
-        <item name="android:statusBarColor">@color/black_090909</item>
+        <item name="android:statusBarColor">@color/white_FFFFFF</item>
         <item name="android:windowLightStatusBar">true</item>
         <!-- Customize your theme here. -->
         <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="Theme.Motivoo.Starting" parent="Theme.SplashScreen">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowDisablePreview">true</item>
+        <item name="android:windowBackground">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
     </style>
 
     <style name="Theme.MOTIVOOAOS" parent="Base.Theme.MOTIVOOAOS" />
