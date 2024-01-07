@@ -19,7 +19,6 @@ class SoreSpotQuestionFragment :
         binding.onboardingViewModel = soreSpotQuestionViewModel
 
         moveToNext()
-
     }
 
     // TODO 초대하는 사람, 초대 받는 사람 분기 처리
