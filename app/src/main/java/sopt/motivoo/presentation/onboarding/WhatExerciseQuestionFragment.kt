@@ -26,7 +26,7 @@ class WhatExerciseQuestionFragment :
         whatExerciseQuestionViewModel.navigateToFifthPageExe.flowWithLifecycle(lifecycle)
             .onEach {
                 if (findNavController().currentDestination?.id == R.id.whatExerciseQuestionFragment) {
-                    findNavController().navigate(R.id.action_whatExerciseQuestionFragment_to_frequencyExerciseQuestionFragment)
+                    findNavController().navigate(R.id.action_whatExerciseQuestionFragment_to_frequencyQuestionFragment)
                 }
             }.launchIn(lifecycleScope)
     }

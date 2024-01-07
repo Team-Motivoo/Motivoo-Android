@@ -26,7 +26,7 @@ class WhatActivityQuestionFragment :
         whatActivityQuestionViewModel.navigateToFifthPageAct.flowWithLifecycle(lifecycle)
             .onEach {
                 if (findNavController().currentDestination?.id == R.id.whatActivityQuestionFragment) {
-                    findNavController().navigate(R.id.action_whatActivityQuestionFragment_to_frequencyExerciseQuestionFragment)
+                    findNavController().navigate(R.id.action_whatActivityQuestionFragment_to_frequencyQuestionFragment)
                 }
             }.launchIn(lifecycleScope)
     }

@@ -35,4 +35,10 @@
     <string name="low_activity_description">출퇴근, 청소, 쇼핑 등</string>
     <string name="what_activity_title">자주 하는 활동을 알려주세요</string>
     <string name="what_activity_description">가장 많이 하는 활동을 기준으로 선택해주세요</string>
+    <string name="frequency_exercise_title">일주일에 운동을\n몇 번 하시나요?</string>
+    <string name="frequency_activity_title">해당 활동을 일주일에\n몇 번 하시나요?</string>
+    <string name="frequency_under_one">1일 이하</string>
+    <string name="frequency_one_to_three">1일 - 3일 이내</string>
+    <string name="frequency_three_to_five">3일 - 5일 이내</string>
+    <string name="frequency_over_five">5일 - 매일</string>
 </resources>

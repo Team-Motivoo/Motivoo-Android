@@ -18,7 +18,7 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/tv_what_exercise_title"
+            android:id="@+id/tv_frequency_title"
             style="@style/H2_semi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -37,8 +37,8 @@
             android:layout_marginTop="8dp"
             android:text="@string/what_activity_description"
             android:textColor="@color/gray_600_707276"
-            app:layout_constraintStart_toStartOf="@+id/tv_what_exercise_title"
-            app:layout_constraintTop_toBottomOf="@+id/tv_what_exercise_title" />
+            app:layout_constraintStart_toStartOf="@+id/tv_frequency_title"
+            app:layout_constraintTop_toBottomOf="@+id/tv_frequency_title" />
 
         <include
             android:id="@+id/include_what_exercise_hard"

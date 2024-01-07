@@ -60,9 +60,9 @@ class MainActivity : AppCompatActivity() {
             binding.clOnboardingToolbar.visibility = if (destination.id in listOf(
                     R.id.ageQuestionFragment,
                     R.id.doExerciseQuestionFragment,
-                    R.id.frequencyExerciseQuestionFragment,
+                    R.id.frequencyQuestionFragment,
                     R.id.soreSpotQuestionFragment,
-                    R.id.timeExerciseQuestionFragment,
+                    R.id.timeQuestionFragment,
                     R.id.whatExerciseQuestionFragment,
                     R.id.whatActivityQuestionFragment,
                 )
@@ -83,8 +83,8 @@ class MainActivity : AppCompatActivity() {
             R.id.doExerciseQuestionFragment -> 2f
             R.id.whatExerciseQuestionFragment -> 3f
             R.id.whatActivityQuestionFragment -> 3f
-            R.id.frequencyExerciseQuestionFragment -> 4f
-            R.id.timeExerciseQuestionFragment -> 5f
+            R.id.frequencyQuestionFragment -> 4f
+            R.id.timeQuestionFragment -> 5f
             R.id.soreSpotQuestionFragment -> 6f
             else -> 0f
         }

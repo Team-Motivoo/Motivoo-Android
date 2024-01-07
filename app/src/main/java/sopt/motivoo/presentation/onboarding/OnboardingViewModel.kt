@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import sopt.motivoo.presentation.type.DoExerciseType
+import sopt.motivoo.presentation.type.FrequencyType
 import sopt.motivoo.presentation.type.UserType
 import sopt.motivoo.presentation.type.WhatActivityType
 import sopt.motivoo.presentation.type.WhatExerciseType
@@ -31,6 +32,9 @@ class OnboardingViewModel : ViewModel() {
     private val _whatActivityType = MutableStateFlow<WhatActivityType?>(null)
     val whatActivityType get() = _whatActivityType.asStateFlow()
 
+    private val _frequencyType = MutableStateFlow<FrequencyType?>(null)
+    val frequencyType get() = _frequencyType.asStateFlow()
+
     private val _navigateToForthPage = MutableSharedFlow<DoExerciseType>()
     val navigateToForthPage = _navigateToForthPage.asSharedFlow()
 
@@ -39,6 +43,9 @@ class OnboardingViewModel : ViewModel() {
 
     private val _navigateToFifthPageAct = MutableSharedFlow<WhatActivityType>()
     val navigateToFifthPageAct = _navigateToFifthPageAct.asSharedFlow()
+
+    private val _navigateToSixthPage = MutableSharedFlow<FrequencyType>()
+    val navigateToSixthPage = _navigateToSixthPage.asSharedFlow()
 
 
     fun setDoExerciseType(doExerciseType: DoExerciseType) {
@@ -59,6 +66,13 @@ class OnboardingViewModel : ViewModel() {
         _whatActivityType.value = whatActivityType
         viewModelScope.launch {
             _navigateToFifthPageAct.emit(whatActivityType)
+        }
+    }
+
+    fun setFrequencyType(frequencyType: FrequencyType) {
+        _frequencyType.value = frequencyType
+        viewModelScope.launch {
+            _navigateToSixthPage.emit(frequencyType)
         }
     }
 

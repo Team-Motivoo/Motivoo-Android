@@ -76,18 +76,6 @@
             app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
-        android:id="@+id/frequencyExerciseQuestionFragment"
-        android:name="sopt.motivoo.presentation.onboarding.FrequencyExerciseQuestionFragment"
-        android:label="FrequencyExerciseQuestionFragment">
-        <action
-            android:id="@+id/action_frequencyExerciseQuestionFragment_to_timeExerciseQuestionFragment"
-            app:destination="@id/timeExerciseQuestionFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-    </fragment>
-    <fragment
         android:id="@+id/soreSpotQuestionFragment"
         android:name="sopt.motivoo.presentation.onboarding.SoreSpotQuestionFragment"
         android:label="SoreSpotQuestionFragment">
@@ -100,24 +88,12 @@
             app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
-        android:id="@+id/timeExerciseQuestionFragment"
-        android:name="sopt.motivoo.presentation.onboarding.TimeExerciseQuestionFragment"
-        android:label="TimeExerciseQuestionFragment">
-        <action
-            android:id="@+id/action_timeExerciseQuestionFragment_to_soreSpotQuestionFragment"
-            app:destination="@id/soreSpotQuestionFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-    </fragment>
-    <fragment
         android:id="@+id/whatExerciseQuestionFragment"
         android:name="sopt.motivoo.presentation.onboarding.WhatExerciseQuestionFragment"
         android:label="WhatExerciseQuestionFragment">
         <action
-            android:id="@+id/action_whatExerciseQuestionFragment_to_frequencyExerciseQuestionFragment"
-            app:destination="@id/frequencyExerciseQuestionFragment"
+            android:id="@+id/action_whatExerciseQuestionFragment_to_frequencyQuestionFragment"
+            app:destination="@id/frequencyQuestionFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -128,8 +104,32 @@
         android:name="sopt.motivoo.presentation.onboarding.WhatActivityQuestionFragment"
         android:label="WhatActivityQuestionFragment">
         <action
-            android:id="@+id/action_whatActivityQuestionFragment_to_frequencyExerciseQuestionFragment"
-            app:destination="@id/frequencyExerciseQuestionFragment"
+            android:id="@+id/action_whatActivityQuestionFragment_to_frequencyQuestionFragment"
+            app:destination="@id/frequencyQuestionFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/frequencyQuestionFragment"
+        android:name="sopt.motivoo.presentation.onboarding.FrequencyQuestionFragment"
+        android:label="FrequencyQuestionFragment">
+        <action
+            android:id="@+id/action_frequencyQuestionFragment_to_timeQuestionFragment"
+            app:destination="@id/timeQuestionFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/timeQuestionFragment"
+        android:name="sopt.motivoo.presentation.onboarding.TimeQuestionFragment"
+        android:label="TimeQuestionFragment">
+        <action
+            android:id="@+id/action_timeQuestionFragment_to_soreSpotQuestionFragment"
+            app:destination="@id/soreSpotQuestionFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
