@@ -56,4 +56,5 @@
     <string name="sore_spot_wrist">손목</string>
     <string name="sore_spot_ankle">발목</string>
     <string name="onboarding_motivoo_start">모티부 시작하기</string>
+    <string name="motivoo_logo">motivoo_logo</string>
 </resources>
