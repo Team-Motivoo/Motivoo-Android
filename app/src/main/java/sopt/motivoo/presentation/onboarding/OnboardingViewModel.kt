@@ -25,6 +25,24 @@ class OnboardingViewModel : ViewModel() {
     private val _userType = MutableStateFlow<UserType?>(null)
     val userType get() = _userType.asStateFlow()
 
+    val age = MutableStateFlow<String?>(null)
+
+    val isValidAge: StateFlow<Boolean?> = age.map { ageString ->
+        when {
+            ageString.isNullOrEmpty() -> null
+            ageString.toIntOrNull()?.let { it in 14..99 } == true -> true
+            else -> false
+        }
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), null)
+
+    val isValidNext: StateFlow<Boolean> =
+        combine(
+            userType,
+            isValidAge,
+        ) { userType, isValidAge ->
+            userType != null && isValidAge == true
+        }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), false)
+
     private val _doExerciseType = MutableStateFlow<DoExerciseType?>(null)
     val doExerciseType get() = _doExerciseType.asStateFlow()
 
@@ -55,6 +73,16 @@ class OnboardingViewModel : ViewModel() {
     private val _navigateToLastPage = MutableSharedFlow<TimeType>()
     val navigateToLastPage = _navigateToLastPage.asSharedFlow()
 
+    val soreSpotFilterType: MutableStateFlow<Map<SoreSpotType, Boolean>> = MutableStateFlow(
+        mapOf(
+            SoreSpotType.NECK to false,
+            SoreSpotType.SHOULDER to false,
+            SoreSpotType.WAIST to false,
+            SoreSpotType.KNEE to false,
+            SoreSpotType.WRIST to false,
+            SoreSpotType.ANKLE to false,
+        ),
+    )
 
     fun setDoExerciseType(doExerciseType: DoExerciseType) {
         _doExerciseType.value = doExerciseType
@@ -90,36 +118,6 @@ class OnboardingViewModel : ViewModel() {
             _navigateToLastPage.emit(timeType)
         }
     }
-
-    val age = MutableStateFlow<String?>(null)
-
-    val isValidAge: StateFlow<Boolean?> = age.map { ageString ->
-        when {
-            ageString.isNullOrEmpty() -> null
-            ageString.toIntOrNull()?.let { it in 14..99 } == true -> true
-            else -> false
-        }
-    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), null)
-
-    val isValidNext: StateFlow<Boolean> =
-        combine(
-            userType,
-            isValidAge,
-        ) { userType, isValidAge ->
-            userType != null && isValidAge == true
-        }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), false)
-
-
-    val soreSpotFilterType: MutableStateFlow<Map<SoreSpotType, Boolean>> = MutableStateFlow(
-        mapOf(
-            SoreSpotType.NECK to false,
-            SoreSpotType.SHOULDER to false,
-            SoreSpotType.WAIST to false,
-            SoreSpotType.KNEE to false,
-            SoreSpotType.WRIST to false,
-            SoreSpotType.ANKLE to false,
-        ),
-    )
 
     fun setSoreSpotFilterType(soreSpotType: SoreSpotType) {
         val isSelected = soreSpotFilterType.value[soreSpotType] ?: return

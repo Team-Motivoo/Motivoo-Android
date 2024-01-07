@@ -22,18 +22,17 @@ class TimeQuestionFragment :
         super.onViewCreated(view, savedInstanceState)
         binding.onboardingViewModel = timeQuestionViewModel
         collectData()
-
     }
 
     private fun collectData() {
         timeQuestionViewModel.doExerciseType.flowWithLifecycle(lifecycle)
             .onEach { doExercise ->
                 when (doExercise) {
-                    DoExerciseType.YES -> binding.tvTimeTitle.text =
-                        getText(R.string.time_exercise_title)
+                    DoExerciseType.YES ->
+                        binding.tvTimeTitle.text = getText(R.string.time_exercise_title)
 
-                    DoExerciseType.NO -> binding.tvTimeTitle.text =
-                        getText(R.string.time_activity_title)
+                    DoExerciseType.NO ->
+                        binding.tvTimeTitle.text = getText(R.string.time_activity_title)
 
                     else -> Unit
                 }
@@ -45,5 +44,4 @@ class TimeQuestionFragment :
             }
         }.launchIn(lifecycleScope)
     }
-
 }

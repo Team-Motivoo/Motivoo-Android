@@ -22,18 +22,17 @@ class FrequencyQuestionFragment :
         super.onViewCreated(view, savedInstanceState)
         binding.onboardingViewModel = frequencyQuestionViewModel
         collectData()
-
     }
 
     private fun collectData() {
         frequencyQuestionViewModel.doExerciseType.flowWithLifecycle(lifecycle)
             .onEach { doExercise ->
                 when (doExercise) {
-                    DoExerciseType.YES -> binding.tvFrequencyTitle.text =
-                        getText(R.string.frequency_exercise_title)
+                    DoExerciseType.YES ->
+                        binding.tvFrequencyTitle.text = getText(R.string.frequency_exercise_title)
 
-                    DoExerciseType.NO -> binding.tvFrequencyTitle.text =
-                        getText(R.string.frequency_activity_title)
+                    DoExerciseType.NO ->
+                        binding.tvFrequencyTitle.text = getText(R.string.frequency_activity_title)
 
                     else -> Unit
                 }
