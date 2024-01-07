@@ -13,5 +13,11 @@
     <string name="mypage_myinfo">내 정보</string>
     <string name="mypage_ex_info">운동 정보</string>
     <string name="mypage_check_ex_info">내 운동 정보를 확인하세요!</string>
+    <string name="mypage_app_info">앱 정보</string>
+    <string name="mypage_service_use">서비스 이용약관</string>
+    <string name="mypage_privacy_policy">개인정보 처리방침</string>
+    <string name="mypage_open_source">오픈소스 라이선스</string>
+    <string name="mypage_developer_info">개발자 정보</string>
+    <string name="mypage_ask_kakao">카카오채널 문의하기</string>
 
 </resources>
