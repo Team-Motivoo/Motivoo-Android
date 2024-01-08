@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
-        android:name="sopt.motivoo.presentation.HomeFragment"
+        android:name="sopt.motivoo.presentation.home.HomeFragment"
         android:label="HomeFragment" />
     <fragment
         android:id="@+id/myPageFragment"
