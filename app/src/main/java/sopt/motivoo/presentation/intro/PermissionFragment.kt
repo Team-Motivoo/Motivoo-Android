@@ -16,7 +16,7 @@ class PermissionFragment :
     BindingFragment<FragmentPermissionBinding>(R.layout.fragment_permission) {
 
     private val deniedPermissions = mutableSetOf<String>()
-    private var requiredPermissions = mutableSetOf<String>()
+    private val requiredPermissions = mutableSetOf<String>()
 
     private val requestMultiplePermissionsLauncher =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
@@ -46,33 +46,23 @@ class PermissionFragment :
     }
 
     private fun initRequiredPermissions() {
-        val isAndroidTOrAbove = Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU
-        val isAndroidQOrAbove = Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q
-
-        val storagePermission = if (isAndroidTOrAbove) {
-            Manifest.permission.READ_MEDIA_IMAGES
-        } else {
-            Manifest.permission.READ_EXTERNAL_STORAGE
-        }
-
-        val permissions = mutableListOf(
-            Manifest.permission.CAMERA,
-            storagePermission
+        requiredPermissions.addAll(
+            mutableListOf(
+                Manifest.permission.CAMERA,
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    Manifest.permission.READ_MEDIA_IMAGES
+                } else {
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                }
+            ).apply {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    add(Manifest.permission.ACTIVITY_RECOGNITION)
+                }
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    add(Manifest.permission.POST_NOTIFICATIONS)
+                }
+            }.filterNot { shouldShowRequestPermissionRationale(it) }
         )
-
-        if (isAndroidQOrAbove) {
-            permissions.add(Manifest.permission.ACTIVITY_RECOGNITION)
-        }
-
-        if (isAndroidTOrAbove) {
-            permissions.add(Manifest.permission.POST_NOTIFICATIONS)
-        }
-
-        for (permission in permissions) {
-            if (!shouldShowRequestPermissionRationale(permission)) {
-                requiredPermissions.add(permission)
-            }
-        }
     }
 
     private fun checkPermissionsStatus(): Boolean {
