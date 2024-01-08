@@ -16,16 +16,16 @@ import sopt.motivoo.util.binding.BindingFragment
 class TimeQuestionFragment :
     BindingFragment<FragmentTimeQusetionBinding>(R.layout.fragment_time_qusetion) {
 
-    private val timeQuestionViewModel by activityViewModels<OnboardingViewModel>()
+    private val onboardingViewModel by activityViewModels<OnboardingViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.onboardingViewModel = timeQuestionViewModel
+        binding.onboardingViewModel = onboardingViewModel
         collectData()
     }
 
     private fun collectData() {
-        timeQuestionViewModel.doExerciseType.flowWithLifecycle(lifecycle)
+        onboardingViewModel.doExerciseType.flowWithLifecycle(lifecycle)
             .onEach { doExercise ->
                 when (doExercise) {
                     DoExerciseType.YES ->
@@ -38,7 +38,7 @@ class TimeQuestionFragment :
                 }
             }.launchIn(lifecycleScope)
 
-        timeQuestionViewModel.navigateToLastPage.flowWithLifecycle(lifecycle).onEach {
+        onboardingViewModel.navigateToLastPage.flowWithLifecycle(lifecycle).onEach {
             if (findNavController().currentDestination?.id == R.id.timeQuestionFragment) {
                 findNavController().navigate(R.id.action_timeQuestionFragment_to_soreSpotQuestionFragment)
             }

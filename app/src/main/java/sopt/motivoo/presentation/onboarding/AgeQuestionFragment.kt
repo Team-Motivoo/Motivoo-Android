@@ -25,12 +25,12 @@ import sopt.motivoo.util.extension.setVisible
 class AgeQuestionFragment :
     BindingFragment<FragmentAgeQusetionBinding>(R.layout.fragment_age_qusetion) {
 
-    private val ageQuestionViewModel by activityViewModels<OnboardingViewModel>()
+    private val onboardingViewModel by activityViewModels<OnboardingViewModel>()
     private var isAnimationPlayed = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.onboardingViewModel = ageQuestionViewModel
+        binding.onboardingViewModel = onboardingViewModel
 
         collectData()
         clickNextButton()
@@ -43,7 +43,7 @@ class AgeQuestionFragment :
     }
 
     private fun collectData() {
-        ageQuestionViewModel.userType.flowWithLifecycle(lifecycle).onEach { userType ->
+        onboardingViewModel.userType.flowWithLifecycle(lifecycle).onEach { userType ->
             if (userType != null) {
                 showAgeLayout(
                     binding.clAgeQuestion,
@@ -53,7 +53,7 @@ class AgeQuestionFragment :
             }
         }.launchIn(lifecycleScope)
 
-        ageQuestionViewModel.isValidAge.flowWithLifecycle(lifecycle).onEach { isValidAge ->
+        onboardingViewModel.isValidAge.flowWithLifecycle(lifecycle).onEach { isValidAge ->
             when (isValidAge) {
                 null, true -> {
                     binding.etAgeQuestion.background =
@@ -69,7 +69,7 @@ class AgeQuestionFragment :
             }
         }.launchIn(lifecycleScope)
 
-        ageQuestionViewModel.isValidNext.flowWithLifecycle(lifecycle).onEach { isValidNext ->
+        onboardingViewModel.isValidNext.flowWithLifecycle(lifecycle).onEach { isValidNext ->
             binding.btnAgeQuestionDone.isEnabled = isValidNext
         }.launchIn(lifecycleScope)
     }
@@ -82,7 +82,7 @@ class AgeQuestionFragment :
             isAnimationPlayed = true
         }
         view.setVisible(VISIBLE)
-        changeTopMargin()
+        changeTopMarginAfterAnimation()
         changeText(newTitle, newDescription)
     }
 
@@ -91,7 +91,7 @@ class AgeQuestionFragment :
         binding.tvAgeQuestionDescription.text = newDescription
     }
 
-    private fun changeTopMargin() {
+    private fun changeTopMarginAfterAnimation() {
         val layoutParams = binding.clUserType.layoutParams as ConstraintLayout.LayoutParams
         layoutParams.topMargin = dpToPx(TOP_MARGIN, requireContext())
         binding.clUserType.layoutParams = layoutParams

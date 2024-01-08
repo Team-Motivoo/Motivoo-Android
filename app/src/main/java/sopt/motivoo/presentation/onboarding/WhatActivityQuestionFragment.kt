@@ -15,15 +15,16 @@ import sopt.motivoo.util.binding.BindingFragment
 class WhatActivityQuestionFragment :
     BindingFragment<FragmentWhatActivityQuestionBinding>(R.layout.fragment_what_activity_question) {
 
-    private val whatActivityQuestionViewModel by activityViewModels<OnboardingViewModel>()
+    private val onboardingViewModel by activityViewModels<OnboardingViewModel>()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.onboardingViewModel = whatActivityQuestionViewModel
+        binding.onboardingViewModel = onboardingViewModel
         collectData()
     }
 
     private fun collectData() {
-        whatActivityQuestionViewModel.navigateToFifthPageAct.flowWithLifecycle(lifecycle)
+        onboardingViewModel.navigateToFifthPageAct.flowWithLifecycle(lifecycle)
             .onEach {
                 if (findNavController().currentDestination?.id == R.id.whatActivityQuestionFragment) {
                     findNavController().navigate(R.id.action_whatActivityQuestionFragment_to_frequencyQuestionFragment)

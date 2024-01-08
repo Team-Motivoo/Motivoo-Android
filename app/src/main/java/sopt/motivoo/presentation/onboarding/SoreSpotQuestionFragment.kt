@@ -12,17 +12,17 @@ import sopt.motivoo.util.extension.setOnSingleClickListener
 class SoreSpotQuestionFragment :
     BindingFragment<FragmentSoreSpotQusetionBinding>(R.layout.fragment_sore_spot_qusetion) {
 
-    private val soreSpotQuestionViewModel by activityViewModels<OnboardingViewModel>()
+    private val onboardingViewModel by activityViewModels<OnboardingViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.onboardingViewModel = soreSpotQuestionViewModel
+        binding.onboardingViewModel = onboardingViewModel
 
-        moveToNext()
+        moveToNextFragment()
     }
 
     // TODO 초대하는 사람, 초대 받는 사람 분기 처리
-    private fun moveToNext() {
+    private fun moveToNextFragment() {
         binding.btnOnboardingDone.setOnSingleClickListener { findNavController().navigate(R.id.action_soreSpotQuestionFragment_to_getInviteCodeFragment) }
     }
 }

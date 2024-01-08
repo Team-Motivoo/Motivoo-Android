@@ -16,16 +16,16 @@ import sopt.motivoo.util.binding.BindingFragment
 class FrequencyQuestionFragment :
     BindingFragment<FragmentFrequencyQusetionBinding>(R.layout.fragment_frequency_qusetion) {
 
-    private val frequencyQuestionViewModel by activityViewModels<OnboardingViewModel>()
+    private val onboardingViewModel by activityViewModels<OnboardingViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.onboardingViewModel = frequencyQuestionViewModel
+        binding.onboardingViewModel = onboardingViewModel
         collectData()
     }
 
     private fun collectData() {
-        frequencyQuestionViewModel.doExerciseType.flowWithLifecycle(lifecycle)
+        onboardingViewModel.doExerciseType.flowWithLifecycle(lifecycle)
             .onEach { doExercise ->
                 when (doExercise) {
                     DoExerciseType.YES ->
@@ -38,7 +38,7 @@ class FrequencyQuestionFragment :
                 }
             }.launchIn(lifecycleScope)
 
-        frequencyQuestionViewModel.navigateToSixthPage.flowWithLifecycle(lifecycle).onEach {
+        onboardingViewModel.navigateToSixthPage.flowWithLifecycle(lifecycle).onEach {
             if (findNavController().currentDestination?.id == R.id.frequencyQuestionFragment) {
                 findNavController().navigate(R.id.action_frequencyQuestionFragment_to_timeQuestionFragment)
             }

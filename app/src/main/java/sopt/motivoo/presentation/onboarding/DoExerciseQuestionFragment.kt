@@ -16,17 +16,17 @@ import sopt.motivoo.util.binding.BindingFragment
 class DoExerciseQuestionFragment :
     BindingFragment<FragmentDoExerciseQuestionBinding>(R.layout.fragment_do_exercise_question) {
 
-    private val doExerciseQuestionViewModel by activityViewModels<OnboardingViewModel>()
+    private val onboardingViewModel by activityViewModels<OnboardingViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.onboardingViewModel = doExerciseQuestionViewModel
+        binding.onboardingViewModel = onboardingViewModel
 
         collectData()
     }
 
     private fun collectData() {
-        doExerciseQuestionViewModel.navigateToForthPage.flowWithLifecycle(lifecycle)
+        onboardingViewModel.navigateToForthPage.flowWithLifecycle(lifecycle)
             .onEach { doExercise ->
                 if (findNavController().currentDestination?.id == R.id.doExerciseQuestionFragment) {
                     when (doExercise) {
