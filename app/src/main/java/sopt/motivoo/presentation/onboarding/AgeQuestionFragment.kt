@@ -7,7 +7,6 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.flowWithLifecycle
@@ -21,6 +20,7 @@ import sopt.motivoo.util.binding.BindingFragment
 import sopt.motivoo.util.extension.drawableOf
 import sopt.motivoo.util.extension.setOnSingleClickListener
 import sopt.motivoo.util.extension.setVisible
+import sopt.motivoo.util.extension.showKeyboard
 
 class AgeQuestionFragment :
     BindingFragment<FragmentAgeQusetionBinding>(R.layout.fragment_age_qusetion) {
@@ -78,7 +78,7 @@ class AgeQuestionFragment :
         if (!isAnimationPlayed) {
             TransitionManager.beginDelayedTransition(binding.root as ViewGroup)
             binding.etAgeQuestion.requestFocus()
-            showKeyboard()
+            requireContext().showKeyboard(binding.etAgeQuestion)
             isAnimationPlayed = true
         }
         view.setVisible(VISIBLE)
@@ -100,12 +100,6 @@ class AgeQuestionFragment :
     private fun dpToPx(dp: Int, context: Context): Int {
         val scale = context.resources.displayMetrics.density
         return (dp * scale).toInt()
-    }
-
-    private fun showKeyboard() {
-        val inputMethodManager =
-            context?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
-        inputMethodManager?.showSoftInput(binding.etAgeQuestion, InputMethodManager.SHOW_IMPLICIT)
     }
 
     companion object {
