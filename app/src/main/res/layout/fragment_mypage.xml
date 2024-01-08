@@ -22,7 +22,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="39dp"
                 android:text="@string/mypage_nickname"
                 android:textColor="@color/gray_900_161616"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -60,6 +60,8 @@
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="28dp"
                 android:background="@drawable/mypage_box_bg"
+                android:clickable="true"
+                android:focusable="true"
                 android:paddingVertical="26dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -108,175 +110,227 @@
                     app:layout_constraintTop_toTopOf="@id/tv_mypage_ex_info" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <View
-                android:id="@+id/view_mypage_app_info"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/mypage_box_bg"
-                app:layout_constraintBottom_toBottomOf="@id/tv_mypage_developer_info"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cl_mypage_ex_info" />
-
             <TextView
                 android:id="@+id/tv_mypage_app_info"
                 style="@style/Caption2_re"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:text="@string/mypage_app_info"
-                android:textColor="@color/gray_500_9D9EA0"
-                app:layout_constraintStart_toStartOf="@id/view_mypage_app_info"
-                app:layout_constraintTop_toTopOf="@id/view_mypage_app_info" />
-
-            <TextView
-                android:id="@+id/tv_mypage_service_use"
-                style="@style/H6_semi"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:paddingVertical="20dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/mypage_middle_box_bg_top"
                 android:paddingStart="20dp"
-                android:text="@string/mypage_service_use"
-                android:textColor="@color/gray_900_161616"
-                app:layout_constraintEnd_toEndOf="@id/view_mypage_app_info"
-                app:layout_constraintStart_toStartOf="@id/view_mypage_app_info"
-                app:layout_constraintTop_toBottomOf="@id/tv_mypage_app_info" />
+                android:paddingTop="20dp"
+                android:paddingBottom="4dp"
+                android:text="@string/mypage_app_info"
+                android:textColor="@color/gray_500_9D9EA0"
+                app:layout_constraintEnd_toEndOf="@id/cl_mypage_ex_info"
+                app:layout_constraintStart_toStartOf="@id/cl_mypage_ex_info"
+                app:layout_constraintTop_toBottomOf="@id/cl_mypage_ex_info" />
 
-            <ImageView
-                android:id="@+id/iv_mypage_array2"
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_mypage_service_use"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
-                android:src="@drawable/ic_arrow"
-                app:layout_constraintBottom_toBottomOf="@id/tv_mypage_service_use"
-                app:layout_constraintEnd_toEndOf="@id/view_mypage_app_info"
-                app:layout_constraintTop_toTopOf="@id/tv_mypage_service_use" />
+                android:background="@drawable/mypage_middle_box_bg_mid"
+                android:clickable="true"
+                android:focusable="true"
+                app:layout_constraintEnd_toEndOf="@id/tv_mypage_app_info"
+                app:layout_constraintStart_toStartOf="@id/tv_mypage_app_info"
+                app:layout_constraintTop_toBottomOf="@id/tv_mypage_app_info">
+
+                <TextView
+                    android:id="@+id/tv_mypage_service_use"
+                    style="@style/H6_semi"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="20dp"
+                    android:paddingStart="20dp"
+                    android:text="@string/mypage_service_use"
+                    android:textColor="@color/gray_900_161616"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/iv_mypage_array2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:src="@drawable/ic_arrow"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_mypage_service_use"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tv_mypage_service_use" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <View
                 android:id="@+id/view_mypage_bar1"
                 android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:background="@color/gray_100_F4F5F9"
-                app:layout_constraintEnd_toEndOf="@id/view_mypage_app_info"
-                app:layout_constraintStart_toStartOf="@id/view_mypage_app_info"
-                app:layout_constraintTop_toBottomOf="@id/tv_mypage_service_use" />
+                app:layout_constraintEnd_toEndOf="@id/cl_mypage_service_use"
+                app:layout_constraintStart_toStartOf="@id/cl_mypage_service_use"
+                app:layout_constraintTop_toBottomOf="@id/cl_mypage_service_use" />
 
-            <TextView
-                android:id="@+id/tv_mypage_privacy_policy"
-                style="@style/H6_semi"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_mypage_privacy_policy"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:paddingVertical="20dp"
-                android:paddingStart="20dp"
-                android:text="@string/mypage_privacy_policy"
-                android:textColor="@color/gray_900_161616"
-                app:layout_constraintEnd_toEndOf="@id/view_mypage_app_info"
-                app:layout_constraintStart_toStartOf="@id/view_mypage_app_info"
-                app:layout_constraintTop_toBottomOf="@id/view_mypage_bar1" />
+                android:background="@drawable/mypage_middle_box_bg_mid"
+                android:clickable="true"
+                android:focusable="true"
+                app:layout_constraintEnd_toEndOf="@id/tv_mypage_app_info"
+                app:layout_constraintStart_toStartOf="@id/tv_mypage_app_info"
+                app:layout_constraintTop_toBottomOf="@id/view_mypage_bar1">
 
-            <ImageView
-                android:id="@+id/iv_mypage_array3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
-                android:src="@drawable/ic_arrow"
-                app:layout_constraintBottom_toBottomOf="@id/tv_mypage_privacy_policy"
-                app:layout_constraintEnd_toEndOf="@id/view_mypage_app_info"
-                app:layout_constraintTop_toTopOf="@id/tv_mypage_privacy_policy" />
+                <TextView
+                    android:id="@+id/tv_mypage_privacy_policy"
+                    style="@style/H6_semi"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="20dp"
+                    android:paddingStart="20dp"
+                    android:text="@string/mypage_privacy_policy"
+                    android:textColor="@color/gray_900_161616"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/iv_mypage_array3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:src="@drawable/ic_arrow"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_mypage_privacy_policy"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tv_mypage_privacy_policy" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <View
                 android:id="@+id/view_mypage_bar2"
                 android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:background="@color/gray_100_F4F5F9"
-                app:layout_constraintEnd_toEndOf="@id/view_mypage_app_info"
-                app:layout_constraintStart_toStartOf="@id/view_mypage_app_info"
-                app:layout_constraintTop_toBottomOf="@id/tv_mypage_privacy_policy" />
+                app:layout_constraintEnd_toEndOf="@id/cl_mypage_privacy_policy"
+                app:layout_constraintStart_toStartOf="@id/cl_mypage_privacy_policy"
+                app:layout_constraintTop_toBottomOf="@id/cl_mypage_privacy_policy" />
 
-            <TextView
-                android:id="@+id/tv_mypage_open_source"
-                style="@style/H6_semi"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_mypage_open_source"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:paddingVertical="20dp"
-                android:paddingStart="20dp"
-                android:text="@string/mypage_open_source"
-                android:textColor="@color/gray_900_161616"
-                app:layout_constraintEnd_toEndOf="@id/view_mypage_app_info"
-                app:layout_constraintStart_toStartOf="@id/view_mypage_app_info"
-                app:layout_constraintTop_toBottomOf="@id/view_mypage_bar2" />
+                android:background="@drawable/mypage_middle_box_bg_mid"
+                android:clickable="true"
+                android:focusable="true"
+                app:layout_constraintEnd_toEndOf="@id/tv_mypage_app_info"
+                app:layout_constraintStart_toStartOf="@id/tv_mypage_app_info"
+                app:layout_constraintTop_toBottomOf="@id/view_mypage_bar2">
 
-            <ImageView
-                android:id="@+id/iv_mypage_array4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
-                android:src="@drawable/ic_arrow"
-                app:layout_constraintBottom_toBottomOf="@id/tv_mypage_open_source"
-                app:layout_constraintEnd_toEndOf="@id/view_mypage_app_info"
-                app:layout_constraintTop_toTopOf="@id/tv_mypage_open_source" />
+                <TextView
+                    android:id="@+id/tv_mypage_open_source"
+                    style="@style/H6_semi"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="20dp"
+                    android:paddingStart="20dp"
+                    android:text="@string/mypage_open_source"
+                    android:textColor="@color/gray_900_161616"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/iv_mypage_array4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:src="@drawable/ic_arrow"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_mypage_open_source"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tv_mypage_open_source" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <View
                 android:id="@+id/view_mypage_bar3"
                 android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:background="@color/gray_100_F4F5F9"
-                app:layout_constraintEnd_toEndOf="@id/view_mypage_app_info"
-                app:layout_constraintStart_toStartOf="@id/view_mypage_app_info"
-                app:layout_constraintTop_toBottomOf="@id/tv_mypage_open_source" />
+                app:layout_constraintEnd_toEndOf="@id/cl_mypage_privacy_policy"
+                app:layout_constraintStart_toStartOf="@id/cl_mypage_privacy_policy"
+                app:layout_constraintTop_toBottomOf="@id/cl_mypage_open_source" />
 
-            <TextView
-                android:id="@+id/tv_mypage_developer_info"
-                style="@style/H6_semi"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_mypage_developer_info"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:paddingVertical="20dp"
-                android:paddingStart="20dp"
-                android:text="@string/mypage_developer_info"
-                android:textColor="@color/gray_900_161616"
-                app:layout_constraintEnd_toEndOf="@id/view_mypage_app_info"
-                app:layout_constraintStart_toStartOf="@id/view_mypage_app_info"
-                app:layout_constraintTop_toBottomOf="@id/view_mypage_bar3" />
+                android:background="@drawable/mypage_middle_box_bg_btm"
+                android:clickable="true"
+                android:focusable="true"
+                app:layout_constraintEnd_toEndOf="@id/tv_mypage_app_info"
+                app:layout_constraintStart_toStartOf="@id/tv_mypage_app_info"
+                app:layout_constraintTop_toBottomOf="@id/view_mypage_bar3">
 
-            <ImageView
-                android:id="@+id/iv_mypage_array5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
-                android:src="@drawable/ic_arrow"
-                app:layout_constraintBottom_toBottomOf="@id/tv_mypage_developer_info"
-                app:layout_constraintEnd_toEndOf="@id/view_mypage_app_info"
-                app:layout_constraintTop_toTopOf="@id/tv_mypage_developer_info" />
+                <TextView
+                    android:id="@+id/tv_mypage_developer_info"
+                    style="@style/H6_semi"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="20dp"
+                    android:paddingStart="20dp"
+                    android:text="@string/mypage_developer_info"
+                    android:textColor="@color/gray_900_161616"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/tv_mypage_ask_kakao"
-                style="@style/H6_semi"
+                <ImageView
+                    android:id="@+id/iv_mypage_array5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:src="@drawable/ic_arrow"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_mypage_developer_info"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tv_mypage_developer_info" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="20dp"
+                android:layout_marginBottom="21dp"
                 android:background="@drawable/mypage_box_bg"
-                android:paddingVertical="20dp"
-                android:paddingStart="20dp"
-                android:text="@string/mypage_ask_kakao"
-                android:textColor="@color/gray_900_161616"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/view_mypage_app_info" />
+                android:clickable="true"
+                android:focusable="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/cl_mypage_developer_info"
+                app:layout_constraintStart_toStartOf="@id/cl_mypage_developer_info"
+                app:layout_constraintTop_toBottomOf="@id/cl_mypage_developer_info">
 
-            <ImageView
-                android:id="@+id/iv_mypage_array6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
-                android:src="@drawable/ic_arrow"
-                app:layout_constraintBottom_toBottomOf="@id/tv_mypage_ask_kakao"
-                app:layout_constraintEnd_toEndOf="@id/tv_mypage_ask_kakao"
-                app:layout_constraintTop_toTopOf="@id/tv_mypage_ask_kakao" />
+                <TextView
+                    android:id="@+id/tv_mypage_ask_kakao"
+                    style="@style/H6_semi"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="20dp"
+                    android:paddingStart="20dp"
+                    android:text="@string/mypage_ask_kakao"
+                    android:textColor="@color/gray_900_161616"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/iv_mypage_array6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:src="@drawable/ic_arrow"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_mypage_ask_kakao"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tv_mypage_ask_kakao" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
