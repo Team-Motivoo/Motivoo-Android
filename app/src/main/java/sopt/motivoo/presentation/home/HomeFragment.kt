@@ -1,16 +1,43 @@
 package sopt.motivoo.presentation.home
 
+import android.Manifest
+import android.app.Instrumentation.ActivityResult
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.SeekBar
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import sopt.motivoo.R
 import sopt.motivoo.databinding.FragmentHomeBinding
 import sopt.motivoo.util.binding.BindingFragment
 
 class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home) {
+    private val requestHomePermissionRequest = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { permissions ->
+        var permissionGranted = true
+        permissions.entries.forEach {
+            if (it.key in HOME_REQUIRED_PERMISSIONS && it.value == false) {
+                permissionGranted = false
+            }
+        }
+        if (!permissionGranted) {
+            // permission denied
+        } else {
+            // permission granted
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.motivooStepCountText.setStepCountText("0")
+
+        if (homePermissionsGranted()) {
+
+        } else {
+            requestHomePermissionRequest.launch(HOME_REQUIRED_PERMISSIONS)
+        }
 
         /**
          * XXX 삭제 XXX
@@ -38,5 +65,23 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
             override fun onStartTrackingTouch(p0: SeekBar?) {}
             override fun onStopTrackingTouch(p0: SeekBar?) {}
         })
+    }
+
+    private fun homePermissionsGranted() = HOME_REQUIRED_PERMISSIONS.all {
+        ContextCompat.checkSelfPermission(
+            requireContext(), it
+        ) == PackageManager.PERMISSION_GRANTED
+    }
+
+    companion object {
+        private val HOME_REQUIRED_PERMISSIONS =
+            mutableListOf<String>().apply {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    add(Manifest.permission.ACTIVITY_RECOGNITION)
+                }
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    add(Manifest.permission.POST_NOTIFICATIONS)
+                }
+            }.toTypedArray()
     }
 }
