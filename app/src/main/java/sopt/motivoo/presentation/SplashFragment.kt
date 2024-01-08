@@ -22,21 +22,19 @@ class SplashFragment : BindingFragment<FragmentSplashBinding>(R.layout.fragment_
     private fun showSplash() {
         lifecycleScope.launch {
             delay(1500)
-            navigateToLogin()
+            navigateToPermission()
         }
     }
 
-    private fun navigateToLogin() {
+    private fun navigateToPermission() {
         val navOptions = NavOptions.Builder()
             .setPopUpTo(R.id.splashFragment, true)
             .build()
 
-        findNavController().navigate(R.id.action_splashFragment_to_loginFragment, null, navOptions)
-    }
-
-    private fun navigateToWebView() {
-        val action = SplashFragmentDirections
-            .actionSplashFragmentToWebViewFragment("https://velog.io/@gnwjd309/GitHub-commit-history")
-        findNavController().navigate(action)
+        findNavController().navigate(
+            R.id.action_splashFragment_to_permissionFragment,
+            null,
+            navOptions
+        )
     }
 }
