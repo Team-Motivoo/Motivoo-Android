@@ -49,11 +49,6 @@
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/ripple_gray200_rectangle_radius30"
                 android:backgroundTint="@color/white_FFFFFF"
-<<<<<<< HEAD
-=======
-                android:clickable="true"
-                android:focusable="true"
->>>>>>> 1c603853fbc439d8a07cf10282c62f934deda715
                 android:text="@string/mypage_myinfo"
                 android:textColor="@color/gray_700_464747"
                 app:layout_constraintBottom_toBottomOf="@id/tv_mypage_name"
@@ -67,11 +62,6 @@
                 android:layout_marginTop="28dp"
                 android:background="@drawable/ripple_gray200_rectangle_radius8"
                 android:backgroundTint="@color/white_FFFFFF"
-<<<<<<< HEAD
-=======
-                android:clickable="true"
-                android:focusable="true"
->>>>>>> 1c603853fbc439d8a07cf10282c62f934deda715
                 android:paddingVertical="26dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -143,11 +133,6 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/ripple_gray200_rectangle"
                 android:backgroundTint="@color/white_FFFFFF"
-<<<<<<< HEAD
-=======
-                android:clickable="true"
-                android:focusable="true"
->>>>>>> 1c603853fbc439d8a07cf10282c62f934deda715
                 app:layout_constraintEnd_toEndOf="@id/tv_mypage_app_info"
                 app:layout_constraintStart_toStartOf="@id/tv_mypage_app_info"
                 app:layout_constraintTop_toBottomOf="@id/tv_mypage_app_info">
@@ -191,11 +176,6 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/ripple_gray200_rectangle"
                 android:backgroundTint="@color/white_FFFFFF"
-<<<<<<< HEAD
-=======
-                android:clickable="true"
-                android:focusable="true"
->>>>>>> 1c603853fbc439d8a07cf10282c62f934deda715
                 app:layout_constraintEnd_toEndOf="@id/tv_mypage_app_info"
                 app:layout_constraintStart_toStartOf="@id/tv_mypage_app_info"
                 app:layout_constraintTop_toBottomOf="@id/view_mypage_bar1">
@@ -239,11 +219,6 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/ripple_gray200_rectangle"
                 android:backgroundTint="@color/white_FFFFFF"
-<<<<<<< HEAD
-=======
-                android:clickable="true"
-                android:focusable="true"
->>>>>>> 1c603853fbc439d8a07cf10282c62f934deda715
                 app:layout_constraintEnd_toEndOf="@id/tv_mypage_app_info"
                 app:layout_constraintStart_toStartOf="@id/tv_mypage_app_info"
                 app:layout_constraintTop_toBottomOf="@id/view_mypage_bar2">
@@ -287,11 +262,6 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/ripple_gray200_rectangle_bottom_radius8"
                 android:backgroundTint="@color/white_FFFFFF"
-<<<<<<< HEAD
-=======
-                android:clickable="true"
-                android:focusable="true"
->>>>>>> 1c603853fbc439d8a07cf10282c62f934deda715
                 app:layout_constraintEnd_toEndOf="@id/tv_mypage_app_info"
                 app:layout_constraintStart_toStartOf="@id/tv_mypage_app_info"
                 app:layout_constraintTop_toBottomOf="@id/view_mypage_bar3">
@@ -327,11 +297,6 @@
                 android:layout_marginBottom="21dp"
                 android:background="@drawable/ripple_gray200_rectangle_radius8"
                 android:backgroundTint="@color/white_FFFFFF"
-<<<<<<< HEAD
-=======
-                android:clickable="true"
-                android:focusable="true"
->>>>>>> 1c603853fbc439d8a07cf10282c62f934deda715
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/cl_mypage_developer_info"
                 app:layout_constraintStart_toStartOf="@id/cl_mypage_developer_info"

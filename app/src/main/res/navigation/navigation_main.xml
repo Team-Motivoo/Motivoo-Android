@@ -49,7 +49,6 @@
             app:argType="string" />
     </fragment>
     <fragment
-<<<<<<< HEAD
         android:id="@+id/ageQuestionFragment"
         android:name="sopt.motivoo.presentation.onboarding.AgeQuestionFragment"
         android:label="AgeQuestionFragment">
@@ -145,8 +144,6 @@
         android:name="sopt.motivoo.presentation.onboarding.GetInviteCodeFragment"
         android:label="GetInviteCodeFragment" />
     <fragment
-=======
->>>>>>> 1c603853fbc439d8a07cf10282c62f934deda715
         android:id="@+id/myInfoFragment"
         android:name="sopt.motivoo.presentation.MyInfoFragment"
         android:label="MyInfoFragment" />
