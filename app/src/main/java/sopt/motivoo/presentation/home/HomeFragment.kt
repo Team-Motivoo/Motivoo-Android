@@ -125,7 +125,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         override fun onReceive(context: Context?, intent: Intent?) {
             if (intent?.action == STEP_COUNT) {
                 binding.motivooStepCountText.setStepCountText(
-                    intent.getIntExtra(STEP_COUNT, 0).toString() ?: pref.stepCount.toString()
+                    intent.getIntExtra(STEP_COUNT, 0).toString()
                 )
                 /**
                  * 삭제될 것

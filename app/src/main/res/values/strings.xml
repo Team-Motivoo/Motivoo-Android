@@ -13,4 +13,9 @@
     <string name="step_count_notification_channel_title">step_counter</string>
     <string name="step_count_notification_channel_name">step_count_name</string>
     <string name="notification_text">걸음 수 : %d</string>
+
+    <!-- bottomNavigation -->
+    <string name="home">홈</string>
+    <string name="exercise">운동</string>
+    <string name="my_page">마이</string>
 </resources>
