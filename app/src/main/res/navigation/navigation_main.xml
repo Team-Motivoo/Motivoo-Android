@@ -30,7 +30,11 @@
     <fragment
         android:id="@+id/myPageFragment"
         android:name="sopt.motivoo.presentation.MyPageFragment"
-        android:label="MyPageFragment" />
+        android:label="MyPageFragment" >
+        <action
+            android:id="@+id/action_myPageFragment_to_myInfoFragment"
+            app:destination="@id/myInfoFragment" />
+    </fragment>
     <fragment
         android:id="@+id/exerciseFragment"
         android:name="sopt.motivoo.presentation.ExerciseFragment"
@@ -43,4 +47,8 @@
             android:name="url"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/myInfoFragment"
+        android:name="sopt.motivoo.presentation.MyInfoFragment"
+        android:label="MyInfoFragment" />
 </navigation>
