@@ -85,6 +85,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
          * 파이 차트 원형 프로그래스 바
          */
         binding.motivooPieChart.setStepCount(((pref.stepCount / 100.0) * 320).toFloat())
+        binding.motivooStepCountText.setStepCountText(pref.stepCount.toString())
     }
 
     override fun onResume() {
@@ -93,7 +94,6 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
             requireContext(), stepCountReceiver, addIntentFilter(),
             ContextCompat.RECEIVER_NOT_EXPORTED
         )
-        binding.motivooStepCountText.setStepCountText(pref.stepCount.toString())
     }
 
     private fun homePermissionsGranted() = HOME_REQUIRED_PERMISSIONS.all {
