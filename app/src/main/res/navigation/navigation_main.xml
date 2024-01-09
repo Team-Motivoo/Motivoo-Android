@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/navigation_main"
-    app:startDestination="@id/ageQuestionFragment">
+    app:startDestination="@id/getInviteCodeFragment">
 
     <fragment
         android:id="@+id/splashFragment"
@@ -137,6 +137,6 @@
     </fragment>
     <fragment
         android:id="@+id/getInviteCodeFragment"
-        android:name="sopt.motivoo.presentation.onboarding.GetInviteCodeFragment"
+        android:name="sopt.motivoo.presentation.invitecode.GetInviteCodeFragment"
         android:label="GetInviteCodeFragment" />
 </navigation>

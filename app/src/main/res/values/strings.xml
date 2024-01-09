@@ -61,4 +61,11 @@
     <string name="today_exercise">오늘 할 운동을 고르세요!</string>
     <string name="my_step_count">내 걸음</string>
     <string name="motivoo_logo">motivoo_logo</string>
+
+    <!-- invite code -->
+    <string name="get_invite_code_title">함께 운동할 가족에게\n초대코드를 공유해주세요!</string>
+    <string name="get_invite_code">초대코드</string>
+    <string name="get_invite_code_copy">복사하기</string>
+    <string name="get_invite_code_check_matching">매칭 확인하기</string>
+    <string name="toast_waiting_matching">아직 매칭을 확인하고 있어요</string>
 </resources>
