@@ -42,7 +42,6 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
             Toast.makeText(requireContext(), "권한 허용 필요", Toast.LENGTH_SHORT).show()
         } else {
             // permission granted
-            registerStepCountReceiver()
             startStepCountService()
         }
     }
@@ -64,7 +63,6 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         stepCountReceiver = StepCountReceiver()
 
         if (homePermissionsGranted()) {
-            registerStepCountReceiver()
             startStepCountService()
         } else {
             requestHomePermissionRequest.launch(HOME_REQUIRED_PERMISSIONS)
@@ -91,6 +89,11 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
 
     override fun onResume() {
         super.onResume()
+        ContextCompat.registerReceiver(
+            requireContext(), stepCountReceiver, addIntentFilter(),
+            ContextCompat.RECEIVER_NOT_EXPORTED
+        )
+        binding.motivooStepCountText.setStepCountText(pref.stepCount.toString())
     }
 
     private fun homePermissionsGranted() = HOME_REQUIRED_PERMISSIONS.all {
@@ -103,13 +106,6 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         requireContext().apply {
             startService(Intent(this, StepCountService::class.java))
         }
-    }
-
-    private fun registerStepCountReceiver() {
-        ContextCompat.registerReceiver(
-            requireContext(), stepCountReceiver, addIntentFilter(),
-            ContextCompat.RECEIVER_NOT_EXPORTED
-        )
     }
 
     private fun addIntentFilter() = IntentFilter().apply {
