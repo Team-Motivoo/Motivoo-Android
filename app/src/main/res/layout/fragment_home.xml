@@ -90,12 +90,6 @@
                 app:layout_constraintStart_toStartOf="@id/motivoo_pie_chart"
                 app:layout_constraintTop_toTopOf="@id/motivoo_pie_chart" />
 
-            <SeekBar
-                android:id="@+id/seek_bar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/view_motivoo_pie_chart" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
