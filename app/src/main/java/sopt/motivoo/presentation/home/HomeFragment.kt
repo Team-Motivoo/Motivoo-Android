@@ -1,27 +1,32 @@
 package sopt.motivoo.presentation.home
 
 import android.Manifest
-import android.app.Instrumentation.ActivityResult
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager
-import android.hardware.Sensor
-import android.hardware.SensorManager
 import android.os.Build
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
-import android.widget.SeekBar
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import dagger.hilt.android.AndroidEntryPoint
 import sopt.motivoo.R
 import sopt.motivoo.databinding.FragmentHomeBinding
+import sopt.motivoo.domain.entity.MotivooStorage
 import sopt.motivoo.util.binding.BindingFragment
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     private lateinit var stepCountReceiver: StepCountReceiver
+
+    @Inject
+    lateinit var pref: MotivooStorage
 
     private val requestHomePermissionRequest = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
@@ -40,6 +45,18 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
             registerStepCountReceiver()
             startStepCountService()
         }
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        when (pref.stepCountServiceFlag) {
+            -1 -> pref.stepCountServiceFlag = 0
+            0 -> pref.stepCountServiceFlag = 1
+        }
+        return super.onCreateView(inflater, container, savedInstanceState)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -97,6 +114,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
 
     override fun onDestroy() {
         requireContext().unregisterReceiver(stepCountReceiver)
+        super.onDestroy()
     }
 
     inner class StepCountReceiver() : BroadcastReceiver() {
@@ -105,6 +123,11 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
                 binding.motivooStepCountText.setStepCountText(
                     intent.getIntExtra(STEP_COUNT, 0).toString()
                 )
+                /**
+                 * 삭제될 것
+                 * 파이 차트 원형 프로그래스 바
+                 */
+                binding.motivooPieChart.setStepCount(((pref.stepCount / 100.0) * 320).toFloat())
             }
         }
     }
