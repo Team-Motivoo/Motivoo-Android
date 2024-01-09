@@ -9,7 +9,7 @@
     <string name="age_question_title_first">당신은\n부모인가요 자녀인가요?</string>
     <string name="age_question_description_first">맞춤 운동을 제공해드려요!</string>
     <string name="age_question_title_second">나이를 알려주세요</string>
-    <string name="age_question_description_second">정확한 운동 추천을 위해 필요해요</string>
+    <string name="age_question_description_second">맞춤 운동 추천을 위해 필요해요</string>
     <string name="onboarding_parent">부모</string>
     <string name="onboarding_chile">자녀</string>
     <string name="onboarding_age">나이</string>
@@ -27,12 +27,12 @@
     <string name="middle_exercise_description">빠르게 걷기, 골프, 필라테스 등</string>
     <string name="low_exercise_title">저강도 운동</string>
     <string name="low_exercise_description">걷기, 요가, 스트레칭 등</string>
-    <string name="hard_activity_title">고강도 신체 활동</string>
-    <string name="hard_activity_description">계단으로 물건 나르기, 육아 등</string>
-    <string name="middle_activity_title">중강도 신체 활동</string>
+    <string name="hard_activity_title">고강도 활동</string>
+    <string name="hard_activity_description">무거운 물건 나르기, 육아 등</string>
+    <string name="middle_activity_title">중강도 활동</string>
     <string name="middle_activity_description">가벼운 물건 나르기 등</string>
-    <string name="low_activity_title">저강도 신체 활동</string>
-    <string name="low_activity_description">출퇴근, 청소, 쇼핑 등</string>
+    <string name="low_activity_title">저강도 활동</string>
+    <string name="low_activity_description">출퇴근, 가벼운 청소, 쇼핑 등</string>
     <string name="what_activity_title">자주 하는 활동을 알려주세요</string>
     <string name="what_activity_description">가장 많이 하는 활동을 기준으로 선택해주세요</string>
     <string name="frequency_exercise_title">일주일에 운동을\n몇 번 하시나요?</string>
