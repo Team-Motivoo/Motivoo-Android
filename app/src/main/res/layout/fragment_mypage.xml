@@ -47,30 +47,28 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
-                android:background="@drawable/mypage_myinfo_bg"
+                android:background="@drawable/shape_ripple_radius30"
                 android:clickable="true"
-                android:focusable="true"
                 android:text="@string/mypage_myinfo"
                 android:textColor="@color/gray_700_464747"
                 app:layout_constraintBottom_toBottomOf="@id/tv_mypage_name"
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl_mypage_ex_info"
+                android:id="@+id/cl_mypage_exercise_info"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="28dp"
-                android:background="@drawable/mypage_rip_box_bg"
+                android:background="@drawable/shape_ripple_radius8"
                 android:clickable="true"
-                android:focusable="true"
                 android:paddingVertical="26dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_mypage_name">
 
                 <ImageView
-                    android:id="@+id/iv_mypage_ex_info"
+                    android:id="@+id/iv_mypage_exercise_info"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_marginStart="20dp"
@@ -81,25 +79,25 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/tv_mypage_ex_info"
+                    android:id="@+id/tv_mypage_exercise_info"
                     style="@style/H6_semi"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:text="@string/mypage_ex_info"
+                    android:text="@string/mypage_exercise_info"
                     android:textColor="@color/gray_900_161616"
-                    app:layout_constraintStart_toEndOf="@+id/iv_mypage_ex_info"
+                    app:layout_constraintStart_toEndOf="@+id/iv_mypage_exercise_info"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/tv_mypage_check_ex"
+                    android:id="@+id/tv_mypage_check_exercise"
                     style="@style/Caption2_re"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/mypage_check_ex_info"
+                    android:text="@string/mypage_check_exercise_info"
                     android:textColor="@color/gray_500_9D9EA0"
-                    app:layout_constraintStart_toStartOf="@id/tv_mypage_ex_info"
-                    app:layout_constraintTop_toBottomOf="@id/tv_mypage_ex_info" />
+                    app:layout_constraintStart_toStartOf="@id/tv_mypage_exercise_info"
+                    app:layout_constraintTop_toBottomOf="@id/tv_mypage_exercise_info" />
 
                 <ImageView
                     android:id="@+id/iv_mypage_arrow1"
@@ -107,9 +105,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="20dp"
                     android:src="@drawable/ic_arrow"
-                    app:layout_constraintBottom_toBottomOf="@id/tv_mypage_check_ex"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_mypage_check_exercise"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/tv_mypage_ex_info" />
+                    app:layout_constraintTop_toTopOf="@id/tv_mypage_exercise_info" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
@@ -118,23 +116,22 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/mypage_middle_box_bg_top"
+                android:background="@drawable/shape_top_radius8"
                 android:paddingStart="20dp"
                 android:paddingTop="20dp"
                 android:paddingBottom="4dp"
                 android:text="@string/mypage_app_info"
                 android:textColor="@color/gray_500_9D9EA0"
-                app:layout_constraintEnd_toEndOf="@id/cl_mypage_ex_info"
-                app:layout_constraintStart_toStartOf="@id/cl_mypage_ex_info"
-                app:layout_constraintTop_toBottomOf="@id/cl_mypage_ex_info" />
+                app:layout_constraintEnd_toEndOf="@id/cl_mypage_exercise_info"
+                app:layout_constraintStart_toStartOf="@id/cl_mypage_exercise_info"
+                app:layout_constraintTop_toBottomOf="@id/cl_mypage_exercise_info" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl_mypage_service_use"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/mypage_rip_middle_box_bg_mid"
+                android:background="@drawable/shape_ripple"
                 android:clickable="true"
-                android:focusable="true"
                 app:layout_constraintEnd_toEndOf="@id/tv_mypage_app_info"
                 app:layout_constraintStart_toStartOf="@id/tv_mypage_app_info"
                 app:layout_constraintTop_toBottomOf="@id/tv_mypage_app_info">
@@ -176,9 +173,8 @@
                 android:id="@+id/cl_mypage_privacy_policy"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/mypage_rip_middle_box_bg_mid"
+                android:background="@drawable/shape_ripple"
                 android:clickable="true"
-                android:focusable="true"
                 app:layout_constraintEnd_toEndOf="@id/tv_mypage_app_info"
                 app:layout_constraintStart_toStartOf="@id/tv_mypage_app_info"
                 app:layout_constraintTop_toBottomOf="@id/view_mypage_bar1">
@@ -220,9 +216,8 @@
                 android:id="@+id/cl_mypage_open_source"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/mypage_rip_middle_box_bg_mid"
+                android:background="@drawable/shape_ripple"
                 android:clickable="true"
-                android:focusable="true"
                 app:layout_constraintEnd_toEndOf="@id/tv_mypage_app_info"
                 app:layout_constraintStart_toStartOf="@id/tv_mypage_app_info"
                 app:layout_constraintTop_toBottomOf="@id/view_mypage_bar2">
@@ -264,9 +259,8 @@
                 android:id="@+id/cl_mypage_developer_info"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/mypage_rip_middle_box_bg_btm"
+                android:background="@drawable/shape_ripple_bottom_radius8"
                 android:clickable="true"
-                android:focusable="true"
                 app:layout_constraintEnd_toEndOf="@id/tv_mypage_app_info"
                 app:layout_constraintStart_toStartOf="@id/tv_mypage_app_info"
                 app:layout_constraintTop_toBottomOf="@id/view_mypage_bar3">
@@ -300,9 +294,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="21dp"
-                android:background="@drawable/mypage_rip_box_bg"
+                android:background="@drawable/shape_ripple_radius8"
                 android:clickable="true"
-                android:focusable="true"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/cl_mypage_developer_info"
                 app:layout_constraintStart_toStartOf="@id/cl_mypage_developer_info"
