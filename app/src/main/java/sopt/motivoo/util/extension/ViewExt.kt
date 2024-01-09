@@ -7,7 +7,7 @@ fun View.setVisible(visibility: Int) {
 }
 
 inline fun View.setOnSingleClickListener(
-    delay: Long = 500L,
+    delay: Long = 100L,
     crossinline block: (View) -> Unit,
 ) {
     var previousClickedTime = 0L

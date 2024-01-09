@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="sopt.motivoo.presentation.type.UserType" />
+
+        <variable
+            name="onboardingViewModel"
+            type="sopt.motivoo.presentation.onboarding.OnboardingViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_age_question_title"
+            style="@style/H2_semi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="51dp"
+            android:text="@string/age_question_title_first"
+            android:textColor="@color/gray_900_161616"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_age_question_description"
+            style="@style/B6_re"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/age_question_description_first"
+            android:textColor="@color/gray_600_707276"
+            app:layout_constraintStart_toStartOf="@+id/tv_age_question_title"
+            app:layout_constraintTop_toBottomOf="@+id/tv_age_question_title" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_age_question"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_age_question_description">
+
+            <TextView
+                android:id="@+id/tv_age_question_age"
+                style="@style/B6_re"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="44dp"
+                android:text="@string/onboarding_age"
+                android:textColor="@color/gray_500_9D9EA0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/et_age_question"
+                style="@style/B6_re"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/selector_edittext_input"
+                android:hint="@string/onboarding_hint"
+                android:imeOptions="actionDone"
+                android:inputType="number"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="18dp"
+                android:text="@={onboardingViewModel.age}"
+                android:textColor="@color/gray_900_161616"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/tv_age_question_age"
+                app:layout_constraintTop_toBottomOf="@+id/tv_age_question_age" />
+
+            <TextView
+                android:id="@+id/tv_age_question_error_message"
+                style="@style/Caption2_re"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="@string/onboarding_error_message"
+                android:textColor="@color/pink_FF19A3"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@+id/et_age_question"
+                app:layout_constraintTop_toBottomOf="@+id/et_age_question" />
+
+            <TextView
+                android:id="@+id/tv_age_question_parent_child_title"
+                style="@style/B6_re"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="34dp"
+                android:text="@string/onboarding_parent_or_child"
+                android:textColor="@color/gray_500_9D9EA0"
+                app:layout_constraintStart_toStartOf="@+id/et_age_question"
+                app:layout_constraintTop_toBottomOf="@+id/tv_age_question_error_message" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_user_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            app:layout_constraintTop_toBottomOf="@+id/cl_age_question">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gl_center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintGuide_percent="0.5" />
+
+            <include
+                android:id="@+id/include_user_type_parent"
+                layout="@layout/view_user_type_button"
+                selected="@{onboardingViewModel.userType == UserType.PARENT}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="6dp"
+                android:onClick="@{()->onboardingViewModel.setUserType(UserType.PARENT)}"
+                app:layout_constraintEnd_toStartOf="@+id/gl_center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:userType="@{UserType.PARENT}" />
+
+            <include
+                android:id="@+id/include_user_type_child"
+                layout="@layout/view_user_type_button"
+                selected="@{onboardingViewModel.userType == UserType.CHILD}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="16dp"
+                android:onClick="@{()->onboardingViewModel.setUserType(UserType.CHILD)}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/gl_center"
+                app:layout_constraintTop_toTopOf="@+id/include_user_type_parent"
+                app:userType="@{UserType.CHILD}" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_age_question_done"
+            style="@style/B5_med"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="44dp"
+            android:background="@drawable/selector_next_button_background"
+            android:enabled="false"
+            android:paddingVertical="18dp"
+            android:text="@string/next"
+            android:textColor="@drawable/selector_text_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
