@@ -18,7 +18,6 @@ class MyPageFragment : BindingFragment<FragmentMypageBinding>(R.layout.fragment_
 
         binding.clMypageExerciseInfo.setOnClickListener {
             navigateToMyExerciseInfo()
-
         }
     }
 
@@ -29,5 +28,4 @@ class MyPageFragment : BindingFragment<FragmentMypageBinding>(R.layout.fragment_
     private fun navigateToMyExerciseInfo() {
         findNavController().navigate(R.id.action_myPageFragment_to_myExerciseInfoFragment)
     }
-
 }
