@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="sopt.motivoo.presentation.type.SoreSpotType" />
+
+        <variable
+            name="onboardingViewModel"
+            type="sopt.motivoo.presentation.onboarding.OnboardingViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_sore_spot_title"
+            style="@style/H2_semi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="51dp"
+            android:text="@string/sore_spot_title"
+            android:textColor="@color/gray_900_161616"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_sore_spot_description"
+            style="@style/B6_re"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/sore_spot_description"
+            android:textColor="@color/gray_600_707276"
+            app:layout_constraintStart_toStartOf="@+id/tv_sore_spot_title"
+            app:layout_constraintTop_toBottomOf="@+id/tv_sore_spot_title" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <include
+            android:id="@+id/include_sore_spot_neck"
+            layout="@layout/view_sore_spot_button"
+            selected="@{onboardingViewModel.soreSpotFilterType.get(SoreSpotType.NECK)}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="58dp"
+            android:layout_marginEnd="6dp"
+            android:onClick="@{()->onboardingViewModel.setSoreSpotFilterType(SoreSpotType.NECK)}"
+            app:layout_constraintEnd_toStartOf="@+id/gl_center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_sore_spot_description"
+            app:soreSpotType="@{SoreSpotType.NECK}" />
+
+        <include
+            android:id="@+id/include_sore_spot_shoulder"
+            layout="@layout/view_sore_spot_button"
+            selected="@{onboardingViewModel.soreSpotFilterType.get(SoreSpotType.SHOULDER)}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="16dp"
+            android:onClick="@{()->onboardingViewModel.setSoreSpotFilterType(SoreSpotType.SHOULDER)}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/gl_center"
+            app:layout_constraintTop_toTopOf="@+id/include_sore_spot_neck"
+            app:soreSpotType="@{SoreSpotType.SHOULDER}" />
+
+        <include
+            android:id="@+id/include_sore_spot_waist"
+            layout="@layout/view_sore_spot_button"
+            selected="@{onboardingViewModel.soreSpotFilterType.get(SoreSpotType.WAIST)}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="6dp"
+            android:onClick="@{()->onboardingViewModel.setSoreSpotFilterType(SoreSpotType.WAIST)}"
+            app:layout_constraintEnd_toStartOf="@+id/gl_center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include_sore_spot_neck"
+            app:soreSpotType="@{SoreSpotType.WAIST}" />
+
+        <include
+            android:id="@+id/include_sore_spot_knee"
+            layout="@layout/view_sore_spot_button"
+            selected="@{onboardingViewModel.soreSpotFilterType.get(SoreSpotType.KNEE)}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="16dp"
+            android:onClick="@{()->onboardingViewModel.setSoreSpotFilterType(SoreSpotType.KNEE)}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/gl_center"
+            app:layout_constraintTop_toTopOf="@+id/include_sore_spot_waist"
+            app:soreSpotType="@{SoreSpotType.KNEE}" />
+
+        <include
+            android:id="@+id/include_sore_spot_wrist"
+            layout="@layout/view_sore_spot_button"
+            selected="@{onboardingViewModel.soreSpotFilterType.get(SoreSpotType.WRIST)}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="6dp"
+            android:onClick="@{()->onboardingViewModel.setSoreSpotFilterType(SoreSpotType.WRIST)}"
+            app:layout_constraintEnd_toStartOf="@+id/gl_center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include_sore_spot_waist"
+            app:soreSpotType="@{SoreSpotType.WRIST}" />
+
+        <include
+            android:id="@+id/include_sore_spot_ankle"
+            layout="@layout/view_sore_spot_button"
+            selected="@{onboardingViewModel.soreSpotFilterType.get(SoreSpotType.ANKLE)}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="16dp"
+            android:onClick="@{()->onboardingViewModel.setSoreSpotFilterType(SoreSpotType.ANKLE)}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/gl_center"
+            app:layout_constraintTop_toTopOf="@+id/include_sore_spot_wrist"
+            app:soreSpotType="@{SoreSpotType.ANKLE}" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_onboarding_done"
+            style="@style/B5_med"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="44dp"
+            android:background="@drawable/selector_next_button_background"
+            android:paddingVertical="18dp"
+            android:text="@string/onboarding_motivoo_start"
+            android:textColor="@drawable/selector_text_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
