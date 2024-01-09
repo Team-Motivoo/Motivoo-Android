@@ -7,4 +7,10 @@
     <string name="today_exercise">오늘 할 운동을 고르세요!</string>
     <string name="my_step_count">내 걸음</string>
     <string name="motivoo_logo">motivoo_logo</string>
+
+    <!-- notification -->
+    <string name="step_count_notification_channel_id">step_count_channel</string>
+    <string name="step_count_notification_channel_title">step_counter</string>
+    <string name="step_count_notification_channel_name">step_count_name</string>
+    <string name="notification_text">걸음 수 : %d</string>
 </resources>
