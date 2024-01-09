@@ -19,5 +19,9 @@
     <string name="mypage_open_source">오픈소스 라이선스</string>
     <string name="mypage_developer_info">개발자 정보</string>
     <string name="mypage_ask_kakao">카카오채널 문의하기</string>
+    <string name="mypage_before">이전</string>
+    <string name="mypage_name">이름</string>
+    <string name="mypage_age">나이</string>
+    <string name="mypage_logout">로그아웃</string>
 
 </resources>
