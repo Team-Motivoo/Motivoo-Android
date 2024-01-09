@@ -63,7 +63,7 @@ class AgeQuestionFragment :
 
                 false -> {
                     binding.etAgeQuestion.background =
-                        requireContext().drawableOf(R.drawable.bg_edittext_error)
+                        requireContext().drawableOf(R.drawable.background_edittext_error)
                     binding.tvAgeQuestionErrorMessage.setVisible(VISIBLE)
                 }
             }
