@@ -89,6 +89,10 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         binding.motivooPieChart.setStepCount(((pref.stepCount / 100.0) * 320).toFloat())
     }
 
+    override fun onResume() {
+        super.onResume()
+    }
+
     private fun homePermissionsGranted() = HOME_REQUIRED_PERMISSIONS.all {
         ContextCompat.checkSelfPermission(
             requireContext(), it
@@ -112,16 +116,16 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         addAction(STEP_COUNT)
     }
 
-    override fun onDestroy() {
+    override fun onPause() {
+        super.onPause()
         requireContext().unregisterReceiver(stepCountReceiver)
-        super.onDestroy()
     }
 
     inner class StepCountReceiver() : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             if (intent?.action == STEP_COUNT) {
                 binding.motivooStepCountText.setStepCountText(
-                    intent.getIntExtra(STEP_COUNT, 0).toString()
+                    intent.getIntExtra(STEP_COUNT, 0).toString() ?: pref.stepCount.toString()
                 )
                 /**
                  * 삭제될 것
