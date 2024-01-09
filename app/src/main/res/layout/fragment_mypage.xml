@@ -48,6 +48,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/mypage_myinfo_bg"
+                android:clickable="true"
+                android:focusable="true"
                 android:text="@string/mypage_myinfo"
                 android:textColor="@color/gray_700_464747"
                 app:layout_constraintBottom_toBottomOf="@id/tv_mypage_name"
