@@ -2,8 +2,6 @@
     <string name="app_name">MOTIVOO</string>
     <string name="application_terminate">\'뒤로\' 버튼 한 번 더 누르면 종료됩니다.</string>
     <string name="binding_error">에러가 발생했습니다</string>
-    <string name="permission_back">이전</string>
-    <string name="next">다음</string>
 
     <!--onboarding-->
     <string name="age_question_title_first">당신은\n부모인가요 자녀인가요?</string>
@@ -96,6 +94,20 @@
     <string name="home">홈</string>
     <string name="exercise">운동</string>
     <string name="my_page">마이</string>
+    <string name="next">다음</string>
+
+    <!--  permission  -->
+    <string name="permission_back">이전</string>
+    <string name="permission_title">접근 권한 안내</string>
+    <string name="permission_description">원활한 이용을 위해\n다음 권한의 허용이 필요해요.</string>
+    <string name="permission_essential">(필수)</string>
+    <string name="permission_health_title">건강 및 피트니스</string>
+    <string name="permission_health_description">건강 및 피트니스 앱으로 걸음수를 측정할게요</string>
+    <string name="permission_camera_description">카메라 기능으로 운동을 인증할 수 있어요</string>
+    <string name="permission_camera_title">카메라</string>
+    <string name="permission_gallery_title">사진</string>
+    <string name="permission_gallery_description">사진 기능으로 운동을 인증할 수 있어요</string>
+    <string name="permission_caution">허용하지 않아도 앱을 이용할 수 있으나, 일부\n서비스 이용이 제한될 수 있어요. 거부 후 설정에서\n다시 허용할 수 있어요.</string>
 
     <!-- invite code -->
     <string name="get_invite_code_title">함께 운동할 가족에게\n초대코드를 공유해주세요!</string>
