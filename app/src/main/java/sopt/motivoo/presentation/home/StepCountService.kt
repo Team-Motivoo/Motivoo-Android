@@ -40,7 +40,15 @@ class StepCountService : Service() {
         val sensorTypeStepDetector = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR)
 
         visibleStepCount()
+        getStepCount(sensorManager, sensorTypeStepDetector)
 
+        return START_NOT_STICKY
+    }
+
+    private fun getStepCount(
+        sensorManager: SensorManager,
+        sensorTypeStepDetector: Sensor?
+    ) {
         if (isMyServiceRunning(StepCountService::class.java) && job?.isActive == null) {
             job = CoroutineScope(Dispatchers.Default).launch {
                 object : SensorEventListener {
@@ -61,8 +69,6 @@ class StepCountService : Service() {
                 }
             }
         }
-
-        return START_NOT_STICKY
     }
 
     private fun visibleStepCount() {
