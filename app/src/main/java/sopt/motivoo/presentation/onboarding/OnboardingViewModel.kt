@@ -59,19 +59,19 @@ class OnboardingViewModel : ViewModel() {
     val timeType get() = _timeType.asStateFlow()
 
     private val _navigateToForthPage = MutableSharedFlow<DoExerciseType>()
-    val navigateToForthPage = _navigateToForthPage.asSharedFlow()
+    val navigateToForthPage get() = _navigateToForthPage.asSharedFlow()
 
     private val _navigateToFifthPageExe = MutableSharedFlow<WhatExerciseType>()
-    val navigateToFifthPageExe = _navigateToFifthPageExe.asSharedFlow()
+    val navigateToFifthPageExe get() = _navigateToFifthPageExe.asSharedFlow()
 
     private val _navigateToFifthPageAct = MutableSharedFlow<WhatActivityType>()
-    val navigateToFifthPageAct = _navigateToFifthPageAct.asSharedFlow()
+    val navigateToFifthPageAct get() = _navigateToFifthPageAct.asSharedFlow()
 
     private val _navigateToSixthPage = MutableSharedFlow<FrequencyType>()
-    val navigateToSixthPage = _navigateToSixthPage.asSharedFlow()
+    val navigateToSixthPage get() = _navigateToSixthPage.asSharedFlow()
 
     private val _navigateToLastPage = MutableSharedFlow<TimeType>()
-    val navigateToLastPage = _navigateToLastPage.asSharedFlow()
+    val navigateToLastPage get() = _navigateToLastPage.asSharedFlow()
 
     val soreSpotFilterType: MutableStateFlow<Map<SoreSpotType, Boolean>> = MutableStateFlow(
         mapOf(
