@@ -51,15 +51,16 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        when (pref.stepCountServiceFlag) {
-            -1 -> pref.stepCountServiceFlag = 0
-            0 -> pref.stepCountServiceFlag = 1
-        }
         return super.onCreateView(inflater, container, savedInstanceState)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        when (pref.stepCountServiceFlag) {
+            -1 -> pref.stepCountServiceFlag = 0
+            0 -> pref.stepCountServiceFlag = 1
+        }
+
         stepCountReceiver = StepCountReceiver()
 
         if (homePermissionsGranted()) {
