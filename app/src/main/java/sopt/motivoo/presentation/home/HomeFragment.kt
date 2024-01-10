@@ -47,13 +47,13 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        stepCountReceiver = StepCountReceiver()
-
         if (homePermissionsGranted()) {
             startStepCountService()
         } else {
             requestHomePermissionRequest.launch(HOME_REQUIRED_PERMISSIONS)
         }
+
+        stepCountReceiver = StepCountReceiver()
 
         /**
          * 삭제될 것
