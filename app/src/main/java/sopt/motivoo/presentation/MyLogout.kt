@@ -9,10 +9,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.findNavController
 import sopt.motivoo.R
+import sopt.motivoo.databinding.FragmentMypageLogoutBinding
 import sopt.motivoo.databinding.FragmentMypageServiceOutBinding
 import sopt.motivoo.util.binding.BindingFragment
 
-class MyServiceOut : BindingFragment<FragmentMypageServiceOutBinding>(R.layout.fragment_mypage_service_out){
+class MyLogout : BindingFragment<FragmentMypageLogoutBinding>(R.layout.fragment_mypage_logout){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -21,11 +22,11 @@ class MyServiceOut : BindingFragment<FragmentMypageServiceOutBinding>(R.layout.f
     }
 
     private fun clickButton() {
-        binding.tvMyServiceOutBtn.setOnClickListener {
+        binding.tvMyLogoutBtn.setOnClickListener {
             navigateToLogin()
         }
 
-        binding.tvMyServiceOutCancelBtn.setOnClickListener {
+        binding.tvMyLogoutCancelBtn.setOnClickListener {
             navigateMyInfo()
         }
     }

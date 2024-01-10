@@ -156,6 +156,9 @@
         <action
             android:id="@+id/action_myInfoFragment_to_myPageFragment"
             app:destination="@id/myPageFragment" />
+        <action
+            android:id="@+id/action_myInfoFragment_to_myLogout"
+            app:destination="@id/myLogout" />
     </fragment>
     <fragment
         android:id="@+id/myExerciseInfoFragment"
@@ -176,4 +179,8 @@
             android:id="@+id/action_myServiceOut_to_myInfoFragment"
             app:destination="@id/myInfoFragment" />
     </dialog>
+    <fragment
+        android:id="@+id/myLogout"
+        android:name="sopt.motivoo.presentation.MyLogout"
+        android:label="MyLogout" />
 </navigation>

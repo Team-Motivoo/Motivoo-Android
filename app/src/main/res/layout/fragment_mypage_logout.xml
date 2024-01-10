@@ -22,20 +22,20 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/tv_my_service_out"
+                android:id="@+id/tv_my_logout"
                 style="@style/H5_semi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:paddingVertical="5dp"
-                android:text="@string/mypage_ask_service_out"
+                android:text="@string/mypage_logout"
                 android:textColor="@color/gray_900_161616"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tv_my_service_out_content"
+                android:id="@+id/tv_my_logout_content"
                 style="@style/B6_re"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -44,32 +44,32 @@
                 android:layout_marginEnd="27dp"
                 android:paddingHorizontal="29dp"
                 android:paddingVertical="5dp"
-                android:text="@string/mypage_service_out_content"
+                android:text="@string/mypage_logout_check"
                 android:textAlignment="center"
                 android:textColor="@color/gray_700_464747"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_my_service_out" />
+                app:layout_constraintTop_toBottomOf="@id/tv_my_logout" />
 
             <TextView
-                android:id="@+id/tv_my_service_out_btn"
+                android:id="@+id/tv_my_logout_btn"
                 style="@style/B5_med"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="54dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="48dp"
                 android:background="@drawable/ripple_gray200_rectangle_radius8"
                 android:backgroundTint="@color/gray_900_161616"
                 android:gravity="center"
                 android:paddingVertical="19dp"
-                android:text="@string/mypage_service_out"
+                android:text="@string/mypage_logout"
                 android:textColor="@color/white_FFFFFF"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_my_service_out_content" />
+                app:layout_constraintTop_toBottomOf="@id/tv_my_logout_content" />
 
             <TextView
-                android:id="@+id/tv_my_service_out_cancel_btn"
+                android:id="@+id/tv_my_logout_cancel_btn"
                 style="@style/B5_med"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -82,9 +82,9 @@
                 android:text="@string/mypage_cancel"
                 android:textColor="@color/black_090909"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@id/tv_my_service_out_btn"
-                app:layout_constraintStart_toStartOf="@id/tv_my_service_out_btn"
-                app:layout_constraintTop_toBottomOf="@id/tv_my_service_out_btn" />
+                app:layout_constraintEnd_toEndOf="@id/tv_my_logout_btn"
+                app:layout_constraintStart_toStartOf="@id/tv_my_logout_btn"
+                app:layout_constraintTop_toBottomOf="@id/tv_my_logout_btn" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

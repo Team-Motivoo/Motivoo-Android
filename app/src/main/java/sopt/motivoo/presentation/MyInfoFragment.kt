@@ -33,4 +33,8 @@ class MyInfoFragment :
     private fun navigateToMyPage() {
         findNavController().navigate(R.id.action_myInfoFragment_to_myPageFragment)
     }
+
+    private fun navigateToMyLogout() {
+        findNavController().navigate(R.id.action_myInfoFragment_to_myLogout)
+    }
 }
