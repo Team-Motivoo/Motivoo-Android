@@ -24,6 +24,9 @@ class MyInfoFragment :
         binding.tvMyinfoBack.setOnClickListener {
             navigateToMyPage()
         }
+        binding.clMyinfoLogout.setOnClickListener {
+            navigateToMyLogout()
+        }
     }
 
     private fun navigateToMyServiceOut() {

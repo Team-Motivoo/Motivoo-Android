@@ -10,12 +10,28 @@ import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.findNavController
 import sopt.motivoo.R
 import sopt.motivoo.databinding.FragmentMypageServiceOutBinding
-import sopt.motivoo.util.binding.BindingFragment
 
-class MyServiceOut : BindingFragment<FragmentMypageServiceOutBinding>(R.layout.fragment_mypage_service_out){
+class MyServiceOut : DialogFragment() {
+
+    private lateinit var binding: FragmentMypageServiceOutBinding
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View? {
+        binding = FragmentMypageServiceOutBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val width = ViewGroup.LayoutParams.MATCH_PARENT
+        val height = ViewGroup.LayoutParams.MATCH_PARENT
+
+        dialog?.window?.setLayout(width, height)
+        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         clickButton()
     }
