@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="whatActivityType"
+            type="sopt.motivoo.presentation.type.WhatActivityType" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_what_exercise_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_onboarding_button_background">
+
+        <TextView
+            android:id="@+id/tv_what_exercise_type_title"
+            style="@style/B3_med"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="19dp"
+            android:paddingBottom="10dp"
+            android:text="@{whatActivityType.titleRes}"
+            android:textColor="@color/gray_800_303031"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="고강도 신체 활동" />
+
+        <TextView
+            android:id="@+id/tv_what_exercise_type_description"
+            style="@style/B6_re"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="@{whatActivityType.desRes}"
+            android:textColor="@color/gray_800_303031"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_what_exercise_type_title"
+            tools:text="계단으로 물건 나르기, 육아 등" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
