@@ -21,7 +21,6 @@ import sopt.motivoo.R
 import sopt.motivoo.domain.entity.MotivooStorage
 import sopt.motivoo.presentation.home.HomeFragment.Companion.STEP_COUNT
 import sopt.motivoo.util.extension.sendNotification
-import sopt.motivoo.util.isMyServiceRunning
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -49,7 +48,7 @@ class StepCountService : Service() {
         sensorManager: SensorManager,
         sensorTypeStepDetector: Sensor?
     ) {
-        if (isMyServiceRunning(StepCountService::class.java) && job?.isActive == null) {
+        if (job?.isActive == null) {
             job = CoroutineScope(Dispatchers.Default).launch {
                 object : SensorEventListener {
                     override fun onSensorChanged(sensorEvent: SensorEvent?) {
