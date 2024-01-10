@@ -33,7 +33,7 @@
 
             <TextView
                 android:id="@+id/tv_mypage_name"
-                style="@style/H2_semi"
+                style="@style/H3_semi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
