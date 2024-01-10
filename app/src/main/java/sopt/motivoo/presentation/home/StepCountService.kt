@@ -26,7 +26,6 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class StepCountService : Service() {
     private var job: Job? = null
-    private lateinit var stepCountListener: SensorEventListener
 
     @Inject
     lateinit var pref: MotivooStorage
@@ -43,7 +42,7 @@ class StepCountService : Service() {
 
         if (pref.stepCountServiceFlag != 1) {
             job = CoroutineScope(Dispatchers.Default).launch {
-                stepCountListener = object : SensorEventListener {
+                object : SensorEventListener {
                     override fun onSensorChanged(sensorEvent: SensorEvent?) {
                         when (sensorEvent?.sensor?.type) {
                             Sensor.TYPE_STEP_DETECTOR -> {
@@ -54,11 +53,11 @@ class StepCountService : Service() {
                     }
 
                     override fun onAccuracyChanged(p0: Sensor?, p1: Int) {}
+                }.let {
+                    sensorManager.registerListener(
+                        it, sensorTypeStepDetector, SensorManager.SENSOR_DELAY_UI, 0
+                    )
                 }
-
-                sensorManager.registerListener(
-                    stepCountListener, sensorTypeStepDetector, SensorManager.SENSOR_DELAY_UI, 0
-                )
             }
         }
 
