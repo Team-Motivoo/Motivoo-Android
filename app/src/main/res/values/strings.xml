@@ -68,4 +68,8 @@
     <string name="get_invite_code_copy">복사하기</string>
     <string name="get_invite_code_check_matching">매칭 확인하기</string>
     <string name="toast_waiting_matching">아직 매칭을 확인하고 있어요</string>
+    <string name="post_invite_code_hint">초대코드를 입력해주세요</string>
+    <string name="post_invite_code_error_message">초대코드가 올바르지 않아요</string>
+    <string name="post_invite_code">초대코드 입력하기</string>
+    <string name="clipboard_copy">클립보드에 복사되었습니다.</string>
 </resources>

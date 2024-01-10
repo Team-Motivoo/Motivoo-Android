@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/navigation_main"
-    app:startDestination="@id/getInviteCodeFragment">
+    app:startDestination="@id/afterLoginFragment">
 
     <fragment
         android:id="@+id/splashFragment"
@@ -17,12 +17,11 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="sopt.motivoo.presentation.LoginFragment"
+        android:name="sopt.motivoo.presentation.login.LoginFragment"
         android:label="LoginFragment">
-
         <action
-            android:id="@+id/action_loginFragment_to_ageQuestionFragment"
-            app:destination="@id/ageQuestionFragment" />
+            android:id="@+id/action_loginFragment_to_afterLoginFragment"
+            app:destination="@id/afterLoginFragment" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
@@ -139,4 +138,19 @@
         android:id="@+id/getInviteCodeFragment"
         android:name="sopt.motivoo.presentation.invitecode.GetInviteCodeFragment"
         android:label="GetInviteCodeFragment" />
+    <fragment
+        android:id="@+id/afterLoginFragment"
+        android:name="sopt.motivoo.presentation.login.AfterLoginFragment"
+        android:label="AfterLoginFragment">
+        <action
+            android:id="@+id/action_afterLoginFragment_to_ageQuestionFragment"
+            app:destination="@id/ageQuestionFragment" />
+        <action
+            android:id="@+id/action_afterLoginFragment_to_postInviteCodeFragment"
+            app:destination="@id/postInviteCodeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/postInviteCodeFragment"
+        android:name="sopt.motivoo.presentation.invitecode.PostInviteCodeFragment"
+        android:label="PostInviteCodeFragment" />
 </navigation>

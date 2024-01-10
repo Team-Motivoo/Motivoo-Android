@@ -22,6 +22,23 @@ class GetInviteCodeFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setToastAnimation()
+        setClipboard()
+    }
+
+    private fun setClipboard() {
+        val clipboard: ClipboardManager =
+            requireContext().getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+        val clip = ClipData.newPlainText("label", "STRING")
+
+        binding.btnGetInviteCodeCopy.setOnSingleClickListener {
+            clipboard.setPrimaryClip(clip)
+            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S_V2)
+                requireContext().showToast(getString(R.string.clipboard_copy))
+        }
+    }
+
+    private fun setToastAnimation() {
         binding.btnGetInviteCodeCheckMatching.setOnSingleClickListener {
             val fadeIn = AnimationUtils.loadAnimation(context, R.anim.fade_in)
             binding.tvGetInviteCodeMatchingWaiting.startAnimation(fadeIn)
@@ -31,17 +48,11 @@ class GetInviteCodeFragment :
                 val fadeOut = AnimationUtils.loadAnimation(context, R.anim.fade_out)
                 binding.tvGetInviteCodeMatchingWaiting.startAnimation(fadeOut)
                 binding.tvGetInviteCodeMatchingWaiting.visibility = View.GONE
-            }, 2000)
+            }, TWO_SECONDS)
         }
+    }
 
-        val clipboard: ClipboardManager =
-            requireContext().getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
-        val clip = ClipData.newPlainText("label", "STRING")
-
-        binding.btnGetInviteCodeCopy.setOnSingleClickListener {
-            clipboard.setPrimaryClip(clip)
-            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S_V2)
-                requireContext().showToast("클립보드에 복사되었습니다.")
-        }
+    companion object {
+        private const val TWO_SECONDS = 2000L
     }
 }
