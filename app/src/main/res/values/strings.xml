@@ -48,7 +48,7 @@
     <string name="sore_spot_title">평소 활동 중에 불편했거나\n걱정되는 곳을 선택해주세요</string>
     <string name="sore_spot_description">최대 3개까지 선택할 수 있어요</string>
     <string name="sore_spot_neck">목</string>
-    <string name="sore_spot_shoulder">어꺠</string>
+    <string name="sore_spot_shoulder">어깨</string>
     <string name="sore_spot_waist">허리</string>
     <string name="sore_spot_knee">무릎</string>
     <string name="sore_spot_wrist">손목</string>
@@ -108,4 +108,15 @@
     <string name="permission_gallery_title">사진</string>
     <string name="permission_gallery_description">사진 기능으로 운동을 인증할 수 있어요</string>
     <string name="permission_caution">허용하지 않아도 앱을 이용할 수 있으나, 일부\n서비스 이용이 제한될 수 있어요. 거부 후 설정에서\n다시 허용할 수 있어요.</string>
+
+    <!-- invite code -->
+    <string name="get_invite_code_title">함께 운동할 가족에게\n초대코드를 공유해주세요!</string>
+    <string name="get_invite_code">초대코드</string>
+    <string name="get_invite_code_copy">복사하기</string>
+    <string name="get_invite_code_check_matching">매칭 확인하기</string>
+    <string name="toast_waiting_matching">아직 매칭을 확인하고 있어요</string>
+    <string name="post_invite_code_hint">초대코드를 입력해주세요</string>
+    <string name="post_invite_code_error_message">초대코드가 올바르지 않아요</string>
+    <string name="post_invite_code">초대코드 입력하기</string>
+    <string name="clipboard_copy">클립보드에 복사되었습니다.</string>
 </resources>
