@@ -92,7 +92,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
     override fun onResume() {
         super.onResume()
         ContextCompat.registerReceiver(
-            requireContext(), stepCountReceiver, addIntentFilter(),
+            requireContext(), stepCountReceiver, getIntentFilter(),
             ContextCompat.RECEIVER_NOT_EXPORTED
         )
     }
@@ -109,7 +109,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         }
     }
 
-    private fun addIntentFilter() = IntentFilter().apply {
+    private fun getIntentFilter() = IntentFilter().apply {
         addAction(STEP_COUNT)
     }
 
