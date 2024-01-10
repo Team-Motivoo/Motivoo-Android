@@ -48,6 +48,8 @@ class MainActivity : AppCompatActivity() {
                     R.id.homeFragment,
                     R.id.myPageFragment,
                     R.id.exerciseFragment,
+                    R.id.myInfoFragment,
+                    R.id.myExerciseInfoFragment
                 )
             ) {
                 View.VISIBLE

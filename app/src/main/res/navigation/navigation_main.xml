@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/navigation_main"
-    app:startDestination="@id/afterLoginFragment">
+    app:startDestination="@id/splashFragment">
 
     <fragment
         android:id="@+id/splashFragment"
@@ -25,12 +25,19 @@
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
-        android:name="sopt.motivoo.presentation.HomeFragment"
+        android:name="sopt.motivoo.presentation.home.HomeFragment"
         android:label="HomeFragment" />
     <fragment
         android:id="@+id/myPageFragment"
         android:name="sopt.motivoo.presentation.MyPageFragment"
-        android:label="MyPageFragment" />
+        android:label="MyPageFragment" >
+        <action
+            android:id="@+id/action_myPageFragment_to_myInfoFragment"
+            app:destination="@id/myInfoFragment" />
+        <action
+            android:id="@+id/action_myPageFragment_to_myExerciseInfoFragment"
+            app:destination="@id/myExerciseInfoFragment" />
+    </fragment>
     <fragment
         android:id="@+id/exerciseFragment"
         android:name="sopt.motivoo.presentation.ExerciseFragment"
@@ -153,4 +160,12 @@
         android:id="@+id/postInviteCodeFragment"
         android:name="sopt.motivoo.presentation.invitecode.PostInviteCodeFragment"
         android:label="PostInviteCodeFragment" />
+    <fragment
+        android:id="@+id/myInfoFragment"
+        android:name="sopt.motivoo.presentation.MyInfoFragment"
+        android:label="MyInfoFragment" />
+    <fragment
+        android:id="@+id/myExerciseInfoFragment"
+        android:name="sopt.motivoo.presentation.MyExerciseInfoFragment"
+        android:label="MyExerciseInfoFragment" />
 </navigation>
