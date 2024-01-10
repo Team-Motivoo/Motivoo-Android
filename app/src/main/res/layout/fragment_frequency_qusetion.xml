@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="sopt.motivoo.presentation.type.FrequencyType" />
+
+        <variable
+            name="onboardingViewModel"
+            type="sopt.motivoo.presentation.onboarding.OnboardingViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_frequency_title"
+            style="@style/H2_semi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="51dp"
+            android:text="@string/frequency_exercise_title"
+            android:textColor="@color/gray_900_161616"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <include
+            android:id="@+id/include_frequency_one"
+            layout="@layout/view_frequency_button"
+            selected="@{onboardingViewModel.frequencyType == FrequencyType.UNDERONE}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="52dp"
+            android:onClick="@{()->onboardingViewModel.setFrequencyType(FrequencyType.UNDERONE)}"
+            app:frequencyType="@{FrequencyType.UNDERONE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_frequency_title" />
+
+        <include
+            android:id="@+id/include_frequency_two"
+            layout="@layout/view_frequency_button"
+            selected="@{onboardingViewModel.frequencyType == FrequencyType.ONETOTHREE}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            android:onClick="@{()->onboardingViewModel.setFrequencyType(FrequencyType.ONETOTHREE)}"
+            app:frequencyType="@{FrequencyType.ONETOTHREE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include_frequency_one" />
+
+        <include
+            android:id="@+id/include_frequency_three"
+            layout="@layout/view_frequency_button"
+            selected="@{onboardingViewModel.frequencyType == FrequencyType.THREETOFIVE}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            android:onClick="@{()->onboardingViewModel.setFrequencyType(FrequencyType.THREETOFIVE)}"
+            app:frequencyType="@{FrequencyType.THREETOFIVE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include_frequency_two" />
+
+        <include
+            android:id="@+id/include_frequency_four"
+            layout="@layout/view_frequency_button"
+            selected="@{onboardingViewModel.frequencyType == FrequencyType.OVERFIVE}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            android:onClick="@{()->onboardingViewModel.setFrequencyType(FrequencyType.OVERFIVE)}"
+            app:frequencyType="@{FrequencyType.OVERFIVE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include_frequency_three" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

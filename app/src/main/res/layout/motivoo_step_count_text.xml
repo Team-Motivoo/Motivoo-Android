@@ -10,11 +10,11 @@
         style="@style/B6_re"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/my_step_count"
         android:textColor="@color/gray_600_707276"
         app:layout_constraintEnd_toEndOf="@id/tv_step_count"
         app:layout_constraintStart_toStartOf="@id/tv_step_count"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="내 걸음" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_step_count"
