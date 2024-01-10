@@ -113,7 +113,6 @@ class StepCountService : Service() {
 
     override fun onDestroy() {
         job?.cancel()
-        stopSelf()
         super.onDestroy()
     }
 
