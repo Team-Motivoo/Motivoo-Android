@@ -102,9 +102,9 @@
                     style="@style/Caption2_re"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingHorizontal="1dp"
                     android:paddingVertical="4dp"
                     android:text="@string/mypage_check_exercise_info"
-                    android:paddingHorizontal="1dp"
                     android:textColor="@color/gray_500_9D9EA0"
                     app:layout_constraintStart_toStartOf="@id/tv_mypage_exercise_info"
                     app:layout_constraintTop_toBottomOf="@id/tv_mypage_exercise_info" />
