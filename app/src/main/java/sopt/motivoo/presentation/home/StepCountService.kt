@@ -20,8 +20,8 @@ import kotlinx.coroutines.launch
 import sopt.motivoo.R
 import sopt.motivoo.domain.entity.MotivooStorage
 import sopt.motivoo.presentation.home.HomeFragment.Companion.STEP_COUNT
+import sopt.motivoo.util.extension.sendNotification
 import sopt.motivoo.util.isMyServiceRunning
-import sopt.motivoo.util.sendNotification
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -83,19 +83,13 @@ class StepCountService : Service() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.TIRAMISU) {
             startForeground(
                 FOREGROUND_SERVICE_ID,
-                manager.sendNotification(
-                    getString(R.string.notification_text, stepCount),
-                    applicationContext
-                ),
+                sendNotification(getString(R.string.notification_text, stepCount)),
                 ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC
             )
         } else {
             startForeground(
                 FOREGROUND_SERVICE_ID,
-                manager.sendNotification(
-                    getString(R.string.notification_text, stepCount),
-                    applicationContext
-                )
+                sendNotification(getString(R.string.notification_text, stepCount))
             )
         }
     }
