@@ -31,6 +31,7 @@ fun NotificationManager.sendNotification(
         setContentText(messageBody)
         setContentIntent(contentPendingIntent)
         setAutoCancel(true)
+        setOngoing(true)
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
             priority = NotificationCompat.PRIORITY_DEFAULT
         }
