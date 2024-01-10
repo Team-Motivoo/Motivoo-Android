@@ -12,12 +12,24 @@ class MyPageFragment : BindingFragment<FragmentMypageBinding>(R.layout.fragment_
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        clickButton()
+    }
+
+    private fun clickButton() {
         binding.tvMypageMyInfo.setOnClickListener {
             navigateToMyInfo()
+        }
+
+        binding.clMypageExerciseInfo.setOnClickListener {
+            navigateToMyExerciseInfo()
         }
     }
 
     private fun navigateToMyInfo() {
         findNavController().navigate(R.id.action_myPageFragment_to_myInfoFragment)
+    }
+
+    private fun navigateToMyExerciseInfo() {
+        findNavController().navigate(R.id.action_myPageFragment_to_myExerciseInfoFragment)
     }
 }

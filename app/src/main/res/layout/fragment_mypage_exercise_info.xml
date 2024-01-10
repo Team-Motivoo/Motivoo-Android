@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/gray_100_F4F5F9">
+
+        <TextView
+            android:id="@+id/tv_exercise_info_title"
+            style="@style/H6_semi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="34dp"
+            android:paddingVertical="5dp"
+            android:text="@string/mypage_exercise_info"
+            android:textColor="@color/gray_900_161616"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_exercise_info_back"
+            style="@style/B6_re"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:paddingHorizontal="11dp"
+            android:paddingVertical="17dp"
+            android:text="@string/mypage_before"
+            android:textColor="@color/gray_700_464747"
+            app:layout_constraintBottom_toBottomOf="@id/tv_exercise_info_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_exercise_info_title" />
+
+        <TextView
+            android:id="@+id/tv_exercise_info_or_not"
+            style="@style/B6_re"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="34dp"
+            android:background="@drawable/shape_rectangle_top_radius8"
+            android:backgroundTint="@color/white_FFFFFF"
+            android:paddingVertical="25dp"
+            android:paddingStart="20dp"
+            android:text="@string/mypage_exercise_or_not"
+            android:textColor="@color/gray_700_464747"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_exercise_info_title" />
+
+        <TextView
+            android:id="@+id/tv_exercise_info_or_not_answer"
+            style="@style/H6_semi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:paddingHorizontal="1dp"
+            android:paddingVertical="5dp"
+            android:textColor="@color/gray_800_303031"
+            app:layout_constraintBottom_toBottomOf="@id/tv_exercise_info_or_not"
+            app:layout_constraintEnd_toEndOf="@id/tv_exercise_info_or_not"
+            app:layout_constraintTop_toTopOf="@id/tv_exercise_info_or_not"
+            tools:text="예" />
+
+        <View
+            android:id="@+id/view_exercise_info_bar1"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/gray_100_F4F5F9"
+            app:layout_constraintEnd_toEndOf="@id/tv_exercise_info_or_not"
+            app:layout_constraintStart_toStartOf="@id/tv_exercise_info_or_not"
+            app:layout_constraintTop_toBottomOf="@id/tv_exercise_info_or_not" />
+
+        <TextView
+            android:id="@+id/tv_exercise_info_intensity"
+            style="@style/B6_re"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ripple_gray200_rectangle"
+            android:backgroundTint="@color/white_FFFFFF"
+            android:paddingVertical="25dp"
+            android:paddingStart="20dp"
+            android:text="@string/mypage_exercise_intensity"
+            android:textColor="@color/gray_700_464747"
+            app:layout_constraintEnd_toEndOf="@id/tv_exercise_info_or_not"
+            app:layout_constraintStart_toStartOf="@id/tv_exercise_info_or_not"
+            app:layout_constraintTop_toBottomOf="@id/view_exercise_info_bar1" />
+
+        <TextView
+            android:id="@+id/tv_exercise_info_intensity_answer"
+            style="@style/H6_semi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:paddingHorizontal="1dp"
+            android:paddingVertical="5dp"
+            android:textColor="@color/gray_800_303031"
+            app:layout_constraintBottom_toBottomOf="@id/tv_exercise_info_intensity"
+            app:layout_constraintEnd_toEndOf="@id/tv_exercise_info_intensity"
+            app:layout_constraintTop_toTopOf="@id/tv_exercise_info_intensity"
+            tools:text="저강도 운동" />
+
+        <View
+            android:id="@+id/view_exercise_info_bar2"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/gray_100_F4F5F9"
+            app:layout_constraintEnd_toEndOf="@id/tv_exercise_info_intensity"
+            app:layout_constraintStart_toStartOf="@id/tv_exercise_info_intensity"
+            app:layout_constraintTop_toBottomOf="@id/tv_exercise_info_intensity" />
+
+        <TextView
+            android:id="@+id/tv_exercise_info_average_count"
+            style="@style/B6_re"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ripple_gray200_rectangle"
+            android:backgroundTint="@color/white_FFFFFF"
+            android:paddingVertical="25dp"
+            android:paddingStart="20dp"
+            android:text="@string/mypage_average_count"
+            android:textColor="@color/gray_700_464747"
+            app:layout_constraintEnd_toEndOf="@id/tv_exercise_info_intensity"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@id/tv_exercise_info_intensity"
+            app:layout_constraintTop_toBottomOf="@id/view_exercise_info_bar2" />
+
+        <TextView
+            android:id="@+id/tv_exercise_info_average_count_answer"
+            style="@style/H6_semi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:paddingHorizontal="1dp"
+            android:paddingVertical="5dp"
+            android:textColor="@color/gray_800_303031"
+            app:layout_constraintBottom_toBottomOf="@id/tv_exercise_info_average_count"
+            app:layout_constraintEnd_toEndOf="@id/tv_exercise_info_average_count"
+            app:layout_constraintTop_toTopOf="@id/tv_exercise_info_average_count"
+            tools:text="3일" />
+
+        <View
+            android:id="@+id/view_exercise_info_bar3"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/gray_100_F4F5F9"
+            app:layout_constraintEnd_toEndOf="@id/tv_exercise_info_average_count"
+            app:layout_constraintStart_toStartOf="@id/tv_exercise_info_average_count"
+            app:layout_constraintTop_toBottomOf="@id/tv_exercise_info_average_count" />
+
+        <TextView
+            android:id="@+id/tv_exercise_info_average_time"
+            style="@style/B6_re"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ripple_gray200_rectangle"
+            android:backgroundTint="@color/white_FFFFFF"
+            android:paddingVertical="25dp"
+            android:paddingStart="20dp"
+            android:text="@string/mypage_average_time"
+            android:textColor="@color/gray_700_464747"
+            app:layout_constraintEnd_toEndOf="@id/tv_exercise_info_average_count"
+            app:layout_constraintStart_toStartOf="@id/tv_exercise_info_average_count"
+            app:layout_constraintTop_toBottomOf="@id/view_exercise_info_bar3" />
+
+        <TextView
+            android:id="@+id/tv_exercise_info_average_time_answer"
+            style="@style/H6_semi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:paddingHorizontal="1dp"
+            android:paddingVertical="5dp"
+            android:textColor="@color/gray_800_303031"
+            app:layout_constraintBottom_toBottomOf="@id/tv_exercise_info_average_time"
+            app:layout_constraintEnd_toEndOf="@id/tv_exercise_info_average_time"
+            app:layout_constraintTop_toTopOf="@id/tv_exercise_info_average_time"
+            tools:text="2-3시간" />
+
+        <View
+            android:id="@+id/view_exercise_info_bar4"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/gray_100_F4F5F9"
+            app:layout_constraintEnd_toEndOf="@id/tv_exercise_info_average_time"
+            app:layout_constraintStart_toStartOf="@id/tv_exercise_info_average_time"
+            app:layout_constraintTop_toBottomOf="@id/tv_exercise_info_average_time" />
+
+        <TextView
+            android:id="@+id/tv_exercise_info_watch_out"
+            style="@style/B6_re"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_rectangle_bottom_radius8"
+            android:backgroundTint="@color/white_FFFFFF"
+            android:paddingVertical="25dp"
+            android:paddingStart="20dp"
+            android:text="@string/mypage_watch_out"
+            android:textColor="@color/gray_700_464747"
+            app:layout_constraintEnd_toEndOf="@id/tv_exercise_info_average_time"
+            app:layout_constraintStart_toStartOf="@id/tv_exercise_info_average_time"
+            app:layout_constraintTop_toBottomOf="@id/view_exercise_info_bar4" />
+
+        <TextView
+            android:id="@+id/tv_exercise_info_watch_out_answer"
+            style="@style/H6_semi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:paddingHorizontal="5dp"
+            android:paddingVertical="1dp"
+            android:textColor="@color/gray_800_303031"
+            app:layout_constraintBottom_toBottomOf="@id/tv_exercise_info_watch_out"
+            app:layout_constraintEnd_toEndOf="@id/tv_exercise_info_watch_out"
+            app:layout_constraintTop_toTopOf="@id/tv_exercise_info_watch_out"
+            tools:text="무릎, 어깨" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
