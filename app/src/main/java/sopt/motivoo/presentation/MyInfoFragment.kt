@@ -14,8 +14,23 @@ class MyInfoFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        clickButton()
+    }
+
+    private fun clickButton() {
         binding.clMyinfoOut.setOnClickListener {
-            findNavController().navigate(R.id.action_myInfoFragment_to_myServiceOut)
+            navigateToMyServiceOut()
         }
+        binding.tvMyinfoBack.setOnClickListener {
+            navigateToMyPage()
+        }
+    }
+
+    private fun navigateToMyServiceOut() {
+        findNavController().navigate(R.id.action_myInfoFragment_to_myServiceOut)
+    }
+
+    private fun navigateToMyPage() {
+        findNavController().navigate(R.id.action_myInfoFragment_to_myPageFragment)
     }
 }

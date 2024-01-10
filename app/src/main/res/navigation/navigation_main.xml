@@ -153,11 +153,18 @@
         <action
             android:id="@+id/action_myInfoFragment_to_myServiceOut"
             app:destination="@id/myServiceOut" />
+        <action
+            android:id="@+id/action_myInfoFragment_to_myPageFragment"
+            app:destination="@id/myPageFragment" />
     </fragment>
     <fragment
         android:id="@+id/myExerciseInfoFragment"
         android:name="sopt.motivoo.presentation.MyExerciseInfoFragment"
-        android:label="MyExerciseInfoFragment" />
+        android:label="MyExerciseInfoFragment" >
+        <action
+            android:id="@+id/action_myExerciseInfoFragment_to_myPageFragment"
+            app:destination="@id/myPageFragment" />
+    </fragment>
     <dialog
         android:id="@+id/myServiceOut"
         android:name="sopt.motivoo.presentation.MyServiceOut"

@@ -8,7 +8,7 @@ import sopt.motivoo.util.binding.BindingFragment
 
 class ExerciseFragment : BindingFragment<FragmentExerciseBinding>(R.layout.fragment_exercise) {
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
     }
 }

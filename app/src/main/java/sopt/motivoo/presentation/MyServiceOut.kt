@@ -15,20 +15,6 @@ import sopt.motivoo.databinding.FragmentMypageServiceOutBinding
 class MyServiceOut : DialogFragment() {
 
     private lateinit var binding: FragmentMypageServiceOutBinding
-    override fun onStart() {
-        super.onStart()
-        val width = ViewGroup.LayoutParams.MATCH_PARENT
-        val height = ViewGroup.LayoutParams.MATCH_PARENT
-
-        dialog?.window?.setLayout(width, height)
-        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        //false로 설정해 주면 화면밖 혹은 뒤로가기 버튼시 다이얼로그라 dismiss 되지 않는다.
-        isCancelable = true
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,12 +29,35 @@ class MyServiceOut : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val width = ViewGroup.LayoutParams.MATCH_PARENT
+        val height = ViewGroup.LayoutParams.MATCH_PARENT
+
+        dialog?.window?.setLayout(width, height)
+        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        clickButton()
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+    }
+
+    private fun clickButton() {
         binding.tvMyServiceOutBtn.setOnClickListener {
-            findNavController().navigate(R.id.action_myServiceOut_to_loginFragment)
+            navigateToLogin()
         }
 
         binding.tvMyServiceOutCancelBtn.setOnClickListener {
-            findNavController().navigate(R.id.action_myServiceOut_to_myInfoFragment)
+            navigateMyInfo()
         }
+    }
+
+    private fun navigateToLogin() {
+        findNavController().navigate(R.id.action_myServiceOut_to_loginFragment)
+    }
+
+    private fun navigateMyInfo() {
+        findNavController().navigate(R.id.action_myServiceOut_to_myInfoFragment)
     }
 }
