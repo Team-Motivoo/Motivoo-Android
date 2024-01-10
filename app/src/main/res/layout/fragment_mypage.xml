@@ -90,7 +90,7 @@
                     style="@style/H6_semi"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="12dp"
                     android:paddingVertical="6dp"
                     android:text="@string/mypage_exercise_info"
                     android:textColor="@color/gray_900_161616"

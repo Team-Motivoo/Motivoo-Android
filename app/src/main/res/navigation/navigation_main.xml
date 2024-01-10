@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/navigation_main"
-    app:startDestination="@id/splashFragment">
+    app:startDestination="@id/myPageFragment">
 
     <fragment
         android:id="@+id/splashFragment"
@@ -149,9 +149,24 @@
     <fragment
         android:id="@+id/myInfoFragment"
         android:name="sopt.motivoo.presentation.MyInfoFragment"
-        android:label="MyInfoFragment" />
+        android:label="MyInfoFragment" >
+        <action
+            android:id="@+id/action_myInfoFragment_to_myServiceOut"
+            app:destination="@id/myServiceOut" />
+    </fragment>
     <fragment
         android:id="@+id/myExerciseInfoFragment"
         android:name="sopt.motivoo.presentation.MyExerciseInfoFragment"
         android:label="MyExerciseInfoFragment" />
+    <dialog
+        android:id="@+id/myServiceOut"
+        android:name="sopt.motivoo.presentation.MyServiceOut"
+        android:label="MyServiceOut" >
+        <action
+            android:id="@+id/action_myServiceOut_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_myServiceOut_to_myInfoFragment"
+            app:destination="@id/myInfoFragment" />
+    </dialog>
 </navigation>
