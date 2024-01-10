@@ -49,8 +49,12 @@
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bnv_main"
+            style="@style/Widget.Design.BottomNavigationView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/white_FFFFFF"
+            android:elevation="6dp"
+            android:padding="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:menu="@menu/navigation" />
 
