@@ -2,8 +2,6 @@
     <string name="app_name">MOTIVOO</string>
     <string name="application_terminate">\'뒤로\' 버튼 한 번 더 누르면 종료됩니다.</string>
     <string name="binding_error">에러가 발생했습니다</string>
-    <string name="permission_back">이전</string>
-    <string name="next">다음</string>
 
     <!--onboarding-->
     <string name="age_question_title_first">당신은\n부모인가요 자녀인가요?</string>
