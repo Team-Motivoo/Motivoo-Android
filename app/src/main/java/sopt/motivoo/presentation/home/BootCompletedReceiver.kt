@@ -18,7 +18,6 @@ class BootCompletedReceiver : BroadcastReceiver() {
         val intentStepCountService = Intent(context, StepCountService::class.java)
 
         if (action == Intent.ACTION_BOOT_COMPLETED) {
-            pref.stepCountServiceFlag = 0
             context?.startService(intentStepCountService)
         }
     }
