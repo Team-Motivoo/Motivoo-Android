@@ -119,4 +119,7 @@
     <string name="post_invite_code_error_message">초대코드가 올바르지 않아요</string>
     <string name="post_invite_code">초대코드 입력하기</string>
     <string name="clipboard_copy">클립보드에 복사되었습니다.</string>
+
+    <!-- login -->
+    <string name="login_kakao">카카오 로그인하기</string>
 </resources>
