@@ -41,18 +41,18 @@ class MotivooMyPieChart @JvmOverloads constructor(
 
         context.theme.obtainStyledAttributes(
             attributeSet, R.styleable.MotivooPieChart, defStyleAttr, defStyleAttr
-        ).run {
+        ).let { typedArray ->
             progressBarMyPaint.run {
-                color = getColor(R.styleable.MotivooPieChart_progressMyColor, Color.BLUE)
+                color = typedArray.getColor(R.styleable.MotivooPieChart_progressMyColor, Color.BLUE)
                 style = Paint.Style.STROKE
                 strokeWidth = 9.px
             }
             centerCirclePaint.run {
-                color = getColor(R.styleable.MotivooPieChart_centerCicleColor, Color.BLACK)
+                color = typedArray.getColor(R.styleable.MotivooPieChart_centerCicleColor, Color.BLACK)
                 style = Paint.Style.STROKE
                 strokeWidth = 3.px
             }
-            recycle()
+            typedArray.recycle()
         }
     }
 
