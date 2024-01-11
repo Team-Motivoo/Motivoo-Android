@@ -130,4 +130,7 @@
     <string name="post_invite_code_error_message">초대코드가 올바르지 않아요</string>
     <string name="post_invite_code">초대코드 입력하기</string>
     <string name="clipboard_copy">클립보드에 복사되었습니다.</string>
+    <string name="exercise_today_exercise">오늘의 운동</string>
+    <string name="exercise_today_mission">8천걸음 걷고 \n스쿼트 10번 하기</string>
+    <string name="exercise_notice">운동 기록은 30일간 보관 후 사라져요!</string>
 </resources>
