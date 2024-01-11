@@ -66,32 +66,29 @@
                 android:layout_marginTop="28dp"
                 android:background="@drawable/ripple_gray200_rectangle_radius8"
                 android:backgroundTint="@color/white_FFFFFF"
-                android:paddingTop="20dp"
-                android:paddingBottom="22dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_mypage_name">
 
                 <ImageView
                     android:id="@+id/iv_mypage_exercise_info"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:layout_marginTop="6dp"
-                    android:layout_marginBottom="4dp"
-                    android:background="@color/gray_100_F4F5F9"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintDimensionRatio="1"
+                    android:src="@drawable/ic_shoes"
+                    android:layout_marginTop="2dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_mypage_check_exercise"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="@+id/tv_mypage_exercise_info" />
 
                 <TextView
                     android:id="@+id/tv_mypage_exercise_info"
-                    style="@style/H6_semi"
+                    style="@style/B5_med"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:paddingVertical="6dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="20dp"
+                    android:paddingVertical="3dp"
                     android:text="@string/mypage_exercise_info"
                     android:textColor="@color/gray_900_161616"
                     app:layout_constraintStart_toEndOf="@+id/iv_mypage_exercise_info"
@@ -103,21 +100,24 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingHorizontal="1dp"
-                    android:paddingVertical="4dp"
+                    android:paddingVertical="1dp"
+                    android:layout_marginBottom="22dp"
                     android:text="@string/mypage_check_exercise_info"
                     android:textColor="@color/gray_500_9D9EA0"
                     app:layout_constraintStart_toStartOf="@id/tv_mypage_exercise_info"
-                    app:layout_constraintTop_toBottomOf="@id/tv_mypage_exercise_info" />
+                    app:layout_constraintTop_toBottomOf="@id/tv_mypage_exercise_info"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
 
                 <ImageView
                     android:id="@+id/iv_mypage_arrow1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="2dp"
                     android:src="@drawable/ic_arrow"
-                    app:layout_constraintBottom_toBottomOf="@id/tv_mypage_check_exercise"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/tv_mypage_exercise_info" />
+                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
@@ -149,7 +149,7 @@
 
                 <TextView
                     android:id="@+id/tv_mypage_service_use"
-                    style="@style/H6_semi"
+                    style="@style/B5_med"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:paddingVertical="26dp"
@@ -165,6 +165,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="2dp"
                     android:src="@drawable/ic_arrow"
                     app:layout_constraintBottom_toBottomOf="@id/tv_mypage_service_use"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -192,7 +193,7 @@
 
                 <TextView
                     android:id="@+id/tv_mypage_privacy_policy"
-                    style="@style/H6_semi"
+                    style="@style/B5_med"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:paddingVertical="26dp"
@@ -208,6 +209,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="2dp"
                     android:src="@drawable/ic_arrow"
                     app:layout_constraintBottom_toBottomOf="@id/tv_mypage_privacy_policy"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -235,7 +237,7 @@
 
                 <TextView
                     android:id="@+id/tv_mypage_open_source"
-                    style="@style/H6_semi"
+                    style="@style/B5_med"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:paddingVertical="26dp"
@@ -251,6 +253,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="2dp"
                     android:src="@drawable/ic_arrow"
                     app:layout_constraintBottom_toBottomOf="@id/tv_mypage_open_source"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -278,7 +281,7 @@
 
                 <TextView
                     android:id="@+id/tv_mypage_developer_info"
-                    style="@style/H6_semi"
+                    style="@style/B5_med"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:paddingVertical="26dp"
@@ -294,6 +297,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="2dp"
                     android:src="@drawable/ic_arrow"
                     app:layout_constraintBottom_toBottomOf="@id/tv_mypage_developer_info"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -314,7 +318,7 @@
 
                 <TextView
                     android:id="@+id/tv_mypage_ask_kakao"
-                    style="@style/H6_semi"
+                    style="@style/B5_med"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:paddingVertical="25dp"

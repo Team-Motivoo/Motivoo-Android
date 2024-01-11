@@ -14,7 +14,7 @@
 
         <TextView
             android:id="@+id/tv_myinfo_title"
-            style="@style/H6_semi"
+            style="@style/H7_semi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="34dp"
@@ -60,7 +60,7 @@
 
         <TextView
             android:id="@+id/tv_myinfo_user_name"
-            style="@style/H6_semi"
+            style="@style/H7_semi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
@@ -98,7 +98,7 @@
 
         <TextView
             android:id="@+id/tv_myinfo_user_age"
-            style="@style/H6_semi"
+            style="@style/H7_semi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
@@ -122,7 +122,7 @@
 
             <TextView
                 android:id="@+id/tv_myinfo_logout"
-                style="@style/H6_semi"
+                style="@style/B5_med"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:paddingVertical="25dp"
@@ -130,6 +130,7 @@
                 android:text="@string/mypage_logout"
                 android:textColor="@color/gray_900_161616"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -146,6 +147,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_myinfo_out"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -157,7 +159,7 @@
 
             <TextView
                 android:id="@+id/tv_myinfo_out"
-                style="@style/H6_semi"
+                style="@style/B5_med"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:paddingStart="20dp"

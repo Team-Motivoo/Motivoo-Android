@@ -82,6 +82,11 @@
     <string name="mypage_average_count">주 평균 횟수</string>
     <string name="mypage_average_time">하루 평균 시간</string>
     <string name="mypage_watch_out">주의할 곳</string>
+    <string name="mypage_ask_service_out">정말 탈퇴하시겠어요?</string>
+    <string name="mypage_service_out_content">회원 탈퇴 시 모든 정보가 삭제되며 복구가 불가능해요.</string>
+    <string name="mypage_service_out">탈퇴하기</string>
+    <string name="mypage_cancel">취소</string>
+    <string name="mypage_logout_check">정말 로그아웃 하시겠어요?</string>
 
 
     <!-- notification -->

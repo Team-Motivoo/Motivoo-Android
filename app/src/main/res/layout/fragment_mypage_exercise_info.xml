@@ -14,7 +14,7 @@
 
         <TextView
             android:id="@+id/tv_exercise_info_title"
-            style="@style/H6_semi"
+            style="@style/H7_semi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="34dp"
@@ -58,7 +58,7 @@
 
         <TextView
             android:id="@+id/tv_exercise_info_or_not_answer"
-            style="@style/H6_semi"
+            style="@style/H7_semi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
@@ -96,7 +96,7 @@
 
         <TextView
             android:id="@+id/tv_exercise_info_intensity_answer"
-            style="@style/H6_semi"
+            style="@style/H7_semi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
@@ -135,7 +135,7 @@
 
         <TextView
             android:id="@+id/tv_exercise_info_average_count_answer"
-            style="@style/H6_semi"
+            style="@style/H7_semi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
@@ -173,7 +173,7 @@
 
         <TextView
             android:id="@+id/tv_exercise_info_average_time_answer"
-            style="@style/H6_semi"
+            style="@style/H7_semi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
@@ -211,7 +211,7 @@
 
         <TextView
             android:id="@+id/tv_exercise_info_watch_out_answer"
-            style="@style/H6_semi"
+            style="@style/H7_semi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
