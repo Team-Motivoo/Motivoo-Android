@@ -28,7 +28,7 @@
     <fragment
         android:id="@+id/myPageFragment"
         android:name="sopt.motivoo.presentation.MyPageFragment"
-        android:label="MyPageFragment" >
+        android:label="MyPageFragment">
         <action
             android:id="@+id/action_myPageFragment_to_myInfoFragment"
             app:destination="@id/myInfoFragment" />
@@ -161,11 +161,47 @@
     <fragment
         android:id="@+id/myInfoFragment"
         android:name="sopt.motivoo.presentation.MyInfoFragment"
-        android:label="MyInfoFragment" />
+        android:label="MyInfoFragment" >
+        <action
+            android:id="@+id/action_myInfoFragment_to_myServiceOut"
+            app:destination="@id/myServiceOutFragment" />
+        <action
+            android:id="@+id/action_myInfoFragment_to_myPageFragment"
+            app:destination="@id/myPageFragment" />
+        <action
+            android:id="@+id/action_myInfoFragment_to_myLogout"
+            app:destination="@id/myLogoutFragment" />
+    </fragment>
     <fragment
         android:id="@+id/myExerciseInfoFragment"
         android:name="sopt.motivoo.presentation.MyExerciseInfoFragment"
-        android:label="MyExerciseInfoFragment" />
+        android:label="MyExerciseInfoFragment" >
+        <action
+            android:id="@+id/action_myExerciseInfoFragment_to_myPageFragment"
+            app:destination="@id/myPageFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/myServiceOutFragment"
+        android:name="sopt.motivoo.presentation.MyServiceOutFragment"
+        android:label="MyServiceOutFragment" >
+        <action
+            android:id="@+id/action_myServiceOut_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_myServiceOut_to_myInfoFragment"
+            app:destination="@id/myInfoFragment" />
+    </dialog>
+    <dialog
+        android:id="@+id/myLogoutFragment"
+        android:name="sopt.motivoo.presentation.MyLogoutFragment"
+        android:label="MyLogoutFragment" >
+        <action
+            android:id="@+id/action_myLogout_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_myLogout_to_myInfoFragment"
+            app:destination="@id/myInfoFragment" />
+    </dialog>
     <fragment
         android:id="@+id/permissionFragment"
         android:name="sopt.motivoo.presentation.intro.PermissionFragment"

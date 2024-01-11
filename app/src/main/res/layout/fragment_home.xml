@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -9,7 +10,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/gray_100_F4F5F9"
+        android:background="@color/white_FFFFFF"
+        android:fillViewport="true"
         android:paddingHorizontal="18dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,73 +24,167 @@
                 style="@style/Caption1_semi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="34dp"
-                android:text="2024년 1월 4일"
+                android:layout_marginTop="40dp"
                 android:textColor="@color/gray_600_707276"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="2024년 1월 4일" />
 
             <TextView
-                android:id="@+id/tv_home_today_exercise"
+                android:id="@+id/tv_home_today_exercise_mission"
                 style="@style/H4_semi"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:layout_marginEnd="16dp"
+                android:maxWidth="212dp"
+                android:textColor="@color/gray_900_161616"
+                app:layout_constraintEnd_toStartOf="@id/tv_exercise_method"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_home_today"
+                tools:text="오늘 할 운동을 골라주세요!" />
+
+            <TextView
+                android:id="@+id/tv_exercise_method"
+                style="@style/Caption2_re"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/today_exercise"
+                android:background="@drawable/shape_rectangle_radius_8_solid_gray100"
+                android:drawablePadding="4dp"
+                android:visibility="gone"
+                android:padding="10dp"
+                android:text="@string/home_exercise_method"
                 android:textColor="@color/black_090909"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_home_today" />
-
-            <sopt.motivoo.util.custom_view.MotivooMissionCard
-                android:id="@+id/motivoo_first_mission_card"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="28dp"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintEnd_toStartOf="@id/motivoo_second_mission_card"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_home_today_exercise" />
-
-            <sopt.motivoo.util.custom_view.MotivooMissionCard
-                android:id="@+id/motivoo_second_mission_card"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@id/motivoo_first_mission_card"
+                app:drawableStartCompat="@drawable/ic_question"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/motivoo_first_mission_card"
-                app:layout_constraintTop_toTopOf="@id/motivoo_first_mission_card" />
+                app:layout_constraintTop_toTopOf="@id/tv_home_today" />
 
-            <View
-                android:id="@+id/view_motivoo_pie_chart"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/csl_unselected_mission"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/background_mission_card"
-                app:layout_constraintDimensionRatio="1"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/motivoo_first_mission_card" />
+                app:layout_constraintTop_toBottomOf="@id/tv_home_today_exercise_mission">
 
-            <sopt.motivoo.util.custom_view.MotivooPieChart
-                android:id="@+id/motivoo_pie_chart"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                app:layout_constraintBottom_toBottomOf="@id/view_motivoo_pie_chart"
-                app:layout_constraintEnd_toEndOf="@id/view_motivoo_pie_chart"
-                app:layout_constraintStart_toStartOf="@id/view_motivoo_pie_chart"
-                app:layout_constraintTop_toTopOf="@id/view_motivoo_pie_chart"
-                app:progressBarColor="@color/gray_100_F4F5F9"
-                app:progressBarInnerColor="@color/blue_400_65DBFF" />
+                <sopt.motivoo.util.custom_view.MotivooMissionCard
+                    android:id="@+id/motivoo_first_mission_card"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toStartOf="@id/motivoo_second_mission_card"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <sopt.motivoo.util.custom_view.MotivooStepCountText
-                android:id="@+id/motivoo_step_count_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@id/motivoo_pie_chart"
-                app:layout_constraintEnd_toEndOf="@id/motivoo_pie_chart"
-                app:layout_constraintStart_toStartOf="@id/motivoo_pie_chart"
-                app:layout_constraintTop_toTopOf="@id/motivoo_pie_chart" />
+                <sopt.motivoo.util.custom_view.MotivooMissionCard
+                    android:id="@+id/motivoo_second_mission_card"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@id/motivoo_first_mission_card"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/motivoo_first_mission_card"
+                    app:layout_constraintTop_toTopOf="@id/motivoo_first_mission_card" />
+
+                <TextView
+                    android:id="@+id/tv_step_count"
+                    style="@style/Caption2_re"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:text="@string/home_step_count"
+                    android:textColor="@color/gray_600_707276"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/motivoo_first_mission_card" />
+
+                <sopt.motivoo.util.custom_view.MotivooStepCountText
+                    android:id="@+id/motivoo_step_count_text_unselected_mission"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_step_count" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/csl_selected_mission"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_home_today_exercise_mission">
+
+                <ImageView
+                    android:id="@+id/iv_step_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/img_step_count"
+                    app:layout_constraintBottom_toBottomOf="@id/motivoo_my_pie_chart"
+                    app:layout_constraintEnd_toEndOf="@id/motivoo_my_pie_chart"
+                    app:layout_constraintStart_toStartOf="@id/motivoo_my_pie_chart"
+                    app:layout_constraintTop_toTopOf="@id/motivoo_my_pie_chart" />
+
+                <TextView
+                    android:id="@+id/tv_exercise_percent"
+                    style="@style/Caption2_re"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/home_exercise_percent"
+                    android:textColor="@color/gray_600_707276"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_step_count"
+                    app:layout_constraintEnd_toEndOf="@id/iv_step_count"
+                    app:layout_constraintStart_toStartOf="@id/iv_step_count" />
+
+                <sopt.motivoo.util.custom_view.MotivooOtherPieChart
+                    android:id="@+id/motivoo_other_pie_chart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="22dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:progressInnerColor="@color/gray_100_F4F5F9"
+                    app:progressOtherColor="@color/gray_600_707276" />
+
+                <sopt.motivoo.util.custom_view.MotivooMyPieChart
+                    android:id="@+id/motivoo_my_pie_chart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:centerCicleColor="@color/white_FFFFFF"
+                    app:layout_constraintEnd_toEndOf="@id/motivoo_other_pie_chart"
+                    app:layout_constraintStart_toStartOf="@id/motivoo_other_pie_chart"
+                    app:layout_constraintTop_toTopOf="@id/motivoo_other_pie_chart"
+                    app:progressMyColor="@color/blue_400_65DBFF" />
+
+                <sopt.motivoo.util.custom_view.MotivooStepCountText
+                    android:id="@+id/motivoo_step_count_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/motivoo_other_pie_chart" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    style="@style/B5_med"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/selector_home_verify_exercise"
+                    android:enabled="false"
+                    android:text="@string/home_verify_exercise"
+                    android:textColor="@drawable/selector_home_verify_exercise_text"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/motivoo_step_count_text" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
