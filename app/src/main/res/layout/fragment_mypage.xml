@@ -83,7 +83,7 @@
 
                 <TextView
                     android:id="@+id/tv_mypage_exercise_info"
-                    style="@style/H7_semi"
+                    style="@style/B5_med"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
@@ -149,7 +149,7 @@
 
                 <TextView
                     android:id="@+id/tv_mypage_service_use"
-                    style="@style/H7_semi"
+                    style="@style/B5_med"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:paddingVertical="26dp"
@@ -193,7 +193,7 @@
 
                 <TextView
                     android:id="@+id/tv_mypage_privacy_policy"
-                    style="@style/H7_semi"
+                    style="@style/B5_med"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:paddingVertical="26dp"
@@ -237,7 +237,7 @@
 
                 <TextView
                     android:id="@+id/tv_mypage_open_source"
-                    style="@style/H7_semi"
+                    style="@style/B5_med"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:paddingVertical="26dp"
@@ -281,7 +281,7 @@
 
                 <TextView
                     android:id="@+id/tv_mypage_developer_info"
-                    style="@style/H7_semi"
+                    style="@style/B5_med"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:paddingVertical="26dp"
@@ -318,7 +318,7 @@
 
                 <TextView
                     android:id="@+id/tv_mypage_ask_kakao"
-                    style="@style/H7_semi"
+                    style="@style/B5_med"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:paddingVertical="25dp"

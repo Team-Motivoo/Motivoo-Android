@@ -122,7 +122,7 @@
 
             <TextView
                 android:id="@+id/tv_myinfo_logout"
-                style="@style/H7_semi"
+                style="@style/B5_med"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:paddingVertical="25dp"
@@ -159,7 +159,7 @@
 
             <TextView
                 android:id="@+id/tv_myinfo_out"
-                style="@style/H7_semi"
+                style="@style/B5_med"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:paddingStart="20dp"
