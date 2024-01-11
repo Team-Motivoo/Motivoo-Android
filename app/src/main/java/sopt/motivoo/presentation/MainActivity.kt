@@ -50,8 +50,8 @@ class MainActivity : AppCompatActivity() {
                     R.id.exerciseFragment,
                     R.id.myInfoFragment,
                     R.id.myExerciseInfoFragment,
-                    R.id.myServiceOut,
-                    R.id.myLogout
+                    R.id.myServiceOutFragment,
+                    R.id.myLogoutFragment
                 )
             ) {
                 View.VISIBLE
