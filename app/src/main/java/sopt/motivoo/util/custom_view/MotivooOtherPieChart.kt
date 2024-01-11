@@ -86,13 +86,12 @@ class MotivooOtherPieChart @JvmOverloads constructor(
 
         val x =
             (ORIGIN_VALUE.px - cos(radian) * RADIUS.px - (LAYOUT_SPACING + DIAMETER_SPACING).px)
+        val y: Float
         if ((30 - (stepCount * DEGREE)) >= 0) {
-            val y =
-                (ORIGIN_VALUE.px + sin(radian) * RADIUS.px - (LAYOUT_SPACING + DIAMETER_SPACING).px).toFloat()
+            y = (ORIGIN_VALUE.px + sin(radian) * RADIUS.px - (LAYOUT_SPACING + DIAMETER_SPACING).px).toFloat()
             otherImage?.let { canvas.drawBitmap(it, x.toFloat(), y, null) }
         } else {
-            val y =
-                (ORIGIN_VALUE.px - sin(radian) * RADIUS.px - (LAYOUT_SPACING + DIAMETER_SPACING).px).toFloat()
+            y = (ORIGIN_VALUE.px - sin(radian) * RADIUS.px - (LAYOUT_SPACING + DIAMETER_SPACING).px).toFloat()
             if (degree <= 85) {
                 otherImage?.let { canvas.drawBitmap(it, x.toFloat(), y, null) }
             } else {
