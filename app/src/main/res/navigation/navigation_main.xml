@@ -202,7 +202,6 @@
             android:id="@+id/action_myLogout_to_myInfoFragment"
             app:destination="@id/myInfoFragment" />
     </dialog>
-        android:label="MyExerciseInfoFragment" />
     <fragment
         android:id="@+id/permissionFragment"
         android:name="sopt.motivoo.presentation.intro.PermissionFragment"
