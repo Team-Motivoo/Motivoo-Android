@@ -9,12 +9,12 @@
 
     <TextView
         android:id="@+id/tv_step_count_title"
-        style="@style/Caption2_re"
+        style="@style/Caption1_semi"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/home_my_step_count"
-        android:textColor="@color/gray_600_707276"
+        android:textColor="@color/gray_700_464747"
         app:layout_constraintEnd_toEndOf="@id/view_line_divider"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,6 +24,7 @@
         style="@style/H1_semi"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
         android:gravity="center"
         android:textColor="@color/blue_800_072D39"
         android:textSize="36dp"
@@ -59,6 +60,7 @@
         style="@style/H2_re"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
         android:gravity="center"
         android:textColor="@color/gray_600_707276"
         android:textSize="36dp"
