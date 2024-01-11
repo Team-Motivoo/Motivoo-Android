@@ -40,18 +40,18 @@ class MotivooOtherPieChart @JvmOverloads constructor(
 
         context.theme.obtainStyledAttributes(
             attributeSet, R.styleable.MotivooPieChart, defStyleAttr, defStyleAttr
-        ).run {
+        ).let { typedArray ->
             progressBarInnerPaint.run {
-                color = getColor(R.styleable.MotivooPieChart_progressInnerColor, Color.BLUE)
+                color = typedArray.getColor(R.styleable.MotivooPieChart_progressInnerColor, Color.BLUE)
                 style = Paint.Style.STROKE
                 strokeWidth = 9.px
             }
             progressBarOtherPaint.run {
-                color = getColor(R.styleable.MotivooPieChart_progressOtherColor, Color.BLUE)
+                color = typedArray.getColor(R.styleable.MotivooPieChart_progressOtherColor, Color.BLUE)
                 style = Paint.Style.STROKE
                 strokeWidth = 9.px
             }
-            recycle()
+            typedArray.recycle()
         }
     }
 
