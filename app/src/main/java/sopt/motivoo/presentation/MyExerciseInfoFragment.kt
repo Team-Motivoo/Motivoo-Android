@@ -12,10 +12,10 @@ class MyExerciseInfoFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        clickButton()
+        clickButtons()
     }
 
-    private fun clickButton() {
+    private fun clickButtons() {
         binding.tvExerciseInfoBack.setOnClickListener {
             navigateToMyPage()
         }

@@ -14,7 +14,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/ripple_gray200_rectangle_radius8"
+            android:background="@drawable/shape_rectangle_radius8"
             android:backgroundTint="@color/white_FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -79,10 +79,8 @@
                 android:textColor="@color/black_090909"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/tv_my_logout_btn"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@id/tv_my_logout_btn"
-                app:layout_constraintTop_toBottomOf="@id/tv_my_logout_btn"
-                app:layout_constraintVertical_bias="1.0" />
+                app:layout_constraintTop_toBottomOf="@id/tv_my_logout_btn" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

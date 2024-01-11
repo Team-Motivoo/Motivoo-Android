@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/navigation_main"
-    app:startDestination="@id/myPageFragment">
+    app:startDestination="@id/splashFragment">
 
     <fragment
         android:id="@+id/splashFragment"
@@ -164,13 +164,13 @@
         android:label="MyInfoFragment" >
         <action
             android:id="@+id/action_myInfoFragment_to_myServiceOut"
-            app:destination="@id/myServiceOut" />
+            app:destination="@id/myServiceOutFragment" />
         <action
             android:id="@+id/action_myInfoFragment_to_myPageFragment"
             app:destination="@id/myPageFragment" />
         <action
             android:id="@+id/action_myInfoFragment_to_myLogout"
-            app:destination="@id/myLogout" />
+            app:destination="@id/myLogoutFragment" />
     </fragment>
     <fragment
         android:id="@+id/myExerciseInfoFragment"
@@ -181,9 +181,9 @@
             app:destination="@id/myPageFragment" />
     </fragment>
     <dialog
-        android:id="@+id/myServiceOut"
-        android:name="sopt.motivoo.presentation.MyServiceOut"
-        android:label="MyServiceOut" >
+        android:id="@+id/myServiceOutFragment"
+        android:name="sopt.motivoo.presentation.MyServiceOutFragment"
+        android:label="MyServiceOutFragment" >
         <action
             android:id="@+id/action_myServiceOut_to_loginFragment"
             app:destination="@id/loginFragment" />
@@ -192,9 +192,9 @@
             app:destination="@id/myInfoFragment" />
     </dialog>
     <dialog
-        android:id="@+id/myLogout"
-        android:name="sopt.motivoo.presentation.MyLogout"
-        android:label="MyLogout" >
+        android:id="@+id/myLogoutFragment"
+        android:name="sopt.motivoo.presentation.MyLogoutFragment"
+        android:label="MyLogoutFragment" >
         <action
             android:id="@+id/action_myLogout_to_loginFragment"
             app:destination="@id/loginFragment" />

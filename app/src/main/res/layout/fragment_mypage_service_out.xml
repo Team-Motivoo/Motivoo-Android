@@ -14,7 +14,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/ripple_gray200_rectangle_radius8"
+            android:background="@drawable/shape_rectangle_radius8"
             android:backgroundTint="@color/white_FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
