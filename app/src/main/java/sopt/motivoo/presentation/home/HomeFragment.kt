@@ -8,7 +8,9 @@ import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.transition.TransitionManager
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
@@ -53,9 +55,38 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
             requestHomePermissionRequest.launch(HOME_REQUIRED_PERMISSIONS)
         }
 
-        binding.tvHomeTodayExerciseMission.text = "8천걸음 걷고\n스탠딩 랫폴다운 20번 하기"
-        binding.motivooStepCountText.setStepCountText("10000")
-        binding.motivooStepCountText.setOtherStepCountText("9000")
+        /**
+         * 미션 선택 전 홈
+         */
+        binding.tvHomeToday.text = "2024년 1월 4일"
+        binding.tvHomeTodayExerciseMission.text =
+            getString(R.string.home_today_exercise_description)
+        binding.motivooFirstMissionCard.apply {
+            setMissionImage(R.drawable.ic_clap_sound)
+            setMissionText("8천걸음 걷고 스쿼트 10번 하기")
+        }
+        binding.motivooSecondMissionCard.apply {
+            setMissionImage(R.drawable.ic_clap_sound)
+            setMissionText("8천걸음 걸어서 트리 보러가기")
+        }
+
+        binding.motivooStepCountTextUnselectedMission.setStepCountText("9000")
+        binding.motivooStepCountTextUnselectedMission.setOtherStepCountText("9000")
+
+        /**
+         * 미션 선택 후 홈
+         */
+        binding.motivooFirstMissionCard.setOnClickListener {
+            TransitionManager.beginDelayedTransition(binding.root as ViewGroup)
+            binding.cslUnselectedMission.visibility = View.GONE
+            binding.cslSelectedMission.visibility = View.VISIBLE
+            binding.tvHomeToday.text = getString(R.string.home_today_exercise)
+            binding.tvHomeTodayExerciseMission.text = "8천걸음 걷고\n스탠딩 랫폴다운 20번 하기"
+            binding.motivooStepCountText.setStepCountText("10000")
+            binding.motivooStepCountText.setOtherStepCountText("9000")
+            binding.motivooMyPieChart.setStepCount(8 / 10f)
+            binding.motivooOtherPieChart.setStepCount(6 / 10f)
+        }
 
         stepCountReceiver = StepCountReceiver()
     }
