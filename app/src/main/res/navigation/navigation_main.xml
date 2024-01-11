@@ -8,25 +8,22 @@
         android:id="@+id/splashFragment"
         android:name="sopt.motivoo.presentation.SplashFragment"
         android:label="SplashFragment">
+
         <action
-            android:id="@+id/action_splashFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
-        <action
-            android:id="@+id/action_splashFragment_to_webViewFragment"
-            app:destination="@id/webViewFragment" />
+            android:id="@+id/action_splashFragment_to_permissionFragment"
+            app:destination="@id/permissionFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="sopt.motivoo.presentation.LoginFragment"
+        android:name="sopt.motivoo.presentation.login.LoginFragment"
         android:label="LoginFragment">
-
         <action
-            android:id="@+id/action_loginFragment_to_ageQuestionFragment"
-            app:destination="@id/ageQuestionFragment" />
+            android:id="@+id/action_loginFragment_to_afterLoginFragment"
+            app:destination="@id/afterLoginFragment" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
-        android:name="sopt.motivoo.presentation.HomeFragment"
+        android:name="sopt.motivoo.presentation.home.HomeFragment"
         android:label="HomeFragment" />
     <fragment
         android:id="@+id/myPageFragment"
@@ -144,8 +141,23 @@
     </fragment>
     <fragment
         android:id="@+id/getInviteCodeFragment"
-        android:name="sopt.motivoo.presentation.onboarding.GetInviteCodeFragment"
+        android:name="sopt.motivoo.presentation.invitecode.GetInviteCodeFragment"
         android:label="GetInviteCodeFragment" />
+    <fragment
+        android:id="@+id/afterLoginFragment"
+        android:name="sopt.motivoo.presentation.login.AfterLoginFragment"
+        android:label="AfterLoginFragment">
+        <action
+            android:id="@+id/action_afterLoginFragment_to_ageQuestionFragment"
+            app:destination="@id/ageQuestionFragment" />
+        <action
+            android:id="@+id/action_afterLoginFragment_to_postInviteCodeFragment"
+            app:destination="@id/postInviteCodeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/postInviteCodeFragment"
+        android:name="sopt.motivoo.presentation.invitecode.PostInviteCodeFragment"
+        android:label="PostInviteCodeFragment" />
     <fragment
         android:id="@+id/myInfoFragment"
         android:name="sopt.motivoo.presentation.MyInfoFragment"
@@ -190,4 +202,13 @@
             android:id="@+id/action_myLogout_to_myInfoFragment"
             app:destination="@id/myInfoFragment" />
     </dialog>
+        android:label="MyExerciseInfoFragment" />
+    <fragment
+        android:id="@+id/permissionFragment"
+        android:name="sopt.motivoo.presentation.intro.PermissionFragment"
+        android:label="PermissionFragment">
+        <action
+            android:id="@+id/action_permissionFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
 </navigation>

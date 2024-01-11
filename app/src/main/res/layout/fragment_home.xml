@@ -30,7 +30,7 @@
 
             <TextView
                 android:id="@+id/tv_home_today_exercise"
-                style="@style/H2_semi"
+                style="@style/H4_semi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -89,12 +89,6 @@
                 app:layout_constraintEnd_toEndOf="@id/motivoo_pie_chart"
                 app:layout_constraintStart_toStartOf="@id/motivoo_pie_chart"
                 app:layout_constraintTop_toTopOf="@id/motivoo_pie_chart" />
-
-            <SeekBar
-                android:id="@+id/seek_bar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/view_motivoo_pie_chart" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

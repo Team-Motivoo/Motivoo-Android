@@ -1,37 +1,44 @@
 <resources>
 
-    <style name="H1_med">
-        <item name="android:textSize">48sp</item>
-        <item name="fontFamily">@font/pretendard_regular</item>
-        <item name="android:lineSpacingExtra">23.04sp</item>
+    <style name="H1_semi">
+        <item name="android:textSize">36sp</item>
+        <item name="fontFamily">@font/pretendard_semibold</item>
+        <item name="android:lineSpacingExtra">17.28sp</item>
         <item name="android:letterSpacing">-0.03</item>
     </style>
 
-    <style name="H2_semi">
+    <style name="H2_re">
+        <item name="android:textSize">36sp</item>
+        <item name="fontFamily">@font/pretendard_regular</item>
+        <item name="android:lineSpacingExtra">17.28sp</item>
+        <item name="android:letterSpacing">-0.03</item>
+    </style>
+
+    <style name="H3_semi">
         <item name="android:textSize">24sp</item>
         <item name="fontFamily">@font/pretendard_semibold</item>
         <item name="android:lineSpacingExtra">9.6sp</item>
     </style>
 
-    <style name="H3_med">
-        <item name="android:textSize">24sp</item>
-        <item name="fontFamily">@font/pretendard_medium</item>
-        <item name="android:lineSpacingExtra">9.6sp</item>
+    <style name="H4_semi">
+        <item name="android:textSize">20sp</item>
+        <item name="fontFamily">@font/pretendard_semibold</item>
+        <item name="android:lineSpacingExtra">8sp</item>
     </style>
 
-    <style name="H4_semi">
+    <style name="H5_semi">
         <item name="android:textSize">18sp</item>
         <item name="fontFamily">@font/pretendard_semibold</item>
         <item name="android:lineSpacingExtra">8.64sp</item>
     </style>
 
-    <style name="H5_semi">
+    <style name="H6_semi">
         <item name="android:textSize">17sp</item>
         <item name="fontFamily">@font/pretendard_semibold</item>
         <item name="android:lineSpacingExtra">8.16sp</item>
     </style>
 
-    <style name="H6_semi">
+    <style name="H7_semi">
         <item name="android:textSize">16sp</item>
         <item name="fontFamily">@font/pretendard_semibold</item>
         <item name="android:lineSpacingExtra">7.68sp</item>

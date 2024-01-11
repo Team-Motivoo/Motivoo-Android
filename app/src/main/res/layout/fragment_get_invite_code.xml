@@ -10,16 +10,110 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.onboarding.GetInviteCodeFragment">
+        tools:context=".presentation.invitecode.GetInviteCodeFragment">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="초대코드 공유 뷰"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <ImageView
+            android:id="@+id/iv_get_invite_code"
+            android:layout_width="128dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="84dp"
+            app:layout_constraintDimensionRatio="1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_get_invite_code_description"
+            style="@style/B3_med"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="45dp"
+            android:gravity="center"
+            android:text="@string/get_invite_code_title"
+            android:textColor="@color/gray_900_161616"
+            app:layout_constraintEnd_toEndOf="@+id/iv_get_invite_code"
+            app:layout_constraintStart_toStartOf="@+id/iv_get_invite_code"
+            app:layout_constraintTop_toBottomOf="@+id/iv_get_invite_code" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_get_invite_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/shape_get_invite_code_radius8"
+            app:layout_constraintTop_toBottomOf="@id/tv_get_invite_code_description">
+
+            <TextView
+                android:id="@+id/tv_get_invite_code_title"
+                style="@style/B5_med"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="29dp"
+                android:text="@string/get_invite_code"
+                android:textColor="@color/gray_600_707276"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_get_invite_code"
+                style="@style/H3_semi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:textColor="@color/black_090909"
+                app:layout_constraintEnd_toEndOf="@+id/tv_get_invite_code_title"
+                app:layout_constraintStart_toStartOf="@+id/tv_get_invite_code_title"
+                app:layout_constraintTop_toBottomOf="@+id/tv_get_invite_code_title"
+                tools:text="81dc24gd0" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_get_invite_code_copy"
+                style="@style/H7_semi"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="54dp"
+                android:layout_marginTop="34dp"
+                android:layout_marginBottom="24dp"
+                android:background="@drawable/shape_get_invite_code_copy_button_radius8"
+                android:paddingVertical="19dp"
+                android:text="@string/get_invite_code_copy"
+                android:textColor="@color/black_090909"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_get_invite_code" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/tv_get_invite_code_matching_waiting"
+            style="@style/Caption1_semi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:text="@string/toast_waiting_matching"
+            android:textColor="@color/pink_FF19A3"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/btn_get_invite_code_check_matching"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_get_invite_code_check_matching"
+            style="@style/B5_med"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="44dp"
+            android:background="@drawable/selector_next_button_background"
+            android:paddingVertical="18dp"
+            android:text="@string/get_invite_code_check_matching"
+            android:textColor="@drawable/selector_text_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
