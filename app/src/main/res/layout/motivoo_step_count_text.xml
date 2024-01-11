@@ -20,7 +20,7 @@
 
     <TextView
         android:id="@+id/tv_step_count"
-        style="@style/H1_med"
+        style="@style/H1_semi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/blue_800_072D39"
