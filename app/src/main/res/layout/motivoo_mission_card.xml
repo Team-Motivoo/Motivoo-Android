@@ -4,8 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@drawable/background_mission_card"
-    android:padding="16dp">
+    android:background="@drawable/bg_mission_card"
+    android:minHeight="160dp"
+    android:paddingVertical="16dp"
+    android:paddingStart="20dp"
+    android:paddingEnd="39dp">
 
     <ImageView
         android:id="@+id/iv_mission"
@@ -21,8 +24,7 @@
         style="@style/B6_re"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:maxLines="2"
+        android:layout_marginTop="8dp"
         android:textColor="@color/black_090909"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/iv_mission"

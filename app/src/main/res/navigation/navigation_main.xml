@@ -28,7 +28,7 @@
     <fragment
         android:id="@+id/myPageFragment"
         android:name="sopt.motivoo.presentation.MyPageFragment"
-        android:label="MyPageFragment" >
+        android:label="MyPageFragment">
         <action
             android:id="@+id/action_myPageFragment_to_myInfoFragment"
             app:destination="@id/myInfoFragment" />
