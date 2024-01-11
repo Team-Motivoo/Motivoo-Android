@@ -70,19 +70,19 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
             setMissionText("8천걸음 걸어서 트리 보러가기")
         }
 
-        binding.motivooStepCountTextUnselectedMission.setStepCountText("9000")
+        binding.motivooStepCountTextUnselectedMission.setMyStepCountText("9000")
         binding.motivooStepCountTextUnselectedMission.setOtherStepCountText("9000")
 
         /**
          * 미션 선택 후 홈
          */
         binding.motivooFirstMissionCard.setOnClickListener {
-            TransitionManager.beginDelayedTransition(binding.root as ViewGroup)
+            TransitionManager.beginDelayedTransition(binding.root as? ViewGroup)
             binding.cslUnselectedMission.visibility = View.GONE
             binding.cslSelectedMission.visibility = View.VISIBLE
             binding.tvHomeToday.text = getString(R.string.home_today_exercise)
             binding.tvHomeTodayExerciseMission.text = "8천걸음 걷고\n스탠딩 랫폴다운 20번 하기"
-            binding.motivooStepCountText.setStepCountText("10000")
+            binding.motivooStepCountText.setMyStepCountText("10000")
             binding.motivooStepCountText.setOtherStepCountText("9000")
             binding.tvExerciseMethod.visibility = View.VISIBLE
             binding.motivooMyPieChart.setStepCount(8 / 10f)

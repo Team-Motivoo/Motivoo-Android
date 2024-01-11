@@ -55,7 +55,7 @@
                 android:padding="10dp"
                 android:text="@string/home_exercise_method"
                 android:textColor="@color/black_090909"
-                app:drawableStartCompat="@drawable/icon_question"
+                app:drawableStartCompat="@drawable/ic_question"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/tv_home_today" />
 
