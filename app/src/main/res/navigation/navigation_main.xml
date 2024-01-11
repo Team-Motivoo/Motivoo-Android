@@ -28,7 +28,7 @@
     <fragment
         android:id="@+id/myPageFragment"
         android:name="sopt.motivoo.presentation.MyPageFragment"
-        android:label="MyPageFragment" >
+        android:label="MyPageFragment">
         <action
             android:id="@+id/action_myPageFragment_to_myInfoFragment"
             app:destination="@id/myInfoFragment" />
@@ -172,6 +172,10 @@
         android:label="PermissionFragment">
         <action
             android:id="@+id/action_permissionFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 </navigation>

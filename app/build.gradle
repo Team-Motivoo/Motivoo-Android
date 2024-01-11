@@ -29,6 +29,9 @@ android {
 
         buildConfigField "String", "BASE_URL", properties["base_url"]
 
+        buildConfigField("String", "KAKAO_APP_KEY", "\"${properties.get('KAKAO_APP_KEY')}\"")
+        manifestPlaceholders = [KAKAO_APP_KEY: properties.get('KAKAO_APP_KEY')]
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -130,6 +133,9 @@ dependencies {
 
     //progress Bar
     implementation "com.github.skydoves:progressview:1.1.3"
+
+    // kakao login
+    implementation "com.kakao.sdk:v2-user:2.19.0"
 }
 
 ktlint {
