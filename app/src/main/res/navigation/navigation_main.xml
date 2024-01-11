@@ -26,10 +26,6 @@
         android:name="sopt.motivoo.presentation.home.HomeFragment"
         android:label="HomeFragment" />
     <fragment
-        android:id="@+id/homeMissionFragment"
-        android:name="sopt.motivoo.presentation.home.HomeMissionFragment"
-        android:label="HomeMissionFragment" />
-    <fragment
         android:id="@+id/myPageFragment"
         android:name="sopt.motivoo.presentation.MyPageFragment"
         android:label="MyPageFragment">
