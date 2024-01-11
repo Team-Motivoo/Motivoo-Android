@@ -84,6 +84,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
             binding.tvHomeTodayExerciseMission.text = "8천걸음 걷고\n스탠딩 랫폴다운 20번 하기"
             binding.motivooStepCountText.setStepCountText("10000")
             binding.motivooStepCountText.setOtherStepCountText("9000")
+            binding.tvExerciseMethod.visibility = View.VISIBLE
             binding.motivooMyPieChart.setStepCount(8 / 10f)
             binding.motivooOtherPieChart.setStepCount(6 / 10f)
         }
