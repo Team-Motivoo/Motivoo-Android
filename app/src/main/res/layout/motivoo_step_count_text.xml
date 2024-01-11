@@ -10,24 +10,27 @@
     <TextView
         android:id="@+id/tv_step_count_title"
         style="@style/Caption2_re"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="@string/home_my_step_count"
         android:textColor="@color/gray_600_707276"
-        app:layout_constraintEnd_toEndOf="@id/tv_step_count"
-        app:layout_constraintStart_toStartOf="@id/tv_step_count"
+        app:layout_constraintEnd_toEndOf="@id/view_line_divider"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_step_count"
         style="@style/H1_semi"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:textColor="@color/blue_800_072D39"
-        app:layout_constraintEnd_toStartOf="@id/view_line_divider"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="36dp"
+        app:layout_constraintEnd_toEndOf="@id/tv_step_count_title"
+        app:layout_constraintStart_toStartOf="@id/tv_step_count_title"
         app:layout_constraintTop_toBottomOf="@id/tv_step_count_title"
-        tools:text="8900" />
+        tools:text="12123" />
 
     <View
         android:id="@+id/view_line_divider"
@@ -35,29 +38,32 @@
         android:layout_height="0dp"
         android:background="@color/gray_300_D5D5D7"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/tv_other_step_count"
-        app:layout_constraintStart_toEndOf="@id/tv_step_count"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_other_step_count_title"
         style="@style/Caption2_re"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="@string/home_parent_step_count"
         android:textColor="@color/gray_600_707276"
-        app:layout_constraintEnd_toEndOf="@id/tv_other_step_count"
-        app:layout_constraintStart_toStartOf="@id/tv_other_step_count"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/view_line_divider"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_other_step_count"
-        style="@style/H1_med"
-        android:layout_width="wrap_content"
+        style="@style/H2_re"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:textColor="@color/gray_600_707276"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/view_line_divider"
+        android:textSize="36dp"
+        app:layout_constraintEnd_toEndOf="@id/tv_other_step_count_title"
+        app:layout_constraintStart_toStartOf="@id/tv_other_step_count_title"
         app:layout_constraintTop_toBottomOf="@id/tv_other_step_count_title"
         tools:text="8900" />
 

@@ -17,7 +17,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_home"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/tv_home_today"
@@ -46,7 +46,7 @@
 
             <TextView
                 android:id="@+id/tv_home_today_exercise_mission"
-                style="@style/H2_semi"
+                style="@style/H4_semi"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
@@ -111,6 +111,7 @@
                 app:layout_constraintTop_toBottomOf="@id/motivoo_other_pie_chart" />
 
             <androidx.appcompat.widget.AppCompatButton
+                style="@style/B5_med"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"

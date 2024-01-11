@@ -53,8 +53,8 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
             requestHomePermissionRequest.launch(HOME_REQUIRED_PERMISSIONS)
         }
 
-        binding.tvHomeTodayExerciseMission.text = "8천걸음 걷고 스탠딩 랫폴다운 20번 하기"
-        binding.motivooStepCountText.setStepCountText("9000")
+        binding.tvHomeTodayExerciseMission.text = "8천걸음 걷고\n스탠딩 랫폴다운 20번 하기"
+        binding.motivooStepCountText.setStepCountText("10000")
         binding.motivooStepCountText.setOtherStepCountText("9000")
 
         stepCountReceiver = StepCountReceiver()
@@ -92,9 +92,9 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
     inner class StepCountReceiver() : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             if (intent?.action == STEP_COUNT) {
-                binding.motivooStepCountText.setStepCountText(
-                    intent.getIntExtra(STEP_COUNT, 0).toString()
-                )
+//                binding.motivooStepCountText.setStepCountText(
+//                    intent.getIntExtra(STEP_COUNT, 0).toString()
+//                )
             }
         }
     }
