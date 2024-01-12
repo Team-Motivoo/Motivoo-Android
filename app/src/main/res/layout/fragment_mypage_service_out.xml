@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingHorizontal="16dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_rectangle_radius8"
+            android:backgroundTint="@color/white_FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tv_my_service_out"
+                style="@style/H5_semi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:paddingVertical="5dp"
+                android:text="@string/mypage_ask_service_out"
+                android:textColor="@color/gray_900_161616"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_my_service_out_content"
+                style="@style/B6_re"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:paddingVertical="5dp"
+                android:text="@string/mypage_service_out_content"
+                android:textAlignment="center"
+                android:textColor="@color/gray_700_464747"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_my_service_out" />
+
+            <TextView
+                android:id="@+id/tv_my_service_out_btn"
+                style="@style/B5_med"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/ripple_gray200_rectangle_radius8"
+                android:backgroundTint="@color/gray_900_161616"
+                android:gravity="center"
+                android:paddingVertical="19dp"
+                android:text="@string/mypage_service_out"
+                android:textColor="@color/white_FFFFFF"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_my_service_out_content" />
+
+            <TextView
+                android:id="@+id/tv_my_service_out_cancel_btn"
+                style="@style/B5_med"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="24dp"
+                android:background="@drawable/ripple_gray200_rectangle_radius8"
+                android:backgroundTint="@color/gray_100_F4F5F9"
+                android:gravity="center"
+                android:paddingVertical="19dp"
+                android:text="@string/mypage_cancel"
+                android:textColor="@color/black_090909"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/tv_my_service_out_btn"
+                app:layout_constraintStart_toStartOf="@id/tv_my_service_out_btn"
+                app:layout_constraintTop_toBottomOf="@id/tv_my_service_out_btn" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

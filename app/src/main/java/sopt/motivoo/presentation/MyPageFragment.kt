@@ -12,10 +12,10 @@ class MyPageFragment : BindingFragment<FragmentMypageBinding>(R.layout.fragment_
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        clickButton()
+        clickButtons()
     }
 
-    private fun clickButton() {
+    private fun clickButtons() {
         binding.tvMypageMyInfo.setOnClickListener {
             navigateToMyInfo()
         }

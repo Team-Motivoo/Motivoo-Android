@@ -27,7 +27,11 @@ class MotivooStepCountText @JvmOverloads constructor(
         )
     }
 
-    fun setStepCountText(stepCountText: String) {
+    fun setMyStepCountText(stepCountText: String) {
         binding.tvStepCount.text = stepCountText
+    }
+
+    fun setOtherStepCountText(otherStepCountText: String) {
+        binding.tvOtherStepCount.text = otherStepCountText
     }
 }
