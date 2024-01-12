@@ -5,19 +5,24 @@ import android.view.View
 import sopt.motivoo.R
 import sopt.motivoo.data.model.ExerciseInfo
 import sopt.motivoo.databinding.FragmentExerciseBinding
-import sopt.motivoo.presentation.Exercise.ExerciseInfoAdapter
+import sopt.motivoo.presentation.exercise.ExerciseInfoAdapter
 import sopt.motivoo.util.binding.BindingFragment
 
 class ExerciseFragment : BindingFragment<FragmentExerciseBinding>(R.layout.fragment_exercise) {
 
     private val mockExerciseList = listOf<ExerciseInfo>(
         ExerciseInfo.NoticeInfo(
-            mission_content = "오늘의 미션 내용"
+            missionContent = "오늘의 미션 내용"
         ),
         ExerciseInfo.EachDateInfo(
-            date = "2024/01/12", my_mission_img_url = null, opponent_mission_img_url = "![f15c9e2ce52a1735081be72dcec2e97d]",
-            my_mission_content = "내 미션 내용", opponent_mission_content = "부모님 미션 내용",
-            my_mission_status = "진행중", opponent_mission_status = "성공"
+            date = "2024/01/12", myMissionImgUrl = null, opponentMissionImgUrl = "![f15c9e2ce52a1735081be72dcec2e97d]",
+            myMissionContent = "내 미션 내용", opponentMissionContent = "부모님 미션 내용",
+            myMissionStatus = "진행중", opponentMissionStatus = "성공"
+        ),
+        ExerciseInfo.EachDateInfo(
+            date = "2024/12/23", myMissionImgUrl = "f15c9e2ce52a1735081be72dcec2e97d", opponentMissionImgUrl = null,
+            myMissionContent = "내 미션 내용", opponentMissionContent = "부모님 미션 내용",
+            myMissionStatus = "성공", opponentMissionStatus = "실패"
         )
     )
 

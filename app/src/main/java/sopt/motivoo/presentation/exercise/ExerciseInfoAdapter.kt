@@ -1,4 +1,4 @@
-package sopt.motivoo.presentation.Exercise
+package sopt.motivoo.presentation.exercise
 
 import android.content.Context
 import android.view.LayoutInflater
