@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tv_item_exercise_date"
+        style="@style/B6_re"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:paddingHorizontal="1dp"
+        android:paddingVertical="5dp"
+        android:textColor="@color/gray_600_707276"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/exercise_date" />
+
+    <TextView
+        android:id="@+id/tv_item_exercise_no_image_before_exercise1"
+        style="@style/Caption2_re"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/shape_gray50_rectangle_radius8"
+        android:gravity="center"
+        android:text="@string/exercise_no_image_before_exercise"
+        android:textColor="@color/gray_400_C0C1C3"
+        app:layout_constraintDimensionRatio="1"
+        app:layout_constraintEnd_toStartOf="@id/tv_item_exercise_no_image_before_exercise2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_item_exercise_date" />
+
+    <TextView
+        android:id="@+id/tv_item_exercise_no_image_before_exercise2"
+        style="@style/Caption2_re"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/shape_gray50_rectangle_radius8"
+        android:gravity="center"
+        android:text="@string/exercise_no_image_before_exercise"
+        android:textColor="@color/gray_400_C0C1C3"
+        app:layout_constraintDimensionRatio="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_item_exercise_no_image_before_exercise1"
+        app:layout_constraintTop_toTopOf="@id/tv_item_exercise_no_image_before_exercise1" />
+
+    <ImageView
+        android:id="@+id/iv_item_exercise_img1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/tv_item_exercise_no_image_before_exercise1"
+        app:layout_constraintEnd_toEndOf="@id/tv_item_exercise_no_image_before_exercise1"
+        app:layout_constraintStart_toStartOf="@id/tv_item_exercise_no_image_before_exercise1"
+        app:layout_constraintTop_toTopOf="@id/tv_item_exercise_no_image_before_exercise1"
+        tools:src="@drawable/img_exercise_fake" />
+
+    <ImageView
+        android:id="@+id/iv_item_exercise_img2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/tv_item_exercise_no_image_before_exercise2"
+        app:layout_constraintEnd_toEndOf="@id/tv_item_exercise_no_image_before_exercise2"
+        app:layout_constraintStart_toStartOf="@id/tv_item_exercise_no_image_before_exercise2"
+        app:layout_constraintTop_toTopOf="@id/tv_item_exercise_no_image_before_exercise2"
+        tools:src="@drawable/img_exercise_fake" />
+
+    <TextView
+        android:id="@+id/tv_item_exercise_img_btm_txt1"
+        style="@style/B1_med"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:paddingVertical="5dp"
+        android:textColor="@color/gray_900_161616"
+        app:layout_constraintStart_toStartOf="@id/tv_item_exercise_no_image_before_exercise1"
+        app:layout_constraintTop_toBottomOf="@id/tv_item_exercise_no_image_before_exercise1"
+        tools:text="@string/exercise_today_mission" />
+
+    <TextView
+        android:id="@+id/tv_item_exercise_img_btm_txt2"
+        style="@style/B1_med"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:paddingVertical="5dp"
+        android:textColor="@color/gray_900_161616"
+        app:layout_constraintStart_toStartOf="@id/tv_item_exercise_no_image_before_exercise2"
+        app:layout_constraintTop_toBottomOf="@id/tv_item_exercise_no_image_before_exercise2"
+        tools:text="@string/exercise_today_mission" />
+
+    <TextView
+        android:id="@+id/tv_item_exercise_my_exercise"
+        style="@style/Caption2_re"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="44dp"
+        android:background="@drawable/shape_rectangle_radius24"
+        android:backgroundTint="@color/gray_100_F4F5F9"
+        android:paddingHorizontal="9dp"
+        android:paddingVertical="7dp"
+        android:text="@string/exercise_my_exercise"
+        android:textColor="@color/gray_600_707276"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/tv_item_exercise_no_image_before_exercise1"
+        app:layout_constraintTop_toBottomOf="@id/tv_item_exercise_img_btm_txt1" />
+
+    <TextView
+        android:id="@+id/tv_item_exercise_my_state"
+        style="@style/Caption2_re"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="4dp"
+        android:background="@drawable/shape_rectangle_radius24"
+        android:backgroundTint="@color/gray_100_F4F5F9"
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="7dp"
+        android:textColor="@color/gray_600_707276"
+        app:layout_constraintBottom_toBottomOf="@id/tv_item_exercise_my_exercise"
+        app:layout_constraintStart_toEndOf="@id/tv_item_exercise_my_exercise"
+        app:layout_constraintTop_toTopOf="@id/tv_item_exercise_my_exercise"
+        tools:text="진행중" />
+
+    <TextView
+        android:id="@+id/tv_item_exercise_parent_exercise"
+        style="@style/Caption2_re"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:background="@drawable/shape_rectangle_radius24"
+        android:backgroundTint="@color/gray_100_F4F5F9"
+        android:paddingHorizontal="9dp"
+        android:paddingVertical="7dp"
+        android:text="@string/exercise_parent_exercise"
+        android:textColor="@color/gray_600_707276"
+        app:layout_constraintStart_toStartOf="@id/tv_item_exercise_no_image_before_exercise2"
+        app:layout_constraintTop_toBottomOf="@id/tv_item_exercise_img_btm_txt2" />
+
+    <TextView
+        android:id="@+id/tv_item_exercise_parent_state"
+        style="@style/Caption2_re"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="4dp"
+        android:background="@drawable/shape_rectangle_radius24"
+        android:backgroundTint="@color/gray_100_F4F5F9"
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="7dp"
+        android:textColor="@color/gray_600_707276"
+        app:layout_constraintBottom_toBottomOf="@id/tv_item_exercise_parent_exercise"
+        app:layout_constraintStart_toEndOf="@id/tv_item_exercise_parent_exercise"
+        app:layout_constraintTop_toTopOf="@id/tv_item_exercise_parent_exercise"
+        tools:text="성공" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
