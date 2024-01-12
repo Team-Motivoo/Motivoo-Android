@@ -5,7 +5,6 @@ import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.user.Constants.TAG
 import com.kakao.sdk.user.UserApiClient
 import dagger.hilt.android.qualifiers.ActivityContext
-import sopt.motivoo.presentation.type.SocialType
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -20,11 +19,12 @@ class KakaoAuthService @Inject constructor(
         }
 
     fun startKakaoLogin(
-        loginListener: (platformType: SocialType, platformToken: String, email: String, password: String, nickname: String) -> Unit,
+        loginListener: ((String) -> Unit),
     ) {
         val kakaoLoginCallback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
             if (error != null) {
                 handleLoginError(error)
+                Timber.tag("kakao").d(error)
             } else if (token != null) {
                 Timber.tag("kakaoToken").d(token.accessToken)
                 handleLoginSuccess(token, loginListener)
@@ -50,9 +50,9 @@ class KakaoAuthService @Inject constructor(
 
     private fun handleLoginSuccess(
         oAuthToken: OAuthToken,
-        loginListener: (platformType: SocialType, platformToken: String, email: String, password: String, nickname: String) -> Unit,
+        loginListener: ((String) -> Unit),
     ) {
-        loginListener(SocialType.KAKAO, oAuthToken.accessToken, "", "", "")
+        loginListener(oAuthToken.accessToken)
     }
 
     private fun handleLoginError(throwable: Throwable) {

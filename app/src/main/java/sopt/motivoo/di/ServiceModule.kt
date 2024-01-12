@@ -5,6 +5,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
+import sopt.motivoo.data.service.AuthService
 import sopt.motivoo.data.service.DummyService
 import javax.inject.Singleton
 
@@ -16,4 +17,8 @@ object ServiceModule {
     @Provides
     @Singleton
     fun provideDummyService(retrofit: Retrofit): DummyService = retrofit.create()
+
+    @Provides
+    @Singleton
+    fun provideAuthService(retrofit: Retrofit): AuthService = retrofit.create()
 }

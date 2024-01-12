@@ -120,6 +120,14 @@
     <string name="post_invite_code">초대코드 입력하기</string>
     <string name="clipboard_copy">클립보드에 복사되었습니다.</string>
 
+    <!-- terms of use -->
+    <string name="terms_title">이용약관</string>
+    <string name="terms_all">약관 전체 동의</string>
+    <string name="terms_of_use_access">이용약관 동의</string>
+    <string name="terms_of_use_link"><u>보기</u></string>
+    <string name="terms_get_info_access">개인정보수집 및 이용 동의</string>
+
     <!-- login -->
     <string name="login_kakao">카카오 로그인하기</string>
+    <string name="terms_use_info_access">개인정보 처리방침 동의</string>
 </resources>

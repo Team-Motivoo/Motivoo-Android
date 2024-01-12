@@ -11,9 +11,10 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import sopt.motivoo.BuildConfig
+import sopt.motivoo.BuildConfig.BASE_URL
 import sopt.motivoo.BuildConfig.DEBUG
 import sopt.motivoo.data.datasource.local.MotivooStorageImpl
+import sopt.motivoo.data.datasource.remote.AuthInterceptor
 import sopt.motivoo.domain.entity.MotivooStorage
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
@@ -29,6 +30,11 @@ object RetrofitModule {
 
     @Provides
     @Singleton
+    @Logger
+    fun provideAuthInterceptor(interceptor: AuthInterceptor): Interceptor = interceptor
+
+    @Provides
+    @Singleton
     fun provideJson(): Json = Json {
         isLenient = true
         ignoreUnknownKeys = true
@@ -39,28 +45,28 @@ object RetrofitModule {
     @Provides
     @Singleton
     fun providesOkHttpClient(
-        @Logger loggingInterceptor: Interceptor
+        @Logger loggingInterceptor: Interceptor,
     ): OkHttpClient =
         OkHttpClient.Builder().apply {
             connectTimeout(10, TimeUnit.SECONDS)
             writeTimeout(10, TimeUnit.SECONDS)
             readTimeout(10, TimeUnit.SECONDS)
             addInterceptor(loggingInterceptor)
+            if (DEBUG) {
+                addInterceptor(
+                    HttpLoggingInterceptor().apply {
+                        level = HttpLoggingInterceptor.Level.BODY
+                    },
+                )
+            } else {
+                HttpLoggingInterceptor.Level.NONE
+            }
         }.build()
-
-    @Provides
-    @Logger
-    fun provideLoggingInterceptor(): Interceptor {
-        return HttpLoggingInterceptor().apply {
-            level = if (DEBUG) HttpLoggingInterceptor.Level.BODY
-            else HttpLoggingInterceptor.Level.NONE
-        }
-    }
 
     @Provides
     @Singleton
     fun providesRetrofit(okHttpClient: OkHttpClient): Retrofit =
-        Retrofit.Builder().baseUrl(BuildConfig.BASE_URL).client(okHttpClient).addConverterFactory(
+        Retrofit.Builder().baseUrl(BASE_URL).client(okHttpClient).addConverterFactory(
             Json.asConverterFactory("application/json".toMediaType()),
         ).build()
 }
