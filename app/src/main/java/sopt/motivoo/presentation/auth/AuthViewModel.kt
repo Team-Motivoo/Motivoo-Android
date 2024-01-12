@@ -27,6 +27,10 @@ class AuthViewModel @Inject constructor(
         motivooStorage.isLogin = true
     }
 
+    fun resetLoginState() {
+        _loginState.value = UiState.Loading
+    }
+
     fun postLogin(
         platformToken: String,
     ) {

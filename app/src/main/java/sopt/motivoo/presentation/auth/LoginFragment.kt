@@ -15,8 +15,7 @@ import sopt.motivoo.databinding.FragmentLoginBinding
 import sopt.motivoo.util.UiState
 import sopt.motivoo.util.binding.BindingFragment
 import sopt.motivoo.util.extension.setOnSingleClickListener
-import sopt.motivoo.util.extension.showSnackbar
-import timber.log.Timber
+import sopt.motivoo.util.extension.showToast
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -28,22 +27,29 @@ class LoginFragment : BindingFragment<FragmentLoginBinding>(R.layout.fragment_lo
     lateinit var kakaoAuthService: KakaoAuthService
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        clickKakaoLoginButton()
+        collectData()
+    }
+
+    private fun clickKakaoLoginButton() {
         binding.llKakaoLogin.setOnSingleClickListener {
             kakaoAuthService.startKakaoLogin { token ->
-                Timber.tag("aaa").e("호출")
                 authViewModel.postLogin(token)
-                Timber.tag("aaa").e("콜백")
             }
         }
+    }
 
+    private fun collectData() {
         authViewModel.loginState.flowWithLifecycle(lifecycle).onEach { uiState ->
             when (uiState) {
                 is UiState.Success -> {
+                    requireContext().showToast("로그인 성공!")
                     findNavController().navigate(R.id.action_loginFragment_to_termsOfUseFragment)
+                    authViewModel.resetLoginState()
                 }
 
                 is UiState.Failure -> {
-                    requireContext().showSnackbar(binding.root, "실패애ㅐㅇ애ㅐㅇ")
+                    requireContext().showToast("실패에에엥")
                 }
 
                 else -> Unit
