@@ -11,7 +11,11 @@
 
         <action
             android:id="@+id/action_splashFragment_to_permissionFragment"
-            app:destination="@id/permissionFragment" />
+            app:destination="@id/permissionFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -20,7 +24,11 @@
 
         <action
             android:id="@+id/action_loginFragment_to_termsOfUseFragment"
-            app:destination="@id/termsOfUseFragment" />
+            app:destination="@id/termsOfUseFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
@@ -151,7 +159,7 @@
     <fragment
         android:id="@+id/myInfoFragment"
         android:name="sopt.motivoo.presentation.MyInfoFragment"
-        android:label="MyInfoFragment" >
+        android:label="MyInfoFragment">
         <action
             android:id="@+id/action_myInfoFragment_to_myServiceOut"
             app:destination="@id/myServiceOutFragment" />
@@ -165,7 +173,7 @@
     <fragment
         android:id="@+id/myExerciseInfoFragment"
         android:name="sopt.motivoo.presentation.MyExerciseInfoFragment"
-        android:label="MyExerciseInfoFragment" >
+        android:label="MyExerciseInfoFragment">
         <action
             android:id="@+id/action_myExerciseInfoFragment_to_myPageFragment"
             app:destination="@id/myPageFragment" />
@@ -173,7 +181,7 @@
     <dialog
         android:id="@+id/myServiceOutFragment"
         android:name="sopt.motivoo.presentation.MyServiceOutFragment"
-        android:label="MyServiceOutFragment" >
+        android:label="MyServiceOutFragment">
         <action
             android:id="@+id/action_myServiceOut_to_loginFragment"
             app:destination="@id/loginFragment" />
@@ -184,7 +192,7 @@
     <dialog
         android:id="@+id/myLogoutFragment"
         android:name="sopt.motivoo.presentation.MyLogoutFragment"
-        android:label="MyLogoutFragment" >
+        android:label="MyLogoutFragment">
         <action
             android:id="@+id/action_myLogout_to_loginFragment"
             app:destination="@id/loginFragment" />
@@ -198,7 +206,11 @@
         android:label="PermissionFragment">
         <action
             android:id="@+id/action_permissionFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/termsOfUseFragment"
