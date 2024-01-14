@@ -6,16 +6,18 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 import sopt.motivoo.R
+import sopt.motivoo.data.datasource.remote.AuthTokenRefreshListener
 import sopt.motivoo.databinding.ActivityMainBinding
 import sopt.motivoo.util.extension.hideKeyboard
 import sopt.motivoo.util.extension.setOnSingleClickListener
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), AuthTokenRefreshListener {
     lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_MOTIVOOAOS)
@@ -93,6 +95,14 @@ class MainActivity : AppCompatActivity() {
             R.id.timeQuestionFragment -> 5f
             R.id.soreSpotQuestionFragment -> 6f
             else -> 0f
+        }
+    }
+
+    override fun onTokenRefreshFailed() {
+        runOnUiThread {
+            val navController = findNavController(R.id.fc_main)
+            navController.popBackStack(R.id.loginFragment, false)
+            navController.navigate(R.id.loginFragment)
         }
     }
 

@@ -1,11 +1,11 @@
 package sopt.motivoo.data.model.response
 
+
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import sopt.motivoo.domain.entity.auth.LoginInfo
 
 @Serializable
-data class ResponseLoginDto(
+data class ResponseReissueDto(
     @SerialName("code")
     val code: Int,
     @SerialName("message")
@@ -19,22 +19,7 @@ data class ResponseLoginDto(
     data class Data(
         @SerialName("access_token")
         val accessToken: String,
-        @SerialName("id")
-        val id: Long,
-        @SerialName("nickname")
-        val nickname: String,
         @SerialName("refresh_token")
         val refreshToken: String,
-        @SerialName("token_type")
-        val tokenType: String
     )
-
-    fun toLoginInfo(): LoginInfo {
-        return LoginInfo(
-            accessToken = data.accessToken,
-            nickName = data.nickname,
-            id = data.id,
-            refreshToken = data.refreshToken
-        )
-    }
 }
