@@ -18,7 +18,7 @@ class ExerciseEachDateInfoViewHolder(private val binding: ItemExerciseBinding) :
         with(binding) {
             val context = binding.root.context
             if (exerciseInfoData.userType == "PARENT") {
-                tvItemExerciseMyExercise.text = context.getString(R.string.exercise_parent_exercise)
+                tvItemExerciseMyExercise.text = context.getString(R.string.exercise_my_exercise)
                 tvItemExerciseParentExercise.text =
                     context.getString(R.string.exercise_child_exercise)
             }
