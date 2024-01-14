@@ -5,15 +5,18 @@ import android.content.ClipboardManager
 import android.content.Context.CLIPBOARD_SERVICE
 import android.os.Build
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.View
+import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.animation.AnimationUtils
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import sopt.motivoo.R
 import sopt.motivoo.databinding.FragmentGetInviteCodeBinding
 import sopt.motivoo.util.binding.BindingFragment
 import sopt.motivoo.util.extension.setOnSingleClickListener
+import sopt.motivoo.util.extension.setVisible
 
 class GetInviteCodeFragment :
     BindingFragment<FragmentGetInviteCodeBinding>(R.layout.fragment_get_invite_code) {
@@ -43,26 +46,28 @@ class GetInviteCodeFragment :
         binding.btnGetInviteCodeCheckMatching.setOnSingleClickListener {
             val fadeIn = AnimationUtils.loadAnimation(context, R.anim.fade_in)
             binding.tvGetInviteCodeMatchingWaiting.startAnimation(fadeIn)
-            binding.tvGetInviteCodeMatchingWaiting.visibility = VISIBLE
+            binding.tvGetInviteCodeMatchingWaiting.setVisible(VISIBLE)
 
-            Handler(Looper.getMainLooper()).postDelayed({
+            lifecycleScope.launch {
+                delay(TWO_SECONDS)
                 val fadeOut = AnimationUtils.loadAnimation(context, R.anim.fade_out)
                 binding.tvGetInviteCodeMatchingWaiting.startAnimation(fadeOut)
-                binding.tvGetInviteCodeMatchingWaiting.visibility = View.GONE
-            }, TWO_SECONDS)
+                binding.tvGetInviteCodeMatchingWaiting.setVisible(GONE)
+            }
         }
     }
 
     private fun setClipBoardToastAnimation() {
         val fadeIn = AnimationUtils.loadAnimation(context, R.anim.fade_in)
         binding.tvGetInviteCodeToast.startAnimation(fadeIn)
-        binding.tvGetInviteCodeToast.visibility = VISIBLE
+        binding.tvGetInviteCodeToast.setVisible(VISIBLE)
 
-        Handler(Looper.getMainLooper()).postDelayed({
+        lifecycleScope.launch {
+            delay(TWO_SECONDS)
             val fadeOut = AnimationUtils.loadAnimation(context, R.anim.fade_out)
             binding.tvGetInviteCodeToast.startAnimation(fadeOut)
-            binding.tvGetInviteCodeToast.visibility = View.GONE
-        }, TWO_SECONDS)
+            binding.tvGetInviteCodeToast.setVisible(GONE)
+        }
     }
 
     companion object {
