@@ -10,6 +10,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <TextView
+            android:id="@+id/tv_login_error_message"
+            style="@style/Caption1_semi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="@string/login_error_message"
+            android:textColor="@color/pink_FF19A3"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/ll_kakao_login"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
         <LinearLayout
             android:id="@+id/ll_kakao_login"
             android:layout_width="0dp"

@@ -100,6 +100,22 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
+        <TextView
+            android:id="@+id/tv_get_invite_code_toast"
+            style="@style/Caption2_re"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/shape_custom_toast"
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="13dp"
+            android:text="@string/clipboard_copy"
+            android:textColor="@color/white_FFFFFF"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/btn_get_invite_code_check_matching"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_get_invite_code_check_matching"
             style="@style/B5_med"

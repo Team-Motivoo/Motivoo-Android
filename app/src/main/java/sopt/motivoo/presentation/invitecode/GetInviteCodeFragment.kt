@@ -14,7 +14,6 @@ import sopt.motivoo.R
 import sopt.motivoo.databinding.FragmentGetInviteCodeBinding
 import sopt.motivoo.util.binding.BindingFragment
 import sopt.motivoo.util.extension.setOnSingleClickListener
-import sopt.motivoo.util.extension.showToast
 
 class GetInviteCodeFragment :
     BindingFragment<FragmentGetInviteCodeBinding>(R.layout.fragment_get_invite_code) {
@@ -22,23 +21,24 @@ class GetInviteCodeFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setToastAnimation()
+        setMatchingToastAnimation()
         setClipboard()
     }
 
     private fun setClipboard() {
         val clipboard: ClipboardManager =
             requireContext().getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+        // TODO 복사되는 멘트 수정
         val clip = ClipData.newPlainText("label", "STRING")
 
         binding.btnGetInviteCodeCopy.setOnSingleClickListener {
             clipboard.setPrimaryClip(clip)
             if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S_V2)
-                requireContext().showToast(getString(R.string.clipboard_copy))
+                setClipBoardToastAnimation()
         }
     }
 
-    private fun setToastAnimation() {
+    private fun setMatchingToastAnimation() {
         binding.btnGetInviteCodeCheckMatching.setOnSingleClickListener {
             val fadeIn = AnimationUtils.loadAnimation(context, R.anim.fade_in)
             binding.tvGetInviteCodeMatchingWaiting.startAnimation(fadeIn)
@@ -52,7 +52,19 @@ class GetInviteCodeFragment :
         }
     }
 
+    private fun setClipBoardToastAnimation() {
+        val fadeIn = AnimationUtils.loadAnimation(context, R.anim.fade_in)
+        binding.tvGetInviteCodeToast.startAnimation(fadeIn)
+        binding.tvGetInviteCodeToast.visibility = VISIBLE
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            val fadeOut = AnimationUtils.loadAnimation(context, R.anim.fade_out)
+            binding.tvGetInviteCodeToast.startAnimation(fadeOut)
+            binding.tvGetInviteCodeToast.visibility = View.GONE
+        }, TWO_SECONDS)
+    }
+
     companion object {
-        private const val TWO_SECONDS = 2000L
+        const val TWO_SECONDS = 2000L
     }
 }

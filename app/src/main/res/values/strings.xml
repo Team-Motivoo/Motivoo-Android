@@ -94,7 +94,6 @@
     <string name="mypage_cancel">취소</string>
     <string name="mypage_logout_check">정말 로그아웃 하시겠어요?</string>
 
-
     <!-- notification -->
     <string name="step_count_notification_channel_id">step_count_channel</string>
     <string name="step_count_notification_channel_title">step_counter</string>
@@ -129,7 +128,7 @@
     <string name="post_invite_code_hint">초대코드를 입력해주세요</string>
     <string name="post_invite_code_error_message">초대코드가 올바르지 않아요</string>
     <string name="post_invite_code">초대코드 입력하기</string>
-    <string name="clipboard_copy">클립보드에 복사되었습니다.</string>
+    <string name="clipboard_copy">클립보드에 복사되었습니다</string>
 
     <!-- terms of use -->
     <string name="terms_title">이용약관</string>
@@ -137,9 +136,11 @@
     <string name="terms_of_use_access">이용약관 동의</string>
     <string name="terms_of_use_link"><u>보기</u></string>
     <string name="terms_get_info_access">개인정보수집 및 이용 동의</string>
+    <string name="terms_use_info_access">개인정보 처리방침 동의</string>
 
     <!-- login -->
     <string name="login_kakao">카카오 로그인하기</string>
-    <string name="terms_use_info_access">개인정보 처리방침 동의</string>
     <string name="motivoo_start_description">가족과 함께 만들어 나가는\n오늘의 운동 습관</string>
+    <string name="login_error_message">로그인을 다시 한 번 시도해주세요</string>
+
 </resources>
