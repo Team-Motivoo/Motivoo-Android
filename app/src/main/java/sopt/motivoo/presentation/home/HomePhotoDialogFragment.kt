@@ -1,5 +1,6 @@
 package sopt.motivoo.presentation.home
 
+import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
 import android.net.Uri
@@ -35,6 +36,7 @@ class HomePhotoDialogFragment :
         }
     }
 
+    @SuppressLint
     private fun createPhotoBitmap(photoUri: Uri): Bitmap =
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             val source =
