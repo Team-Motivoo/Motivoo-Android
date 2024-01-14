@@ -36,7 +36,6 @@ class HomePhotoDialogFragment :
         }
     }
 
-    @SuppressLint
     private fun createPhotoBitmap(photoUri: Uri): Bitmap =
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             val source =
