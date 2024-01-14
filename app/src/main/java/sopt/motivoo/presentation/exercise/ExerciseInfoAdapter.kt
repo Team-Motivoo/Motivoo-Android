@@ -1,6 +1,5 @@
 package sopt.motivoo.presentation.exercise
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -8,16 +7,15 @@ import sopt.motivoo.data.model.ExerciseInfo
 import sopt.motivoo.databinding.ItemExerciseBinding
 import sopt.motivoo.databinding.ItemExerciseNoticeBinding
 
-class ExerciseInfoAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private val inflater by lazy { LayoutInflater.from(context) }
-    private val notice_info_type = 0
-    private val date_exercise_info_type = 1
-
+class ExerciseInfoAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    private val noticeInfoType = 0
+    private val dateExerciseInfoType = 1
     private var exerciseInfoList: List<ExerciseInfo> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        val inflater by lazy { LayoutInflater.from(parent.context) }
         return when (viewType) {
-            notice_info_type -> {
+            noticeInfoType -> {
                 val binding = ItemExerciseNoticeBinding.inflate(inflater, parent, false)
                 ExerciseNoticeViewHolder(binding)
             }
@@ -37,17 +35,19 @@ class ExerciseInfoAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.
             }
 
             is ExerciseEachDateInfoViewHolder -> {
-                val date_exercise_info = exerciseInfoList[position]
-                holder.onBind(date_exercise_info as ExerciseInfo.EachDateInfo)
+                val dateExerciseInfo = exerciseInfoList[position]
+                holder.onBind(dateExerciseInfo as ExerciseInfo.EachDateInfo)
             }
         }
     }
+
     override fun getItemViewType(position: Int): Int {
         return when (exerciseInfoList[position]) {
-            is ExerciseInfo.NoticeInfo -> notice_info_type
-            is ExerciseInfo.EachDateInfo -> date_exercise_info_type
+            is ExerciseInfo.NoticeInfo -> noticeInfoType
+            is ExerciseInfo.EachDateInfo -> dateExerciseInfoType
         }
     }
+
     override fun getItemCount() = exerciseInfoList.size
     fun setExerciseList(exerciseList: List<ExerciseInfo>) {
         this.exerciseInfoList = exerciseList.toList()

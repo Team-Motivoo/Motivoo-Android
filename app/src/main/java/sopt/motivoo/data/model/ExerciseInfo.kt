@@ -2,6 +2,7 @@ package sopt.motivoo.data.model
 
 sealed class ExerciseInfo {
     data class EachDateInfo(
+        val userType: String,
         val date: String,
         val myMissionImgUrl: String?,
         val opponentMissionImgUrl: String?,

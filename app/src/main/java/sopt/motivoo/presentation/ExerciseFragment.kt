@@ -15,21 +15,31 @@ class ExerciseFragment : BindingFragment<FragmentExerciseBinding>(R.layout.fragm
             missionContent = "오늘의 미션 내용"
         ),
         ExerciseInfo.EachDateInfo(
-            date = "2024/01/12", myMissionImgUrl = null, opponentMissionImgUrl = "![f15c9e2ce52a1735081be72dcec2e97d]",
-            myMissionContent = "내 미션 내용", opponentMissionContent = "부모님 미션 내용",
-            myMissionStatus = "진행중", opponentMissionStatus = "성공"
+            userType = "PARENT",
+            date = "2024년 01월 15일",
+            myMissionImgUrl = null,
+            opponentMissionImgUrl = "![f15c9e2ce52a1735081be72dcec2e97d]",
+            myMissionContent = "내 미션 내용",
+            opponentMissionContent = "부모님 미션 내용",
+            myMissionStatus = "진행중",
+            opponentMissionStatus = "성공"
         ),
         ExerciseInfo.EachDateInfo(
-            date = "2024/12/23", myMissionImgUrl = "f15c9e2ce52a1735081be72dcec2e97d", opponentMissionImgUrl = null,
-            myMissionContent = "내 미션 내용", opponentMissionContent = "부모님 미션 내용",
-            myMissionStatus = "성공", opponentMissionStatus = "실패"
+            userType = "CHILD",
+            date = "2024년 12월 30일",
+            myMissionImgUrl = "f15c9e2ce52a1735081be72dcec2e97d",
+            opponentMissionImgUrl = null,
+            myMissionContent = "내 미션 내용",
+            opponentMissionContent = "부모님 미션 내용",
+            myMissionStatus = "성공",
+            opponentMissionStatus = "실패"
         )
     )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val exerciseAdapter = ExerciseInfoAdapter(requireContext())
+        val exerciseAdapter = ExerciseInfoAdapter()
         binding.rvExerciseEachDateExercise.adapter = exerciseAdapter
         exerciseAdapter.setExerciseList(mockExerciseList)
     }
