@@ -5,7 +5,9 @@ import android.app.Notification
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Build
+import android.os.Environment
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
@@ -19,6 +21,9 @@ import coil.request.ImageRequest
 import com.google.android.material.snackbar.Snackbar
 import sopt.motivoo.R
 import sopt.motivoo.presentation.MainActivity
+import java.io.File
+import java.io.FileOutputStream
+import java.io.OutputStream
 
 private const val NOTIFICATION_ID = 0
 
@@ -82,4 +87,26 @@ fun Context.sendNotification(
             priority = NotificationCompat.PRIORITY_DEFAULT
         }
     }.build()
+}
+
+// TODO:: 비트맵 파일 변환 예시 코드
+fun Context.bitmapToFile(bitmap: Bitmap, saveName: String): File {
+    val saveDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        .toString() + saveName
+    val file = File(saveDir)
+    if (!file.exists()) file.mkdirs()
+
+    val fileName = "$saveName.jpg"
+    val tempFile = File(saveDir, fileName)
+
+    var out: OutputStream? = null
+    try {
+        if (tempFile.createNewFile()) {
+            out = FileOutputStream(tempFile)
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out)
+        }
+    } finally {
+        out?.close()
+    }
+    return tempFile
 }

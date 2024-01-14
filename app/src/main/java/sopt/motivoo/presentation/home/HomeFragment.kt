@@ -10,15 +10,19 @@ import android.os.Build
 import android.os.Bundle
 import android.transition.TransitionManager
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import sopt.motivoo.R
 import sopt.motivoo.databinding.FragmentHomeBinding
 import sopt.motivoo.domain.entity.MotivooStorage
 import sopt.motivoo.util.binding.BindingFragment
+import sopt.motivoo.util.extension.setVisible
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -78,15 +82,20 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
          */
         binding.motivooFirstMissionCard.setOnClickListener {
             TransitionManager.beginDelayedTransition(binding.root as? ViewGroup)
-            binding.cslUnselectedMission.visibility = View.GONE
-            binding.cslSelectedMission.visibility = View.VISIBLE
+            binding.cslUnselectedMission.setVisible(GONE)
+            binding.cslSelectedMission.setVisible(VISIBLE)
             binding.tvHomeToday.text = getString(R.string.home_today_exercise)
             binding.tvHomeTodayExerciseMission.text = "8천걸음 걷고\n스탠딩 랫폴다운 20번 하기"
             binding.motivooStepCountText.setMyStepCountText("10000")
             binding.motivooStepCountText.setOtherStepCountText("9000")
-            binding.tvExerciseMethod.visibility = View.VISIBLE
+            binding.tvExerciseMethod.setVisible(VISIBLE)
             binding.motivooMyPieChart.setStepCount(8 / 10f)
             binding.motivooOtherPieChart.setStepCount(6 / 10f)
+            binding.btnVerifyExercise.isEnabled = true
+        }
+
+        binding.btnVerifyExercise.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_homeBottomSheetFragment)
         }
 
         stepCountReceiver = StepCountReceiver()
@@ -124,6 +133,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
     inner class StepCountReceiver() : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             if (intent?.action == STEP_COUNT) {
+                // TODO:: 걸음 수 렌더링
 //                binding.motivooStepCountText.setStepCountText(
 //                    intent.getIntExtra(STEP_COUNT, 0).toString()
 //                )

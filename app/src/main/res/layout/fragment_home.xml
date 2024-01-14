@@ -172,6 +172,7 @@
                     app:layout_constraintTop_toBottomOf="@id/motivoo_other_pie_chart" />
 
                 <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_verify_exercise"
                     style="@style/B5_med"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

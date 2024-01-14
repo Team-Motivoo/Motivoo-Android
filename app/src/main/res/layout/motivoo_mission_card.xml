@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@drawable/bg_mission_card"
+    android:background="@drawable/background_mission_card"
     android:minHeight="160dp"
     android:paddingVertical="16dp"
     android:paddingStart="20dp"
