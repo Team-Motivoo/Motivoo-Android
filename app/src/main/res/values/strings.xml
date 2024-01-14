@@ -141,4 +141,6 @@
     <string name="exercise_parent_exercise">부모님 운동</string>
     <string name="exercise_no_image_before_exercise_today">운동을 완료하고 사진을 등록해보세요!</string>
     <string name="exercise_child_exercise">자녀 운동</string>
+    <string name="exercise_empty_content">아직 완료한 운동이 없어요\n운동하고 나만의 앨범을 만들어봐요!</string>
+    <string name="exercise_empty_button">오늘의 운동 하러가기</string>
 </resources>
