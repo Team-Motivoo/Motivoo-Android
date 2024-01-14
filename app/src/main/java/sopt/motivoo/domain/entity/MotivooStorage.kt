@@ -5,7 +5,7 @@ interface MotivooStorage {
     var stepCount: Int
     var accessToken: String
     var refreshToken: String
-    var isLogin: Boolean
+    var isUserLoggedIn: Boolean
     var userId: Long
     fun clear()
 }

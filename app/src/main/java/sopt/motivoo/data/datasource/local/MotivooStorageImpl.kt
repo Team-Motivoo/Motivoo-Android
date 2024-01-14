@@ -57,7 +57,7 @@ class MotivooStorageImpl @Inject constructor(@ApplicationContext context: Contex
             "",
         ) ?: ""
 
-    override var isLogin: Boolean
+    override var isUserLoggedIn: Boolean
         set(value) = pref.edit { putBoolean(IS_LOGIN, value) }
         get() = pref.getBoolean(IS_LOGIN, false)
 

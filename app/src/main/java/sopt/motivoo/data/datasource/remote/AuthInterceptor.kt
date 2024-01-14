@@ -23,10 +23,10 @@ class AuthInterceptor @Inject constructor(
     override fun intercept(chain: Interceptor.Chain): Response {
         val originalRequest = chain.request()
 
-        val isAutoLogin = motivooStorage.isLogin
+        val isAutoLoginPossible = motivooStorage.isUserLoggedIn
 
         val authRequestBuilder = originalRequest.newBuilder()
-        if (isAutoLogin) {
+        if (isAutoLoginPossible) {
             authRequestBuilder.addHeader(ACCESS_TOKEN, motivooStorage.accessToken)
         } else {
             authRequestBuilder.removeHeader(ACCESS_TOKEN)
