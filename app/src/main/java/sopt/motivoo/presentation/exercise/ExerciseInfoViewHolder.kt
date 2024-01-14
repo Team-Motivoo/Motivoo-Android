@@ -128,7 +128,6 @@ fun compareDate(binding: ItemExerciseBinding, context: Context) {
         binding.tvItemExerciseNoImageBeforeExercise2.text =
             context.getString(R.string.exercise_no_image_before_exercise_today)
     }
-
 }
 
 fun getCurrentDate(): String {
