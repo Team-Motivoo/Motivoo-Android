@@ -22,7 +22,7 @@ class HomeBottomSheetFragment : BottomSheetDialogFragment() {
     private var _binding: BottomSheetHomeBinding? = null
     private val binding get() = _binding ?: error(getString(R.string.binding_error))
 
-    private val cameraPermissionResult =
+    private val isCameraPermissionResult =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
             var permissionGranted = true
             permissions.entries.forEach {
@@ -81,7 +81,7 @@ class HomeBottomSheetFragment : BottomSheetDialogFragment() {
             if (allPermissionGranted()) {
                 start()
             } else {
-                cameraPermissionResult.launch(REQUIRED_PERMISSIONS)
+                isCameraPermissionResult.launch(REQUIRED_PERMISSIONS)
             }
         }
 
