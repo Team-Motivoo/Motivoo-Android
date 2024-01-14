@@ -68,7 +68,7 @@ class HomeBottomSheetFragment : BottomSheetDialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = BottomSheetHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
