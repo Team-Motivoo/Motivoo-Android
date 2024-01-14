@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import sopt.motivoo.R
-import sopt.motivoo.data.model.ExerciseInfo
 import sopt.motivoo.databinding.FragmentMypageBinding
 import sopt.motivoo.util.binding.BindingFragment
 
