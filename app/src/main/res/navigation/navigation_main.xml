@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/navigation_main"
-    app:startDestination="@id/exerciseFragment">
+    app:startDestination="@id/splashFragment">
 
     <fragment
         android:id="@+id/splashFragment"
@@ -38,6 +38,9 @@
         <action
             android:id="@+id/action_myPageFragment_to_exerciseFragment"
             app:destination="@id/exerciseFragment" />
+        <action
+            android:id="@+id/action_myPageFragment_to_exerciseEmptyFragment"
+            app:destination="@id/exerciseEmptyFragment" />
     </fragment>
     <fragment
         android:id="@+id/exerciseFragment"
@@ -217,4 +220,8 @@
         android:id="@+id/mainActivity"
         android:name="sopt.motivoo.presentation.MainActivity"
         android:label="MainActivity" />
+    <fragment
+        android:id="@+id/exerciseEmptyFragment"
+        android:name="sopt.motivoo.presentation.ExerciseEmptyFragment"
+        android:label="ExerciseEmptyFragment" />
 </navigation>
