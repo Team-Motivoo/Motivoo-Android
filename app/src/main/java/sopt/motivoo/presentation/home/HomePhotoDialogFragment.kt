@@ -1,6 +1,5 @@
 package sopt.motivoo.presentation.home
 
-import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
 import android.net.Uri
