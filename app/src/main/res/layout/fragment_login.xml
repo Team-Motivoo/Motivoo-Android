@@ -10,6 +10,42 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/iv_login_tltle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="55dp"
+            android:src="@drawable/ic_motivoo_logo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_login_description"
+            style="@style/H4_semi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/motivoo_start_description"
+            android:textColor="@color/gray_900_161616"
+            app:layout_constraintStart_toStartOf="@+id/iv_login_tltle"
+            app:layout_constraintTop_toBottomOf="@+id/iv_login_tltle" />
+
+        <ImageView
+            android:id="@+id/iv_login"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="99dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/img_login"
+            app:layout_constraintBottom_toTopOf="@+id/ll_kakao_login"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_login_description" />
+
+
         <TextView
             android:id="@+id/tv_login_error_message"
             style="@style/Caption1_semi"
