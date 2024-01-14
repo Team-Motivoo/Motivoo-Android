@@ -196,7 +196,7 @@
             android:layout_marginHorizontal="16dp"
             android:layout_marginBottom="44dp"
             android:background="@drawable/selector_button_background"
-            android:enabled="false"
+            android:enabled="@{termsOfViewModel.termsAllCheckState}"
             android:paddingVertical="18dp"
             android:text="@string/next"
             android:textColor="@drawable/selector_text_color"
