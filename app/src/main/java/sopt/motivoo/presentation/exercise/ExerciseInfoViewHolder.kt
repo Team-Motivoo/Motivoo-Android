@@ -110,8 +110,6 @@ fun getCurrentDate(): String {
     return dataFormat.format(currentDate)
 }
 
-// 자식, 부모에 따라 위치 바꾸기
-
 class ExerciseNoticeViewHolder(private val binding: ItemExerciseNoticeBinding) :
     RecyclerView.ViewHolder(binding.root) {
     fun onBind(exerciseNoticeData: ExerciseInfo.NoticeInfo) {
