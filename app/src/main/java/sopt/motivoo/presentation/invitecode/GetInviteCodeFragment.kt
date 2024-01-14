@@ -28,8 +28,9 @@ class GetInviteCodeFragment :
     private fun setClipboard() {
         val clipboard: ClipboardManager =
             requireContext().getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
-        // TODO 복사되는 멘트 수정
-        val clip = ClipData.newPlainText("label", "STRING")
+        val inviteCode = binding.tvGetInviteCode.text
+        val formattedText = getString(R.string.share_text_message, inviteCode)
+        val clip = ClipData.newPlainText(SHARE_TEXT, formattedText)
 
         binding.btnGetInviteCodeCopy.setOnSingleClickListener {
             clipboard.setPrimaryClip(clip)
@@ -66,5 +67,6 @@ class GetInviteCodeFragment :
 
     companion object {
         const val TWO_SECONDS = 2000L
+        private const val SHARE_TEXT = "share_text"
     }
 }

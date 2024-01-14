@@ -11,14 +11,18 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 import sopt.motivoo.R
-import sopt.motivoo.data.datasource.remote.AuthTokenRefreshListener
+import sopt.motivoo.data.datasource.remote.AuthTokenRefreshListenerImpl
 import sopt.motivoo.databinding.ActivityMainBinding
 import sopt.motivoo.util.extension.hideKeyboard
 import sopt.motivoo.util.extension.setOnSingleClickListener
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(), AuthTokenRefreshListener {
+class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
+
+    @Inject
+    lateinit var authTokenRefreshListener: AuthTokenRefreshListenerImpl
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_MOTIVOOAOS)
         super.onCreate(savedInstanceState)
@@ -26,6 +30,7 @@ class MainActivity : AppCompatActivity(), AuthTokenRefreshListener {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initView()
+        setupTokenRefreshListener()
     }
 
     private fun initView() {
@@ -98,8 +103,8 @@ class MainActivity : AppCompatActivity(), AuthTokenRefreshListener {
         }
     }
 
-    override fun onTokenRefreshFailed() {
-        runOnUiThread {
+    private fun setupTokenRefreshListener() {
+        authTokenRefreshListener.onTokenRefreshFailedCallback = {
             val navController = findNavController(R.id.fc_main)
             navController.popBackStack(R.id.loginFragment, false)
             navController.navigate(R.id.loginFragment)

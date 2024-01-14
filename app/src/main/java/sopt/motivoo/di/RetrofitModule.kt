@@ -15,6 +15,8 @@ import sopt.motivoo.BuildConfig.BASE_URL
 import sopt.motivoo.BuildConfig.DEBUG
 import sopt.motivoo.data.datasource.local.MotivooStorageImpl
 import sopt.motivoo.data.datasource.remote.AuthInterceptor
+import sopt.motivoo.data.datasource.remote.AuthTokenRefreshListener
+import sopt.motivoo.data.datasource.remote.AuthTokenRefreshListenerImpl
 import sopt.motivoo.domain.entity.MotivooStorage
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
@@ -32,6 +34,11 @@ object RetrofitModule {
     @Singleton
     @Logger
     fun provideAuthInterceptor(interceptor: AuthInterceptor): Interceptor = interceptor
+
+    @Provides
+    @Singleton
+    fun provideRefreshListener(authTokenRefreshListenerImpl: AuthTokenRefreshListenerImpl): AuthTokenRefreshListener =
+        authTokenRefreshListenerImpl
 
     @Provides
     @Singleton
