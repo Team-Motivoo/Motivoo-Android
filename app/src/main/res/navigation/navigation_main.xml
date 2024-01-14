@@ -11,11 +11,7 @@
 
         <action
             android:id="@+id/action_splashFragment_to_permissionFragment"
-            app:destination="@id/permissionFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:destination="@id/permissionFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -206,11 +202,7 @@
         android:label="PermissionFragment">
         <action
             android:id="@+id/action_permissionFragment_to_loginFragment"
-            app:destination="@id/loginFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/termsOfUseFragment"
