@@ -43,13 +43,13 @@ class LoginFragment : BindingFragment<FragmentLoginBinding>(R.layout.fragment_lo
         authViewModel.loginState.flowWithLifecycle(lifecycle).onEach { uiState ->
             when (uiState) {
                 is UiState.Success -> {
-                    requireContext().showToast("로그인 성공!")
+                    requireContext().showToast("로그인에 성공했어요.")
                     findNavController().navigate(R.id.action_loginFragment_to_termsOfUseFragment)
                     authViewModel.resetLoginState()
                 }
 
                 is UiState.Failure -> {
-                    requireContext().showToast("실패에에엥")
+                    requireContext().showToast("로그인에 실패했어요.")
                 }
 
                 else -> Unit

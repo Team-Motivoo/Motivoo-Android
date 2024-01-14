@@ -31,6 +31,7 @@ class TermsOfUseFragment :
         goToBack()
         collectData()
         clickDoneButton()
+        setupCheckAllListener()
     }
 
     private fun clickDoneButton() {
@@ -40,16 +41,24 @@ class TermsOfUseFragment :
     }
 
     private fun collectData() {
-        termsOfUseViewModel.isAllTermValid.flowWithLifecycle(lifecycle).onEach { isAllTermValid ->
-            binding.cbCheckAll.isChecked = isAllTermValid
-            binding.btnTermsOfUseDone.isEnabled = isAllTermValid
-        }.launchIn(lifecycleScope)
+        termsOfUseViewModel.termsAllCheckState.flowWithLifecycle(lifecycle)
+            .onEach { isAllTermValid ->
+                binding.cbCheckAll.isChecked = isAllTermValid
+                binding.btnTermsOfUseDone.isEnabled = isAllTermValid
+            }.launchIn(lifecycleScope)
     }
 
     private fun goToBack() {
         binding.includeTermsToolbar.tvToolbarBack.setOnSingleClickListener {
             motivooStorage.clear()
             findNavController().popBackStack()
+        }
+    }
+
+    private fun setupCheckAllListener() {
+        binding.cbCheckAll.setOnSingleClickListener {
+            val isChecked = binding.cbCheckAll.isChecked
+            termsOfUseViewModel.setAllTermsChecked(isChecked)
         }
     }
 }
