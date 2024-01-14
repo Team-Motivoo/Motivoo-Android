@@ -1,5 +1,6 @@
 package sopt.motivoo.presentation.exercise
 
+import android.content.Context
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -17,11 +18,8 @@ class ExerciseEachDateInfoViewHolder(private val binding: ItemExerciseBinding) :
     fun onBind(exerciseInfoData: ExerciseInfo.EachDateInfo) {
         with(binding) {
             val context = binding.root.context
-            if (exerciseInfoData.userType == "PARENT") {
-                tvItemExerciseMyExercise.text = context.getString(R.string.exercise_my_exercise)
-                tvItemExerciseParentExercise.text =
-                    context.getString(R.string.exercise_child_exercise)
-            }
+            changePosition(exerciseInfoData, binding, context)
+
             tvItemExerciseDate.text = exerciseInfoData.date
             ivItemExerciseImg1.load(exerciseInfoData.myMissionImgUrl)
             ivItemExerciseImg2.load(exerciseInfoData.opponentMissionImgUrl)
@@ -29,79 +27,108 @@ class ExerciseEachDateInfoViewHolder(private val binding: ItemExerciseBinding) :
             tvItemExerciseImgBtmTxt2.text = exerciseInfoData.opponentMissionContent
             tvItemExerciseMyState.text = exerciseInfoData.myMissionStatus
             tvItemExerciseParentState.text = exerciseInfoData.opponentMissionStatus
-            if (exerciseInfoData.myMissionImgUrl == null) {
-                ivItemExerciseImg1.visibility = View.INVISIBLE
-                tvItemExerciseNoImageBeforeExercise1.visibility = View.VISIBLE
-            } else {
-                ivItemExerciseImg1.visibility = View.VISIBLE
-                tvItemExerciseNoImageBeforeExercise1.visibility = View.INVISIBLE
-            }
-            if (exerciseInfoData.opponentMissionImgUrl == null) {
-                ivItemExerciseImg2.visibility = View.INVISIBLE
-                tvItemExerciseNoImageBeforeExercise2.visibility = View.VISIBLE
-            } else {
-                ivItemExerciseImg2.visibility = View.VISIBLE
-                tvItemExerciseNoImageBeforeExercise2.visibility = View.INVISIBLE
-            }
-            when (exerciseInfoData.myMissionStatus) {
-                "진행중" -> {
-                    tvItemExerciseMyState.backgroundTintList =
-                        ContextCompat.getColorStateList(itemView.context, R.color.pink_100_FFE6F5)
-                    val textColorPink: Int =
-                        ContextCompat.getColor(itemView.context, R.color.pink_FF19A3)
-                    tvItemExerciseMyState.setTextColor(textColorPink)
-                }
-
-                "성공" -> {
-                    tvItemExerciseMyState.backgroundTintList =
-                        ContextCompat.getColorStateList(itemView.context, R.color.blue_100_D7F6FF)
-                    val textColorBlue: Int =
-                        ContextCompat.getColor(itemView.context, R.color.blue_600_2E9ABB)
-                    tvItemExerciseMyState.setTextColor(textColorBlue)
-                }
-
-                else -> {
-                    tvItemExerciseMyState.backgroundTintList =
-                        ContextCompat.getColorStateList(itemView.context, R.color.gray_300_D5D5D7)
-                    val textColorGray: Int =
-                        ContextCompat.getColor(itemView.context, R.color.gray_700_464747)
-                    tvItemExerciseMyState.setTextColor(textColorGray)
-                }
-            }
-            when (exerciseInfoData.opponentMissionStatus) {
-                "진행중" -> {
-                    tvItemExerciseParentState.backgroundTintList =
-                        ContextCompat.getColorStateList(itemView.context, R.color.pink_100_FFE6F5)
-                    val textColorPink: Int =
-                        ContextCompat.getColor(itemView.context, R.color.pink_FF19A3)
-                    tvItemExerciseParentState.setTextColor(textColorPink)
-                }
-
-                "성공" -> {
-                    tvItemExerciseParentState.backgroundTintList =
-                        ContextCompat.getColorStateList(itemView.context, R.color.blue_100_D7F6FF)
-                    val textColorBlue: Int =
-                        ContextCompat.getColor(itemView.context, R.color.blue_600_2E9ABB)
-                    tvItemExerciseParentState.setTextColor(textColorBlue)
-                }
-
-                else -> {
-                    tvItemExerciseParentState.backgroundTintList =
-                        ContextCompat.getColorStateList(itemView.context, R.color.gray_300_D5D5D7)
-                    val textColorGray: Int =
-                        ContextCompat.getColor(itemView.context, R.color.gray_700_464747)
-                    tvItemExerciseParentState.setTextColor(textColorGray)
-                }
-            }
-            val currentDate = getCurrentDate()
-            if (currentDate == tvItemExerciseDate.text.substring(0, 13)) {
-                tvItemExerciseNoImageBeforeExercise1.text =
-                    context.getString(R.string.exercise_no_image_before_exercise_today)
-                tvItemExerciseNoImageBeforeExercise2.text =
-                    context.getString(R.string.exercise_no_image_before_exercise_today)
-            }
+            imageVisibility(exerciseInfoData, binding)
+            checkStatus(exerciseInfoData, binding, context)
+            compareDate(binding, context)
         }
     }
+}
+
+fun changePosition(
+    exerciseInfoData: ExerciseInfo.EachDateInfo,
+    binding: ItemExerciseBinding,
+    context: Context,
+) {
+    if (exerciseInfoData.userType == "PARENT") {
+        binding.tvItemExerciseMyExercise.text = context.getString(R.string.exercise_my_exercise)
+        binding.tvItemExerciseParentExercise.text =
+            context.getString(R.string.exercise_child_exercise)
+    }
+}
+
+fun imageVisibility(exerciseInfoData: ExerciseInfo.EachDateInfo, binding: ItemExerciseBinding) {
+    if (exerciseInfoData.myMissionImgUrl == null) {
+        binding.ivItemExerciseImg1.visibility = View.INVISIBLE
+        binding.tvItemExerciseNoImageBeforeExercise1.visibility = View.VISIBLE
+    } else {
+        binding.ivItemExerciseImg1.visibility = View.VISIBLE
+        binding.tvItemExerciseNoImageBeforeExercise1.visibility = View.INVISIBLE
+    }
+    if (exerciseInfoData.opponentMissionImgUrl == null) {
+        binding.ivItemExerciseImg2.visibility = View.INVISIBLE
+        binding.tvItemExerciseNoImageBeforeExercise2.visibility = View.VISIBLE
+    } else {
+        binding.ivItemExerciseImg2.visibility = View.VISIBLE
+        binding.tvItemExerciseNoImageBeforeExercise2.visibility = View.INVISIBLE
+    }
+}
+
+fun checkStatus(
+    exerciseInfoData: ExerciseInfo.EachDateInfo,
+    binding: ItemExerciseBinding,
+    context: Context,
+) {
+    when (exerciseInfoData.myMissionStatus) {
+        "진행중" -> {
+            binding.tvItemExerciseMyState.backgroundTintList =
+                ContextCompat.getColorStateList(context, R.color.pink_100_FFE6F5)
+            val textColorPink: Int =
+                ContextCompat.getColor(context, R.color.pink_FF19A3)
+            binding.tvItemExerciseMyState.setTextColor(textColorPink)
+        }
+
+        "성공" -> {
+            binding.tvItemExerciseMyState.backgroundTintList =
+                ContextCompat.getColorStateList(context, R.color.blue_100_D7F6FF)
+            val textColorBlue: Int =
+                ContextCompat.getColor(context, R.color.blue_600_2E9ABB)
+            binding.tvItemExerciseMyState.setTextColor(textColorBlue)
+        }
+
+        else -> {
+            binding.tvItemExerciseMyState.backgroundTintList =
+                ContextCompat.getColorStateList(context, R.color.gray_300_D5D5D7)
+            val textColorGray: Int =
+                ContextCompat.getColor(context, R.color.gray_700_464747)
+            binding.tvItemExerciseMyState.setTextColor(textColorGray)
+        }
+    }
+    when (exerciseInfoData.opponentMissionStatus) {
+        "진행중" -> {
+            binding.tvItemExerciseParentState.backgroundTintList =
+                ContextCompat.getColorStateList(context, R.color.pink_100_FFE6F5)
+            val textColorPink: Int =
+                ContextCompat.getColor(context, R.color.pink_FF19A3)
+            binding.tvItemExerciseParentState.setTextColor(textColorPink)
+        }
+
+        "성공" -> {
+            binding.tvItemExerciseParentState.backgroundTintList =
+                ContextCompat.getColorStateList(context, R.color.blue_100_D7F6FF)
+            val textColorBlue: Int =
+                ContextCompat.getColor(context, R.color.blue_600_2E9ABB)
+            binding.tvItemExerciseParentState.setTextColor(textColorBlue)
+        }
+
+        else -> {
+            binding.tvItemExerciseParentState.backgroundTintList =
+                ContextCompat.getColorStateList(context, R.color.gray_300_D5D5D7)
+            val textColorGray: Int =
+                ContextCompat.getColor(context, R.color.gray_700_464747)
+            binding.tvItemExerciseParentState.setTextColor(textColorGray)
+        }
+    }
+}
+
+fun compareDate(binding: ItemExerciseBinding, context: Context) {
+    val currentDate = getCurrentDate()
+    if (currentDate == binding.tvItemExerciseDate.text.substring(0, 13)) {
+        binding.tvItemExerciseNoImageBeforeExercise1.text =
+            context.getString(R.string.exercise_no_image_before_exercise_today)
+        binding.tvItemExerciseNoImageBeforeExercise2.text =
+            context.getString(R.string.exercise_no_image_before_exercise_today)
+    }
+
 }
 
 fun getCurrentDate(): String {
