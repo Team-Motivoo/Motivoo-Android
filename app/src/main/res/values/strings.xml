@@ -141,4 +141,5 @@
     <!-- login -->
     <string name="login_kakao">카카오 로그인하기</string>
     <string name="terms_use_info_access">개인정보 처리방침 동의</string>
+    <string name="motivoo_start_description">가족과 함께 만들어 나가는\n오늘의 운동 습관</string>
 </resources>

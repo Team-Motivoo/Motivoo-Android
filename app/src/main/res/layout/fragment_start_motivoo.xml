@@ -10,6 +10,41 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/iv_motivoo_start_tltle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="55dp"
+            android:src="@drawable/ic_motivoo_logo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_motivoo_start_description"
+            style="@style/H4_semi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/motivoo_start_description"
+            android:textColor="@color/gray_900_161616"
+            app:layout_constraintStart_toStartOf="@+id/iv_motivoo_start_tltle"
+            app:layout_constraintTop_toBottomOf="@+id/iv_motivoo_start_tltle" />
+
+        <ImageView
+            android:id="@+id/iv_motivoo_start"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="72dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginBottom="72dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/img_login_after"
+            app:layout_constraintBottom_toTopOf="@+id/btn_start_motivoo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_motivoo_start_description" />
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_start_motivoo"
             style="@style/B5_med"

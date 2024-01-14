@@ -35,7 +35,6 @@ class AuthViewModel @Inject constructor(
         platformToken: String,
     ) {
         viewModelScope.launch {
-            Timber.tag("aaa").e("보냄")
             authRepository.postLogin(
                 RequestLoginDto(
                     platformToken,
@@ -48,7 +47,6 @@ class AuthViewModel @Inject constructor(
                 motivooStorage.refreshToken = BEARER_PREFIX + signUpResponse.refreshToken
                 _loginState.value = UiState.Success(true)
                 setAutoLogin()
-                Timber.tag("aaa").e("성공")
             }.onFailure { throwable ->
                 Timber.e(throwable.message)
             }

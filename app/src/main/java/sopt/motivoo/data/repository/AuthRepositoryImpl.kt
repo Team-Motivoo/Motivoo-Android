@@ -1,6 +1,5 @@
 package sopt.motivoo.data.repository
 
-
 import sopt.motivoo.data.datasource.remote.AuthDataSource
 import sopt.motivoo.data.model.request.RequestLoginDto
 import sopt.motivoo.domain.entity.auth.LoginInfo
