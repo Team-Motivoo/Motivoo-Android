@@ -18,7 +18,7 @@ class ExerciseFragment : BindingFragment<FragmentExerciseBinding>(R.layout.fragm
             userType = "PARENT",
             date = "2024년 01월 15일",
             myMissionImgUrl = null,
-            opponentMissionImgUrl = "![f15c9e2ce52a1735081be72dcec2e97d]",
+            opponentMissionImgUrl = "https://github.com/Team-Motivoo/Motivoo-Android/assets/113780698/f5e4d978-115e-4c3d-82b3-f06b3bc334aa",
             myMissionContent = "내 미션 내용",
             opponentMissionContent = "부모님 미션 내용",
             myMissionStatus = "진행중",
@@ -27,7 +27,7 @@ class ExerciseFragment : BindingFragment<FragmentExerciseBinding>(R.layout.fragm
         ExerciseInfo.EachDateInfo(
             userType = "CHILD",
             date = "2024년 12월 30일",
-            myMissionImgUrl = "f15c9e2ce52a1735081be72dcec2e97d",
+            myMissionImgUrl = "https://github.com/Team-Motivoo/Motivoo-Android/assets/113780698/f5e4d978-115e-4c3d-82b3-f06b3bc334aa",
             opponentMissionImgUrl = null,
             myMissionContent = "내 미션 내용",
             opponentMissionContent = "부모님 미션 내용",
