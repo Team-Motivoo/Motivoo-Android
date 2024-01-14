@@ -19,7 +19,8 @@ import sopt.motivoo.R
 import sopt.motivoo.databinding.BottomSheetHomeBinding
 
 class HomeBottomSheetFragment : BottomSheetDialogFragment() {
-    private lateinit var binding: BottomSheetHomeBinding
+    private var _binding: BottomSheetHomeBinding? = null
+    private val binding get() = _binding ?: error(getString(R.string.binding_error))
 
     private val cameraPermissionResult =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
@@ -68,7 +69,7 @@ class HomeBottomSheetFragment : BottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = BottomSheetHomeBinding.inflate(inflater, container, false)
+        _binding = BottomSheetHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -95,7 +96,7 @@ class HomeBottomSheetFragment : BottomSheetDialogFragment() {
 
     private fun setLayoutSize() {
         context?.resources?.displayMetrics?.let { metrics ->
-            binding.root.layoutParams.run {
+            binding.root.layoutParams?.run {
                 height = (metrics.heightPixels * heightPercent).toInt()
             }
         }
@@ -105,6 +106,11 @@ class HomeBottomSheetFragment : BottomSheetDialogFragment() {
         ContextCompat.checkSelfPermission(
             requireContext(), it
         ) == PackageManager.PERMISSION_GRANTED
+    }
+
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
     }
 
     companion object {
