@@ -2,6 +2,7 @@
     <string name="app_name">MOTIVOO</string>
     <string name="application_terminate">\'뒤로\' 버튼 한 번 더 누르면 종료됩니다.</string>
     <string name="binding_error">에러가 발생했습니다</string>
+    <string name="confirm">확인</string>
 
     <!--onboarding-->
     <string name="age_question_title_first">당신은\n부모인가요 자녀인가요?</string>
@@ -66,7 +67,6 @@
     <string name="home_verify_exercise">운동 인증하기</string>
     <string name="home_bottom_sheet_take_photo">사진 찍기</string>
     <string name="home_bottom_sheet_select_in_album">앨범에서 선택하기</string>
-    <string name="confirm">확인</string>
     <string name="verify_exercise">운동 인증이 완료되었어요!</string>
     <string name="verify_exercise_description">오늘도 멋지게 운동을 해내셨군요</string>
     <string name="motivoo_logo">motivoo_logo</string>
