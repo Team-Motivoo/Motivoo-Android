@@ -5,12 +5,14 @@ import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import sopt.motivoo.R
 import sopt.motivoo.databinding.FragmentPostInviteCodeBinding
 import sopt.motivoo.util.binding.BindingFragment
 import sopt.motivoo.util.extension.drawableOf
+import sopt.motivoo.util.extension.setOnSingleClickListener
 import sopt.motivoo.util.extension.setVisible
 
 class PostInviteCodeFragment :
@@ -22,6 +24,11 @@ class PostInviteCodeFragment :
         binding.inviteCodeViewModel = inviteCodeViewModel
 
         collectData()
+        clickBackButton()
+    }
+
+    private fun clickBackButton() {
+        binding.includePostInviteCodeToolbar.tvToolbarBack.setOnSingleClickListener { findNavController().popBackStack() }
     }
 
     private fun collectData() {

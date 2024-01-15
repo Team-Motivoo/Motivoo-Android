@@ -10,6 +10,7 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.animation.AnimationUtils
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import sopt.motivoo.R
@@ -26,6 +27,11 @@ class GetInviteCodeFragment :
 
         setMatchingToastAnimation()
         setClipboard()
+        clickBackButton()
+    }
+
+    private fun clickBackButton() {
+        binding.includeGetInviteCodeToolbar.tvToolbarBack.setOnSingleClickListener { findNavController().popBackStack() }
     }
 
     private fun setClipboard() {
