@@ -21,8 +21,8 @@
 
     <TextView
         android:id="@+id/tv_step_count"
-        style="@style/H1_semi"
-        android:layout_width="0dp"
+        style="@style/H1_med"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="7dp"
         android:gravity="center"

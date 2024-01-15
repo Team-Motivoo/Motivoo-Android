@@ -10,24 +10,91 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textView"
+        <ImageView
+            android:id="@+id/iv_login_tltle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="여긴 로그인"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="55dp"
+            android:src="@drawable/ic_motivoo_logo"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/btn_login"
+        <TextView
+            android:id="@+id/tv_login_description"
+            style="@style/H4_semi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="홈으로 이동"
-            app:layout_constraintEnd_toEndOf="@+id/textView"
-            app:layout_constraintStart_toStartOf="@+id/textView"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            android:layout_marginTop="24dp"
+            android:text="@string/motivoo_start_description"
+            android:textColor="@color/gray_900_161616"
+            app:layout_constraintStart_toStartOf="@+id/iv_login_tltle"
+            app:layout_constraintTop_toBottomOf="@+id/iv_login_tltle" />
+
+        <ImageView
+            android:id="@+id/iv_login"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="99dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/img_login"
+            app:layout_constraintBottom_toTopOf="@+id/ll_kakao_login"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_login_description" />
+
+
+        <TextView
+            android:id="@+id/tv_login_error_message"
+            style="@style/Caption1_semi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="@string/login_error_message"
+            android:textColor="@color/pink_FF19A3"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/ll_kakao_login"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/ll_kakao_login"
+            android:layout_width="0dp"
+            android:layout_height="52dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="44dp"
+            android:background="@drawable/background_kakao_login"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ImageView
+                android:id="@+id/iv_kakao_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/login_kakao"
+                android:src="@drawable/ic_kakao_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_kakao_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:fontFamily="@font/pretendard_semibold"
+                android:text="@string/login_kakao"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/iv_kakao_logo"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

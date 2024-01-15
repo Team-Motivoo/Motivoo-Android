@@ -15,16 +15,26 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="sopt.motivoo.presentation.login.LoginFragment"
+        android:name="sopt.motivoo.presentation.auth.LoginFragment"
         android:label="LoginFragment">
+
         <action
-            android:id="@+id/action_loginFragment_to_afterLoginFragment"
-            app:destination="@id/afterLoginFragment" />
+            android:id="@+id/action_loginFragment_to_termsOfUseFragment"
+            app:destination="@id/termsOfUseFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
         android:name="sopt.motivoo.presentation.home.HomeFragment"
-        android:label="HomeFragment" />
+        android:label="HomeFragment">
+        <action
+            android:id="@+id/action_homeFragment_to_homeBottomSheetFragment"
+            app:destination="@id/homeBottomSheetFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/myPageFragment"
         android:name="sopt.motivoo.presentation.MyPageFragment"
@@ -150,17 +160,6 @@
         android:name="sopt.motivoo.presentation.invitecode.GetInviteCodeFragment"
         android:label="GetInviteCodeFragment" />
     <fragment
-        android:id="@+id/afterLoginFragment"
-        android:name="sopt.motivoo.presentation.login.AfterLoginFragment"
-        android:label="AfterLoginFragment">
-        <action
-            android:id="@+id/action_afterLoginFragment_to_ageQuestionFragment"
-            app:destination="@id/ageQuestionFragment" />
-        <action
-            android:id="@+id/action_afterLoginFragment_to_postInviteCodeFragment"
-            app:destination="@id/postInviteCodeFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/postInviteCodeFragment"
         android:name="sopt.motivoo.presentation.invitecode.PostInviteCodeFragment"
         android:label="PostInviteCodeFragment" />
@@ -217,11 +216,71 @@
             app:destination="@id/loginFragment" />
     </fragment>
     <activity
-        android:id="@+id/mainActivity"
-        android:name="sopt.motivoo.presentation.MainActivity"
-        android:label="MainActivity" />
     <fragment
-        android:id="@+id/exerciseEmptyFragment"
-        android:name="sopt.motivoo.presentation.ExerciseEmptyFragment"
-        android:label="ExerciseEmptyFragment" />
+        android:id="@+id/termsOfUseFragment"
+        android:name="sopt.motivoo.presentation.intro.TermsOfUseFragment"
+        android:label="TermsOfUseFragment">
+        <action
+            android:id="@+id/action_termsOfUseFragment_to_startMotivooFragment"
+            app:destination="@id/startMotivooFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/startMotivooFragment"
+        android:name="sopt.motivoo.presentation.intro.StartMotivooFragment"
+        android:label="StartMotivooFragment">
+        <action
+            android:id="@+id/action_startMotivooFragment_to_ageQuestionFragment"
+            app:destination="@id/ageQuestionFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_startMotivooFragment_to_postInviteCodeFragment"
+            app:destination="@id/postInviteCodeFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <dialog
+        android:id="@+id/homeBottomSheetFragment"
+        android:name="sopt.motivoo.presentation.home.HomeBottomSheetFragment"
+        android:label="HomeBottomSheetFragment">
+        <action
+            android:id="@+id/action_homeBottomSheetFragment_to_homePhotoDialogFragment"
+            app:destination="@id/homePhotoDialogFragment"
+            app:popUpTo="@id/homeBottomSheetFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_homeBottomSheetFragment_to_homeConfirmDialogFragment"
+            app:destination="@id/homeConfirmDialogFragment"
+            app:popUpTo="@id/homeBottomSheetFragment"
+            app:popUpToInclusive="true" />
+    </dialog>
+    <dialog
+        android:id="@+id/homePhotoDialogFragment"
+        android:name="sopt.motivoo.presentation.home.HomePhotoDialogFragment"
+        android:label="HomePhotoDialogFragment">
+        <action
+            android:id="@+id/action_homePhotoDialogFragment_to_homeConfirmDialogFragment"
+            app:destination="@id/homeConfirmDialogFragment"
+            app:popUpTo="@id/homePhotoDialogFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="photoUri"
+            app:argType="android.net.Uri" />
+    </dialog>
+    <dialog
+        android:id="@+id/homeConfirmDialogFragment"
+        android:name="sopt.motivoo.presentation.home.HomeConfirmDialogFragment"
+        android:label="HomeConfirmDialogFragment">
+        <argument
+            android:name="photoBitmap"
+            app:argType="android.graphics.Bitmap" />
+    </dialog>
 </navigation>
