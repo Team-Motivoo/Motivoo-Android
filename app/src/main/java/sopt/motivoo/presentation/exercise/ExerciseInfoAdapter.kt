@@ -9,8 +9,8 @@ import sopt.motivoo.domain.entity.ExerciseInfo
 
 class ExerciseInfoAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     companion object {
-        const val noticeInfoType = 0
-        const val dateExerciseInfoType = 1
+        const val NOTICE_INFO_TYPE = 0
+        const val DATE_EXERCISE_INFO_TYPE = 1
     }
 
     private var exerciseInfoList: List<ExerciseInfo> = emptyList()
@@ -18,7 +18,7 @@ class ExerciseInfoAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater by lazy { LayoutInflater.from(parent.context) }
         return when (viewType) {
-            noticeInfoType -> {
+            NOTICE_INFO_TYPE -> {
                 val binding = ItemExerciseNoticeBinding.inflate(inflater, parent, false)
                 ExerciseNoticeViewHolder(binding)
             }
@@ -46,8 +46,8 @@ class ExerciseInfoAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemViewType(position: Int): Int {
         return when (exerciseInfoList[position]) {
-            is ExerciseInfo.NoticeInfo -> noticeInfoType
-            is ExerciseInfo.EachDateInfo -> dateExerciseInfoType
+            is ExerciseInfo.NoticeInfo -> NOTICE_INFO_TYPE
+            is ExerciseInfo.EachDateInfo -> DATE_EXERCISE_INFO_TYPE
         }
     }
 

@@ -9,8 +9,8 @@ import sopt.motivoo.R
 import sopt.motivoo.databinding.ItemExerciseBinding
 import sopt.motivoo.databinding.ItemExerciseNoticeBinding
 import sopt.motivoo.domain.entity.ExerciseInfo
-import sopt.motivoo.presentation.exercise.ExerciseEachDateInfoViewHolder.Companion.stateExercisingType
-import sopt.motivoo.presentation.exercise.ExerciseEachDateInfoViewHolder.Companion.stateFinishType
+import sopt.motivoo.presentation.exercise.ExerciseEachDateInfoViewHolder.Companion.STATE_EXERCISING_TYPE
+import sopt.motivoo.presentation.exercise.ExerciseEachDateInfoViewHolder.Companion.STATE_FINISH_TYPE
 import sopt.motivoo.util.extension.setVisible
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -19,8 +19,8 @@ import java.util.Locale
 class ExerciseEachDateInfoViewHolder(private val binding: ItemExerciseBinding) :
     RecyclerView.ViewHolder(binding.root) {
     companion object {
-        const val stateExercisingType = "진행중"
-        const val stateFinishType = "성공"
+        const val STATE_EXERCISING_TYPE = "진행중"
+        const val STATE_FINISH_TYPE = "성공"
     }
 
     fun onBind(exerciseInfoData: ExerciseInfo.EachDateInfo) {
@@ -86,14 +86,14 @@ fun checkStatus(
     context: Context,
 ) {
     when (exerciseInfoData.myMissionStatus) {
-        stateExercisingType -> {
+        STATE_EXERCISING_TYPE -> {
             binding.tvItemExerciseMyState.backgroundTintList =
                 ContextCompat.getColorStateList(context, R.color.pink_100_FFE6F5)
             val textColorPink: Int = ContextCompat.getColor(context, R.color.pink_FF19A3)
             binding.tvItemExerciseMyState.setTextColor(textColorPink)
         }
 
-        stateFinishType -> {
+        STATE_FINISH_TYPE -> {
             binding.tvItemExerciseMyState.backgroundTintList =
                 ContextCompat.getColorStateList(context, R.color.blue_100_D7F6FF)
             val textColorBlue: Int = ContextCompat.getColor(context, R.color.blue_600_2E9ABB)
@@ -108,14 +108,14 @@ fun checkStatus(
         }
     }
     when (exerciseInfoData.opponentMissionStatus) {
-        stateExercisingType -> {
+        STATE_EXERCISING_TYPE -> {
             binding.tvItemExerciseParentState.backgroundTintList =
                 ContextCompat.getColorStateList(context, R.color.pink_100_FFE6F5)
             val textColorPink: Int = ContextCompat.getColor(context, R.color.pink_FF19A3)
             binding.tvItemExerciseParentState.setTextColor(textColorPink)
         }
 
-        stateFinishType -> {
+        STATE_FINISH_TYPE -> {
             binding.tvItemExerciseParentState.backgroundTintList =
                 ContextCompat.getColorStateList(context, R.color.blue_100_D7F6FF)
             val textColorBlue: Int = ContextCompat.getColor(context, R.color.blue_600_2E9ABB)
