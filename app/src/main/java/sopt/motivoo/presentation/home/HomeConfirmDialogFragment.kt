@@ -13,7 +13,7 @@ class HomeConfirmDialogFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setLayoutSize(0.91f, 0.45f)
+        setLayoutSizeRatio(widthPercent = 0.91f, heightPercent = 0.45f)
 
         val safeArgs: HomeConfirmDialogFragmentArgs by navArgs()
         context?.bitmapToFile(safeArgs.photoBitmap, "FILE_NAME")

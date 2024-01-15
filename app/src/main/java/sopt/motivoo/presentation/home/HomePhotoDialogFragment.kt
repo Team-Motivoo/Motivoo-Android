@@ -18,7 +18,7 @@ class HomePhotoDialogFragment :
     BindingDialogFragment<DialogHomePhotoBinding>(R.layout.dialog_home_photo) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setLayoutSize(1f, 1f)
+        setLayoutSizeRatio(widthPercent = 1f, heightPercent = 1f)
 
         val safeArgs: HomePhotoDialogFragmentArgs by navArgs()
 
