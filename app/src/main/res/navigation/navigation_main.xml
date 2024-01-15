@@ -48,9 +48,6 @@
         <action
             android:id="@+id/action_myPageFragment_to_exerciseFragment"
             app:destination="@id/exerciseFragment" />
-        <action
-            android:id="@+id/action_myPageFragment_to_exerciseEmptyFragment"
-            app:destination="@id/exerciseEmptyFragment" />
     </fragment>
     <fragment
         android:id="@+id/exerciseFragment"
@@ -215,7 +212,6 @@
             android:id="@+id/action_permissionFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
-    <activity
     <fragment
         android:id="@+id/termsOfUseFragment"
         android:name="sopt.motivoo.presentation.intro.TermsOfUseFragment"
