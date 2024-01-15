@@ -29,7 +29,12 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="sopt.motivoo.presentation.home.HomeFragment"
-        android:label="HomeFragment" />
+        android:label="HomeFragment">
+        <action
+            android:id="@+id/action_homeFragment_to_homeBottomSheetFragment"
+            app:destination="@id/homeBottomSheetFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/myPageFragment"
         android:name="sopt.motivoo.presentation.MyPageFragment"
@@ -235,4 +240,40 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
     </fragment>
+    <dialog
+        android:id="@+id/homeBottomSheetFragment"
+        android:name="sopt.motivoo.presentation.home.HomeBottomSheetFragment"
+        android:label="HomeBottomSheetFragment">
+        <action
+            android:id="@+id/action_homeBottomSheetFragment_to_homePhotoDialogFragment"
+            app:destination="@id/homePhotoDialogFragment"
+            app:popUpTo="@id/homeBottomSheetFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_homeBottomSheetFragment_to_homeConfirmDialogFragment"
+            app:destination="@id/homeConfirmDialogFragment"
+            app:popUpTo="@id/homeBottomSheetFragment"
+            app:popUpToInclusive="true" />
+    </dialog>
+    <dialog
+        android:id="@+id/homePhotoDialogFragment"
+        android:name="sopt.motivoo.presentation.home.HomePhotoDialogFragment"
+        android:label="HomePhotoDialogFragment">
+        <action
+            android:id="@+id/action_homePhotoDialogFragment_to_homeConfirmDialogFragment"
+            app:destination="@id/homeConfirmDialogFragment"
+            app:popUpTo="@id/homePhotoDialogFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="photoUri"
+            app:argType="android.net.Uri" />
+    </dialog>
+    <dialog
+        android:id="@+id/homeConfirmDialogFragment"
+        android:name="sopt.motivoo.presentation.home.HomeConfirmDialogFragment"
+        android:label="HomeConfirmDialogFragment">
+        <argument
+            android:name="photoBitmap"
+            app:argType="android.graphics.Bitmap" />
+    </dialog>
 </navigation>
