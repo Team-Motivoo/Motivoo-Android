@@ -27,6 +27,8 @@ class ExerciseEachDateInfoViewHolder(private val binding: ItemExerciseBinding) :
         with(binding) {
             val context = binding.root.context
             changePosition(exerciseInfoData, binding, context)
+            initText(exerciseInfoData, binding)
+            initImage(exerciseInfoData, binding)
             imageVisibility(exerciseInfoData, binding)
             checkStatus(exerciseInfoData, binding, context)
             compareDate(binding, context)
@@ -46,7 +48,7 @@ fun changePosition(
     }
 }
 
-fun setText(exerciseInfoData: ExerciseInfo.EachDateInfo, binding: ItemExerciseBinding) {
+fun initText(exerciseInfoData: ExerciseInfo.EachDateInfo, binding: ItemExerciseBinding) {
     with(binding) {
         tvItemExerciseDate.text = exerciseInfoData.date
         tvItemExerciseImgBottomTxtLeft.text = exerciseInfoData.myMissionContent
@@ -56,7 +58,7 @@ fun setText(exerciseInfoData: ExerciseInfo.EachDateInfo, binding: ItemExerciseBi
     }
 }
 
-fun setImage(exerciseInfoData: ExerciseInfo.EachDateInfo, binding: ItemExerciseBinding) {
+fun initImage(exerciseInfoData: ExerciseInfo.EachDateInfo, binding: ItemExerciseBinding) {
     with(binding) {
         ivItemExerciseFinishLeft.load(exerciseInfoData.myMissionImgUrl)
         ivItemExerciseFinishRight.load(exerciseInfoData.opponentMissionImgUrl)
