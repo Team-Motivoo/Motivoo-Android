@@ -167,4 +167,7 @@
     <string name="motivoo_start_description">자녀와 부모를 잇는\n매일 한 걸음</string>
     <string name="login_error_message">로그인을 다시 한 번 시도해주세요</string>
 
+    <!-- loading -->
+    <string name="loading">연결 중...</string>
+
 </resources>
