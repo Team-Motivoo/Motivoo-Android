@@ -7,5 +7,6 @@ interface MotivooStorage {
     var refreshToken: String
     var isUserLoggedIn: Boolean
     var userId: Long
+    var isFinishedOnboarding: Boolean
     fun clear()
 }

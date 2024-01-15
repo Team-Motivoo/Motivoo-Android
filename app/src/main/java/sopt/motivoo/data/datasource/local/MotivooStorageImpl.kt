@@ -61,6 +61,10 @@ class MotivooStorageImpl @Inject constructor(@ApplicationContext context: Contex
         set(value) = pref.edit { putBoolean(IS_LOGIN, value) }
         get() = pref.getBoolean(IS_LOGIN, false)
 
+    override var isFinishedOnboarding: Boolean
+        set(value) = pref.edit { putBoolean(IS_ONBOARDING_FINISHED, value) }
+        get() = pref.getBoolean(IS_ONBOARDING_FINISHED, false)
+
     override fun clear() {
         pref.edit {
             clear()
@@ -75,5 +79,6 @@ class MotivooStorageImpl @Inject constructor(@ApplicationContext context: Contex
         const val REFRESH_TOKEN = "refreshToken"
         private const val IS_LOGIN = "isLogin"
         private const val USER_ID = "userId"
+        private const val IS_ONBOARDING_FINISHED = "isOnboardingFinished"
     }
 }

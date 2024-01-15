@@ -1,0 +1,38 @@
+package sopt.motivoo.presentation.intro
+
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
+import sopt.motivoo.domain.entity.MotivooStorage
+import sopt.motivoo.domain.repository.OnboardingRepository
+import timber.log.Timber
+import javax.inject.Inject
+
+@HiltViewModel
+class StartMotivooViewModel @Inject constructor(
+    private val motivooStorage: MotivooStorage,
+    private val onboardingRepository: OnboardingRepository,
+) : ViewModel() {
+
+    private val _isOnboardingFinished = MutableStateFlow(false)
+    val isOnboardingFinished get() = _isOnboardingFinished.asStateFlow()
+
+    fun getOnboardingFinished() {
+        viewModelScope.launch {
+            onboardingRepository.getOnboardingFinished()
+                .onSuccess { isOnboardingFinished ->
+                    motivooStorage.isFinishedOnboarding = isOnboardingFinished.isFinishedOnboarding
+                    _isOnboardingFinished.value = isOnboardingFinished.isFinishedOnboarding
+                }.onFailure {
+                    Timber.e(it.message)
+                }
+        }
+    }
+
+    fun resetStartState() {
+        _isOnboardingFinished.value = false
+    }
+}
