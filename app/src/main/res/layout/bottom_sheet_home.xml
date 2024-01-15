@@ -15,7 +15,6 @@
         android:text="가로등 아래에서\n활짝 웃으며 사진 찍기!"
         android:textColor="@color/black_090909"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
