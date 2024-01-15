@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="termsOfViewModel"
+            type="sopt.motivoo.presentation.intro.TermsOfUseViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/include_terms_toolbar"
+            layout="@layout/view_onboarding_toolbar"
+            app:title="@{@string/terms_title}" />
+
+        <CheckBox
+            android:id="@+id/cb_check_all"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="37dp"
+            android:background="@drawable/selector_checkbox"
+            android:button="@android:color/transparent"
+            android:checked="@={termsOfViewModel.termsAllCheckState}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include_terms_toolbar" />
+
+        <TextView
+            android:id="@+id/tv_terms_of_use_all"
+            style="@style/H7_semi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/terms_all"
+            android:textColor="@color/gray_900_161616"
+            app:layout_constraintBottom_toBottomOf="@+id/cb_check_all"
+            app:layout_constraintStart_toEndOf="@+id/cb_check_all"
+            app:layout_constraintTop_toTopOf="@+id/cb_check_all" />
+
+        <CheckBox
+            android:id="@+id/cb_terms_of_use_access"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="39dp"
+            android:background="@drawable/selector_checkbox"
+            android:button="@android:color/transparent"
+            android:checked="@={termsOfViewModel.termsOfUseState}"
+            app:layout_constraintStart_toStartOf="@+id/cb_check_all"
+            app:layout_constraintTop_toBottomOf="@+id/cb_check_all" />
+
+        <TextView
+            android:id="@+id/tv_terms_of_use_access"
+            style="@style/B6_re"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/terms_of_use_access"
+            android:textColor="@color/gray_900_161616"
+            app:layout_constraintBottom_toBottomOf="@+id/cb_terms_of_use_access"
+            app:layout_constraintStart_toEndOf="@+id/cb_terms_of_use_access"
+            app:layout_constraintTop_toTopOf="@+id/cb_terms_of_use_access" />
+
+        <TextView
+            android:id="@+id/tv_terms_of_use_essential"
+            style="@style/B6_re"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:text="@string/permission_essential"
+            android:textColor="@color/pink_FF19A3"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_terms_of_use_access"
+            app:layout_constraintStart_toEndOf="@+id/tv_terms_of_use_access"
+            app:layout_constraintTop_toTopOf="@+id/tv_terms_of_use_access" />
+
+        <TextView
+            android:id="@+id/tv_terms_of_use_link"
+            style="@style/Caption2_re"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="17dp"
+            android:paddingVertical="8dp"
+            android:text="@string/terms_of_use_link"
+            android:textColor="@color/gray_500_9D9EA0"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_terms_of_use_essential"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_terms_of_use_essential" />
+
+        <CheckBox
+            android:id="@+id/cb_terms_get_info_access"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/selector_checkbox"
+            android:button="@android:color/transparent"
+            android:checked="@={termsOfViewModel.termsGetInfoState}"
+            app:layout_constraintStart_toStartOf="@+id/cb_terms_of_use_access"
+            app:layout_constraintTop_toBottomOf="@+id/cb_terms_of_use_access" />
+
+        <TextView
+            android:id="@+id/tv_terms_get_info_access"
+            style="@style/B6_re"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/terms_get_info_access"
+            android:textColor="@color/gray_900_161616"
+            app:layout_constraintBottom_toBottomOf="@+id/cb_terms_get_info_access"
+            app:layout_constraintStart_toEndOf="@+id/cb_terms_get_info_access"
+            app:layout_constraintTop_toTopOf="@+id/cb_terms_get_info_access" />
+
+        <TextView
+            android:id="@+id/tv_terms_get_info_essential"
+            style="@style/B6_re"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:text="@string/permission_essential"
+            android:textColor="@color/pink_FF19A3"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_terms_get_info_access"
+            app:layout_constraintStart_toEndOf="@+id/tv_terms_get_info_access"
+            app:layout_constraintTop_toTopOf="@+id/tv_terms_get_info_access" />
+
+        <TextView
+            android:id="@+id/tv_terms_get_info_link"
+            style="@style/Caption2_re"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="17dp"
+            android:paddingVertical="8dp"
+            android:text="@string/terms_of_use_link"
+            android:textColor="@color/gray_500_9D9EA0"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_terms_get_info_essential"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_terms_get_info_essential" />
+
+
+        <CheckBox
+            android:id="@+id/cb_terms_use_info_access"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/selector_checkbox"
+            android:button="@android:color/transparent"
+            android:checked="@={termsOfViewModel.termsUseInfoState}"
+            app:layout_constraintStart_toStartOf="@+id/cb_terms_get_info_access"
+            app:layout_constraintTop_toBottomOf="@+id/cb_terms_get_info_access" />
+
+        <TextView
+            android:id="@+id/tv_terms_use_info_access"
+            style="@style/B6_re"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/terms_use_info_access"
+            android:textColor="@color/gray_900_161616"
+            app:layout_constraintBottom_toBottomOf="@+id/cb_terms_use_info_access"
+            app:layout_constraintStart_toEndOf="@+id/cb_terms_use_info_access"
+            app:layout_constraintTop_toTopOf="@+id/cb_terms_use_info_access" />
+
+        <TextView
+            android:id="@+id/tv_terms_use_info_essential"
+            style="@style/B6_re"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:text="@string/permission_essential"
+            android:textColor="@color/pink_FF19A3"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_terms_use_info_access"
+            app:layout_constraintStart_toEndOf="@+id/tv_terms_use_info_access"
+            app:layout_constraintTop_toTopOf="@+id/tv_terms_use_info_access" />
+
+        <TextView
+            android:id="@+id/tv_terms_use_info_link"
+            style="@style/Caption2_re"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="17dp"
+            android:paddingVertical="8dp"
+            android:text="@string/terms_of_use_link"
+            android:textColor="@color/gray_500_9D9EA0"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_terms_use_info_essential"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_terms_use_info_essential" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_terms_of_use_done"
+            style="@style/B5_med"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="44dp"
+            android:background="@drawable/selector_button_background"
+            android:enabled="@{termsOfViewModel.termsAllCheckState}"
+            android:paddingVertical="18dp"
+            android:text="@string/next"
+            android:textColor="@drawable/selector_text_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

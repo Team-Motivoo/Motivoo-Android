@@ -16,10 +16,10 @@
 
         <ImageView
             android:id="@+id/iv_post_invite_code"
-            android:layout_width="128dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="84dp"
-            app:layout_constraintDimensionRatio="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="76dp"
+            android:src="@drawable/ic_post"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -29,7 +29,7 @@
             style="@style/H4_semi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="57dp"
+            android:layout_marginTop="28dp"
             android:gravity="center"
             android:text="@string/get_invite_code_title"
             android:textColor="@color/gray_900_161616"
@@ -43,7 +43,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="28dp"
             android:background="@drawable/selector_edittext_input"
             android:hint="@string/post_invite_code_hint"
             android:imeOptions="actionDone"

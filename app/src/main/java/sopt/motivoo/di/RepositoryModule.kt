@@ -4,7 +4,9 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import sopt.motivoo.data.repository.AuthRepositoryImpl
 import sopt.motivoo.data.repository.DummyRepositoryImpl
+import sopt.motivoo.domain.repository.AuthRepository
 import sopt.motivoo.domain.repository.DummyRepository
 import javax.inject.Singleton
 
@@ -16,4 +18,9 @@ object RepositoryModule {
     @Singleton
     fun providesDummyRepository(dummyRepositoryImpl: DummyRepositoryImpl): DummyRepository =
         dummyRepositoryImpl
+
+    @Provides
+    @Singleton
+    fun providesAuthRepository(authRepositoryImpl: AuthRepositoryImpl): AuthRepository =
+        authRepositoryImpl
 }

@@ -20,7 +20,7 @@
 
             <include
                 android:id="@+id/include_toolbar"
-                layout="@layout/view_onboarding_toolbar" />
+                layout="@layout/view_onboarding_toolbar"/>
 
             <com.skydoves.progressview.ProgressView
                 android:id="@+id/onboarding_progress"

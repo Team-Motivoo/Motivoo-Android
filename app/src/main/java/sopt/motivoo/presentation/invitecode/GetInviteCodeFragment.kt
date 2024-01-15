@@ -5,16 +5,18 @@ import android.content.ClipboardManager
 import android.content.Context.CLIPBOARD_SERVICE
 import android.os.Build
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.View
+import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.animation.AnimationUtils
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import sopt.motivoo.R
 import sopt.motivoo.databinding.FragmentGetInviteCodeBinding
 import sopt.motivoo.util.binding.BindingFragment
 import sopt.motivoo.util.extension.setOnSingleClickListener
-import sopt.motivoo.util.extension.showToast
+import sopt.motivoo.util.extension.setVisible
 
 class GetInviteCodeFragment :
     BindingFragment<FragmentGetInviteCodeBinding>(R.layout.fragment_get_invite_code) {
@@ -22,37 +24,54 @@ class GetInviteCodeFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setToastAnimation()
+        setMatchingToastAnimation()
         setClipboard()
     }
 
     private fun setClipboard() {
         val clipboard: ClipboardManager =
             requireContext().getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
-        val clip = ClipData.newPlainText("label", "STRING")
+        val inviteCode = binding.tvGetInviteCode.text
+        val formattedText = getString(R.string.share_text_message, inviteCode)
+        val clip = ClipData.newPlainText(SHARE_TEXT, formattedText)
 
         binding.btnGetInviteCodeCopy.setOnSingleClickListener {
             clipboard.setPrimaryClip(clip)
             if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S_V2)
-                requireContext().showToast(getString(R.string.clipboard_copy))
+                setClipBoardToastAnimation()
         }
     }
 
-    private fun setToastAnimation() {
+    private fun setMatchingToastAnimation() {
         binding.btnGetInviteCodeCheckMatching.setOnSingleClickListener {
             val fadeIn = AnimationUtils.loadAnimation(context, R.anim.fade_in)
             binding.tvGetInviteCodeMatchingWaiting.startAnimation(fadeIn)
-            binding.tvGetInviteCodeMatchingWaiting.visibility = VISIBLE
+            binding.tvGetInviteCodeMatchingWaiting.setVisible(VISIBLE)
 
-            Handler(Looper.getMainLooper()).postDelayed({
+            lifecycleScope.launch {
+                delay(TWO_SECONDS)
                 val fadeOut = AnimationUtils.loadAnimation(context, R.anim.fade_out)
                 binding.tvGetInviteCodeMatchingWaiting.startAnimation(fadeOut)
-                binding.tvGetInviteCodeMatchingWaiting.visibility = View.GONE
-            }, TWO_SECONDS)
+                binding.tvGetInviteCodeMatchingWaiting.setVisible(GONE)
+            }
+        }
+    }
+
+    private fun setClipBoardToastAnimation() {
+        val fadeIn = AnimationUtils.loadAnimation(context, R.anim.fade_in)
+        binding.tvGetInviteCodeToast.startAnimation(fadeIn)
+        binding.tvGetInviteCodeToast.setVisible(VISIBLE)
+
+        lifecycleScope.launch {
+            delay(TWO_SECONDS)
+            val fadeOut = AnimationUtils.loadAnimation(context, R.anim.fade_out)
+            binding.tvGetInviteCodeToast.startAnimation(fadeOut)
+            binding.tvGetInviteCodeToast.setVisible(GONE)
         }
     }
 
     companion object {
-        private const val TWO_SECONDS = 2000L
+        const val TWO_SECONDS = 2000L
+        private const val SHARE_TEXT = "share_text"
     }
 }

@@ -1,8 +1,8 @@
 <resources>
 
-    <style name="H1_semi">
+    <style name="H1_med">
         <item name="android:textSize">36sp</item>
-        <item name="fontFamily">@font/pretendard_semibold</item>
+        <item name="fontFamily">@font/pretendard_medium</item>
         <item name="android:lineSpacingExtra">17.28sp</item>
         <item name="android:letterSpacing">-0.03</item>
     </style>

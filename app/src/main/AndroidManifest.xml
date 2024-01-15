@@ -31,15 +31,18 @@
         android:theme="@style/Theme.MOTIVOOAOS"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-        <receiver android:name=".presentation.home.BootCompletedReceiver"
+        <receiver
+            android:name=".presentation.home.BootCompletedReceiver"
             android:exported="false">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-        <service android:name=".presentation.home.StepCountService"
+        <service
+            android:name=".presentation.home.StepCountService"
             android:exported="false"
-            android:foregroundServiceType="dataSync"/>
+            android:foregroundServiceType="dataSync" />
+
         <activity
             android:name=".presentation.MainActivity"
             android:exported="true"
@@ -49,6 +52,20 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="oauth"
+                    android:scheme="kakao${KAKAO_APP_KEY}" />
             </intent-filter>
         </activity>
 

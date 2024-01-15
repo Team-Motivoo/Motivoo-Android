@@ -31,22 +31,49 @@ class MotivooStorageImpl @Inject constructor(@ApplicationContext context: Contex
         }
     }
 
-    override var name: String
-        get() = pref.getString(NAME, "") ?: ""
-        set(value) = pref.edit { putString(NAME, value) }
-
-    override var email: String
-        get() = pref.getString(EMAIL, "") ?: ""
-        set(value) = pref.edit { putString(EMAIL, value) }
-
     override var stepCount: Int
         get() = pref.getInt(STEP_COUNT, 0)
         set(value) = pref.edit { putInt(STEP_COUNT, value) }
 
+    override var nickName: String
+        get() = pref.getString(NAME, "") ?: ""
+        set(value) = pref.edit { putString(NAME, value) }
+
+    override var userId: Long
+        set(value) = pref.edit { putLong(USER_ID, value) }
+        get() = pref.getLong(USER_ID, 0L)
+
+    override var accessToken: String
+        set(value) = pref.edit { putString(ACCESS_TOKEN, value) }
+        get() = pref.getString(
+            ACCESS_TOKEN,
+            "",
+        ) ?: ""
+
+    override var refreshToken: String
+        set(value) = pref.edit { putString(REFRESH_TOKEN, value) }
+        get() = pref.getString(
+            REFRESH_TOKEN,
+            "",
+        ) ?: ""
+
+    override var isUserLoggedIn: Boolean
+        set(value) = pref.edit { putBoolean(IS_LOGIN, value) }
+        get() = pref.getBoolean(IS_LOGIN, false)
+
+    override fun clear() {
+        pref.edit {
+            clear()
+        }
+    }
+
     companion object {
         private const val FILE_NAME = "MtDataStore"
         private const val NAME = "name"
-        private const val EMAIL = "email"
         private const val STEP_COUNT = "step_count"
+        const val ACCESS_TOKEN = "accessToken"
+        const val REFRESH_TOKEN = "refreshToken"
+        private const val IS_LOGIN = "isLogin"
+        private const val USER_ID = "userId"
     }
 }
