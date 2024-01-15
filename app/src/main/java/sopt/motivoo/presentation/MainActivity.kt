@@ -33,10 +33,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         initView()
         setupTokenRefreshListener()
-
-        var keyHash = Utility.getKeyHash(this)
-
-        Timber.tag("aaa").e("$keyHash")
     }
 
     private fun initView() {

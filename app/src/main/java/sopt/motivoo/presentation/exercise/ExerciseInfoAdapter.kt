@@ -16,7 +16,7 @@ class ExerciseInfoAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var exerciseInfoList: List<ExerciseInfo> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val inflater by lazy { LayoutInflater.from(parent.context) }
+        val inflater = LayoutInflater.from(parent.context)
         return when (viewType) {
             NOTICE_INFO_TYPE -> {
                 val binding = ItemExerciseNoticeBinding.inflate(inflater, parent, false)
