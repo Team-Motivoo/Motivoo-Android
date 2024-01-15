@@ -122,7 +122,7 @@
     <string name="permission_camera_title">카메라</string>
     <string name="permission_gallery_title">사진</string>
     <string name="permission_gallery_description">사진 기능으로 운동을 인증할 수 있어요</string>
-    <string name="permission_caution">허용하지 않아도 앱을 이용할 수 있으나, 일부\n서비스 이용이 제한될 수 있어요. 거부 후 설정에서\n다시 허용할 수 있어요.</string>
+    <string name="permission_caution">허용하지 않아도 앱을 이용할 수 있으나, 일부 서비스 이용이 제한될 수 있어요. 거부 후 설정에서 다시 허용할 수 있어요.</string>
 
     <!-- invite code -->
     <string name="get_invite_code_title">초대받은 코드를\n붙여넣거나 입력해주세요</string>

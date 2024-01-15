@@ -11,7 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 import sopt.motivoo.R
-import sopt.motivoo.data.datasource.remote.AuthTokenRefreshListenerImpl
+import sopt.motivoo.data.datasource.remote.listener.AuthTokenRefreshListenerImpl
 import sopt.motivoo.databinding.ActivityMainBinding
 import sopt.motivoo.util.extension.hideKeyboard
 import sopt.motivoo.util.extension.setOnSingleClickListener

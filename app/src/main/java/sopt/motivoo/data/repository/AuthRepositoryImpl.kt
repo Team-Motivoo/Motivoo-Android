@@ -1,7 +1,7 @@
 package sopt.motivoo.data.repository
 
 import sopt.motivoo.data.datasource.remote.AuthDataSource
-import sopt.motivoo.data.model.request.RequestLoginDto
+import sopt.motivoo.data.model.request.auth.RequestLoginDto
 import sopt.motivoo.domain.entity.auth.LoginInfo
 import sopt.motivoo.domain.repository.AuthRepository
 import javax.inject.Inject

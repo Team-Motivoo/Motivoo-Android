@@ -10,7 +10,8 @@ import okhttp3.Response
 import sopt.motivoo.BuildConfig
 import sopt.motivoo.data.datasource.local.MotivooStorageImpl.Companion.ACCESS_TOKEN
 import sopt.motivoo.data.datasource.local.MotivooStorageImpl.Companion.REFRESH_TOKEN
-import sopt.motivoo.data.model.response.ResponseReissueDto
+import sopt.motivoo.data.datasource.remote.listener.AuthTokenRefreshListener
+import sopt.motivoo.data.model.response.auth.ResponseReissueDto
 import sopt.motivoo.domain.entity.MotivooStorage
 import javax.inject.Inject
 

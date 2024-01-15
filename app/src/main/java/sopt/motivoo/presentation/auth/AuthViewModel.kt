@@ -6,7 +6,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import sopt.motivoo.data.model.request.RequestLoginDto
+import sopt.motivoo.data.model.request.auth.RequestLoginDto
 import sopt.motivoo.domain.entity.MotivooStorage
 import sopt.motivoo.domain.entity.auth.LoginInfo
 import sopt.motivoo.domain.repository.AuthRepository
