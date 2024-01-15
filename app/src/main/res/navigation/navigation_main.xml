@@ -24,7 +24,12 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="sopt.motivoo.presentation.home.HomeFragment"
-        android:label="HomeFragment" />
+        android:label="HomeFragment">
+        <action
+            android:id="@+id/action_homeFragment_to_homeBottomSheetFragment"
+            app:destination="@id/homeBottomSheetFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/myPageFragment"
         android:name="sopt.motivoo.presentation.MyPageFragment"
@@ -161,7 +166,7 @@
     <fragment
         android:id="@+id/myInfoFragment"
         android:name="sopt.motivoo.presentation.MyInfoFragment"
-        android:label="MyInfoFragment" >
+        android:label="MyInfoFragment">
         <action
             android:id="@+id/action_myInfoFragment_to_myServiceOut"
             app:destination="@id/myServiceOutFragment" />
@@ -175,7 +180,7 @@
     <fragment
         android:id="@+id/myExerciseInfoFragment"
         android:name="sopt.motivoo.presentation.MyExerciseInfoFragment"
-        android:label="MyExerciseInfoFragment" >
+        android:label="MyExerciseInfoFragment">
         <action
             android:id="@+id/action_myExerciseInfoFragment_to_myPageFragment"
             app:destination="@id/myPageFragment" />
@@ -183,7 +188,7 @@
     <dialog
         android:id="@+id/myServiceOutFragment"
         android:name="sopt.motivoo.presentation.MyServiceOutFragment"
-        android:label="MyServiceOutFragment" >
+        android:label="MyServiceOutFragment">
         <action
             android:id="@+id/action_myServiceOut_to_loginFragment"
             app:destination="@id/loginFragment" />
@@ -194,7 +199,7 @@
     <dialog
         android:id="@+id/myLogoutFragment"
         android:name="sopt.motivoo.presentation.MyLogoutFragment"
-        android:label="MyLogoutFragment" >
+        android:label="MyLogoutFragment">
         <action
             android:id="@+id/action_myLogout_to_loginFragment"
             app:destination="@id/loginFragment" />
@@ -210,4 +215,40 @@
             android:id="@+id/action_permissionFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
+    <dialog
+        android:id="@+id/homeBottomSheetFragment"
+        android:name="sopt.motivoo.presentation.home.HomeBottomSheetFragment"
+        android:label="HomeBottomSheetFragment">
+        <action
+            android:id="@+id/action_homeBottomSheetFragment_to_homePhotoDialogFragment"
+            app:destination="@id/homePhotoDialogFragment"
+            app:popUpTo="@id/homeBottomSheetFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_homeBottomSheetFragment_to_homeConfirmDialogFragment"
+            app:destination="@id/homeConfirmDialogFragment"
+            app:popUpTo="@id/homeBottomSheetFragment"
+            app:popUpToInclusive="true" />
+    </dialog>
+    <dialog
+        android:id="@+id/homePhotoDialogFragment"
+        android:name="sopt.motivoo.presentation.home.HomePhotoDialogFragment"
+        android:label="HomePhotoDialogFragment">
+        <action
+            android:id="@+id/action_homePhotoDialogFragment_to_homeConfirmDialogFragment"
+            app:destination="@id/homeConfirmDialogFragment"
+            app:popUpTo="@id/homePhotoDialogFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="photoUri"
+            app:argType="android.net.Uri" />
+    </dialog>
+    <dialog
+        android:id="@+id/homeConfirmDialogFragment"
+        android:name="sopt.motivoo.presentation.home.HomeConfirmDialogFragment"
+        android:label="HomeConfirmDialogFragment">
+        <argument
+            android:name="photoBitmap"
+            app:argType="android.graphics.Bitmap" />
+    </dialog>
 </navigation>
