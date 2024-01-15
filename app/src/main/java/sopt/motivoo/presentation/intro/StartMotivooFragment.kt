@@ -6,6 +6,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import sopt.motivoo.R
@@ -15,6 +16,7 @@ import sopt.motivoo.util.binding.BindingFragment
 import sopt.motivoo.util.extension.setOnSingleClickListener
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class StartMotivooFragment :
     BindingFragment<FragmentStartMotivooBinding>(R.layout.fragment_start_motivoo) {
 

@@ -27,11 +27,7 @@ class AuthInterceptor @Inject constructor(
         val isAutoLoginPossible = motivooStorage.isUserLoggedIn
 
         val authRequestBuilder = originalRequest.newBuilder()
-        if (isAutoLoginPossible) {
-            authRequestBuilder.addHeader(ACCESS_TOKEN, motivooStorage.accessToken)
-        } else {
-            authRequestBuilder.removeHeader(ACCESS_TOKEN)
-        }
+        authRequestBuilder.addHeader(ACCESS_TOKEN, motivooStorage.accessToken)
 
         val authRequest = authRequestBuilder.build()
 
