@@ -10,6 +10,5 @@ class LoadingFragment :
     BindingFragment<FragmentLoadingBinding>(R.layout.fragment_loading) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
     }
 }
