@@ -1,4 +1,4 @@
-package sopt.motivoo.data.model
+package sopt.motivoo.domain.entity
 
 sealed class ExerciseInfo {
     data class EachDateInfo(

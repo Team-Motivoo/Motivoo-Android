@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/navigation_main"
-    app:startDestination="@id/exerciseFragment">
+    app:startDestination="@id/splashFragment">
 
     <fragment
         android:id="@+id/splashFragment"
@@ -167,7 +167,7 @@
     <fragment
         android:id="@+id/myInfoFragment"
         android:name="sopt.motivoo.presentation.MyInfoFragment"
-        android:label="MyInfoFragment" >
+        android:label="MyInfoFragment">
         <action
             android:id="@+id/action_myInfoFragment_to_myServiceOut"
             app:destination="@id/myServiceOutFragment" />
@@ -181,7 +181,7 @@
     <fragment
         android:id="@+id/myExerciseInfoFragment"
         android:name="sopt.motivoo.presentation.MyExerciseInfoFragment"
-        android:label="MyExerciseInfoFragment" >
+        android:label="MyExerciseInfoFragment">
         <action
             android:id="@+id/action_myExerciseInfoFragment_to_myPageFragment"
             app:destination="@id/myPageFragment" />
@@ -189,7 +189,7 @@
     <dialog
         android:id="@+id/myServiceOutFragment"
         android:name="sopt.motivoo.presentation.MyServiceOutFragment"
-        android:label="MyServiceOutFragment" >
+        android:label="MyServiceOutFragment">
         <action
             android:id="@+id/action_myServiceOut_to_loginFragment"
             app:destination="@id/loginFragment" />
@@ -200,7 +200,7 @@
     <dialog
         android:id="@+id/myLogoutFragment"
         android:name="sopt.motivoo.presentation.MyLogoutFragment"
-        android:label="MyLogoutFragment" >
+        android:label="MyLogoutFragment">
         <action
             android:id="@+id/action_myLogout_to_loginFragment"
             app:destination="@id/loginFragment" />
