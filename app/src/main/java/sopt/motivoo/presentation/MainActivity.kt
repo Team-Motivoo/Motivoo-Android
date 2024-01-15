@@ -9,14 +9,12 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
-import com.kakao.sdk.common.util.Utility
 import dagger.hilt.android.AndroidEntryPoint
 import sopt.motivoo.R
 import sopt.motivoo.data.datasource.remote.AuthTokenRefreshListenerImpl
 import sopt.motivoo.databinding.ActivityMainBinding
 import sopt.motivoo.util.extension.hideKeyboard
 import sopt.motivoo.util.extension.setOnSingleClickListener
-import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
