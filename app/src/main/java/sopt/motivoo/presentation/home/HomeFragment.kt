@@ -94,11 +94,15 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
             binding.btnVerifyExercise.isEnabled = true
         }
 
+        navigateToHomeBottomSheetFragment()
+
+        stepCountReceiver = StepCountReceiver()
+    }
+
+    private fun navigateToHomeBottomSheetFragment() {
         binding.btnVerifyExercise.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_homeBottomSheetFragment)
         }
-
-        stepCountReceiver = StepCountReceiver()
     }
 
     override fun onResume() {
