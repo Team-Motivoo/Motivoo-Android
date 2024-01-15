@@ -16,10 +16,6 @@ import java.util.Locale
 
 class ExerciseEachDateInfoViewHolder(private val binding: ItemExerciseBinding) :
     RecyclerView.ViewHolder(binding.root) {
-    companion object {
-        const val STATE_EXERCISING_TYPE = "진행중"
-        const val STATE_FINISH_TYPE = "성공"
-    }
 
     fun onBind(exerciseInfoData: ExerciseInfo.EachDateInfo) {
         with(binding) {
@@ -153,6 +149,11 @@ class ExerciseEachDateInfoViewHolder(private val binding: ItemExerciseBinding) :
         val dataFormat = SimpleDateFormat("yyyy년 MM월 dd일", Locale.getDefault())
         val currentDate = Date()
         return dataFormat.format(currentDate)
+    }
+
+    companion object {
+        const val STATE_EXERCISING_TYPE = "진행중"
+        const val STATE_FINISH_TYPE = "성공"
     }
 }
 
