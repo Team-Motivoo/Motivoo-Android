@@ -7,12 +7,7 @@ import sopt.motivoo.databinding.ItemExerciseBinding
 import sopt.motivoo.databinding.ItemExerciseNoticeBinding
 import sopt.motivoo.domain.entity.ExerciseInfo
 
-class ExerciseInfoAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    companion object {
-        const val NOTICE_INFO_TYPE = 0
-        const val DATE_EXERCISE_INFO_TYPE = 1
-    }
-
+class ExerciseAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var exerciseInfoList: List<ExerciseInfo> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -56,5 +51,10 @@ class ExerciseInfoAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     fun setExerciseList(exerciseList: List<ExerciseInfo>) {
         this.exerciseInfoList = exerciseList.toList()
         notifyDataSetChanged()
+    }
+
+    companion object {
+        const val NOTICE_INFO_TYPE = 0
+        const val DATE_EXERCISE_INFO_TYPE = 1
     }
 }

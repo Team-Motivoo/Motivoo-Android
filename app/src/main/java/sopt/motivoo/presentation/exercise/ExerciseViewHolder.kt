@@ -18,15 +18,13 @@ class ExerciseEachDateInfoViewHolder(private val binding: ItemExerciseBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
     fun onBind(exerciseInfoData: ExerciseInfo.EachDateInfo) {
-        with(binding) {
-            val context = binding.root.context
-            changePosition(exerciseInfoData, binding, context)
-            initText(exerciseInfoData, binding)
-            initImage(exerciseInfoData, binding)
-            imageVisibility(exerciseInfoData, binding)
-            checkStatus(exerciseInfoData, binding, context)
-            compareDate(binding, context)
-        }
+        val context = binding.root.context
+        changePosition(exerciseInfoData, binding, context)
+        initText(exerciseInfoData, binding)
+        initImage(exerciseInfoData, binding)
+        imageVisibility(exerciseInfoData, binding)
+        checkStatus(exerciseInfoData, binding, context)
+        compareDate(binding, context)
     }
 
     private fun changePosition(

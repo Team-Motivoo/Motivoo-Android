@@ -5,7 +5,7 @@ import android.view.View
 import sopt.motivoo.R
 import sopt.motivoo.databinding.FragmentExerciseBinding
 import sopt.motivoo.domain.entity.ExerciseInfo
-import sopt.motivoo.presentation.exercise.ExerciseInfoAdapter
+import sopt.motivoo.presentation.exercise.ExerciseAdapter
 import sopt.motivoo.util.binding.BindingFragment
 
 class ExerciseFragment : BindingFragment<FragmentExerciseBinding>(R.layout.fragment_exercise) {
@@ -38,7 +38,7 @@ class ExerciseFragment : BindingFragment<FragmentExerciseBinding>(R.layout.fragm
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.rvExerciseEachDateExercise.adapter = ExerciseInfoAdapter()
-        ExerciseInfoAdapter().setExerciseList(mockExerciseList)
+        binding.rvExerciseEachDateExercise.adapter = ExerciseAdapter()
+        ExerciseAdapter().setExerciseList(mockExerciseList)
     }
 }
