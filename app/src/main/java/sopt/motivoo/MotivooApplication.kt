@@ -14,6 +14,5 @@ class MotivooApplication : Application() {
         KakaoSdk.init(this, BuildConfig.KAKAO_APP_KEY)
         if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree())
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        Timber.e(Utility.getKeyHash(this))
     }
 }
