@@ -2,26 +2,24 @@ package sopt.motivoo.presentation
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import sopt.motivoo.R
-import sopt.motivoo.data.service.MyPageService
 import sopt.motivoo.databinding.FragmentMypageMyinfoBinding
-import sopt.motivoo.presentation.mypage.MyPageViewModel
 import sopt.motivoo.util.binding.BindingFragment
 
 class MyInfoFragment :
     BindingFragment<FragmentMypageMyinfoBinding>(R.layout.fragment_mypage_myinfo) {
-
-    private val myPageViewModel by viewModels<MyPageViewModel>()
-    lateinit var myPageService: MyPageService
+    private val args: MyInfoFragmentArgs by navArgs()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        myPageViewModel.getUserInfo()
-        binding.tvMyinfoUserName.text = myPageViewModel.myPageResult.value?.userNickname
-        binding.tvMyinfoUserAge.text = myPageViewModel.myPageResult.value?.userAge.toString()
+        initSetText()
         clickButtons()
+    }
+
+    private fun initSetText() {
+        binding.tvMyinfoUserName.text = args.userNickname
+        binding.tvMyinfoUserAge.text = args.userAge.toString()
     }
 
     private fun clickButtons() {

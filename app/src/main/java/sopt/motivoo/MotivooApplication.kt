@@ -3,7 +3,6 @@ package sopt.motivoo
 import android.app.Application
 import androidx.appcompat.app.AppCompatDelegate
 import com.kakao.sdk.common.KakaoSdk
-import com.kakao.sdk.common.util.Utility
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 

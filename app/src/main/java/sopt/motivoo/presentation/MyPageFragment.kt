@@ -3,10 +3,10 @@ package sopt.motivoo.presentation
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import sopt.motivoo.R
-import sopt.motivoo.data.service.MyPageService
 import sopt.motivoo.databinding.FragmentMypageBinding
 import sopt.motivoo.presentation.mypage.MyPageViewModel
 import sopt.motivoo.util.binding.BindingFragment
@@ -15,14 +15,24 @@ import sopt.motivoo.util.binding.BindingFragment
 class MyPageFragment : BindingFragment<FragmentMypageBinding>(R.layout.fragment_mypage) {
 
     private val myPageViewModel by viewModels<MyPageViewModel>()
-    lateinit var myPageService: MyPageService
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         myPageViewModel.getUserInfo()
-        binding.tvMypageName.text = myPageViewModel.myPageResult.value?.userNickname
+        observingLiveData()
         clickButtons()
+    }
+
+    private fun observingLiveData() {
+        myPageViewModel.myPageUserInfo.observe(viewLifecycleOwner) {
+            binding.tvMypageName.text = it.userNickname
+            val sendUserInfo = MyPageFragmentDirections.actionMyPageFragmentToMyInfoFragment(
+                it.userNickname,
+                it.userAge
+            )
+            Navigation.findNavController(requireView()).navigate(sendUserInfo)
+        }
     }
 
     private fun clickButtons() {

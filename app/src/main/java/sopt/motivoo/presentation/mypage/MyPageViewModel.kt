@@ -17,7 +17,7 @@ class MyPageViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _myPageResult: MutableLiveData<UserInfo> = MutableLiveData()
-    val myPageResult: LiveData<UserInfo> = _myPageResult
+    val myPageUserInfo: LiveData<UserInfo> = _myPageResult
 
     fun getUserInfo() {
         viewModelScope.launch {
