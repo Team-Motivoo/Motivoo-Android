@@ -7,13 +7,21 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 import sopt.motivoo.R
 import sopt.motivoo.databinding.FragmentPermissionBinding
+import sopt.motivoo.domain.entity.MotivooStorage
 import sopt.motivoo.util.binding.BindingFragment
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class PermissionFragment :
     BindingFragment<FragmentPermissionBinding>(R.layout.fragment_permission) {
+
+    @Inject
+    lateinit var motivooStorage: MotivooStorage
 
     private val deniedPermissions = mutableSetOf<String>()
     private val requiredPermissions = mutableSetOf<String>()
@@ -29,7 +37,7 @@ class PermissionFragment :
                 }
             }
             if (requiredPermissions.isEmpty()) {
-                navigateToLogin()
+                navigateToNextFragment()
             }
             return@registerForActivityResult
         }
@@ -39,7 +47,7 @@ class PermissionFragment :
 
         initRequiredPermissions()
         if (checkPermissionsStatus() || isAllPermissionsGranted()) {
-            navigateToLogin()
+            navigateToNextFragment()
         } else {
             getPermission()
         }
@@ -99,7 +107,30 @@ class PermissionFragment :
         requestMultiplePermissionsLauncher.launch(permissions)
     }
 
-    private fun navigateToLogin() {
-        findNavController().navigate(R.id.action_permissionFragment_to_loginFragment)
+    private fun navigateToNextFragment() {
+
+        val navOptions = NavOptions.Builder()
+            .setPopUpTo(R.id.permissionFragment, true)
+            .build()
+
+        if (motivooStorage.isUserMatched && motivooStorage.isUserLoggedIn) {
+            findNavController().navigate(
+                R.id.action_permissionFragment_to_homeFragment,
+                null,
+                navOptions
+            )
+        } else if (!motivooStorage.isUserMatched && motivooStorage.isUserLoggedIn) {
+            findNavController().navigate(
+                R.id.action_permissionFragment_to_startMotivooFragment,
+                null,
+                navOptions
+            )
+        } else {
+            findNavController().navigate(
+                R.id.action_permissionFragment_to_loginFragment,
+                null,
+                navOptions
+            )
+        }
     }
 }

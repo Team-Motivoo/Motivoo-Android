@@ -22,11 +22,11 @@ class SplashFragment : BindingFragment<FragmentSplashBinding>(R.layout.fragment_
     private fun showSplash() {
         lifecycleScope.launch {
             delay(1500)
-            navigateToPermission()
+            navigateToNextFragment()
         }
     }
 
-    private fun navigateToPermission() {
+    private fun navigateToNextFragment() {
         val navOptions = NavOptions.Builder()
             .setPopUpTo(R.id.splashFragment, true)
             .build()

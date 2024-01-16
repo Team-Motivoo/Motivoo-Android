@@ -25,6 +25,6 @@ interface OnboardingService {
         @Body requestPostInviteCodeDto: RequestPostInviteCodeDto
     ): ResponsePostInviteCodeDto
 
-    @GET("parentchild/match")
+    @GET("onboarding/match")
     suspend fun getInviteCode(): ResponseGetInviteCodeDto
 }

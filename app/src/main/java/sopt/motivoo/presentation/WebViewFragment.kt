@@ -16,6 +16,7 @@ class WebViewFragment : BindingFragment<FragmentWebviewBinding>(R.layout.fragmen
 
     private fun initWebView() {
         binding.webView.settings.apply {
+            javaScriptEnabled = true
             loadWithOverviewMode = true
             useWideViewPort = true
             domStorageEnabled = true

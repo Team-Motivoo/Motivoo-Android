@@ -22,13 +22,16 @@ data class ResponsePostInviteCodeDto(
         @SerialName("my_invite_code")
         val myInviteCode: Boolean,
         @SerialName("user_id")
-        val userId: Int
+        val userId: Int,
+        @SerialName("is_finished_onboarding")
+        val isFinishedOnboarding: Boolean
     )
 
     fun toMatchedInfo(): MatchedInfo {
         return MatchedInfo(
             isMatched = data.isMatched,
-            isMyInviteCode = data.myInviteCode
+            isMyInviteCode = data.myInviteCode,
+            isFinishedOnboarding = data.isFinishedOnboarding
         )
     }
 }

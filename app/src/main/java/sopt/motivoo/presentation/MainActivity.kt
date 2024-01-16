@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var authTokenRefreshListener: AuthTokenRefreshListenerImpl
+
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_MOTIVOOAOS)
         super.onCreate(savedInstanceState)

@@ -14,7 +14,6 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import sopt.motivoo.R
 import sopt.motivoo.databinding.FragmentPostInviteCodeBinding
-import sopt.motivoo.util.UiState
 import sopt.motivoo.util.binding.BindingFragment
 import sopt.motivoo.util.extension.drawableOf
 import sopt.motivoo.util.extension.setOnSingleClickListener
@@ -52,29 +51,36 @@ class PostInviteCodeFragment :
             }
         }.launchIn(lifecycleScope)
 
-        inviteCodeViewModel.postInviteCodeState.flowWithLifecycle(lifecycle).onEach { uiState ->
-            when (uiState) {
-                is UiState.Success -> {
-                    val navOptions = NavOptions.Builder()
-                        .setPopUpTo(R.id.postInviteCodeFragment, true)
-                        .build()
+        inviteCodeViewModel.postInviteCodeState.flowWithLifecycle(lifecycle)
+            .onEach {
+                when (inviteCodeViewModel.postInviteCodeState.value) {
+                    is PostInviteCodeViewModel.OnboardingState.GoToOnboarding -> {
+                        findNavController().navigate(R.id.action_postInviteCodeFragment_to_ageQuestionFragment)
+                        inviteCodeViewModel.resetOnboardingState()
+                    }
 
-                    findNavController().navigate(
-                        R.id.action_postInviteCodeFragment_to_homeFragment,
-                        null,
-                        navOptions
-                    )
+                    is PostInviteCodeViewModel.OnboardingState.SameWithMyInviteCode,
+                    is PostInviteCodeViewModel.OnboardingState.Failure -> {
+                        binding.etPostInviteCode.background =
+                            requireContext().drawableOf(R.drawable.shape_edittext_error_radius8)
+                        binding.tvPostInviteCodeErrorMessage.setVisible(VISIBLE)
+                    }
+
+                    is PostInviteCodeViewModel.OnboardingState.PassOnboarding -> {
+                        val navOptions = NavOptions.Builder()
+                            .setPopUpTo(R.id.postInviteCodeFragment, true)
+                            .build()
+
+                        findNavController().navigate(
+                            R.id.action_postInviteCodeFragment_to_homeFragment,
+                            null,
+                            navOptions
+                        )
+                    }
+
+                    else -> Unit
                 }
-
-                is UiState.Failure -> {
-                    binding.etPostInviteCode.background =
-                        requireContext().drawableOf(R.drawable.shape_edittext_error_radius8)
-                    binding.tvPostInviteCodeErrorMessage.setVisible(VISIBLE)
-                }
-
-                else -> Unit
-            }
-        }.launchIn(lifecycleScope)
+            }.launchIn(lifecycleScope)
     }
 
     private fun setDefaultUi() {
