@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import sopt.motivoo.domain.entity.MotivooStorage
 import sopt.motivoo.domain.repository.OnboardingRepository
+import sopt.motivoo.util.UiState
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -17,7 +18,7 @@ class StartMotivooViewModel @Inject constructor(
     private val onboardingRepository: OnboardingRepository,
 ) : ViewModel() {
 
-    private val _isOnboardingFinished = MutableStateFlow(false)
+    private val _isOnboardingFinished = MutableStateFlow<UiState<Boolean>>(UiState.Loading)
     val isOnboardingFinished get() = _isOnboardingFinished.asStateFlow()
 
     fun getOnboardingFinished() {
@@ -25,14 +26,15 @@ class StartMotivooViewModel @Inject constructor(
             onboardingRepository.getOnboardingFinished()
                 .onSuccess { isOnboardingFinished ->
                     motivooStorage.isFinishedOnboarding = isOnboardingFinished.isFinishedOnboarding
-                    _isOnboardingFinished.value = isOnboardingFinished.isFinishedOnboarding
+                    _isOnboardingFinished.value = UiState.Success(true)
                 }.onFailure {
                     Timber.e(it.message)
+                    _isOnboardingFinished.value = UiState.Success(false)
                 }
         }
     }
 
     fun resetStartState() {
-        _isOnboardingFinished.value = false
+        _isOnboardingFinished.value = UiState.Loading
     }
 }

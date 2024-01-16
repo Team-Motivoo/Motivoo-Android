@@ -10,34 +10,63 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.animation.AnimationUtils
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import sopt.motivoo.R
 import sopt.motivoo.databinding.FragmentGetInviteCodeBinding
+import sopt.motivoo.domain.entity.MotivooStorage
 import sopt.motivoo.util.binding.BindingFragment
 import sopt.motivoo.util.extension.setOnSingleClickListener
 import sopt.motivoo.util.extension.setVisible
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class GetInviteCodeFragment :
     BindingFragment<FragmentGetInviteCodeBinding>(R.layout.fragment_get_invite_code) {
 
+    @Inject
+    lateinit var motivooStorage: MotivooStorage
+
+    private val safeArgs: GetInviteCodeFragmentArgs by navArgs()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         setMatchingToastAnimation()
         setClipboard()
         clickBackButton()
+        setInviteCode()
+    }
+
+    private fun setInviteCode() {
+        binding.tvGetInviteCode.text = safeArgs.inviteCode.ifEmpty {
+            motivooStorage.inviteCode
+        }
     }
 
     private fun clickBackButton() {
-        binding.includeGetInviteCodeToolbar.tvToolbarBack.setOnSingleClickListener { findNavController().popBackStack() }
+        binding.includeGetInviteCodeToolbar.tvToolbarBack.setOnSingleClickListener {
+            val navOptions = NavOptions.Builder()
+                .setPopUpTo(R.id.getInviteCodeFragment, true)
+                .build()
+
+            findNavController().navigate(
+                R.id.action_getInviteCodeFragment_to_startMotivooFragment,
+                null,
+                navOptions
+            )
+        }
     }
 
     private fun setClipboard() {
         val clipboard: ClipboardManager =
             requireContext().getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
-        val inviteCode = binding.tvGetInviteCode.text
+        val inviteCode = safeArgs.inviteCode.ifEmpty {
+            motivooStorage.inviteCode
+        }
         val formattedText = getString(R.string.share_text_message, inviteCode)
         val clip = ClipData.newPlainText(SHARE_TEXT, formattedText)
 

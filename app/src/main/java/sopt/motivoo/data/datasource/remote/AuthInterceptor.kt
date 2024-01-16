@@ -8,8 +8,6 @@ import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.Response
 import sopt.motivoo.BuildConfig
-import sopt.motivoo.data.datasource.local.MotivooStorageImpl.Companion.ACCESS_TOKEN
-import sopt.motivoo.data.datasource.local.MotivooStorageImpl.Companion.REFRESH_TOKEN
 import sopt.motivoo.data.datasource.remote.listener.AuthTokenRefreshListener
 import sopt.motivoo.data.model.response.auth.ResponseReissueDto
 import sopt.motivoo.domain.entity.MotivooStorage
@@ -22,15 +20,10 @@ class AuthInterceptor @Inject constructor(
 ) : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
-        val originalRequest = chain.request()
-
         val isAutoLoginPossible = motivooStorage.isUserLoggedIn
 
-        val authRequestBuilder = originalRequest.newBuilder()
-        authRequestBuilder.addHeader(ACCESS_TOKEN, motivooStorage.accessToken)
-
-        val authRequest = authRequestBuilder.build()
-
+        val originalRequest = chain.request()
+        val authRequest = originalRequest.newAuthBuilder()
         val response = chain.proceed(authRequest)
 
         when (response.code) {
@@ -43,8 +36,8 @@ class AuthInterceptor @Inject constructor(
 
                 val refreshRequestBuilder = refreshRequest.newBuilder()
                     .url("${BuildConfig.BASE_URL}oauth/reissue")
+                    .addHeader(AUTHORIZATION, motivooStorage.refreshToken)
                     .post(jsonBody)
-                    .addHeader(REFRESH_TOKEN, motivooStorage.refreshToken)
                     .build()
 
                 val refreshTokenResponse = chain.proceed(refreshRequestBuilder)
@@ -76,9 +69,10 @@ class AuthInterceptor @Inject constructor(
     }
 
     private fun Request.newAuthBuilder() =
-        this.newBuilder().addHeader(ACCESS_TOKEN, motivooStorage.accessToken).build()
+        this.newBuilder().addHeader(AUTHORIZATION, motivooStorage.accessToken).build()
 
     companion object {
         private const val REFRESH_CODE = 401
+        private const val AUTHORIZATION = "Authorization"
     }
 }

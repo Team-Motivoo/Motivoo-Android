@@ -14,6 +14,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import sopt.motivoo.data.model.request.onboarding.RequestOnboardingDto
+import sopt.motivoo.domain.entity.MotivooStorage
 import sopt.motivoo.domain.repository.OnboardingRepository
 import sopt.motivoo.presentation.type.DoExerciseType
 import sopt.motivoo.presentation.type.FrequencyType
@@ -28,8 +29,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 class OnboardingViewModel @Inject constructor(
+    private val motivooStorage: MotivooStorage,
     private val onboardingRepository: OnboardingRepository
 ) : ViewModel() {
+
+    private val _inviteCode = MutableStateFlow<String?>(null)
+    val inviteCode get() = _inviteCode.asStateFlow()
 
     private val _userType = MutableStateFlow<UserType?>(null)
     val userType get() = _userType.asStateFlow()
@@ -167,11 +172,16 @@ class OnboardingViewModel @Inject constructor(
                 isExercise = isDoExercise,
                 type = userTypeString
             )
-            onboardingRepository.postOnboardingInfo(requestDto).onSuccess {
-                _isPostOnboardingInfoSuccess.value = UiState.Success(true)
-            }.onFailure {
-                Timber.e(it.message)
-            }
+            onboardingRepository.postOnboardingInfo(requestDto)
+                .onSuccess {
+                    it.inviteCode.let { inviteCode ->
+                        _inviteCode.value = inviteCode
+                        motivooStorage.inviteCode = inviteCode
+                    }
+                    _isPostOnboardingInfoSuccess.value = UiState.Success(true)
+                }.onFailure {
+                    Timber.e(it.message)
+                }
         }
     }
 }

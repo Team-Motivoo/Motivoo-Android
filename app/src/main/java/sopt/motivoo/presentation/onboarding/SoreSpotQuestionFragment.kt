@@ -25,20 +25,6 @@ class SoreSpotQuestionFragment :
         binding.onboardingViewModel = onboardingViewModel
 
         setupDoneButton()
-        collectData()
-    }
-
-    private fun collectData() {
-        onboardingViewModel.isPostOnboardingInfoSuccess.flowWithLifecycle(lifecycle)
-            .onEach { uiState ->
-                when (uiState) {
-                    is UiState.Success -> {
-                        moveToNextFragment()
-                    }
-
-                    else -> Unit
-                }
-            }.launchIn(lifecycleScope)
     }
 
     private fun setupDoneButton() {
@@ -52,7 +38,21 @@ class SoreSpotQuestionFragment :
                 isDoExerciseSelected(),
                 getSelectedSoreSpotString()
             )
+            collectData()
         }
+    }
+
+    private fun collectData() {
+        onboardingViewModel.isPostOnboardingInfoSuccess.flowWithLifecycle(lifecycle)
+            .onEach { uiState ->
+                when (uiState) {
+                    is UiState.Success -> {
+                        moveToNextFragment()
+                    }
+
+                    else -> Unit
+                }
+            }.launchIn(lifecycleScope)
     }
 
     private fun getUserTypeString() =
@@ -81,6 +81,11 @@ class SoreSpotQuestionFragment :
     }
 
     private fun moveToNextFragment() {
-        findNavController().navigate(R.id.action_soreSpotQuestionFragment_to_getInviteCodeFragment)
+        val inviteCode = onboardingViewModel.inviteCode.value.toString()
+        val action =
+            SoreSpotQuestionFragmentDirections.actionSoreSpotQuestionFragmentToGetInviteCodeFragment(
+                inviteCode
+            )
+        findNavController().navigate(action)
     }
 }

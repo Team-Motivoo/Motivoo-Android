@@ -92,7 +92,7 @@
     <fragment
         android:id="@+id/soreSpotQuestionFragment"
         android:name="sopt.motivoo.presentation.onboarding.SoreSpotQuestionFragment"
-        android:label="SoreSpotQuestionFragment">
+        android:label="soreSpotQuestionFragment">
         <action
             android:id="@+id/action_soreSpotQuestionFragment_to_getInviteCodeFragment"
             app:destination="@id/getInviteCodeFragment"
@@ -152,7 +152,14 @@
     <fragment
         android:id="@+id/getInviteCodeFragment"
         android:name="sopt.motivoo.presentation.invitecode.GetInviteCodeFragment"
-        android:label="GetInviteCodeFragment" />
+        android:label="GetInviteCodeFragment">
+        <argument
+            android:name="inviteCode"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_getInviteCodeFragment_to_startMotivooFragment"
+            app:destination="@id/startMotivooFragment" />
+    </fragment>
     <fragment
         android:id="@+id/postInviteCodeFragment"
         android:name="sopt.motivoo.presentation.invitecode.PostInviteCodeFragment"
