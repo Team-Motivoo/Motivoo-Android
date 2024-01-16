@@ -26,7 +26,6 @@ class StartMotivooFragment :
     @Inject
     lateinit var motivooStorage: MotivooStorage
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

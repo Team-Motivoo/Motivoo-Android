@@ -1,6 +1,5 @@
 package sopt.motivoo.data.model.response.onboarding
 
-
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import sopt.motivoo.domain.entity.onboarding.GetMatchedInfo

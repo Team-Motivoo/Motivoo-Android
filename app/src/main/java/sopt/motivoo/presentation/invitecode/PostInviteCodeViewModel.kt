@@ -27,7 +27,6 @@ class PostInviteCodeViewModel @Inject constructor(
         .map { it.isEmpty() }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), false)
 
-
     private val _postInviteCodeState = MutableStateFlow<UiState<Boolean>>(UiState.Loading)
     val postInviteCodeState get() = _postInviteCodeState.asStateFlow()
 

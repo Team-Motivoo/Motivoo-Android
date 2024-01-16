@@ -32,7 +32,6 @@ class PostInviteCodeFragment :
         collectData()
         clickBackButton()
         clickDoneButton()
-
     }
 
     private fun clickDoneButton() {
@@ -51,7 +50,6 @@ class PostInviteCodeFragment :
                 true -> setDefaultUi()
                 false -> Unit
             }
-
         }.launchIn(lifecycleScope)
 
         inviteCodeViewModel.postInviteCodeState.flowWithLifecycle(lifecycle).onEach { uiState ->
@@ -76,7 +74,6 @@ class PostInviteCodeFragment :
 
                 else -> Unit
             }
-
         }.launchIn(lifecycleScope)
     }
 

@@ -126,7 +126,6 @@ class GetInviteCodeFragment :
             binding.tvGetInviteCodeMatchingWaiting.startAnimation(fadeOut)
             binding.tvGetInviteCodeMatchingWaiting.setVisible(GONE)
         }
-
     }
 
     private fun setClipBoardToastAnimation() {
