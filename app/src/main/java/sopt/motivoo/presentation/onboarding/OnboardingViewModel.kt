@@ -162,6 +162,7 @@ class OnboardingViewModel @Inject constructor(
         selectedSoreSpotString: List<String>
     ) {
         viewModelScope.launch {
+            resetOnboardingFinishedState()
             val exerciseType = if (isDoExercise) whatExerciseTypeString else whatActivityTypeString
             val requestDto = RequestOnboardingDto(
                 age = age.value?.toIntOrNull() ?: 0,
@@ -176,12 +177,16 @@ class OnboardingViewModel @Inject constructor(
                 .onSuccess {
                     it.inviteCode.let { inviteCode ->
                         _inviteCode.value = inviteCode
-                        motivooStorage.inviteCode = inviteCode
+                        motivooStorage.inviteCode = inviteCode.toString()
                     }
                     _isPostOnboardingInfoSuccess.value = UiState.Success(true)
                 }.onFailure {
                     Timber.e(it.message)
                 }
         }
+    }
+
+    fun resetOnboardingFinishedState() {
+        _isPostOnboardingInfoSuccess.value = UiState.Loading
     }
 }
