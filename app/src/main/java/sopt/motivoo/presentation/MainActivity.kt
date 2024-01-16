@@ -15,6 +15,7 @@ import sopt.motivoo.data.datasource.remote.AuthTokenRefreshListenerImpl
 import sopt.motivoo.databinding.ActivityMainBinding
 import sopt.motivoo.util.extension.hideKeyboard
 import sopt.motivoo.util.extension.setOnSingleClickListener
+import sopt.motivoo.util.extension.showToast
 import javax.inject.Inject
 
 @AndroidEntryPoint
