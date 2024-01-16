@@ -20,7 +20,6 @@ class AuthInterceptor @Inject constructor(
 ) : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
-        val isAutoLoginPossible = motivooStorage.isUserLoggedIn
 
         val originalRequest = chain.request()
         val authRequest = originalRequest.newAuthBuilder()
