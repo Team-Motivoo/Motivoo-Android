@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/navigation_main"
-    app:startDestination="@id/exerciseFragment">
+    app:startDestination="@id/loadingFragment">
 
     <fragment
         android:id="@+id/splashFragment"
@@ -279,4 +279,8 @@
             android:name="photoBitmap"
             app:argType="android.graphics.Bitmap" />
     </dialog>
+    <fragment
+        android:id="@+id/loadingFragment"
+        android:name="sopt.motivoo.presentation.LoadingFragment"
+        android:label="LoadingFragment" />
 </navigation>
