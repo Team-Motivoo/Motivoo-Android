@@ -4,8 +4,9 @@ import sopt.motivoo.data.datasource.remote.OnboardingDataSource
 import sopt.motivoo.data.model.request.onboarding.RequestOnboardingDto
 import sopt.motivoo.data.model.request.onboarding.RequestPostInviteCodeDto
 import sopt.motivoo.domain.entity.onboarding.FinishedOnboarding
+import sopt.motivoo.domain.entity.onboarding.GetMatchedInfo
 import sopt.motivoo.domain.entity.onboarding.InviteCodeInfo
-import sopt.motivoo.domain.entity.onboarding.MatchedInfoInfo
+import sopt.motivoo.domain.entity.onboarding.MatchedInfo
 import sopt.motivoo.domain.repository.OnboardingRepository
 import javax.inject.Inject
 
@@ -21,8 +22,13 @@ class OnboardingRepositoryImpl @Inject constructor(
     override suspend fun getOnboardingFinished(): Result<FinishedOnboarding> =
         runCatching { onboardingDataSource.getOnboardingFinished().toFinishedOnboarding() }
 
-    override suspend fun patchInviteCode(requestPostInviteCodeDto: RequestPostInviteCodeDto): Result<MatchedInfoInfo> =
+    override suspend fun patchInviteCode(requestPostInviteCodeDto: RequestPostInviteCodeDto): Result<MatchedInfo> =
         runCatching {
             onboardingDataSource.patchInviteCode(requestPostInviteCodeDto).toMatchedInfo()
+        }
+
+    override suspend fun getInviteCode(): Result<GetMatchedInfo> =
+        runCatching {
+            onboardingDataSource.getInviteCode().toGetMatchedInfo()
         }
 }

@@ -3,10 +3,10 @@ package sopt.motivoo.data.model.response.onboarding
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import sopt.motivoo.domain.entity.onboarding.MatchedInfo
+import sopt.motivoo.domain.entity.onboarding.GetMatchedInfo
 
 @Serializable
-data class ResponsePostInviteCodeDto(
+data class ResponseGetInviteCodeDto(
     @SerialName("code")
     val code: Int,
     @SerialName("data")
@@ -20,16 +20,15 @@ data class ResponsePostInviteCodeDto(
     data class Data(
         @SerialName("is_matched")
         val isMatched: Boolean,
-        @SerialName("my_invite_code")
-        val myInviteCode: Boolean,
+        @SerialName("opponent_user_id")
+        val opponentUserId: Int,
         @SerialName("user_id")
         val userId: Int
     )
 
-    fun toMatchedInfo(): MatchedInfo {
-        return MatchedInfo(
+    fun toGetMatchedInfo(): GetMatchedInfo {
+        return GetMatchedInfo(
             isMatched = data.isMatched,
-            isMyInviteCode = data.myInviteCode
         )
     }
 }

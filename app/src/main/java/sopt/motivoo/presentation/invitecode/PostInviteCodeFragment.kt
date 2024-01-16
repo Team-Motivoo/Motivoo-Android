@@ -7,6 +7,7 @@ import android.view.View.VISIBLE
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
@@ -56,7 +57,15 @@ class PostInviteCodeFragment :
         inviteCodeViewModel.postInviteCodeState.flowWithLifecycle(lifecycle).onEach { uiState ->
             when (uiState) {
                 is UiState.Success -> {
-                    findNavController().navigate(R.id.action_postInviteCodeFragment_to_homeFragment)
+                    val navOptions = NavOptions.Builder()
+                        .setPopUpTo(R.id.postInviteCodeFragment, true)
+                        .build()
+
+                    findNavController().navigate(
+                        R.id.action_postInviteCodeFragment_to_homeFragment,
+                        null,
+                        navOptions
+                    )
                 }
 
                 is UiState.Failure -> {

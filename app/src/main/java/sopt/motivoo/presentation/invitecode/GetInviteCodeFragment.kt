@@ -9,16 +9,21 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.animation.AnimationUtils
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import sopt.motivoo.R
 import sopt.motivoo.databinding.FragmentGetInviteCodeBinding
 import sopt.motivoo.domain.entity.MotivooStorage
+import sopt.motivoo.util.UiState
 import sopt.motivoo.util.binding.BindingFragment
 import sopt.motivoo.util.extension.setOnSingleClickListener
 import sopt.motivoo.util.extension.setVisible
@@ -28,6 +33,8 @@ import javax.inject.Inject
 class GetInviteCodeFragment :
     BindingFragment<FragmentGetInviteCodeBinding>(R.layout.fragment_get_invite_code) {
 
+    private val getInviteCodeViewModel by viewModels<GetInviteCodeViewModel>()
+
     @Inject
     lateinit var motivooStorage: MotivooStorage
 
@@ -35,10 +42,41 @@ class GetInviteCodeFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setMatchingToastAnimation()
         setClipboard()
         clickBackButton()
         setInviteCode()
+        collectData()
+        checkMatching()
+    }
+
+    private fun checkMatching() {
+        binding.btnGetInviteCodeCheckMatching.setOnSingleClickListener {
+            getInviteCodeViewModel.getInviteCode()
+        }
+    }
+
+    private fun collectData() {
+        getInviteCodeViewModel.checkMatchState.flowWithLifecycle(lifecycle).onEach { uiState ->
+            when (uiState) {
+                is UiState.Success -> {
+                    val navOptions = NavOptions.Builder()
+                        .setPopUpTo(R.id.getInviteCodeFragment, true)
+                        .build()
+
+                    findNavController().navigate(
+                        R.id.action_getInviteCodeFragment_to_homeFragment,
+                        null,
+                        navOptions
+                    )
+                }
+
+                is UiState.Loading -> Unit
+
+                else -> {
+                    setMatchingToastAnimation()
+                }
+            }
+        }.launchIn(lifecycleScope)
     }
 
     private fun setInviteCode() {
@@ -78,18 +116,17 @@ class GetInviteCodeFragment :
     }
 
     private fun setMatchingToastAnimation() {
-        binding.btnGetInviteCodeCheckMatching.setOnSingleClickListener {
-            val fadeIn = AnimationUtils.loadAnimation(context, R.anim.fade_in)
-            binding.tvGetInviteCodeMatchingWaiting.startAnimation(fadeIn)
-            binding.tvGetInviteCodeMatchingWaiting.setVisible(VISIBLE)
+        val fadeIn = AnimationUtils.loadAnimation(context, R.anim.fade_in)
+        binding.tvGetInviteCodeMatchingWaiting.startAnimation(fadeIn)
+        binding.tvGetInviteCodeMatchingWaiting.setVisible(VISIBLE)
 
-            lifecycleScope.launch {
-                delay(TWO_SECONDS)
-                val fadeOut = AnimationUtils.loadAnimation(context, R.anim.fade_out)
-                binding.tvGetInviteCodeMatchingWaiting.startAnimation(fadeOut)
-                binding.tvGetInviteCodeMatchingWaiting.setVisible(GONE)
-            }
+        lifecycleScope.launch {
+            delay(TWO_SECONDS)
+            val fadeOut = AnimationUtils.loadAnimation(context, R.anim.fade_out)
+            binding.tvGetInviteCodeMatchingWaiting.startAnimation(fadeOut)
+            binding.tvGetInviteCodeMatchingWaiting.setVisible(GONE)
         }
+
     }
 
     private fun setClipBoardToastAnimation() {
