@@ -29,7 +29,7 @@ class StartMotivooViewModel @Inject constructor(
                     _isOnboardingFinished.value = UiState.Success(true)
                 }.onFailure {
                     Timber.e(it.message)
-                    _isOnboardingFinished.value = UiState.Success(false)
+                    _isOnboardingFinished.value = UiState.Failure(it.toString())
                 }
         }
     }
