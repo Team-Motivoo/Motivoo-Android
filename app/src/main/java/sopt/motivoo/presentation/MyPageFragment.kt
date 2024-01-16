@@ -19,11 +19,11 @@ class MyPageFragment : BindingFragment<FragmentMypageBinding>(R.layout.fragment_
         super.onViewCreated(view, savedInstanceState)
 
         myPageViewModel.getUserInfo()
-        observingLiveData()
+        observeLiveData()
         clickButtons()
     }
 
-    private fun observingLiveData() {
+    private fun observeLiveData() {
         myPageViewModel.myPageUserInfo.observe(viewLifecycleOwner) {
             binding.tvMypageName.text = it.userNickname
         }
