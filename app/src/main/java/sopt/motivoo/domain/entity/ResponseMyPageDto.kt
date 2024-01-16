@@ -24,4 +24,3 @@ data class ResponseMyPageDto(
         val userType: String,
     )
 }
-
