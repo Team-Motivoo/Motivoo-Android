@@ -13,11 +13,11 @@ class MyInfoFragment :
     private val args: MyInfoFragmentArgs by navArgs()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initSetText()
+        initText()
         clickButtons()
     }
 
-    private fun initSetText() {
+    private fun initText() {
         binding.tvMyinfoUserName.text = args.userNickname
         binding.tvMyinfoUserAge.text = args.userAge.toString()
     }

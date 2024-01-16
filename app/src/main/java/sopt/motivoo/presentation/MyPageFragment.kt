@@ -3,7 +3,6 @@ package sopt.motivoo.presentation
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import sopt.motivoo.R
@@ -27,11 +26,6 @@ class MyPageFragment : BindingFragment<FragmentMypageBinding>(R.layout.fragment_
     private fun observingLiveData() {
         myPageViewModel.myPageUserInfo.observe(viewLifecycleOwner) {
             binding.tvMypageName.text = it.userNickname
-            val sendUserInfo = MyPageFragmentDirections.actionMyPageFragmentToMyInfoFragment(
-                it.userNickname,
-                it.userAge
-            )
-            Navigation.findNavController(requireView()).navigate(sendUserInfo)
         }
     }
 
@@ -46,7 +40,11 @@ class MyPageFragment : BindingFragment<FragmentMypageBinding>(R.layout.fragment_
     }
 
     private fun navigateToMyInfo() {
-        findNavController().navigate(R.id.action_myPageFragment_to_myInfoFragment)
+        val sendUserInfo = MyPageFragmentDirections.actionMyPageFragmentToMyInfoFragment(
+            myPageViewModel.myPageUserInfo.value?.userNickname ?: "",
+            myPageViewModel.myPageUserInfo.value?.userAge ?: 0
+        )
+        findNavController().navigate(sendUserInfo)
     }
 
     private fun navigateToMyExerciseInfo() {
