@@ -16,7 +16,6 @@ class MyPageViewModel @Inject constructor(
     private val myPageService: MyPageService,
 ) : ViewModel() {
 
-
     private val _myPageResult: MutableLiveData<UserInfo> = MutableLiveData()
     val myPageResult: LiveData<UserInfo> = _myPageResult
 
@@ -25,11 +24,11 @@ class MyPageViewModel @Inject constructor(
             kotlin.runCatching {
                 myPageService.getUserInfo()
             }.onSuccess {
-                _myPageResult.value = UserInfo(it.data.userNickname, it.data.userAge, it.data.userType)
+                _myPageResult.value =
+                    UserInfo(it.data.userNickname, it.data.userAge, it.data.userType)
             }.onFailure {
                 Timber.e(it.message)
             }
         }
     }
-
 }
