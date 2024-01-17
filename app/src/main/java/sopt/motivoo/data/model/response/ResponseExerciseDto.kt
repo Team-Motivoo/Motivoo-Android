@@ -27,10 +27,10 @@ data class ResponseExerciseDto(
         data class MissionHistory(
             @SerialName("date") val date: String,
             @SerialName("my_mission_content") val myMissionContent: String,
-            @SerialName("my_mission_img_url") val myMissionImgUrl: String,
+            @SerialName("my_mission_img_url") val myMissionImgUrl: String?,
             @SerialName("my_mission_status") val myMissionStatus: String,
             @SerialName("opponent_mission_content") val opponentMissionContent: String,
-            @SerialName("opponent_mission_img_url") val opponentMissionImgUrl: String,
+            @SerialName("opponent_mission_img_url") val opponentMissionImgUrl: String?,
             @SerialName("opponent_mission_status") val opponentMissionStatus: String,
         )
     }
