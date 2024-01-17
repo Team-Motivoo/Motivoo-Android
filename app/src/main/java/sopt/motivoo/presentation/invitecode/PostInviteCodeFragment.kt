@@ -18,6 +18,7 @@ import sopt.motivoo.util.binding.BindingFragment
 import sopt.motivoo.util.extension.drawableOf
 import sopt.motivoo.util.extension.setOnSingleClickListener
 import sopt.motivoo.util.extension.setVisible
+import sopt.motivoo.util.findStartDestination
 
 @AndroidEntryPoint
 class PostInviteCodeFragment :
@@ -67,8 +68,10 @@ class PostInviteCodeFragment :
                     }
 
                     is PostInviteCodeViewModel.OnboardingState.PassOnboarding -> {
+                        val navController = findNavController()
+                        val startDestinationId = navController.findStartDestination().id
                         val navOptions = NavOptions.Builder()
-                            .setPopUpTo(R.id.postInviteCodeFragment, true)
+                            .setPopUpTo(startDestinationId, true)
                             .build()
 
                         findNavController().navigate(

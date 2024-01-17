@@ -10,6 +10,7 @@ import kotlinx.coroutines.launch
 import sopt.motivoo.R
 import sopt.motivoo.databinding.FragmentSplashBinding
 import sopt.motivoo.util.binding.BindingFragment
+import sopt.motivoo.util.findStartDestination
 
 class SplashFragment : BindingFragment<FragmentSplashBinding>(R.layout.fragment_splash) {
 
@@ -27,14 +28,12 @@ class SplashFragment : BindingFragment<FragmentSplashBinding>(R.layout.fragment_
     }
 
     private fun navigateToNextFragment() {
+        val navController = findNavController()
+        val startDestinationId = navController.findStartDestination().id
         val navOptions = NavOptions.Builder()
-            .setPopUpTo(R.id.splashFragment, true)
+            .setPopUpTo(startDestinationId, true)
             .build()
 
-        findNavController().navigate(
-            R.id.action_splashFragment_to_permissionFragment,
-            null,
-            navOptions
-        )
+        navController.navigate(R.id.action_splashFragment_to_permissionFragment, null, navOptions)
     }
 }

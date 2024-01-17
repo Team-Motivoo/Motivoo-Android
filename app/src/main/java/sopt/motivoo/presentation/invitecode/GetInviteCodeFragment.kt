@@ -27,6 +27,7 @@ import sopt.motivoo.util.UiState
 import sopt.motivoo.util.binding.BindingFragment
 import sopt.motivoo.util.extension.setOnSingleClickListener
 import sopt.motivoo.util.extension.setVisible
+import sopt.motivoo.util.findStartDestination
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -39,14 +40,21 @@ class GetInviteCodeFragment :
     lateinit var motivooStorage: MotivooStorage
 
     private val safeArgs: GetInviteCodeFragmentArgs by navArgs()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         setClipboard()
-        clickBackButton()
         setInviteCode()
         collectData()
         checkMatching()
+        clickBackButton()
+    }
+
+    private fun clickBackButton() {
+        binding.includeGetInviteCodeToolbar.tvToolbarBack.setOnSingleClickListener {
+            if (motivooStorage.isFinishedOnboarding) passedOnboardingClickBackButton() else afterOnboardingClickBackButton()
+        }
     }
 
     private fun checkMatching() {
@@ -59,8 +67,10 @@ class GetInviteCodeFragment :
         getInviteCodeViewModel.checkMatchState.flowWithLifecycle(lifecycle).onEach { uiState ->
             when (uiState) {
                 is UiState.Success -> {
+                    val navController = findNavController()
+                    val startDestinationId = navController.findStartDestination().id
                     val navOptions = NavOptions.Builder()
-                        .setPopUpTo(R.id.getInviteCodeFragment, true)
+                        .setPopUpTo(startDestinationId, true)
                         .build()
 
                     findNavController().navigate(
@@ -85,10 +95,16 @@ class GetInviteCodeFragment :
         }
     }
 
-    private fun clickBackButton() {
+    private fun passedOnboardingClickBackButton() {
+        findNavController().popBackStack()
+    }
+
+    private fun afterOnboardingClickBackButton() {
         binding.includeGetInviteCodeToolbar.tvToolbarBack.setOnSingleClickListener {
+            val navController = findNavController()
+            val startDestinationId = navController.findStartDestination().id
             val navOptions = NavOptions.Builder()
-                .setPopUpTo(R.id.getInviteCodeFragment, true)
+                .setPopUpTo(startDestinationId, true)
                 .build()
 
             findNavController().navigate(

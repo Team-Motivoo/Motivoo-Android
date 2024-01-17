@@ -14,6 +14,8 @@ import sopt.motivoo.R
 import sopt.motivoo.databinding.FragmentPermissionBinding
 import sopt.motivoo.domain.entity.MotivooStorage
 import sopt.motivoo.util.binding.BindingFragment
+import sopt.motivoo.util.findStartDestination
+import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -51,6 +53,8 @@ class PermissionFragment :
         } else {
             getPermission()
         }
+
+        Timber.tag("aaa").e("진입")
     }
 
     private fun initRequiredPermissions() {
@@ -109,9 +113,13 @@ class PermissionFragment :
 
     private fun navigateToNextFragment() {
 
+        val navController = findNavController()
+        val startDestinationId = navController.findStartDestination().id
         val navOptions = NavOptions.Builder()
-            .setPopUpTo(R.id.permissionFragment, true)
+            .setPopUpTo(startDestinationId, true)
             .build()
+
+        Timber.tag("aaa").e("${navController.findStartDestination()}")
 
         if (motivooStorage.isUserMatched && motivooStorage.isUserLoggedIn) {
             findNavController().navigate(

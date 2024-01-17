@@ -63,11 +63,11 @@ class PostInviteCodeViewModel @Inject constructor(
     }
 
     sealed class OnboardingState {
-        object Init : OnboardingState()
-        object GoToOnboarding : OnboardingState()
+        data object Init : OnboardingState()
+        data object GoToOnboarding : OnboardingState()
         data class Failure(val message: String) : OnboardingState()
-        object PassOnboarding : OnboardingState()
+        data object PassOnboarding : OnboardingState()
 
-        object SameWithMyInviteCode : OnboardingState()
+        data object SameWithMyInviteCode : OnboardingState()
     }
 }
