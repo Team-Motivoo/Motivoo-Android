@@ -2,6 +2,7 @@ package sopt.motivoo.presentation.intro
 
 import android.os.Bundle
 import android.view.View
+import android.widget.CheckBox
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,24 +29,48 @@ class TermsOfUseFragment :
         clickDoneButton()
         setupCheckAllListener()
         goToTermsWebFragment()
+        setupTermsCheckListeners()
+    }
+
+    private fun setupTermsCheckListeners() {
+        binding.clTermsOfUseAll.setOnSingleClickListener {
+            toggleCheckBox(binding.cbCheckAll)
+            termsOfUseViewModel.setAllTermsChecked(binding.cbCheckAll.isChecked)
+        }
+
+        binding.clTermsOfUse.setOnSingleClickListener {
+            toggleCheckBox(binding.cbTermsOfUseAccess)
+        }
+
+        binding.clTermsGetInfo.setOnSingleClickListener {
+            toggleCheckBox(binding.cbTermsGetInfoAccess)
+        }
+
+        binding.clTermsUseInfo.setOnSingleClickListener {
+            toggleCheckBox(binding.cbTermsUseInfoAccess)
+        }
+    }
+
+    private fun toggleCheckBox(checkBox: CheckBox) {
+        checkBox.isChecked = !checkBox.isChecked
     }
 
     private fun goToTermsWebFragment() {
         binding.tvTermsOfUseLink.setOnSingleClickListener {
             val action = TermsOfUseFragmentDirections
-                .actionTermsOfUseFragmentToWebViewFragment("https://gayeong04.notion.site/82b7d6d8cc3f4091aa0a3b41bbfc6c62?pvs=4")
+                .actionTermsOfUseFragmentToWebViewFragment(getString(R.string.terms_of_use_lnk))
             findNavController().navigate(action)
         }
 
         binding.tvTermsGetInfoLink.setOnSingleClickListener {
             val action = TermsOfUseFragmentDirections
-                .actionTermsOfUseFragmentToWebViewFragment("https://gayeong04.notion.site/e85e6a92bcce43bbac61c0de4e79cd14?pvs=4")
+                .actionTermsOfUseFragmentToWebViewFragment(getString(R.string.terms_of_get_info_lnk))
             findNavController().navigate(action)
         }
 
         binding.tvTermsUseInfoLink.setOnSingleClickListener {
             val action = TermsOfUseFragmentDirections
-                .actionTermsOfUseFragmentToWebViewFragment("https://gayeong04.notion.site/df1e215e4b2248d28a913ea27788a777?pvs=4")
+                .actionTermsOfUseFragmentToWebViewFragment(getString(R.string.terms_of_use_info_lnk))
             findNavController().navigate(action)
         }
     }
