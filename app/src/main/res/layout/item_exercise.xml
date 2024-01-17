@@ -78,11 +78,12 @@
     <TextView
         android:id="@+id/tv_item_exercise_img_bottom_txt_left"
         style="@style/B1_med"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:paddingVertical="5dp"
         android:textColor="@color/gray_900_161616"
+        app:layout_constraintEnd_toEndOf="@id/iv_item_exercise_finish_left"
         app:layout_constraintStart_toStartOf="@id/tv_item_exercise_no_image_before_exercise_left"
         app:layout_constraintTop_toBottomOf="@id/tv_item_exercise_no_image_before_exercise_left"
         tools:text="@string/exercise_today_mission" />
@@ -90,11 +91,12 @@
     <TextView
         android:id="@+id/tv_item_exercise_img_bottom_txt_right"
         style="@style/B1_med"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:paddingVertical="5dp"
         android:textColor="@color/gray_900_161616"
+        app:layout_constraintEnd_toEndOf="@id/iv_item_exercise_finish_right"
         app:layout_constraintStart_toStartOf="@id/tv_item_exercise_no_image_before_exercise_right"
         app:layout_constraintTop_toBottomOf="@id/tv_item_exercise_no_image_before_exercise_right"
         tools:text="@string/exercise_today_mission" />
