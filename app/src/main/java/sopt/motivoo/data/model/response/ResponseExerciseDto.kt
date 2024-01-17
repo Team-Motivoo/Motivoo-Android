@@ -2,7 +2,8 @@ package sopt.motivoo.data.model.response
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import sopt.motivoo.domain.entity.exercise.ExerciseInfo
+import sopt.motivoo.domain.entity.exercise.ExerciseData
+import sopt.motivoo.domain.entity.exercise.ExerciseData.ExerciseItemInfo
 
 @Serializable
 data class ResponseExerciseDto(
@@ -34,13 +35,13 @@ data class ResponseExerciseDto(
         )
     }
 
-    fun toExerciseInfo(): List<ExerciseInfo> {
-        val list: MutableList<ExerciseInfo> =
-            mutableListOf(ExerciseInfo.NoticeInfo(data.todayMission.missionContent))
+    fun toExerciseData(): ExerciseData {
+        val list: MutableList<ExerciseItemInfo> =
+            mutableListOf(ExerciseItemInfo.NoticeItemInfo(data.todayMission.missionContent))
 
         data.missionHistory.forEach {
             list.add(
-                ExerciseInfo.EachDateInfo(
+                ExerciseItemInfo.EachDateItemInfo(
                     date = it.date,
                     myMissionContent = it.myMissionContent,
                     myMissionImgUrl = it.myMissionImgUrl,
@@ -52,6 +53,6 @@ data class ResponseExerciseDto(
             )
         }
 
-        return list
+        return ExerciseData(data.userType, list)
     }
 }
