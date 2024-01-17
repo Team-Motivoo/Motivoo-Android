@@ -8,7 +8,7 @@ import coil.load
 import sopt.motivoo.R
 import sopt.motivoo.databinding.ItemExerciseBinding
 import sopt.motivoo.databinding.ItemExerciseNoticeBinding
-import sopt.motivoo.domain.entity.ExerciseInfo
+import sopt.motivoo.domain.entity.exercise.ExerciseInfo
 import sopt.motivoo.util.extension.setVisible
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -32,11 +32,11 @@ class ExerciseEachDateInfoViewHolder(private val binding: ItemExerciseBinding) :
         binding: ItemExerciseBinding,
         context: Context,
     ) {
-        if (exerciseInfoData.userType == "PARENT") {
-            binding.tvItemExerciseMyExercise.text = context.getString(R.string.exercise_my_exercise)
-            binding.tvItemExerciseParentExercise.text =
-                context.getString(R.string.exercise_child_exercise)
-        }
+//        if (exerciseInfoData.userType == "PARENT") {
+//            binding.tvItemExerciseMyExercise.text = context.getString(R.string.exercise_my_exercise)
+//            binding.tvItemExerciseParentExercise.text =
+//                context.getString(R.string.exercise_child_exercise)
+//        }
     }
 
     private fun initText(
