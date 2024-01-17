@@ -9,5 +9,6 @@ interface MotivooStorage {
     var userId: Long
     var isFinishedOnboarding: Boolean
     var inviteCode: String
+    fun logout()
     fun clear()
 }

@@ -78,6 +78,17 @@ class MotivooStorageImpl @Inject constructor(@ApplicationContext context: Contex
         }
     }
 
+    override fun logout() {
+        val userData = pref.edit()
+        userData.remove(STEP_COUNT)
+        userData.remove(USER_ID)
+        userData.remove(ACCESS_TOKEN)
+        userData.remove(REFRESH_TOKEN)
+        userData.remove(INVITE_CODE)
+        userData.remove(IS_LOGIN)
+        userData.apply()
+    }
+
     companion object {
         private const val FILE_NAME = "MtDataStore"
         private const val NAME = "name"
