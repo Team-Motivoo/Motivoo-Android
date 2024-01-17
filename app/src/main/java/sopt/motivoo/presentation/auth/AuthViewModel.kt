@@ -24,12 +24,20 @@ class AuthViewModel @Inject constructor(
     private val _loginState = MutableStateFlow<UiState<Boolean>>(UiState.Loading)
     val loginState get() = _loginState.asStateFlow()
 
+    private val _logoutState = MutableStateFlow<UiState<Boolean>>(UiState.Loading)
+    val logoutState get() = _logoutState.asStateFlow()
+
+
     private fun setAutoLogin() {
         motivooStorage.isUserLoggedIn = true
     }
 
     fun resetLoginState() {
         _loginState.value = UiState.Loading
+    }
+
+    fun resetLogoutState() {
+        _logoutState.value = UiState.Loading
     }
 
     fun postLogin(
@@ -57,6 +65,18 @@ class AuthViewModel @Inject constructor(
         _loginState.value = UiState.Success(true)
         setAutoLogin()
     }
+
+    fun postLogout() {
+        viewModelScope.launch {
+            authRepository.postLogout()
+                .onSuccess {
+                    _logoutState.value = UiState.Success(true)
+                }.onFailure { throwable ->
+                    _logoutState.value = UiState.Failure(throwable.message.toString())
+                }
+        }
+    }
+
 
     companion object {
         const val BEARER_PREFIX = "Bearer "

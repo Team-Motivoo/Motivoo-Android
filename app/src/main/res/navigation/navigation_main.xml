@@ -240,9 +240,6 @@
         <action
             android:id="@+id/action_myLogout_to_loginFragment"
             app:destination="@id/loginFragment" />
-        <action
-            android:id="@+id/action_myLogout_to_myInfoFragment"
-            app:destination="@id/myInfoFragment" />
     </dialog>
     <fragment
         android:id="@+id/permissionFragment"
