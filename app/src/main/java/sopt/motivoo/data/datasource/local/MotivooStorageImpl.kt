@@ -35,10 +35,6 @@ class MotivooStorageImpl @Inject constructor(@ApplicationContext context: Contex
         get() = pref.getInt(STEP_COUNT, 0)
         set(value) = pref.edit { putInt(STEP_COUNT, value) }
 
-    override var nickName: String
-        get() = pref.getString(NAME, "") ?: ""
-        set(value) = pref.edit { putString(NAME, value) }
-
     override var userId: Long
         set(value) = pref.edit { putLong(USER_ID, value) }
         get() = pref.getLong(USER_ID, 0L)

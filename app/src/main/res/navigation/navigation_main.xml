@@ -235,9 +235,6 @@
         <action
             android:id="@+id/action_myServiceOut_to_loginFragment"
             app:destination="@id/loginFragment" />
-        <action
-            android:id="@+id/action_myServiceOut_to_myInfoFragment"
-            app:destination="@id/myInfoFragment" />
     </dialog>
     <dialog
         android:id="@+id/myLogoutFragment"
@@ -246,9 +243,6 @@
         <action
             android:id="@+id/action_myLogout_to_loginFragment"
             app:destination="@id/loginFragment" />
-        <action
-            android:id="@+id/action_myLogout_to_myInfoFragment"
-            app:destination="@id/myInfoFragment" />
     </dialog>
     <fragment
         android:id="@+id/permissionFragment"
@@ -283,6 +277,13 @@
         <action
             android:id="@+id/action_termsOfUseFragment_to_startMotivooFragment"
             app:destination="@id/startMotivooFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_termsOfUseFragment_to_webViewFragment"
+            app:destination="@id/webViewFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
