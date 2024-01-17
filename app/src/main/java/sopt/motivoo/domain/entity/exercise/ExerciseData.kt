@@ -19,5 +19,4 @@ class ExerciseData(
             val missionContent: String,
         ) : ExerciseItemInfo()
     }
-
 }
