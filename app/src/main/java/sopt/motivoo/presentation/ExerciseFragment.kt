@@ -44,8 +44,8 @@ class ExerciseFragment : BindingFragment<FragmentExerciseBinding>(R.layout.fragm
         if (exerciseData.exerciseItemInfoList.isEmpty()) {
             setRecyclerViewVisibility(false)
             setEmptyViewVisibility(true)
-            initAdapter(exerciseData)
         } else {
+            initAdapter(exerciseData)
             setRecyclerViewVisibility(true)
             setEmptyViewVisibility(false)
         }
@@ -69,6 +69,6 @@ class ExerciseFragment : BindingFragment<FragmentExerciseBinding>(R.layout.fragm
 
     companion object {
         const val PARENT = "부모"
-        const val CHILD = "자식"
+        const val CHILD = "자녀"
     }
 }
