@@ -14,7 +14,7 @@ data class ResponseExerciseDto(
     @Serializable
     data class ExerciseHistoryData(
         @SerialName("user_type") val userType: String,
-        @SerialName("") val todayMission: MissionContent,
+        @SerialName("today_mission") val todayMission: MissionContent,
         @SerialName("mission_history") val missionHistory: List<MissionHistory>,
     ) {
         @Serializable
