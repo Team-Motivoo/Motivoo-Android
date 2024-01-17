@@ -31,10 +31,13 @@ class MotivooStorageImpl @Inject constructor(@ApplicationContext context: Contex
         }
     }
 
-    override var stepCount: Int
-        get() = pref.getInt(STEP_COUNT, 0)
-        set(value) = pref.edit { putInt(STEP_COUNT, value) }
+    override var myStepCount: Int
+        get() = pref.getInt(MY_STEP_COUNT, 0)
+        set(value) = pref.edit { putInt(MY_STEP_COUNT, value) }
 
+    override var otherStepCount: Int
+        get() = pref.getInt(OTHER_GOAL_STEP_COUNT, 0)
+        set(value) = pref.edit { putInt(OTHER_STEP_COUNT, value) }
     override var nickName: String
         get() = pref.getString(NAME, "") ?: ""
         set(value) = pref.edit { putString(NAME, value) }
@@ -61,6 +64,14 @@ class MotivooStorageImpl @Inject constructor(@ApplicationContext context: Contex
         set(value) = pref.edit { putBoolean(IS_LOGIN, value) }
         get() = pref.getBoolean(IS_LOGIN, false)
 
+    override var myGoalStepCount: Int
+        get() = pref.getInt(MY_GOAL_STEP_COUNT, 0)
+        set(value) = pref.edit { putInt(MY_GOAL_STEP_COUNT, value) }
+
+    override var otherGoalStepCount: Int
+        get() = pref.getInt(OTHER_GOAL_STEP_COUNT, 0)
+        set(value) = pref.edit { putInt(OTHER_GOAL_STEP_COUNT, value) }
+
     override fun clear() {
         pref.edit {
             clear()
@@ -70,10 +81,13 @@ class MotivooStorageImpl @Inject constructor(@ApplicationContext context: Contex
     companion object {
         private const val FILE_NAME = "MtDataStore"
         private const val NAME = "name"
-        private const val STEP_COUNT = "step_count"
+        private const val MY_STEP_COUNT = "my_step_count"
+        private const val OTHER_STEP_COUNT = "other_step_count"
         const val ACCESS_TOKEN = "accessToken"
         const val REFRESH_TOKEN = "refreshToken"
         private const val IS_LOGIN = "isLogin"
         private const val USER_ID = "userId"
+        private const val MY_GOAL_STEP_COUNT = "my_goal_step_count"
+        private const val OTHER_GOAL_STEP_COUNT = "other_goal_step_count"
     }
 }

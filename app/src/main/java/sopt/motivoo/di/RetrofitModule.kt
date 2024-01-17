@@ -72,8 +72,9 @@ object RetrofitModule {
 
     @Provides
     @Singleton
-    fun providesRetrofit(okHttpClient: OkHttpClient): Retrofit =
-        Retrofit.Builder().baseUrl(BASE_URL).client(okHttpClient).addConverterFactory(
+    fun providesRetrofit(okHttpClient: OkHttpClient): Retrofit {
+        return Retrofit.Builder().baseUrl(BASE_URL).client(okHttpClient).addConverterFactory(
             Json.asConverterFactory("application/json".toMediaType()),
         ).build()
+    }
 }

@@ -21,6 +21,7 @@ import coil.request.ImageRequest
 import com.google.android.material.snackbar.Snackbar
 import sopt.motivoo.R
 import sopt.motivoo.presentation.MainActivity
+import timber.log.Timber
 import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStream
@@ -64,6 +65,7 @@ fun Context.showKeyboard(view: View) {
 }
 
 fun Context.sendNotification(
+    title:String,
     messageBody: String
 ): Notification {
     val contentIntent = Intent(applicationContext, MainActivity::class.java)
@@ -76,9 +78,7 @@ fun Context.sendNotification(
         applicationContext.getString(R.string.step_count_notification_channel_id)
     ).apply {
         setSmallIcon(R.drawable.ic_clap_sound)
-        setContentTitle(
-            applicationContext.getString(R.string.step_count_notification_channel_title)
-        )
+        setContentTitle(title)
         setContentText(messageBody)
         setContentIntent(contentPendingIntent)
         setAutoCancel(true)
@@ -89,15 +89,13 @@ fun Context.sendNotification(
     }.build()
 }
 
-// TODO:: 비트맵 파일 변환 예시 코드
-fun Context.bitmapToFile(bitmap: Bitmap, saveName: String): File {
+fun Context.bitmapToFile(bitmap: Bitmap, fileName: String): File {
     val saveDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-        .toString() + saveName
-    val file = File(saveDir)
-    if (!file.exists()) file.mkdirs()
-
-    val fileName = "$saveName.jpg"
     val tempFile = File(saveDir, fileName)
+
+    if (!tempFile.parentFile.exists()) {
+        tempFile.parentFile.mkdirs()
+    }
 
     var out: OutputStream? = null
     try {

@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/navigation_main"
-    app:startDestination="@id/splashFragment">
+    app:startDestination="@id/homeFragment">
 
     <fragment
         android:id="@+id/splashFragment"
@@ -32,8 +32,10 @@
         android:label="HomeFragment">
         <action
             android:id="@+id/action_homeFragment_to_homeBottomSheetFragment"
-            app:destination="@id/homeBottomSheetFragment"
-            app:popUpToInclusive="true" />
+            app:destination="@id/homeBottomSheetFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_webViewFragment"
+            app:destination="@+id/webViewFragment" />
     </fragment>
     <fragment
         android:id="@+id/myPageFragment"
