@@ -1,7 +1,6 @@
 package sopt.motivoo.presentation
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -10,7 +9,6 @@ import sopt.motivoo.R
 import sopt.motivoo.databinding.FragmentMypageExerciseInfoBinding
 import sopt.motivoo.presentation.my_exercise_info.MyExerciseInfoViewModel
 import sopt.motivoo.util.binding.BindingFragment
-import timber.log.Timber
 
 @AndroidEntryPoint
 class MyExerciseInfoFragment :
@@ -26,13 +24,18 @@ class MyExerciseInfoFragment :
     }
 
     private fun observeLiveData() {
-        myExerciseInfoViewModel.myExerciseInfo.observe(viewLifecycleOwner) {
-            binding.tvExerciseInfoOrNotAnswer.text = it.isExercise.toString()
-            binding.tvExerciseInfoIntensityAnswer.text = it.exerciseType
-            binding.tvExerciseInfoAverageCountAnswer.text = it.exerciseFrequency
-            binding.tvExerciseInfoAverageTimeAnswer.text = it.exerciseTime
-            binding.tvExerciseInfoWatchOutAnswer.text = it.healthNotes.toString()
-            Log.d("test",it.healthNotes.toString())
+        with(binding) {
+            myExerciseInfoViewModel.myExerciseInfo.observe(viewLifecycleOwner) {
+                if (it.isExercise) {
+                    tvExerciseInfoOrNotAnswer.text = getString(R.string.yes)
+                } else {
+                    tvExerciseInfoOrNotAnswer.text = getString(R.string.no)
+                }
+                binding.tvExerciseInfoIntensityAnswer.text = it.exerciseType
+                binding.tvExerciseInfoAverageCountAnswer.text = it.exerciseFrequency
+                binding.tvExerciseInfoAverageTimeAnswer.text = it.exerciseTime
+                binding.tvExerciseInfoWatchOutAnswer.text = it.healthNotes.joinToString(", ")
+            }
         }
     }
 
