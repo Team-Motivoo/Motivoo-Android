@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class GetInviteCodeViewModel @Inject constructor(
-    private val motivooStorage: MotivooStorage
+    private val motivooStorage: MotivooStorage,
     private val onboardingRepository: OnboardingRepository,
 ) : ViewModel() {
 
