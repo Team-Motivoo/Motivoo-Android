@@ -52,7 +52,11 @@
     <fragment
         android:id="@+id/exerciseFragment"
         android:name="sopt.motivoo.presentation.ExerciseFragment"
-        android:label="ExerciseFragment" />
+        android:label="ExerciseFragment" >
+        <action
+            android:id="@+id/action_exerciseFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/webViewFragment"
         android:name="sopt.motivoo.presentation.WebViewFragment"
