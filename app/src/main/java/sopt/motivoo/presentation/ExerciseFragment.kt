@@ -2,13 +2,19 @@ package sopt.motivoo.presentation
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import sopt.motivoo.R
 import sopt.motivoo.databinding.FragmentExerciseBinding
 import sopt.motivoo.domain.entity.ExerciseInfo
 import sopt.motivoo.presentation.exercise.ExerciseAdapter
+import sopt.motivoo.presentation.exercise.ExerciseViewModel
 import sopt.motivoo.util.binding.BindingFragment
 
+@AndroidEntryPoint
 class ExerciseFragment : BindingFragment<FragmentExerciseBinding>(R.layout.fragment_exercise) {
+
+    private val exerciseViewModel by viewModels<ExerciseViewModel>()
 
     private val mockExerciseList = listOf<ExerciseInfo>(
         ExerciseInfo.NoticeInfo(
@@ -38,7 +44,16 @@ class ExerciseFragment : BindingFragment<FragmentExerciseBinding>(R.layout.fragm
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        exerciseViewModel.getExerciseHistoryInfo()
+        observeLiveData()
+
+
         binding.rvExerciseEachDateExercise.adapter = ExerciseAdapter()
         ExerciseAdapter().setExerciseList(mockExerciseList)
+    }
+
+    private fun observeLiveData() {
+        exerciseViewModel.exerciseHistoryInfo.observe(viewLifecycleOwner) {
+        }
     }
 }

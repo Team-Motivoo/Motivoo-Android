@@ -16,3 +16,4 @@ sealed class ExerciseInfo {
         val missionContent: String,
     ) : ExerciseInfo()
 }
+
