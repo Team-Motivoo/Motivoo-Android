@@ -36,10 +36,10 @@
     <string name="what_activity_description">가장 많이 하는 활동을 기준으로 선택해주세요</string>
     <string name="frequency_exercise_title">일주일에 운동을\n몇 번 하시나요?</string>
     <string name="frequency_activity_title">해당 활동을 일주일에\n몇 번 하시나요?</string>
-    <string name="frequency_under_one">1일 이하</string>
-    <string name="frequency_one_to_three">1일 - 3일 이내</string>
-    <string name="frequency_three_to_five">3일 - 5일 이내</string>
-    <string name="frequency_over_five">5일 - 매일</string>
+    <string name="frequency_under_one">1회 미만</string>
+    <string name="frequency_one_to_three">1-2회</string>
+    <string name="frequency_three_to_five">3-4회</string>
+    <string name="frequency_over_five">5회 이상</string>
     <string name="time_under_thirty">30분 미만</string>
     <string name="time_thirty_to_one">30분 - 1시간</string>
     <string name="time_one_to_two">1시간 - 2시간</string>
@@ -122,7 +122,7 @@
     <string name="permission_camera_title">카메라</string>
     <string name="permission_gallery_title">사진</string>
     <string name="permission_gallery_description">사진 기능으로 운동을 인증할 수 있어요</string>
-    <string name="permission_caution">허용하지 않아도 앱을 이용할 수 있으나, 일부\n서비스 이용이 제한될 수 있어요. 거부 후 설정에서\n다시 허용할 수 있어요.</string>
+    <string name="permission_caution">허용하지 않아도 앱을 이용할 수 있으나, 일부 서비스 이용이 제한될 수 있어요. 거부 후 설정에서 다시 허용할 수 있어요.</string>
 
     <!-- invite code -->
     <string name="get_invite_code_title">초대받은 코드를\n붙여넣거나 입력해주세요</string>
@@ -161,6 +161,9 @@
     <string name="terms_of_use_link"><u>보기</u></string>
     <string name="terms_get_info_access">개인정보수집 및 이용 동의</string>
     <string name="terms_use_info_access">개인정보 처리방침 동의</string>
+    <string name="terms_of_use_lnk">https://gayeong04.notion.site/82b7d6d8cc3f4091aa0a3b41bbfc6c62?pvs=4</string>
+    <string name="terms_of_get_info_lnk">https://gayeong04.notion.site/e85e6a92bcce43bbac61c0de4e79cd14?pvs=4</string>
+    <string name="terms_of_use_info_lnk">https://gayeong04.notion.site/df1e215e4b2248d28a913ea27788a777?pvs=4</string>
 
     <!-- login -->
     <string name="login_kakao">카카오 로그인하기</string>

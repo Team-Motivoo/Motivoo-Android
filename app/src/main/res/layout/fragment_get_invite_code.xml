@@ -12,18 +12,23 @@
         android:layout_height="match_parent"
         tools:context=".presentation.invitecode.GetInviteCodeFragment">
 
+        <include
+            android:id="@+id/include_get_invite_code_toolbar"
+            layout="@layout/view_onboarding_toolbar"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/tv_get_invite_code_description"
             style="@style/H4_semi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="110dp"
+            android:layout_marginTop="50dp"
             android:gravity="center"
             android:text="@string/get_invite_code_title"
             android:textColor="@color/gray_900_161616"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/include_get_invite_code_toolbar" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_get_invite_code"
@@ -32,6 +37,8 @@
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="32dp"
             android:background="@drawable/shape_get_invite_code_radius8"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_get_invite_code_description">
 
             <TextView

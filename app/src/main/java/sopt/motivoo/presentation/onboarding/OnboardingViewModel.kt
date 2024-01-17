@@ -2,6 +2,7 @@ package sopt.motivoo.presentation.onboarding
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -12,6 +13,9 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import sopt.motivoo.data.model.request.onboarding.RequestOnboardingDto
+import sopt.motivoo.domain.entity.MotivooStorage
+import sopt.motivoo.domain.repository.OnboardingRepository
 import sopt.motivoo.presentation.type.DoExerciseType
 import sopt.motivoo.presentation.type.FrequencyType
 import sopt.motivoo.presentation.type.SoreSpotType
@@ -19,8 +23,18 @@ import sopt.motivoo.presentation.type.TimeType
 import sopt.motivoo.presentation.type.UserType
 import sopt.motivoo.presentation.type.WhatActivityType
 import sopt.motivoo.presentation.type.WhatExerciseType
+import sopt.motivoo.util.UiState
+import timber.log.Timber
+import javax.inject.Inject
 
-class OnboardingViewModel : ViewModel() {
+@HiltViewModel
+class OnboardingViewModel @Inject constructor(
+    private val motivooStorage: MotivooStorage,
+    private val onboardingRepository: OnboardingRepository
+) : ViewModel() {
+
+    private val _inviteCode = MutableStateFlow<String?>(null)
+    val inviteCode get() = _inviteCode.asStateFlow()
 
     private val _userType = MutableStateFlow<UserType?>(null)
     val userType get() = _userType.asStateFlow()
@@ -84,6 +98,9 @@ class OnboardingViewModel : ViewModel() {
         ),
     )
 
+    private val _isPostOnboardingInfoSuccess = MutableStateFlow<UiState<Boolean>>(UiState.Loading)
+    val isPostOnboardingInfoSuccess get() = _isPostOnboardingInfoSuccess.asStateFlow()
+
     fun setDoExerciseType(doExerciseType: DoExerciseType) {
         _doExerciseType.value = doExerciseType
         viewModelScope.launch {
@@ -133,5 +150,43 @@ class OnboardingViewModel : ViewModel() {
 
     fun setUserType(userType: UserType) {
         _userType.value = userType
+    }
+
+    fun postOnboardingInfo(
+        userTypeString: String,
+        whatExerciseTypeString: String,
+        whatActivityTypeString: String,
+        frequencyTypeString: String,
+        timeTypeString: String,
+        isDoExercise: Boolean,
+        selectedSoreSpotString: List<String>
+    ) {
+        viewModelScope.launch {
+            resetOnboardingFinishedState()
+            val exerciseType = if (isDoExercise) whatExerciseTypeString else whatActivityTypeString
+            val requestDto = RequestOnboardingDto(
+                age = age.value?.toIntOrNull() ?: 0,
+                exerciseCount = frequencyTypeString,
+                exerciseNote = selectedSoreSpotString,
+                exerciseTime = timeTypeString,
+                exerciseType = exerciseType,
+                isExercise = isDoExercise,
+                type = userTypeString
+            )
+            onboardingRepository.postOnboardingInfo(requestDto)
+                .onSuccess {
+                    it.inviteCode.let { inviteCode ->
+                        _inviteCode.value = inviteCode
+                        motivooStorage.inviteCode = inviteCode.toString()
+                    }
+                    _isPostOnboardingInfoSuccess.value = UiState.Success(true)
+                }.onFailure {
+                    Timber.e(it.message)
+                }
+        }
+    }
+
+    fun resetOnboardingFinishedState() {
+        _isPostOnboardingInfoSuccess.value = UiState.Loading
     }
 }
