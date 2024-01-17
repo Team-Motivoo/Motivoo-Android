@@ -3,6 +3,7 @@ package sopt.motivoo.presentation
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import sopt.motivoo.R
 import sopt.motivoo.databinding.FragmentExerciseBinding
@@ -19,7 +20,14 @@ class ExerciseFragment : BindingFragment<FragmentExerciseBinding>(R.layout.fragm
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         exerciseViewModel.getExerciseHistoryInfo()
+        setClickEvents()
         observeLiveData()
+    }
+
+    private fun setClickEvents() {
+        binding.tvExerciseEmptyBtn.setOnClickListener {
+            findNavController().navigate(R.id.action_exerciseFragment_to_homeFragment)
+        }
     }
 
     private fun observeLiveData() {
