@@ -6,6 +6,9 @@ interface MotivooStorage {
     var accessToken: String
     var refreshToken: String
     var isUserLoggedIn: Boolean
+    var isUserMatched: Boolean
     var userId: Long
+    var isFinishedOnboarding: Boolean
+    var inviteCode: String
     fun clear()
 }

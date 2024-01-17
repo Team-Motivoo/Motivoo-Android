@@ -1,4 +1,4 @@
-package sopt.motivoo.data.model.request
+package sopt.motivoo.data.model.request.auth
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
