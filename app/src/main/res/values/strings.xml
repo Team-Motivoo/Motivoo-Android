@@ -170,4 +170,11 @@
     <string name="motivoo_start_description">자녀와 부모를 잇는\n매일 한 걸음</string>
     <string name="login_error_message">로그인을 다시 한 번 시도해주세요</string>
 
+    <!-- webview url-->
+    <string name="service_use_url">https://gayeong04.notion.site/82b7d6d8cc3f4091aa0a3b41bbfc6c62?pvs=4</string>
+    <string name="privacy_policy_url">https://gayeong04.notion.site/df1e215e4b2248d28a913ea27788a777?pvs=4</string>
+    <string name="open_source_url">https://gayeong04.notion.site/c78b181acf8a41f28f2ed653db998650?pvs=4</string>
+    <string name="developer_info_url">https://gayeong04.notion.site/39aa420262384587957479ca4da2ba2e?pvs=4</string>
+    <string name="ask_kakao_url">https://gayeong04.notion.site/08592ddcf3bf4a3b80e3c54110444ebf?pvs=4</string>
+
 </resources>
