@@ -30,7 +30,6 @@ class MyExerciseInfoViewModel @Inject constructor(
                     it.data.exerciseTime,
                     it.data.healthNotes
                 )
-
             }.onFailure {
                 Timber.e(it.message)
             }
