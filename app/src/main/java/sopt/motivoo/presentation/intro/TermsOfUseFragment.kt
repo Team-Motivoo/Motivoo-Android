@@ -27,6 +27,27 @@ class TermsOfUseFragment :
         goToBack()
         clickDoneButton()
         setupCheckAllListener()
+        goToTermsWebFragment()
+    }
+
+    private fun goToTermsWebFragment() {
+        binding.tvTermsOfUseLink.setOnSingleClickListener {
+            val action = TermsOfUseFragmentDirections
+                .actionTermsOfUseFragmentToWebViewFragment("https://gayeong04.notion.site/82b7d6d8cc3f4091aa0a3b41bbfc6c62?pvs=4")
+            findNavController().navigate(action)
+        }
+
+        binding.tvTermsGetInfoLink.setOnSingleClickListener {
+            val action = TermsOfUseFragmentDirections
+                .actionTermsOfUseFragmentToWebViewFragment("https://gayeong04.notion.site/e85e6a92bcce43bbac61c0de4e79cd14?pvs=4")
+            findNavController().navigate(action)
+        }
+
+        binding.tvTermsUseInfoLink.setOnSingleClickListener {
+            val action = TermsOfUseFragmentDirections
+                .actionTermsOfUseFragmentToWebViewFragment("https://gayeong04.notion.site/df1e215e4b2248d28a913ea27788a777?pvs=4")
+            findNavController().navigate(action)
+        }
     }
 
     private fun clickDoneButton() {
