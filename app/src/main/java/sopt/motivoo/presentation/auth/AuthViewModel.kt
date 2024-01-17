@@ -88,7 +88,6 @@ class AuthViewModel @Inject constructor(
         }
     }
 
-
     companion object {
         const val BEARER_PREFIX = "Bearer "
     }

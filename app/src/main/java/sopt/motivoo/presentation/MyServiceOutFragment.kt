@@ -26,7 +26,6 @@ class MyServiceOutFragment :
     @Inject
     lateinit var kakaoAuthService: KakaoAuthService
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setLayoutSizeRatio(widthPercent = 1f, heightPercent = 1f)

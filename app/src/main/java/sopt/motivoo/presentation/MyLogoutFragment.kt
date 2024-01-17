@@ -68,5 +68,4 @@ class MyLogoutFragment :
 
         navController.navigate(R.id.action_myLogout_to_loginFragment, null, navOptions)
     }
-
 }

@@ -1,6 +1,5 @@
 package sopt.motivoo.data.model.response.auth
 
-
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

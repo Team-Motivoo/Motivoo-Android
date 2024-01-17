@@ -19,5 +19,4 @@ interface AuthService {
 
     @DELETE("withdraw")
     suspend fun deleteWithDraw(): ResponseWithDrawDto
-
 }
