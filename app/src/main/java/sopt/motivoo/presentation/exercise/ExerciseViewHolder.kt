@@ -51,7 +51,12 @@ class ExerciseEachDateInfoViewHolder(private val binding: ItemExerciseBinding) :
     ) {
         with(binding) {
             ivItemExerciseFinishLeft.load(exerciseItemInfoData.myMissionImgUrl)
-            ivItemExerciseFinishRight.load(exerciseItemInfoData.opponentMissionImgUrl)
+            if (exerciseItemInfoData.myMissionImgUrl == null) {
+                ivItemExerciseFinishLeft.visibility = View.GONE
+            }
+            if (exerciseItemInfoData.opponentMissionImgUrl == null) {
+                ivItemExerciseFinishRight.visibility = View.GONE
+            }
         }
     }
 
