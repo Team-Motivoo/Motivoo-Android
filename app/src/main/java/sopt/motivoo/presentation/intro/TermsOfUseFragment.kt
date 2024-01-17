@@ -32,6 +32,7 @@ class TermsOfUseFragment :
     private fun clickDoneButton() {
         binding.btnTermsOfUseDone.setOnSingleClickListener {
             findNavController().navigate(R.id.action_termsOfUseFragment_to_startMotivooFragment)
+            motivooStorage.isUserLoggedIn = true
         }
     }
 

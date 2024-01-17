@@ -1,10 +1,12 @@
 package sopt.motivoo.data.service
 
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.POST
 import sopt.motivoo.data.model.request.auth.RequestLoginDto
 import sopt.motivoo.data.model.response.auth.ResponseLoginDto
 import sopt.motivoo.data.model.response.auth.ResponseLogoutDto
+import sopt.motivoo.data.model.response.auth.ResponseWithDrawDto
 
 interface AuthService {
     @POST("oauth/login")
@@ -14,4 +16,8 @@ interface AuthService {
 
     @POST("oauth/logout")
     suspend fun postLogout(): ResponseLogoutDto
+
+    @DELETE("withdraw")
+    suspend fun deleteWithDraw(): ResponseWithDrawDto
+
 }

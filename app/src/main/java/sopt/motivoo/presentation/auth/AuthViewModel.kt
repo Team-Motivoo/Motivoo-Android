@@ -27,10 +27,8 @@ class AuthViewModel @Inject constructor(
     private val _logoutState = MutableStateFlow<UiState<Boolean>>(UiState.Loading)
     val logoutState get() = _logoutState.asStateFlow()
 
-
-    private fun setAutoLogin() {
-        motivooStorage.isUserLoggedIn = true
-    }
+    private val _withDrawState = MutableStateFlow<UiState<Boolean>>(UiState.Loading)
+    val withDrawState get() = _withDrawState.asStateFlow()
 
     fun resetLoginState() {
         _loginState.value = UiState.Loading
@@ -38,6 +36,10 @@ class AuthViewModel @Inject constructor(
 
     fun resetLogoutState() {
         _logoutState.value = UiState.Loading
+    }
+
+    fun resetWithDrawState() {
+        _withDrawState.value = UiState.Loading
     }
 
     fun postLogin(
@@ -59,11 +61,9 @@ class AuthViewModel @Inject constructor(
 
     private fun handleLoginSuccess(signUpResponse: LoginInfo) {
         motivooStorage.userId = signUpResponse.id
-        motivooStorage.nickName = signUpResponse.nickName
         motivooStorage.accessToken = BEARER_PREFIX + signUpResponse.accessToken
         motivooStorage.refreshToken = BEARER_PREFIX + signUpResponse.refreshToken
         _loginState.value = UiState.Success(true)
-        setAutoLogin()
     }
 
     fun postLogout() {
@@ -73,6 +73,17 @@ class AuthViewModel @Inject constructor(
                     _logoutState.value = UiState.Success(true)
                 }.onFailure { throwable ->
                     _logoutState.value = UiState.Failure(throwable.message.toString())
+                }
+        }
+    }
+
+    fun withDraw() {
+        viewModelScope.launch {
+            authRepository.deleteWithDraw()
+                .onSuccess {
+                    _withDrawState.value = UiState.Success(true)
+                }.onFailure { throwable ->
+                    _withDrawState.value = UiState.Failure(throwable.message.toString())
                 }
         }
     }

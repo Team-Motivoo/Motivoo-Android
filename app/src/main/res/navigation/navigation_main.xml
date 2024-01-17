@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/navigation_main"
-    app:startDestination="@id/loadingFragment">
+    app:startDestination="@id/splashFragment">
 
     <fragment
         android:id="@+id/splashFragment"
@@ -229,9 +229,6 @@
         <action
             android:id="@+id/action_myServiceOut_to_loginFragment"
             app:destination="@id/loginFragment" />
-        <action
-            android:id="@+id/action_myServiceOut_to_myInfoFragment"
-            app:destination="@id/myInfoFragment" />
     </dialog>
     <dialog
         android:id="@+id/myLogoutFragment"
