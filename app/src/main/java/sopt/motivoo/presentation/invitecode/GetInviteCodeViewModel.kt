@@ -6,6 +6,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import sopt.motivoo.domain.entity.MotivooStorage
 import sopt.motivoo.domain.repository.OnboardingRepository
 import sopt.motivoo.util.UiState
 import timber.log.Timber
@@ -13,6 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class GetInviteCodeViewModel @Inject constructor(
+    private val motivooStorage: MotivooStorage,
     private val onboardingRepository: OnboardingRepository,
 ) : ViewModel() {
 
@@ -25,6 +27,7 @@ class GetInviteCodeViewModel @Inject constructor(
             onboardingRepository.getInviteCode()
                 .onSuccess {
                     if (it.isMatched) {
+                        motivooStorage.isUserMatched = true
                         _checkMatchState.value = UiState.Success(true)
                     }
                 }.onFailure {
