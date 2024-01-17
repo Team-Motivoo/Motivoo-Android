@@ -7,6 +7,7 @@ import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import sopt.motivoo.data.service.AuthService
 import sopt.motivoo.data.service.DummyService
+import sopt.motivoo.data.service.ExerciseService
 import sopt.motivoo.data.service.MyPageService
 import javax.inject.Singleton
 
@@ -26,4 +27,8 @@ object ServiceModule {
     @Provides
     @Singleton
     fun provideMyPageService(retrofit: Retrofit): MyPageService = retrofit.create()
+
+    @Provides
+    @Singleton
+    fun provideExerciseService(retrofit: Retrofit): ExerciseService = retrofit.create()
 }
