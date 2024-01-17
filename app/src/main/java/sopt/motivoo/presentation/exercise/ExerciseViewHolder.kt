@@ -8,7 +8,8 @@ import coil.load
 import sopt.motivoo.R
 import sopt.motivoo.databinding.ItemExerciseBinding
 import sopt.motivoo.databinding.ItemExerciseNoticeBinding
-import sopt.motivoo.domain.entity.exercise.ExerciseInfo
+import sopt.motivoo.domain.entity.exercise.ExerciseData.ExerciseItemInfo
+import sopt.motivoo.presentation.ExerciseFragment.Companion.CHILD
 import sopt.motivoo.util.extension.setVisible
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -17,63 +18,55 @@ import java.util.Locale
 class ExerciseEachDateInfoViewHolder(private val binding: ItemExerciseBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
-    fun onBind(exerciseInfoData: ExerciseInfo.EachDateInfo) {
+    fun onBind(exerciseItemInfoData: ExerciseItemInfo.EachDateItemInfo, userType: String) {
         val context = binding.root.context
-        changePosition(exerciseInfoData, binding, context)
-        initText(exerciseInfoData, binding)
-        initImage(exerciseInfoData, binding)
-        imageVisibility(exerciseInfoData, binding)
-        checkStatus(exerciseInfoData, binding, context)
+        initText(exerciseItemInfoData, binding, userType)
+        initImage(exerciseItemInfoData, binding)
+        imageVisibility(exerciseItemInfoData, binding)
+        checkStatus(exerciseItemInfoData, binding, context)
         compareDate(binding, context)
     }
 
-    private fun changePosition(
-        exerciseInfoData: ExerciseInfo.EachDateInfo,
-        binding: ItemExerciseBinding,
-        context: Context,
-    ) {
-//        if (exerciseInfoData.userType == "PARENT") {
-//            binding.tvItemExerciseMyExercise.text = context.getString(R.string.exercise_my_exercise)
-//            binding.tvItemExerciseParentExercise.text =
-//                context.getString(R.string.exercise_child_exercise)
-//        }
-    }
-
     private fun initText(
-        exerciseInfoData: ExerciseInfo.EachDateInfo,
+        exerciseItemInfoData: ExerciseItemInfo.EachDateItemInfo,
         binding: ItemExerciseBinding,
+        userType: String,
     ) {
         with(binding) {
-            tvItemExerciseDate.text = exerciseInfoData.date
-            tvItemExerciseImgBottomTxtLeft.text = exerciseInfoData.myMissionContent
-            tvItemExerciseImgBottomTxtRight.text = exerciseInfoData.opponentMissionContent
-            tvItemExerciseMyState.text = exerciseInfoData.myMissionStatus
-            tvItemExerciseParentState.text = exerciseInfoData.opponentMissionStatus
+            tvItemExerciseDate.text = exerciseItemInfoData.date
+            tvItemExerciseImgBottomTxtLeft.text = exerciseItemInfoData.myMissionContent
+            tvItemExerciseImgBottomTxtRight.text = exerciseItemInfoData.opponentMissionContent
+            tvItemExerciseMyState.text = exerciseItemInfoData.myMissionStatus
+            tvItemExerciseParentState.text = exerciseItemInfoData.opponentMissionStatus
+            tvItemExerciseParentExercise.text =
+                if (userType == CHILD) root.context.getString(R.string.exercise_parent_exercise) else root.context.getString(
+                    R.string.exercise_child_exercise
+                )
         }
     }
 
     private fun initImage(
-        exerciseInfoData: ExerciseInfo.EachDateInfo,
+        exerciseItemInfoData: ExerciseItemInfo.EachDateItemInfo,
         binding: ItemExerciseBinding,
     ) {
         with(binding) {
-            ivItemExerciseFinishLeft.load(exerciseInfoData.myMissionImgUrl)
-            ivItemExerciseFinishRight.load(exerciseInfoData.opponentMissionImgUrl)
+            ivItemExerciseFinishLeft.load(exerciseItemInfoData.myMissionImgUrl)
+            ivItemExerciseFinishRight.load(exerciseItemInfoData.opponentMissionImgUrl)
         }
     }
 
     private fun imageVisibility(
-        exerciseInfoData: ExerciseInfo.EachDateInfo,
+        exerciseItemInfoData: ExerciseItemInfo.EachDateItemInfo,
         binding: ItemExerciseBinding,
     ) {
-        if (exerciseInfoData.myMissionImgUrl == null) {
+        if (exerciseItemInfoData.myMissionImgUrl == null) {
             binding.ivItemExerciseFinishLeft.setVisible(View.INVISIBLE)
             binding.tvItemExerciseNoImageBeforeExerciseLeft.setVisible(View.VISIBLE)
         } else {
             binding.ivItemExerciseFinishLeft.setVisible(View.VISIBLE)
             binding.tvItemExerciseNoImageBeforeExerciseLeft.setVisible(View.INVISIBLE)
         }
-        if (exerciseInfoData.opponentMissionImgUrl == null) {
+        if (exerciseItemInfoData.opponentMissionImgUrl == null) {
             binding.ivItemExerciseFinishRight.setVisible(View.INVISIBLE)
             binding.tvItemExerciseNoImageBeforeExerciseRight.setVisible(View.VISIBLE)
         } else {
@@ -83,11 +76,11 @@ class ExerciseEachDateInfoViewHolder(private val binding: ItemExerciseBinding) :
     }
 
     private fun checkStatus(
-        exerciseInfoData: ExerciseInfo.EachDateInfo,
+        exerciseItemInfoData: ExerciseItemInfo.EachDateItemInfo,
         binding: ItemExerciseBinding,
         context: Context,
     ) {
-        when (exerciseInfoData.myMissionStatus) {
+        when (exerciseItemInfoData.myMissionStatus) {
             STATE_EXERCISING_TYPE -> {
                 binding.tvItemExerciseMyState.backgroundTintList =
                     ContextCompat.getColorStateList(context, R.color.pink_100_FFE6F5)
@@ -109,7 +102,7 @@ class ExerciseEachDateInfoViewHolder(private val binding: ItemExerciseBinding) :
                 binding.tvItemExerciseMyState.setTextColor(textColorGray)
             }
         }
-        when (exerciseInfoData.opponentMissionStatus) {
+        when (exerciseItemInfoData.opponentMissionStatus) {
             STATE_EXERCISING_TYPE -> {
                 binding.tvItemExerciseParentState.backgroundTintList =
                     ContextCompat.getColorStateList(context, R.color.pink_100_FFE6F5)
@@ -157,7 +150,7 @@ class ExerciseEachDateInfoViewHolder(private val binding: ItemExerciseBinding) :
 
 class ExerciseNoticeViewHolder(private val binding: ItemExerciseNoticeBinding) :
     RecyclerView.ViewHolder(binding.root) {
-    fun onBind(exerciseNoticeData: ExerciseInfo.NoticeInfo) {
+    fun onBind(exerciseNoticeData: ExerciseItemInfo.NoticeItemInfo) {
         binding.tvExerciseTodayMission.text = exerciseNoticeData.missionContent
     }
 }
