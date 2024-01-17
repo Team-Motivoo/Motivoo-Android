@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import sopt.motivoo.databinding.ItemExerciseBinding
 import sopt.motivoo.databinding.ItemExerciseNoticeBinding
-import sopt.motivoo.domain.entity.ExerciseInfo
+import sopt.motivoo.domain.entity.exercise.ExerciseInfo
 
 class ExerciseAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var exerciseInfoList: List<ExerciseInfo> = emptyList()

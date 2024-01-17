@@ -1,8 +1,7 @@
-package sopt.motivoo.domain.entity
+package sopt.motivoo.domain.entity.exercise
 
 sealed class ExerciseInfo {
     data class EachDateInfo(
-        val userType: String,
         val date: String,
         val myMissionImgUrl: String?,
         val opponentMissionImgUrl: String?,
