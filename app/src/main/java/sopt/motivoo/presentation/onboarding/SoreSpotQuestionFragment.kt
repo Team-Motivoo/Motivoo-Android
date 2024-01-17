@@ -29,12 +29,6 @@ class SoreSpotQuestionFragment :
     @Inject
     lateinit var motivooStorage: MotivooStorage
 
-    private val navController = findNavController()
-    private val startDestinationId = navController.findStartDestination().id
-    private val navOptions = NavOptions.Builder()
-        .setPopUpTo(startDestinationId, true)
-        .build()
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.onboardingViewModel = onboardingViewModel
@@ -97,6 +91,12 @@ class SoreSpotQuestionFragment :
 
     private fun moveToNextFragment() {
         if (motivooStorage.isUserMatched) {
+            val navController = findNavController()
+            val startDestinationId = navController.findStartDestination().id
+            val navOptions = NavOptions.Builder()
+                .setPopUpTo(startDestinationId, true)
+                .build()
+
             findNavController().navigate(
                 R.id.action_soreSpotQuestionFragment_to_homeFragment,
                 null,

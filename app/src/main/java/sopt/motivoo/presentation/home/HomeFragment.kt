@@ -108,7 +108,8 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
                 override fun handleOnBackPressed() {
                     requireActivity().finishAffinity()
                 }
-            })
+            }
+        )
     }
 
     private fun navigateToHomeBottomSheetFragment() {
