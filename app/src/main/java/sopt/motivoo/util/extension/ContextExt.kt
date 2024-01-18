@@ -5,12 +5,7 @@ import android.app.Notification
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.ImageDecoder
-import android.net.Uri
 import android.os.Build
-import android.os.Environment
-import android.provider.MediaStore
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
@@ -24,10 +19,6 @@ import coil.request.ImageRequest
 import com.google.android.material.snackbar.Snackbar
 import sopt.motivoo.R
 import sopt.motivoo.presentation.MainActivity
-import timber.log.Timber
-import java.io.File
-import java.io.FileOutputStream
-import java.io.OutputStream
 
 private const val NOTIFICATION_ID = 0
 
