@@ -8,6 +8,7 @@ import android.view.animation.AnimationUtils
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
@@ -17,6 +18,7 @@ import kotlinx.coroutines.launch
 import sopt.motivoo.R
 import sopt.motivoo.data.service.KakaoAuthService
 import sopt.motivoo.databinding.FragmentLoginBinding
+import sopt.motivoo.domain.entity.MotivooStorage
 import sopt.motivoo.presentation.invitecode.GetInviteCodeFragment
 import sopt.motivoo.util.UiState
 import sopt.motivoo.util.binding.BindingFragment
@@ -31,10 +33,28 @@ class LoginFragment : BindingFragment<FragmentLoginBinding>(R.layout.fragment_lo
 
     @Inject
     lateinit var kakaoAuthService: KakaoAuthService
+
+    @Inject
+    lateinit var motivooStorage: MotivooStorage
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         clickKakaoLoginButton()
         collectData()
+        checkLogoutUser()
+    }
+
+    private fun checkLogoutUser() {
+        val navOptions = NavOptions.Builder()
+            .setPopUpTo(R.id.loginFragment, true)
+            .build()
+
+        if (motivooStorage.isUserMatched && motivooStorage.isUserLoggedIn) {
+            findNavController().navigate(
+                R.id.action_loginFragment_to_homeFragment,
+                null,
+                navOptions
+            )
+        }
     }
 
     private fun clickKakaoLoginButton() {
