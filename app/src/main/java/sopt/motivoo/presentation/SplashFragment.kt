@@ -22,7 +22,7 @@ class SplashFragment : BindingFragment<FragmentSplashBinding>(R.layout.fragment_
 
     private fun showSplash() {
         lifecycleScope.launch {
-            delay(1500)
+            delay(2000)
             navigateToNextFragment()
         }
     }
