@@ -44,6 +44,7 @@ class MainActivity : AppCompatActivity() {
                 bnvMain.setupWithNavController(navController)
                 setTopVisible(navController)
             }
+            bnvMain.setOnItemReselectedListener(null)
         }
         navController?.let { setBottomVisible(it) }
 
