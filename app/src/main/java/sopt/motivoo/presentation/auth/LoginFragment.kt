@@ -40,21 +40,18 @@ class LoginFragment : BindingFragment<FragmentLoginBinding>(R.layout.fragment_lo
         super.onViewCreated(view, savedInstanceState)
         clickKakaoLoginButton()
         collectData()
-        checkLogoutUser()
     }
 
-    private fun checkLogoutUser() {
+    private fun checkReLoginUser() {
         val navOptions = NavOptions.Builder()
             .setPopUpTo(R.id.loginFragment, true)
             .build()
 
-        if (motivooStorage.isUserMatched && motivooStorage.isUserLoggedIn) {
-            findNavController().navigate(
-                R.id.action_loginFragment_to_homeFragment,
-                null,
-                navOptions
-            )
-        }
+        findNavController().navigate(
+            R.id.action_loginFragment_to_homeFragment,
+            null,
+            navOptions
+        )
     }
 
     private fun clickKakaoLoginButton() {
@@ -70,7 +67,11 @@ class LoginFragment : BindingFragment<FragmentLoginBinding>(R.layout.fragment_lo
             when (uiState) {
                 is UiState.Success -> {
                     authViewModel.resetLoginState()
-                    findNavController().navigate(R.id.action_loginFragment_to_termsOfUseFragment)
+                    if (motivooStorage.isUserMatched) {
+                        checkReLoginUser()
+                    } else {
+                        findNavController().navigate(R.id.action_loginFragment_to_termsOfUseFragment)
+                    }
                 }
 
                 is UiState.Failure -> {
