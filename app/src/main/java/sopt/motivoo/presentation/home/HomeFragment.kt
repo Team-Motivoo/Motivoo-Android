@@ -175,15 +175,21 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         }
         viewModel.homeData.observe(viewLifecycleOwner) {
             when (it.userType) {
-                getString(R.string.home_child) -> initRunnerIcon(
-                    R.drawable.ic_child_user,
-                    R.drawable.ic_parent_other
-                )
+                getString(R.string.home_child) -> {
+                    initRunnerIcon(
+                        R.drawable.ic_child_user,
+                        R.drawable.ic_parent_other
+                    )
+                    binding.motivooStepCountTextUnselectedMission.setOtherStepCountText(getString(R.string.home_parent))
+                }
 
-                getString(R.string.home_parent) -> initRunnerIcon(
-                    R.drawable.ic_parent_user,
-                    R.drawable.ic_child_other
-                )
+                getString(R.string.home_parent) -> {
+                    initRunnerIcon(
+                        R.drawable.ic_parent_user,
+                        R.drawable.ic_child_other
+                    )
+                    binding.motivooStepCountTextUnselectedMission.setOtherStepCountText(getString(R.string.home_child))
+                }
             }
             pref.userId = it.userId
             pref.otherId = it.opponentUserId
