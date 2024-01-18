@@ -20,7 +20,7 @@
 
             <include
                 android:id="@+id/include_toolbar"
-                layout="@layout/view_onboarding_toolbar"/>
+                layout="@layout/view_onboarding_toolbar" />
 
             <com.skydoves.progressview.ProgressView
                 android:id="@+id/onboarding_progress"
@@ -55,6 +55,10 @@
             android:background="@color/white_FFFFFF"
             android:elevation="6dp"
             android:padding="8dp"
+            app:itemPaddingTop="0dp"
+            app:itemTextAppearanceActive="@style/Caption1_semi"
+            app:itemTextAppearanceInactive="@style/Caption2_re"
+            app:itemTextColor="@drawable/selector_bottomnavi_text_color"
             app:layout_constraintBottom_toBottomOf="parent"
             app:menu="@menu/navigation" />
 
