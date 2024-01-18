@@ -15,7 +15,6 @@ import sopt.motivoo.R
 import sopt.motivoo.databinding.DialogHomePhotoBinding
 import sopt.motivoo.util.Constants.S3_BUCKET_NAME
 import sopt.motivoo.util.binding.BindingDialogFragment
-import sopt.motivoo.util.extension.bitmapToFile
 
 class HomePhotoDialogFragment :
     BindingDialogFragment<DialogHomePhotoBinding>(R.layout.dialog_home_photo) {
@@ -55,16 +54,14 @@ class HomePhotoDialogFragment :
     private fun observeData() {
         viewModel.imageData.observe(viewLifecycleOwner) {
             viewModel.imageBitmap.value?.let { imageBitmap ->
-                context?.bitmapToFile(imageBitmap, it.fileName)?.let { file ->
-                    viewModel.uploadPhoto(it.imgPresignedUrl, file)
-                }
+                viewModel.uploadPhoto(it.imgPresignedUrl, imageBitmap)
             }
         }
         viewModel.isUploadImage.observe(viewLifecycleOwner) {
             viewModel.imageBitmap.value?.let { imageBitmap ->
                 val action =
                     HomePhotoDialogFragmentDirections.actionHomePhotoDialogFragmentToHomeConfirmDialogFragment(
-                        createPhotoBitmap(photoUri)
+                        null, photoUri
                     )
                 findNavController().navigate(action)
             }
