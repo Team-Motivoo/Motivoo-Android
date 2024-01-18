@@ -19,7 +19,7 @@ class ExerciseEachDateInfoViewHolder(private val binding: ItemExerciseBinding) :
 
     fun onBind(exerciseItemInfoData: ExerciseItemInfo.EachDateItemInfo, userType: String) {
         val context = binding.root.context
-        initText(exerciseIte트mInfoData, binding, userType)
+        initText(exerciseItemInfoData, binding, userType)
         initImage(exerciseItemInfoData, binding)
         imageVisibility(exerciseItemInfoData, binding)
         checkStatus(exerciseItemInfoData, binding, context)
