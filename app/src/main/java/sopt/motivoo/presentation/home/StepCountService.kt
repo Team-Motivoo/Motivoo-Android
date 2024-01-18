@@ -12,6 +12,10 @@ import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Build
 import android.os.IBinder
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -20,6 +24,7 @@ import kotlinx.coroutines.launch
 import sopt.motivoo.R
 import sopt.motivoo.domain.entity.MotivooStorage
 import sopt.motivoo.presentation.home.HomeFragment.Companion.STEP_COUNT
+import sopt.motivoo.util.Constants.USERS
 import sopt.motivoo.util.extension.sendNotification
 import javax.inject.Inject
 
@@ -29,6 +34,9 @@ class StepCountService : Service() {
 
     @Inject
     lateinit var pref: MotivooStorage
+
+    @Inject
+    lateinit var firebaseRealtimeDB: FirebaseDatabase
 
     override fun onBind(p0: Intent?): IBinder? {
         return null
@@ -46,7 +54,7 @@ class StepCountService : Service() {
 
     private fun getStepCount(
         sensorManager: SensorManager,
-        sensorTypeStepDetector: Sensor?
+        sensorTypeStepDetector: Sensor?,
     ) {
         if (job?.isActive == null) {
             job = CoroutineScope(Dispatchers.Default).launch {
@@ -54,8 +62,12 @@ class StepCountService : Service() {
                     override fun onSensorChanged(sensorEvent: SensorEvent?) {
                         when (sensorEvent?.sensor?.type) {
                             Sensor.TYPE_STEP_DETECTOR -> {
-                                pref.stepCount += 1
-                                visibleStepCount()
+                                if (pref.myStepCount < pref.myGoalStepCount) {
+                                    pref.myStepCount += 1
+                                    firebaseRealtimeDB.reference.child(USERS)
+                                        .child(pref.userId.toString()).setValue(pref.myStepCount)
+                                    visibleStepCount()
+                                }
                             }
                         }
                     }
@@ -66,13 +78,31 @@ class StepCountService : Service() {
                         it, sensorTypeStepDetector, SensorManager.SENSOR_DELAY_UI, 0
                     )
                 }
+
+                eventOtherStepCount()
             }
         }
     }
 
+    private fun eventOtherStepCount() {
+        firebaseRealtimeDB.reference.child(USERS)
+            .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    snapshot.child(pref.userId.toString()).apply {
+                        if (exists()) {
+                            (value as Long).let { if (it == 0L) pref.myStepCount = 0 }
+                            visibleStepCount()
+                        }
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {}
+            })
+    }
+
     private fun visibleStepCount() {
         sendBroadcast(getStepCountIntent())
-        initializeNotification(pref.stepCount)
+        initializeNotification(pref.myStepCount)
     }
 
     private fun initializeNotification(stepCount: Int) {
@@ -82,13 +112,19 @@ class StepCountService : Service() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.TIRAMISU) {
             startForeground(
                 FOREGROUND_SERVICE_ID,
-                sendNotification(getString(R.string.notification_text, stepCount)),
+                sendNotification(
+                    getString(R.string.notification_title, stepCount),
+                    getString(R.string.notification_content)
+                ),
                 ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC
             )
         } else {
             startForeground(
                 FOREGROUND_SERVICE_ID,
-                sendNotification(getString(R.string.notification_text, stepCount))
+                sendNotification(
+                    getString(R.string.notification_title, stepCount),
+                    getString(R.string.notification_content)
+                )
             )
         }
     }
@@ -107,7 +143,7 @@ class StepCountService : Service() {
 
     private fun getStepCountIntent(): Intent = Intent().apply {
         action = STEP_COUNT
-        putExtra(STEP_COUNT, pref.stepCount)
+        putExtra(STEP_COUNT, pref.myStepCount)
         `package` = this@StepCountService.packageName
     }
 
