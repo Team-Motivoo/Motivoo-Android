@@ -139,11 +139,10 @@ class ExerciseEachDateInfoViewHolder(private val binding: ItemExerciseBinding) :
     }
 
     private fun compareDate(binding: ItemExerciseBinding, context: Context) {
-        fun String.isToday(): Boolean = this == binding.tvItemExerciseDate.text.let {
-            it.removeRange(it.length - 4 until it.length).toString()
-        }
+        fun String.isToday(): Boolean = this == LocalDate.now().prettyString
+        fun String.removeDayOfTheWeek(): String = this.removeRange(length - 4 until length)
 
-        if (LocalDate.now().prettyString.isToday()) {
+        if (binding.tvItemExerciseDate.text.toString().removeDayOfTheWeek().isToday()) {
             binding.tvItemExerciseNoImageBeforeExerciseLeft.text =
                 context.getString(R.string.exercise_no_image_before_exercise_today)
             binding.tvItemExerciseNoImageBeforeExerciseRight.text =
