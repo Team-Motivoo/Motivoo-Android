@@ -5,10 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import sopt.motivoo.databinding.ItemExerciseBinding
 import sopt.motivoo.databinding.ItemExerciseNoticeBinding
-import sopt.motivoo.domain.entity.ExerciseInfo
+import sopt.motivoo.domain.entity.exercise.ExerciseData.ExerciseItemInfo
 
-class ExerciseAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private var exerciseInfoList: List<ExerciseInfo> = emptyList()
+class ExerciseAdapter(private val userType: String) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    private var exerciseItemInfoList: List<ExerciseItemInfo> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -28,28 +29,28 @@ class ExerciseAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is ExerciseNoticeViewHolder -> {
-                val noticeInfo = exerciseInfoList[position]
-                holder.onBind(noticeInfo as ExerciseInfo.NoticeInfo)
+                val noticeInfo = exerciseItemInfoList[position]
+                holder.onBind(noticeInfo as ExerciseItemInfo.NoticeItemInfo)
             }
 
             is ExerciseEachDateInfoViewHolder -> {
-                val dateExerciseInfo = exerciseInfoList[position]
-                holder.onBind(dateExerciseInfo as ExerciseInfo.EachDateInfo)
+                val dateExerciseInfo = exerciseItemInfoList[position]
+                holder.onBind(dateExerciseInfo as ExerciseItemInfo.EachDateItemInfo, userType)
             }
         }
     }
 
     override fun getItemViewType(position: Int): Int {
-        return when (exerciseInfoList[position]) {
-            is ExerciseInfo.NoticeInfo -> NOTICE_INFO_TYPE
-            is ExerciseInfo.EachDateInfo -> DATE_EXERCISE_INFO_TYPE
+        return when (exerciseItemInfoList[position]) {
+            is ExerciseItemInfo.NoticeItemInfo -> NOTICE_INFO_TYPE
+            is ExerciseItemInfo.EachDateItemInfo -> DATE_EXERCISE_INFO_TYPE
         }
     }
 
-    override fun getItemCount() = exerciseInfoList.size
+    override fun getItemCount() = exerciseItemInfoList.size
 
-    fun setExerciseList(exerciseList: List<ExerciseInfo>) {
-        this.exerciseInfoList = exerciseList.toList()
+    fun updateItemList(exerciseList: List<ExerciseItemInfo>) {
+        this.exerciseItemInfoList = exerciseList.toList()
         notifyDataSetChanged()
     }
 

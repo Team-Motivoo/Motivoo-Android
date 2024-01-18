@@ -1,6 +1,6 @@
 package sopt.motivoo.domain.repository
 
-import sopt.motivoo.domain.entity.ResponseMyPageDto
+import sopt.motivoo.data.model.response.ResponseMyPageDto
 
 interface MyPageRepository {
 
