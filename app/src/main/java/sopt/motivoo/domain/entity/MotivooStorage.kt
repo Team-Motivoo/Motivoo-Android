@@ -10,6 +10,7 @@ interface MotivooStorage {
     var isUserMatched: Boolean
     var userId: Long
     var isFinishedOnboarding: Boolean
+    var isFinishedPermission: Boolean
     var inviteCode: String
     var otherId: Long
     var myGoalStepCount: Int
