@@ -13,6 +13,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import sopt.motivoo.R
 import sopt.motivoo.data.datasource.remote.listener.AuthTokenRefreshListenerImpl
 import sopt.motivoo.databinding.ActivityMainBinding
+import sopt.motivoo.util.extension.colorOf
 import sopt.motivoo.util.extension.hideKeyboard
 import sopt.motivoo.util.extension.setOnSingleClickListener
 import javax.inject.Inject
@@ -47,8 +48,23 @@ class MainActivity : AppCompatActivity() {
             bnvMain.setOnItemReselectedListener(null)
         }
         navController?.let { setBottomVisible(it) }
+        navController?.let { setStatusBarColor(it) }
 
         binding.includeToolbar.tvToolbarBack.setOnSingleClickListener { navController?.popBackStack() }
+    }
+
+    private fun setStatusBarColor(navController: NavController) {
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            if (destination.id in listOf(
+                    R.id.myPageFragment,
+                    R.id.myInfoFragment
+                )
+            ) {
+                window.statusBarColor = (this.colorOf(R.color.gray_100_F4F5F9))
+            } else {
+                window.statusBarColor = (this.colorOf(R.color.white_FFFFFF))
+            }
+        }
     }
 
     private fun setBottomVisible(navController: NavController) {
