@@ -71,6 +71,7 @@ class AuthViewModel @Inject constructor(
             authRepository.postLogout()
                 .onSuccess {
                     _logoutState.value = UiState.Success(true)
+                    motivooStorage.logout()
                 }.onFailure { throwable ->
                     _logoutState.value = UiState.Failure(throwable.message.toString())
                 }
@@ -82,6 +83,7 @@ class AuthViewModel @Inject constructor(
             authRepository.deleteWithDraw()
                 .onSuccess {
                     _withDrawState.value = UiState.Success(true)
+                    motivooStorage.clear()
                 }.onFailure { throwable ->
                     _withDrawState.value = UiState.Failure(throwable.message.toString())
                 }

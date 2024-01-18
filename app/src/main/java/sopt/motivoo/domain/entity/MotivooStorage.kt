@@ -14,5 +14,6 @@ interface MotivooStorage {
     var otherId: Long
     var myGoalStepCount: Int
     var otherGoalStepCount: Int
+    fun logout()
     fun clear()
 }
