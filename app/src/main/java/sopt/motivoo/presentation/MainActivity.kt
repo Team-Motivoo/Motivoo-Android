@@ -57,7 +57,8 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             if (destination.id in listOf(
                     R.id.myPageFragment,
-                    R.id.myInfoFragment
+                    R.id.myInfoFragment,
+                    R.id.myExerciseInfoFragment
                 )
             ) {
                 window.statusBarColor = (this.colorOf(R.color.gray_100_F4F5F9))
