@@ -55,6 +55,7 @@
             android:background="@color/white_FFFFFF"
             android:elevation="6dp"
             android:padding="8dp"
+            app:itemPaddingTop="0dp"
             app:itemTextAppearanceActive="@style/Caption1_semi"
             app:itemTextAppearanceInactive="@style/Caption2_re"
             app:itemTextColor="@drawable/selector_bottomnavi_text_color"
