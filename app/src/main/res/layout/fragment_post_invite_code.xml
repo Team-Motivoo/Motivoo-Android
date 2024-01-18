@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
             android:gravity="center"
-            android:text="@string/get_invite_code_title"
+            android:text="@string/post_invite_code_title"
             android:textColor="@color/gray_900_161616"
             app:layout_constraintEnd_toEndOf="@+id/iv_post_invite_code"
             app:layout_constraintStart_toStartOf="@+id/iv_post_invite_code"
