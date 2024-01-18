@@ -236,6 +236,7 @@
             android:background="@drawable/selector_button_background"
             android:enabled="@{termsOfViewModel.termsAllCheckState}"
             android:paddingVertical="18dp"
+            android:stateListAnimator="@null"
             android:text="@string/next"
             android:textColor="@drawable/selector_text_color"
             app:layout_constraintBottom_toBottomOf="parent"
