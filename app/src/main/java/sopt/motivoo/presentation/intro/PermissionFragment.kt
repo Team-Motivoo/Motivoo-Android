@@ -108,6 +108,7 @@ class PermissionFragment :
     }
 
     private fun navigateToNextFragment() {
+        motivooStorage.isFinishedPermission = true
         val navOptions = NavOptions.Builder()
             .setPopUpTo(R.id.permissionFragment, true)
             .build()
