@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/navigation_main"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/splashFragment">
 
     <fragment
         android:id="@+id/splashFragment"
@@ -349,11 +349,11 @@
         <argument
             android:name="photoBitmap"
             app:argType="android.graphics.Bitmap"
-            app:nullable="true"/>
+            app:nullable="true" />
         <argument
             android:name="photoUri"
             app:argType="android.net.Uri"
-            app:nullable="true"/>
+            app:nullable="true" />
     </dialog>
     <fragment
         android:id="@+id/loadingFragment"

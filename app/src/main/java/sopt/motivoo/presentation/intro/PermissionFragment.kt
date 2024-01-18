@@ -48,6 +48,8 @@ class PermissionFragment :
         initRequiredPermissions()
         if (checkPermissionsStatus() || isAllPermissionsGranted()) {
             navigateToNextFragment()
+        } else if (areAllDeniedPermissionsRationale()) {
+            navigateToNextFragment()
         } else {
             getPermission()
         }
@@ -105,6 +107,12 @@ class PermissionFragment :
 
     private fun requestPermissions(permissions: Array<String>) {
         requestMultiplePermissionsLauncher.launch(permissions)
+    }
+
+    private fun areAllDeniedPermissionsRationale(): Boolean {
+        return deniedPermissions.isNotEmpty() && deniedPermissions.all {
+            shouldShowRequestPermissionRationale(it)
+        }
     }
 
     private fun navigateToNextFragment() {
