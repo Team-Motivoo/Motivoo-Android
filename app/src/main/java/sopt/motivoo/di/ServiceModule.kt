@@ -8,6 +8,7 @@ import retrofit2.Retrofit
 import sopt.motivoo.data.service.AuthService
 import sopt.motivoo.data.service.DummyService
 import sopt.motivoo.data.service.OnboardingService
+import sopt.motivoo.data.service.MyPageService
 import sopt.motivoo.data.service.HomeService
 import javax.inject.Singleton
 
@@ -27,6 +28,10 @@ object ServiceModule {
     @Provides
     @Singleton
     fun provideOnboardingService(retrofit: Retrofit): OnboardingService = retrofit.create()
+
+    @Provides
+    @Singleton
+    fun provideMyPageService(retrofit: Retrofit): MyPageService = retrofit.create()
 
     @Provides
     @Singleton
