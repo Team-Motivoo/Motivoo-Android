@@ -46,6 +46,9 @@ class MotivooStorageImpl @Inject constructor(@ApplicationContext context: Contex
         set(value) = pref.edit { putLong(USER_ID, value) }
         get() = pref.getLong(USER_ID, 0L)
 
+    override var otherId: Long
+        get() = pref.getLong(OTHER_ID, 0L)
+        set(value) = pref.edit { putLong(OTHER_ID, value) }
     override var accessToken: String
         set(value) = pref.edit { putString(ACCESS_TOKEN, value) }
         get() = pref.getString(
@@ -87,6 +90,7 @@ class MotivooStorageImpl @Inject constructor(@ApplicationContext context: Contex
         const val REFRESH_TOKEN = "refreshToken"
         private const val IS_LOGIN = "isLogin"
         private const val USER_ID = "userId"
+        private const val OTHER_ID = "otherId"
         private const val MY_GOAL_STEP_COUNT = "my_goal_step_count"
         private const val OTHER_GOAL_STEP_COUNT = "other_goal_step_count"
     }

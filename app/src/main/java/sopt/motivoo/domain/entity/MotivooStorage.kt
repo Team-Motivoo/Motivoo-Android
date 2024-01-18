@@ -8,6 +8,7 @@ interface MotivooStorage {
     var refreshToken: String
     var isUserLoggedIn: Boolean
     var userId: Long
+    var otherId: Long
     var myGoalStepCount: Int
     var otherGoalStepCount: Int
     fun clear()
