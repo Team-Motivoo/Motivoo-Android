@@ -4,6 +4,7 @@
     <string name="binding_error">에러가 발생했습니다</string>
     <string name="confirm">확인</string>
     <string name="allow">허용하기</string>
+    <string name="withdrawal">탈퇴하기</string>
 
     <!--onboarding-->
     <string name="age_question_title_first">당신은\n부모인가요 자녀인가요?</string>
@@ -98,7 +99,6 @@
     <string name="mypage_watch_out">주의할 곳</string>
     <string name="mypage_ask_service_out">정말 탈퇴하시겠어요?</string>
     <string name="mypage_service_out_content">회원 탈퇴 시 모든 정보가 삭제되며 복구가 불가능해요.</string>
-    <string name="mypage_service_out">탈퇴하기</string>
     <string name="mypage_cancel">취소</string>
     <string name="mypage_logout_check">정말 로그아웃 하시겠어요?</string>
 
@@ -183,5 +183,9 @@
     <string name="open_source_url">https://gayeong04.notion.site/c78b181acf8a41f28f2ed653db998650?pvs=4</string>
     <string name="developer_info_url">https://gayeong04.notion.site/39aa420262384587957479ca4da2ba2e?pvs=4</string>
     <string name="ask_kakao_url">https://gayeong04.notion.site/08592ddcf3bf4a3b80e3c54110444ebf?pvs=4</string>
+
+    <!-- withdrawal -->
+    <string name="withdrawal_title">매칭이 끊어졌어요</string>
+    <string name="withdrawal_desc">매칭이 끊어져 모티부를 이용할 수 없어요\n탈퇴 후 다시 가입해주세요</string>
 
 </resources>
