@@ -98,7 +98,6 @@ class MotivooStorageImpl @Inject constructor(@ApplicationContext context: Contex
 
     override fun logout() {
         val userData = pref.edit()
-        userData.remove(STEP_COUNT)
         userData.remove(USER_ID)
         userData.remove(ACCESS_TOKEN)
         userData.remove(REFRESH_TOKEN)
