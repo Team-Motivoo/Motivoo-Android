@@ -2,6 +2,7 @@ package sopt.motivoo.presentation.intro
 
 import android.os.Bundle
 import android.view.View
+import android.widget.CheckBox
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,11 +28,57 @@ class TermsOfUseFragment :
         goToBack()
         clickDoneButton()
         setupCheckAllListener()
+        goToTermsWebFragment()
+        setupTermsCheckListeners()
+    }
+
+    private fun setupTermsCheckListeners() {
+        binding.clTermsOfUseAll.setOnSingleClickListener {
+            toggleCheckBox(binding.cbCheckAll)
+            termsOfUseViewModel.setAllTermsChecked(binding.cbCheckAll.isChecked)
+        }
+
+        binding.clTermsOfUse.setOnSingleClickListener {
+            toggleCheckBox(binding.cbTermsOfUseAccess)
+        }
+
+        binding.clTermsGetInfo.setOnSingleClickListener {
+            toggleCheckBox(binding.cbTermsGetInfoAccess)
+        }
+
+        binding.clTermsUseInfo.setOnSingleClickListener {
+            toggleCheckBox(binding.cbTermsUseInfoAccess)
+        }
+    }
+
+    private fun toggleCheckBox(checkBox: CheckBox) {
+        checkBox.isChecked = !checkBox.isChecked
+    }
+
+    private fun goToTermsWebFragment() {
+        binding.tvTermsOfUseLink.setOnSingleClickListener {
+            val action = TermsOfUseFragmentDirections
+                .actionTermsOfUseFragmentToWebViewFragment(getString(R.string.terms_of_use_lnk))
+            findNavController().navigate(action)
+        }
+
+        binding.tvTermsGetInfoLink.setOnSingleClickListener {
+            val action = TermsOfUseFragmentDirections
+                .actionTermsOfUseFragmentToWebViewFragment(getString(R.string.terms_of_get_info_lnk))
+            findNavController().navigate(action)
+        }
+
+        binding.tvTermsUseInfoLink.setOnSingleClickListener {
+            val action = TermsOfUseFragmentDirections
+                .actionTermsOfUseFragmentToWebViewFragment(getString(R.string.terms_of_use_info_lnk))
+            findNavController().navigate(action)
+        }
     }
 
     private fun clickDoneButton() {
         binding.btnTermsOfUseDone.setOnSingleClickListener {
             findNavController().navigate(R.id.action_termsOfUseFragment_to_startMotivooFragment)
+            motivooStorage.isUserLoggedIn = true
         }
     }
 

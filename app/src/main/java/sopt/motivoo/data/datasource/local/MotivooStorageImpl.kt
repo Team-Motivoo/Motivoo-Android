@@ -35,10 +35,6 @@ class MotivooStorageImpl @Inject constructor(@ApplicationContext context: Contex
         get() = pref.getInt(STEP_COUNT, 0)
         set(value) = pref.edit { putInt(STEP_COUNT, value) }
 
-    override var nickName: String
-        get() = pref.getString(NAME, "") ?: ""
-        set(value) = pref.edit { putString(NAME, value) }
-
     override var userId: Long
         set(value) = pref.edit { putLong(USER_ID, value) }
         get() = pref.getLong(USER_ID, 0L)
@@ -57,9 +53,24 @@ class MotivooStorageImpl @Inject constructor(@ApplicationContext context: Contex
             "",
         ) ?: ""
 
+    override var inviteCode: String
+        set(value) = pref.edit { putString(INVITE_CODE, value) }
+        get() = pref.getString(
+            INVITE_CODE,
+            "",
+        ) ?: ""
+
     override var isUserLoggedIn: Boolean
         set(value) = pref.edit { putBoolean(IS_LOGIN, value) }
         get() = pref.getBoolean(IS_LOGIN, false)
+
+    override var isUserMatched: Boolean
+        set(value) = pref.edit { putBoolean(IS_MATCHED, value) }
+        get() = pref.getBoolean(IS_MATCHED, false)
+
+    override var isFinishedOnboarding: Boolean
+        set(value) = pref.edit { putBoolean(IS_ONBOARDING_FINISHED, value) }
+        get() = pref.getBoolean(IS_ONBOARDING_FINISHED, false)
 
     override fun clear() {
         pref.edit {
@@ -74,6 +85,9 @@ class MotivooStorageImpl @Inject constructor(@ApplicationContext context: Contex
         const val ACCESS_TOKEN = "accessToken"
         const val REFRESH_TOKEN = "refreshToken"
         private const val IS_LOGIN = "isLogin"
+        private const val IS_MATCHED = "isMatched"
         private const val USER_ID = "userId"
+        private const val INVITE_CODE = "inviteCode"
+        private const val IS_ONBOARDING_FINISHED = "isOnboardingFinished"
     }
 }
