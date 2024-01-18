@@ -20,7 +20,7 @@ class HomeConfirmDialogFragment :
 
         val safeArgs: HomeConfirmDialogFragmentArgs by navArgs()
 
-        binding.ivPhoto.load(safeArgs.photoBitmap) {
+        binding.ivPhoto.load(safeArgs.photoUri) {
             scale(Scale.FILL)
             transformations(RoundedCornersTransformation(8.px))
         }

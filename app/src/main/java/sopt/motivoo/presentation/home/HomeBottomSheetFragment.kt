@@ -21,7 +21,6 @@ import sopt.motivoo.R
 import sopt.motivoo.databinding.BottomSheetHomeBinding
 import sopt.motivoo.domain.entity.MotivooStorage
 import sopt.motivoo.util.Constants.S3_BUCKET_NAME
-import sopt.motivoo.util.extension.bitmapToFile
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -104,16 +103,14 @@ class HomeBottomSheetFragment : BottomSheetDialogFragment() {
     private fun observeData() {
         viewModel.imageData.observe(viewLifecycleOwner) {
             viewModel.imageBitmap.value?.let { imageBitmap ->
-                context?.bitmapToFile(imageBitmap, it.fileName)?.let { file ->
-                    viewModel.uploadPhoto(it.imgPresignedUrl, file)
-                }
+                viewModel.uploadPhoto(it.imgPresignedUrl, imageBitmap)
             }
         }
         viewModel.isUploadImage.observe(viewLifecycleOwner) {
             viewModel.imageBitmap.value?.let { imageBitmap ->
                 val action =
                     HomeBottomSheetFragmentDirections.actionHomeBottomSheetFragmentToHomeConfirmDialogFragment(
-                        imageBitmap
+                        imageBitmap, null
                     )
                 findNavController().navigate(action)
             }
