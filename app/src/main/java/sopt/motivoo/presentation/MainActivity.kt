@@ -63,7 +63,8 @@ class MainActivity : AppCompatActivity() {
                     R.id.myLogoutFragment,
                     R.id.loadingFragment,
                     R.id.myLogoutFragment,
-                    R.id.homeConfirmDialogFragment
+                    R.id.homeConfirmDialogFragment,
+                    R.id.withdrawalFragment
                 )
             ) {
                 View.VISIBLE
