@@ -46,7 +46,9 @@ class PermissionFragment :
         super.onViewCreated(view, savedInstanceState)
 
         initRequiredPermissions()
-        if (checkPermissionsStatus() || isAllPermissionsGranted()) {
+        if (motivooStorage.isFinishedPermission) {
+            navigateToNextFragment()
+        } else if (checkPermissionsStatus() || isAllPermissionsGranted()) {
             navigateToNextFragment()
         } else {
             getPermission()

@@ -40,14 +40,7 @@ class SplashFragment : BindingFragment<FragmentSplashBinding>(R.layout.fragment_
             .setPopUpTo(startDestinationId, true)
             .build()
 
-        if (motivooStorage.isFinishedPermission) {
-            navController.navigate(R.id.action_splashFragment_to_loginFragment, null, navOptions)
-        } else {
-            navController.navigate(
-                R.id.action_splashFragment_to_permissionFragment,
-                null,
-                navOptions
-            )
-        }
+        navController.navigate(R.id.action_splashFragment_to_permissionFragment, null, navOptions)
     }
 }
+
