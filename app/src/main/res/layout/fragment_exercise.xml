@@ -55,6 +55,7 @@
             android:gravity="center"
             android:paddingHorizontal="16dp"
             android:paddingVertical="19dp"
+            android:stateListAnimator="@null"
             android:text="@string/exercise_empty_button"
             android:textColor="@color/white_FFFFFF"
             app:layout_constraintEnd_toEndOf="parent"
