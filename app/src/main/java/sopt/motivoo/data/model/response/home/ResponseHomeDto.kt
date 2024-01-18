@@ -31,6 +31,8 @@ data class ResponseHomeDto(
         val isStepCountCompleted: Boolean,
         @SerialName("is_opponent_user_withdraw")
         val isOpponentUserWithdraw: Boolean,
+        @SerialName("is_mission_img_completed")
+        val isMissionImgCompleted: Boolean,
     )
 
     fun toHomeData(): HomeData = HomeData(
@@ -40,6 +42,7 @@ data class ResponseHomeDto(
         opponentUserGoalStepCount = data.opponentUserGoalStepCount,
         isStepCountCompleted = data.isStepCountCompleted,
         opponentUserId = data.opponentUserId,
-        isOpponentUserWithdraw = data.isOpponentUserWithdraw
+        isOpponentUserWithdraw = data.isOpponentUserWithdraw,
+        isMissionImageCompleted = data.isMissionImgCompleted
     )
 }

@@ -67,11 +67,15 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         super.onViewCreated(view, savedInstanceState)
         binding.vm = viewModel
         stepCountReceiver = StepCountReceiver()
-        viewModel.setStepCount(pref.myStepCount)
-        viewModel.patchHome(pref.myStepCount, viewModel.otherStepCount.value?.toInt() ?: 0)
-        viewModel.postMissionTodayChoice()
 
-        if (homePermissionsGranted()) startStepCountService()
+        if (homePermissionsGranted()) {
+            viewModel.setStepCount(pref.myStepCount)
+            viewModel.setOtherStepCount(pref.otherStepCount)
+            startStepCountService()
+        }
+
+        viewModel.patchHome(pref.myStepCount, pref.otherStepCount)
+        viewModel.postMissionTodayChoice()
 
         binding.motivooFirstMissionCard.setOnClickListener {
             choiceMission(0)
@@ -150,7 +154,6 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         viewModel.missionChoiceData.observe(viewLifecycleOwner) {
             if (it.isChoiceFinished) {
                 TransitionManager.beginDelayedTransition(binding.root as? ViewGroup)
-                binding.motivooMyPieChart.setStepCount(pref.myStepCount / pref.myGoalStepCount.toFloat())
                 if (homePermissionsGranted()) {
                     initMissionSelectedHasPermission()
                 } else {
@@ -181,6 +184,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
                 )
             }
             pref.userId = it.userId
+            pref.otherId = it.opponentUserId
             pref.myGoalStepCount = it.userGoalStepCount
             pref.otherGoalStepCount = it.opponentUserGoalStepCount
             viewModel.getEventOtherStepCount(it.opponentUserId)
@@ -196,9 +200,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
     private fun eventOtherStepCount(otherStepCount: Long) {
         binding.btnVerifyExercise.isEnabled = isVerifyExerciseButtonEnabled()
         binding.motivooStepCountText.setOtherStepCountText(otherStepCount.toString())
-        viewModel.homeData.value?.opponentUserGoalStepCount?.let {
-            binding.motivooOtherPieChart.setStepCount((otherStepCount.toFloat() / it))
-        }
+        binding.motivooOtherPieChart.setStepCount((otherStepCount.toFloat() / pref.otherGoalStepCount))
         binding.motivooStepCountTextUnselectedMission.setOtherStepCountText(otherStepCount.toString())
     }
 
@@ -215,6 +217,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
     private fun initMissionUnSelectedHasPermission() {
         binding.motivooStepCountTextUnselectedMission.setVisible(VISIBLE)
         binding.motivooDeniedPermissionUnselected.setVisible(GONE)
+        binding.motivooStepCountText.setOtherStepCountText(pref.otherStepCount.toString())
     }
 
     private fun initMissionSelectedNotPermission() {
@@ -225,6 +228,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
 
     private fun initMissionSelectedHasPermission() {
         binding.motivooStepCountText.setVisible(VISIBLE)
+        binding.motivooMyPieChart.setStepCount(pref.myStepCount / pref.myGoalStepCount.toFloat())
         binding.motivooDeniedPermissionSelected.setVisible(GONE)
         binding.btnVerifyExercise.setVisible(VISIBLE)
     }
@@ -294,7 +298,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
     }
 
     private fun isVerifyExerciseButtonEnabled(): Boolean =
-        pref.otherStepCount == pref.myGoalStepCount && pref.myStepCount == pref.myGoalStepCount
+        pref.otherStepCount == pref.otherGoalStepCount && pref.myStepCount == pref.myGoalStepCount
 
     companion object {
         const val STEP_COUNT = "step_count"

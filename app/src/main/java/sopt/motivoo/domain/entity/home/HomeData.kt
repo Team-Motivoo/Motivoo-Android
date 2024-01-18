@@ -8,4 +8,5 @@ data class HomeData(
     val opponentUserGoalStepCount: Int,
     val isStepCountCompleted: Boolean,
     val isOpponentUserWithdraw: Boolean,
+    val isMissionImageCompleted: Boolean
 )
