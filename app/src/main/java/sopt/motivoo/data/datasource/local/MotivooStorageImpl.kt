@@ -82,6 +82,10 @@ class MotivooStorageImpl @Inject constructor(@ApplicationContext context: Contex
         set(value) = pref.edit { putBoolean(IS_ONBOARDING_FINISHED, value) }
         get() = pref.getBoolean(IS_ONBOARDING_FINISHED, false)
 
+    override var isFinishedPermission: Boolean
+        set(value) = pref.edit { putBoolean(IS_PERMISSION_FINISHED, value) }
+        get() = pref.getBoolean(IS_PERMISSION_FINISHED, false)
+
     override var myGoalStepCount: Int
         get() = pref.getInt(MY_GOAL_STEP_COUNT, 0)
         set(value) = pref.edit { putInt(MY_GOAL_STEP_COUNT, value) }
@@ -121,5 +125,6 @@ class MotivooStorageImpl @Inject constructor(@ApplicationContext context: Contex
         private const val OTHER_GOAL_STEP_COUNT = "other_goal_step_count"
         private const val INVITE_CODE = "inviteCode"
         private const val IS_ONBOARDING_FINISHED = "isOnboardingFinished"
+        private const val IS_PERMISSION_FINISHED = "isPermissionFinished"
     }
 }
