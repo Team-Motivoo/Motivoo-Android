@@ -62,12 +62,10 @@ class StepCountService : Service() {
                     override fun onSensorChanged(sensorEvent: SensorEvent?) {
                         when (sensorEvent?.sensor?.type) {
                             Sensor.TYPE_STEP_DETECTOR -> {
-                                if (pref.myStepCount < pref.myGoalStepCount) {
-                                    pref.myStepCount += 1
-                                    firebaseRealtimeDB.reference.child(USERS)
-                                        .child(pref.userId.toString()).setValue(pref.myStepCount)
-                                    visibleStepCount()
-                                }
+                                pref.myStepCount += 1
+                                firebaseRealtimeDB.reference.child(USERS)
+                                    .child(pref.userId.toString()).setValue(pref.myStepCount)
+                                visibleStepCount()
                             }
                         }
                     }
