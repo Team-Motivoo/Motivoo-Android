@@ -92,18 +92,22 @@ class ExerciseEachDateInfoViewHolder(private val binding: ItemExerciseBinding) :
                 binding.tvItemExerciseMyState.setTextColor(textColorPink)
             }
 
-            STATE_FINISH_TYPE -> {
+            STATE_SUCCESS_TYPE -> {
                 binding.tvItemExerciseMyState.backgroundTintList =
                     ContextCompat.getColorStateList(context, R.color.blue_100_D7F6FF)
                 val textColorBlue: Int = ContextCompat.getColor(context, R.color.blue_600_2E9ABB)
                 binding.tvItemExerciseMyState.setTextColor(textColorBlue)
             }
 
-            else -> {
+            STATE_FAILURE_TYPE -> {
                 binding.tvItemExerciseMyState.backgroundTintList =
                     ContextCompat.getColorStateList(context, R.color.gray_300_D5D5D7)
                 val textColorGray: Int = ContextCompat.getColor(context, R.color.gray_700_464747)
                 binding.tvItemExerciseMyState.setTextColor(textColorGray)
+            }
+
+            else -> {
+                binding.tvItemExerciseMyState.visibility = View.GONE
             }
         }
         when (exerciseItemInfoData.opponentMissionStatus) {
@@ -114,18 +118,22 @@ class ExerciseEachDateInfoViewHolder(private val binding: ItemExerciseBinding) :
                 binding.tvItemExerciseParentState.setTextColor(textColorPink)
             }
 
-            STATE_FINISH_TYPE -> {
+            STATE_SUCCESS_TYPE -> {
                 binding.tvItemExerciseParentState.backgroundTintList =
                     ContextCompat.getColorStateList(context, R.color.blue_100_D7F6FF)
                 val textColorBlue: Int = ContextCompat.getColor(context, R.color.blue_600_2E9ABB)
                 binding.tvItemExerciseParentState.setTextColor(textColorBlue)
             }
 
-            else -> {
+            STATE_FAILURE_TYPE -> {
                 binding.tvItemExerciseParentState.backgroundTintList =
                     ContextCompat.getColorStateList(context, R.color.gray_300_D5D5D7)
                 val textColorGray: Int = ContextCompat.getColor(context, R.color.gray_700_464747)
                 binding.tvItemExerciseParentState.setTextColor(textColorGray)
+            }
+
+            else -> {
+                binding.tvItemExerciseParentState.visibility = View.GONE
             }
         }
     }
@@ -153,7 +161,8 @@ class ExerciseEachDateInfoViewHolder(private val binding: ItemExerciseBinding) :
 
     companion object {
         const val STATE_EXERCISING_TYPE = "진행중"
-        const val STATE_FINISH_TYPE = "성공"
+        const val STATE_SUCCESS_TYPE = "성공"
+        const val STATE_FAILURE_TYPE = "실패"
     }
 }
 
