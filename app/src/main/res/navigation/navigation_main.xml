@@ -372,4 +372,8 @@
         android:id="@+id/loadingFragment"
         android:name="sopt.motivoo.presentation.LoadingFragment"
         android:label="LoadingFragment" />
+    <fragment
+        android:id="@+id/withdrawalFragment"
+        android:name="sopt.motivoo.presentation.withdrawal.WithdrawalFragment"
+        android:label="WithdrawalFragment" />
 </navigation>
