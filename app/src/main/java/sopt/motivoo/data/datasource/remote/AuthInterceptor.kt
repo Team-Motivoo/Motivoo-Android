@@ -8,7 +8,8 @@ import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.Response
 import sopt.motivoo.BuildConfig
-import sopt.motivoo.data.model.response.ResponseReissueDto
+import sopt.motivoo.data.datasource.remote.listener.AuthTokenRefreshListener
+import sopt.motivoo.data.model.response.auth.ResponseReissueDto
 import sopt.motivoo.domain.entity.MotivooStorage
 import javax.inject.Inject
 
@@ -19,7 +20,6 @@ class AuthInterceptor @Inject constructor(
 ) : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
-        val isAutoLoginPossible = motivooStorage.isUserLoggedIn
 
         val originalRequest = chain.request()
         val authRequest = originalRequest.newAuthBuilder()

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white_FFFFFF">
+
+    <TextView
+        android:id="@+id/tv_connection_error_title"
+        style="@style/H5_semi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="196dp"
+        android:paddingVertical="5dp"
+        android:text="@string/connection_error_title"
+        android:textColor="@color/gray_900_161616"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_connection_error_content"
+        style="@style/Caption2_re"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:paddingHorizontal="4dp"
+        android:paddingVertical="4dp"
+        android:text="@string/connection_error_content"
+        android:textColor="@color/gray_700_464747"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_connection_error_title" />
+
+    <ImageView
+        android:id="@+id/iv_connection_error_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/img_unconnection"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_connection_error_content" />
+
+    <TextView
+        android:id="@+id/tv_connection_error_btn"
+        style="@style/B5_med"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="53dp"
+        android:background="@drawable/shape_rectangle_radius8"
+        android:backgroundTint="@color/gray_900_161616"
+        android:gravity="center"
+        android:paddingHorizontal="1dp"
+        android:paddingVertical="19dp"
+        android:text="@string/connection_error_try_again"
+        android:textColor="@color/white_FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_connection_error_img" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

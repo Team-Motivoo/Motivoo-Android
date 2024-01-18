@@ -18,6 +18,7 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
@@ -68,6 +69,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         binding.vm = viewModel
         stepCountReceiver = StepCountReceiver()
 
+        backPressed()
         if (homePermissionsGranted()) {
             viewModel.setStepCount(pref.myStepCount)
             viewModel.setOtherStepCount(pref.otherStepCount)
@@ -242,6 +244,17 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
             setMissionImage(it.missionChoiceList[1].missionIconUrl)
             setMissionText(it.missionChoiceList[1].missionContent)
         }
+    }
+
+    private fun backPressed() {
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    requireActivity().finishAffinity()
+                }
+            }
+        )
     }
 
     private fun navigateToHomeBottomSheetFragment() {
