@@ -1,6 +1,7 @@
 package sopt.motivoo.data.datasource.remote
 
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import sopt.motivoo.data.model.request.home.RequestHomeDto
 import sopt.motivoo.data.model.request.home.RequestMissionImageDto
 import sopt.motivoo.data.model.request.home.RequestMissionTodayDto
@@ -26,7 +27,7 @@ class HomeDataSource @Inject constructor(
     suspend fun patchMissionImage(requestMissionImageDto: RequestMissionImageDto): ResponseMissionImageDto =
         homeService.patchMissionImage(requestMissionImageDto)
 
-    suspend fun uploadPhoto(url: String, photo: MultipartBody.Part) {
+    suspend fun uploadPhoto(url: String, photo: RequestBody) {
         homeService.uploadPhoto(url, photo)
     }
 }

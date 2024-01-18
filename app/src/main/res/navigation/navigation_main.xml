@@ -276,6 +276,11 @@
         android:label="HomeConfirmDialogFragment">
         <argument
             android:name="photoBitmap"
-            app:argType="android.graphics.Bitmap" />
+            app:argType="android.graphics.Bitmap"
+            app:nullable="true"/>
+        <argument
+            android:name="photoUri"
+            app:argType="android.net.Uri"
+            app:nullable="true"/>
     </dialog>
 </navigation>

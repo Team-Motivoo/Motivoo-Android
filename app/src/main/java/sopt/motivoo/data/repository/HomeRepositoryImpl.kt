@@ -72,11 +72,11 @@ class HomeRepositoryImpl @Inject constructor(
             homeDataSource.patchMissionImage(requestMissionImageDto).toMissionImageData()
         }
 
-    override suspend fun uploadPhoto(url: String, file: File): Result<Unit> {
-        val fileBody = MultipartBody.Part.createFormData(
-            name = PHOTO,
-            filename = file.name,
-            body = file.asRequestBody(
+    override suspend fun uploadPhoto(url: String, bitmap: Bitmap): Result<Unit> {
+        val outputStream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.PNG, 80, outputStream)
+        val requestBody = outputStream.toByteArray().toRequestBody()
+        return runCatching { homeDataSource.uploadPhoto(url, requestBody) }
                 URLConnection.guessContentTypeFromName(file.name).toMediaType()
             )
         )

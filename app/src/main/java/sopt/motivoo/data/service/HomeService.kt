@@ -1,6 +1,7 @@
 package sopt.motivoo.data.service
 
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.Multipart
@@ -36,10 +37,9 @@ interface HomeService {
         @Body requestMissionImageDto: RequestMissionImageDto
     ): ResponseMissionImageDto
 
-    @Multipart
     @PUT
     suspend fun uploadPhoto(
         @Url imgPresignedUrl: String,
-        @ photo: MultipartBody.Part
+        @Body photo: RequestBody
     ): Response<Unit>
 }

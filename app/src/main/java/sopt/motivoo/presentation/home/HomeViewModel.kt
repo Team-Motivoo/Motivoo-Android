@@ -90,9 +90,9 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun uploadPhoto(url: String, file: File) {
+    fun uploadPhoto(url: String, bitmap: Bitmap) {
         viewModelScope.launch {
-            repository.uploadPhoto(url, file).onSuccess {
+            repository.uploadPhoto(url, bitmap).onSuccess {
                 _isUploadImage.value = true
             }.onFailure {
                 _isUploadImage.value = false
