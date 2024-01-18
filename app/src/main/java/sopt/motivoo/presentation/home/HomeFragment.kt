@@ -54,9 +54,9 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
             // permission denied
             Toast.makeText(requireContext(), "Permission request denied", Toast.LENGTH_SHORT).show()
         } else {
+            startStepCountService()
             if (viewModel.missionChoiceData.value?.isChoiceFinished == true) {
                 initMissionSelectedHasPermission()
-                startStepCountService()
                 removeBlurEffect()
             } else {
                 initMissionUnSelectedHasPermission()
@@ -196,6 +196,10 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         }
         viewModel.stepCount.observe(viewLifecycleOwner) {
             binding.motivooStepCountText.setMyStepCountText(it.toString())
+        }
+        viewModel.isSelectedMission.observe(viewLifecycleOwner) {
+            viewModel.patchHome(pref.myStepCount, pref.otherStepCount)
+            viewModel.postMissionTodayChoice()
         }
     }
 

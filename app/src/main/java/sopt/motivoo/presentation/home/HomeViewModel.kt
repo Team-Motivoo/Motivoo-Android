@@ -37,6 +37,9 @@ class HomeViewModel @Inject constructor(
     private val _isUploadImage = MutableLiveData<Boolean>()
     val isUploadImage: LiveData<Boolean> = _isUploadImage
 
+    private val _isSelectedMission = MutableLiveData<Boolean>()
+    val isSelectedMission: LiveData<Boolean> = _isSelectedMission
+
     fun getEventOtherStepCount(otherUid: Long) {
         repository.getEventOtherStepCount(otherUid) {
             _otherStepCount.value = it
@@ -79,7 +82,7 @@ class HomeViewModel @Inject constructor(
     fun postMissionToday(missionId: Long) {
         viewModelScope.launch {
             repository.postMissionToday(RequestMissionTodayDto(missionId = missionId)).onSuccess {
-                postMissionTodayChoice()
+                _isSelectedMission.value = true
             }
         }
     }
