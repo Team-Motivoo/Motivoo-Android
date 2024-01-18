@@ -43,4 +43,3 @@ class SplashFragment : BindingFragment<FragmentSplashBinding>(R.layout.fragment_
         navController.navigate(R.id.action_splashFragment_to_permissionFragment, null, navOptions)
     }
 }
-
