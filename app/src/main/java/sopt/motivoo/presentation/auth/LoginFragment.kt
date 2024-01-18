@@ -67,7 +67,7 @@ class LoginFragment : BindingFragment<FragmentLoginBinding>(R.layout.fragment_lo
             when (uiState) {
                 is UiState.Success -> {
                     authViewModel.resetLoginState()
-                    if (motivooStorage.isUserMatched) {
+                    if (motivooStorage.isFinishedOnboarding) {
                         checkReLoginUser()
                     } else {
                         findNavController().navigate(R.id.action_loginFragment_to_termsOfUseFragment)
