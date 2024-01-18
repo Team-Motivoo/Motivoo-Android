@@ -15,7 +15,6 @@ import sopt.motivoo.data.datasource.remote.listener.AuthTokenRefreshListenerImpl
 import sopt.motivoo.databinding.ActivityMainBinding
 import sopt.motivoo.util.extension.hideKeyboard
 import sopt.motivoo.util.extension.setOnSingleClickListener
-import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -33,7 +32,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         initView()
         setupTokenRefreshListener()
-        Timber.tag("로그").e("생성")
     }
 
     private fun initView() {
@@ -120,10 +118,5 @@ class MainActivity : AppCompatActivity() {
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
         hideKeyboard(currentFocus ?: View(this))
         return super.dispatchTouchEvent(ev)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Timber.tag("로그").e("삭제")
     }
 }
