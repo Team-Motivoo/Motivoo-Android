@@ -13,14 +13,11 @@ import sopt.motivoo.presentation.mypage.MyPageViewModel
 import sopt.motivoo.util.UiState
 import sopt.motivoo.util.binding.BindingFragment
 import sopt.motivoo.util.extension.setVisible
-import kotlin.properties.Delegates
 
 @AndroidEntryPoint
 class MyPageFragment : BindingFragment<FragmentMypageBinding>(R.layout.fragment_mypage) {
 
     private val myPageViewModel by viewModels<MyPageViewModel>()
-    private lateinit var userNickname: String
-    private var userAge by Delegates.notNull<Int>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -36,9 +33,6 @@ class MyPageFragment : BindingFragment<FragmentMypageBinding>(R.layout.fragment_
                 is UiState.Success -> {
                     binding.tvMypageName.text = uiState.data.userNickname
                     binding.clMypageRoot.setVisible(VISIBLE)
-                    binding.tvMypageMyInfo.setOnClickListener {
-                        navigateToMyInfo()
-                    }
                 }
 
                 is UiState.Loading -> {
@@ -51,6 +45,10 @@ class MyPageFragment : BindingFragment<FragmentMypageBinding>(R.layout.fragment_
     }
 
     private fun clickButtons() {
+
+        binding.tvMypageMyInfo.setOnClickListener {
+            navigateToMyInfo()
+        }
 
         binding.clMypageExerciseInfo.setOnClickListener {
             navigateToMyExerciseInfo()
@@ -78,9 +76,12 @@ class MyPageFragment : BindingFragment<FragmentMypageBinding>(R.layout.fragment_
     }
 
     private fun navigateToMyInfo() {
+        val userInfo = (myPageViewModel.myPageUserInfo.value as? UiState.Success)?.data
         val sendUserInfo = MyPageFragmentDirections.actionMyPageFragmentToMyInfoFragment(
-            userNickname, userAge
+            userNickname = userInfo?.userNickname ?: "",
+            userAge = userInfo?.userAge ?: 0
         )
+
         findNavController().navigate(sendUserInfo)
     }
 
