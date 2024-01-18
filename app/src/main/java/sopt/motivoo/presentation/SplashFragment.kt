@@ -5,6 +5,7 @@ import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import sopt.motivoo.R
@@ -14,6 +15,7 @@ import sopt.motivoo.util.binding.BindingFragment
 import sopt.motivoo.util.findStartDestination
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class SplashFragment : BindingFragment<FragmentSplashBinding>(R.layout.fragment_splash) {
 
     @Inject
