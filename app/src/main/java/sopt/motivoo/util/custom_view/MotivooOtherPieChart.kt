@@ -111,7 +111,12 @@ class MotivooOtherPieChart @JvmOverloads constructor(
     }
 
     fun setStepCount(stepCount: Float) {
-        this.stepCount = stepCount
+        if (stepCount * DEGREE >= DEGREE) {
+            this.stepCount = 1f
+        } else {
+            this.stepCount = stepCount
+        }
+
         invalidate()
     }
 
@@ -119,6 +124,11 @@ class MotivooOtherPieChart @JvmOverloads constructor(
         otherImage = ContextCompat.getDrawable(context, icon)?.run {
             toBitmap(IMAGE_SIZE.px.toInt(), IMAGE_SIZE.px.toInt())
         }
+        invalidate()
+    }
+
+    fun successStepCount() {
+        otherImage = null
     }
 
     companion object {

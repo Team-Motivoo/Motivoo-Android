@@ -23,13 +23,20 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.Firebase
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.database
 import dagger.hilt.android.AndroidEntryPoint
 import sopt.motivoo.R
 import sopt.motivoo.databinding.FragmentHomeBinding
 import sopt.motivoo.domain.entity.MotivooStorage
 import sopt.motivoo.domain.entity.home.MissionChoiceData
+import sopt.motivoo.util.Constants.USERS
 import sopt.motivoo.util.binding.BindingFragment
 import sopt.motivoo.util.extension.setVisible
+import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -70,13 +77,19 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         stepCountReceiver = StepCountReceiver()
 
         backPressed()
+
+
         if (homePermissionsGranted()) {
-            viewModel.setStepCount(pref.myStepCount)
-            viewModel.setOtherStepCount(pref.otherStepCount)
             startStepCountService()
         }
 
-        viewModel.patchHome(pref.myStepCount, pref.otherStepCount)
+        Firebase.database.reference.child(USERS).child(pref.otherId.toString()).get()
+            .addOnSuccessListener {
+                if (it.value != null) {
+                    Timber.tag("로그").e("my : ${pref.myStepCount} / oth : ${it.value}")
+                    viewModel.patchHome(pref.myStepCount, it.value.toString().toInt())
+                }
+            }
         viewModel.postMissionTodayChoice()
 
         binding.motivooFirstMissionCard.setOnClickListener {
@@ -136,6 +149,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
                 binding.tvExercisePercent.setRenderEffect(it)
             }
         }
+
     }
 
     private fun removeBlurEffect() {
@@ -174,52 +188,84 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
             }
         }
         viewModel.homeData.observe(viewLifecycleOwner) {
-            when (it.userType) {
-                getString(R.string.home_child) -> {
-                    initRunnerIcon(
-                        R.drawable.ic_child_user,
-                        R.drawable.ic_parent_other
-                    )
-                    binding.motivooStepCountText.setOtherStepCountTitleText(getString(R.string.home_parent_step_count))
-                    binding.motivooStepCountTextUnselectedMission.setOtherStepCountTitleText(
-                        getString(R.string.home_parent_step_count)
-                    )
-                }
-
-                getString(R.string.home_parent) -> {
-                    initRunnerIcon(
-                        R.drawable.ic_parent_user,
-                        R.drawable.ic_child_other
-                    )
-                    binding.motivooStepCountText.setOtherStepCountTitleText(getString(R.string.home_child_step_count))
-                    binding.motivooStepCountTextUnselectedMission.setOtherStepCountTitleText(
-                        getString(R.string.home_child_step_count)
-                    )
-                }
-            }
             pref.userId = it.userId
             pref.otherId = it.opponentUserId
             pref.myGoalStepCount = it.userGoalStepCount
             pref.otherGoalStepCount = it.opponentUserGoalStepCount
-            viewModel.getEventOtherStepCount(it.opponentUserId)
+
+            if (it.userType == getString(R.string.home_child)) {
+                initRunnerIcon(
+                    R.drawable.ic_child_user,
+                    R.drawable.ic_parent_other
+                )
+                binding.motivooStepCountText.setOtherStepCountTitleText(getString(R.string.home_parent_step_count))
+                binding.motivooStepCountTextUnselectedMission.setOtherStepCountTitleText(
+                    getString(R.string.home_parent_step_count)
+                )
+            } else {
+                initRunnerIcon(
+                    R.drawable.ic_parent_user,
+                    R.drawable.ic_child_other
+                )
+                binding.motivooStepCountText.setOtherStepCountTitleText(getString(R.string.home_child_step_count))
+                binding.motivooStepCountTextUnselectedMission.setOtherStepCountTitleText(
+                    getString(R.string.home_child_step_count)
+                )
+            }
+
+            if (it.isStepCountCompleted) {
+                binding.motivooMyPieChart.successStepCount()
+                binding.motivooOtherPieChart.successStepCount()
+            }
+
+
+            // TODO: 파이어베이스 DB에 UID KEY 값으로 데이터가 들어가있지 않으면 걸음 수 넣어주기
+            it.userId.let { userId ->
+                Firebase.database.reference.child(USERS).child(userId.toString()).get()
+                    .addOnSuccessListener {
+                        if (it.value == null) {
+                            Firebase.database.reference.child(USERS).child(userId.toString())
+                                .setValue(pref.myStepCount)
+                        }
+                    }
+            }
+
+            // TODO: 파이어베이스 실시간으로 상대 걸음 수 가져오기
+            Firebase.database.reference.child(USERS).child(it.opponentUserId.toString()).addValueEventListener(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        if (snapshot.value != null) {
+                            viewModel.setOtherStepCount(snapshot.value as Long)
+                        }
+                    }
+                    override fun onCancelled(error: DatabaseError) {}
+                })
         }
-        viewModel.otherStepCount.observe(viewLifecycleOwner) { otherStepCount ->
-            eventOtherStepCount(otherStepCount)
+        viewModel.otherStepCount.observe(viewLifecycleOwner) {
+//            if (pref.otherStepCount >= pref.otherGoalStepCount) {
+//                viewModel.patchHome(pref.myStepCount, pref.otherStepCount)
+//            }
+            binding.motivooStepCountText.setOtherStepCountText(it.toString())
+            binding.motivooStepCountTextUnselectedMission.setOtherStepCountText(it.toString())
+            if (pref.otherGoalStepCount != 0) {
+                binding.motivooOtherPieChart.setStepCount(it / pref.otherGoalStepCount.toFloat())
+            }
         }
         viewModel.stepCount.observe(viewLifecycleOwner) {
+//            if (pref.myStepCount >= pref.myGoalStepCount - 7900) {
+//                viewModel.patchHome(pref.myStepCount, pref.otherStepCount)
+//            }
             binding.motivooStepCountText.setMyStepCountText(it.toString())
+            binding.motivooStepCountTextUnselectedMission.setMyStepCountText(it.toString())
+            Timber.tag("로그").e("stepCount : ${it}")
+            Timber.tag("로그").e("my goal : ${pref.myGoalStepCount}")
+            if (pref.otherGoalStepCount != 0) {
+                binding.motivooMyPieChart.setStepCount(it / pref.myGoalStepCount.toFloat())
+            }
         }
         viewModel.isSelectedMission.observe(viewLifecycleOwner) {
             viewModel.patchHome(pref.myStepCount, pref.otherStepCount)
             viewModel.postMissionTodayChoice()
         }
-    }
-
-    private fun eventOtherStepCount(otherStepCount: Long) {
-        binding.btnVerifyExercise.isEnabled = isVerifyExerciseButtonEnabled()
-        binding.motivooStepCountText.setOtherStepCountText(otherStepCount.toString())
-        binding.motivooOtherPieChart.setStepCount((otherStepCount.toFloat() / pref.otherGoalStepCount))
-        binding.motivooStepCountTextUnselectedMission.setOtherStepCountText(otherStepCount.toString())
     }
 
     private fun initRunnerIcon(myIcon: Int, otherIcon: Int) {
@@ -235,7 +281,6 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
     private fun initMissionUnSelectedHasPermission() {
         binding.motivooStepCountTextUnselectedMission.setVisible(VISIBLE)
         binding.motivooDeniedPermissionUnselected.setVisible(GONE)
-        binding.motivooStepCountText.setOtherStepCountText(pref.otherStepCount.toString())
     }
 
     private fun initMissionSelectedNotPermission() {
@@ -246,8 +291,6 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
 
     private fun initMissionSelectedHasPermission() {
         binding.motivooStepCountText.setVisible(VISIBLE)
-        binding.motivooMyPieChart.setStepCount(pref.myStepCount / pref.myGoalStepCount.toFloat())
-        binding.motivooOtherPieChart.setStepCount(pref.otherStepCount / pref.otherGoalStepCount.toFloat())
         binding.motivooDeniedPermissionSelected.setVisible(GONE)
         binding.btnVerifyExercise.setVisible(VISIBLE)
     }
@@ -313,22 +356,11 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         override fun onReceive(context: Context?, intent: Intent?) {
             if (intent?.action == STEP_COUNT) {
                 intent.getIntExtra(STEP_COUNT, 0).let { count ->
-                    eventMyStepCount(count)
+                    viewModel.setStepCount(count)
                 }
             }
         }
-
-        private fun eventMyStepCount(count: Int) {
-            viewModel.setMyStepCount(pref.userId, count)
-            binding.motivooStepCountText.setMyStepCountText(count.toString())
-            binding.motivooMyPieChart.setStepCount(count.toFloat() / pref.myGoalStepCount)
-            binding.motivooStepCountTextUnselectedMission.setMyStepCountText(count.toString())
-            binding.btnVerifyExercise.isEnabled = isVerifyExerciseButtonEnabled()
-        }
     }
-
-    private fun isVerifyExerciseButtonEnabled(): Boolean =
-        pref.otherStepCount == pref.otherGoalStepCount && pref.myStepCount == pref.myGoalStepCount
 
     companion object {
         const val STEP_COUNT = "step_count"

@@ -20,6 +20,7 @@ class HomeViewModel @Inject constructor(
     private val repository: HomeRepository,
 ) : ViewModel() {
     val stepCount = MutableLiveData<Int>()
+    val otherStepCount = MutableLiveData<Int>()
     val imageBitmap = MutableLiveData<Bitmap>()
 
     private val _homeData = MutableLiveData<HomeData>()
@@ -28,8 +29,6 @@ class HomeViewModel @Inject constructor(
     private val _missionChoiceData = MutableLiveData<MissionChoiceData>()
     val missionChoiceData: LiveData<MissionChoiceData> = _missionChoiceData
 
-    private val _otherStepCount = MutableLiveData<Long>()
-    val otherStepCount: LiveData<Long> = _otherStepCount
 
     private val _imageData = MutableLiveData<MissionImageData>()
     val imageData: LiveData<MissionImageData> = _imageData
@@ -40,23 +39,12 @@ class HomeViewModel @Inject constructor(
     private val _isSelectedMission = MutableLiveData<Boolean>()
     val isSelectedMission: LiveData<Boolean> = _isSelectedMission
 
-    fun getEventOtherStepCount(otherUid: Long) {
-        repository.getEventOtherStepCount(otherUid) {
-            _otherStepCount.value = it
-        }
-    }
-
-    fun setMyStepCount(myUid: Long, stepCount: Int) {
-        repository.setMyStepCount(myUid, stepCount)
-        setStepCount(stepCount)
-    }
-
     fun setStepCount(stepCount: Int) {
         this.stepCount.value = stepCount
     }
 
-    fun setOtherStepCount(stepCount: Int) {
-        _otherStepCount.value = stepCount.toLong()
+    fun setOtherStepCount(stepCount: Long) {
+        this.otherStepCount.value = stepCount.toInt()
     }
 
     fun setImageBitmap(imageBitmap: Bitmap) {

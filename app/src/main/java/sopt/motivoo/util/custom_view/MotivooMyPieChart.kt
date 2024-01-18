@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
 import sopt.motivoo.R
 import sopt.motivoo.util.extension.px
+import timber.log.Timber
 import kotlin.math.abs
 import kotlin.math.cos
 import kotlin.math.sin
@@ -98,7 +99,7 @@ class MotivooMyPieChart @JvmOverloads constructor(
     }
 
     fun setStepCount(stepCount: Float) {
-        if (stepCount * DEGREE >= 1) {
+        if (stepCount * DEGREE >= DEGREE) {
             this.stepCount = 1f
         } else {
             this.stepCount = stepCount
@@ -110,7 +111,16 @@ class MotivooMyPieChart @JvmOverloads constructor(
         this.myImage = ContextCompat.getDrawable(context, icon)?.run {
             toBitmap(IMAGE_SIZE.px.toInt(), IMAGE_SIZE.px.toInt())
         }
+        invalidate()
     }
+
+    fun successStepCount() {
+        this.myImage = ContextCompat.getDrawable(context,R.drawable.ic_launcher_background )?.run {
+            toBitmap(0.px.toInt(), 0.px.toInt())
+        }
+        invalidate()
+    }
+
 
     companion object {
         private const val DIAMETER = 290 // fix

@@ -39,6 +39,9 @@ class HomeRepositoryImpl @Inject constructor(
             })
     }
 
+    override fun getOtherStepCount(otherUid: Long) {
+    }
+
     override fun getEventOtherStepCount(otherUid: Long, otherStepCount: (Long) -> Unit) {
         firebaseRealtimeDB.reference.child(USERS)
             .addValueEventListener(object : ValueEventListener {
@@ -46,7 +49,7 @@ class HomeRepositoryImpl @Inject constructor(
                     snapshot.child(otherUid.toString()).apply {
                         if (exists()) {
                             otherStepCount(value as Long)
-                            pref.otherStepCount = (value as Long).toInt()
+//                            pref.otherStepCount = (value as Long).toInt()
                         }
                     }
                 }

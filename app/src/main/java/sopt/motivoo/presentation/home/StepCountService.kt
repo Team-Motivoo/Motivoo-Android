@@ -26,6 +26,7 @@ import sopt.motivoo.domain.entity.MotivooStorage
 import sopt.motivoo.presentation.home.HomeFragment.Companion.STEP_COUNT
 import sopt.motivoo.util.Constants.USERS
 import sopt.motivoo.util.extension.sendNotification
+import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -56,12 +57,14 @@ class StepCountService : Service() {
         sensorManager: SensorManager,
         sensorTypeStepDetector: Sensor?,
     ) {
+        Timber.tag("로그").e("job : ${job?.isActive}")
         if (job?.isActive == null) {
             job = CoroutineScope(Dispatchers.Default).launch {
                 object : SensorEventListener {
                     override fun onSensorChanged(sensorEvent: SensorEvent?) {
                         when (sensorEvent?.sensor?.type) {
                             Sensor.TYPE_STEP_DETECTOR -> {
+                                Timber.tag("로그").e("count : ${pref.myStepCount}")
                                 pref.myStepCount += 1
                                 firebaseRealtimeDB.reference.child(USERS)
                                     .child(pref.userId.toString()).setValue(pref.myStepCount)
@@ -77,7 +80,7 @@ class StepCountService : Service() {
                     )
                 }
 
-                eventOtherStepCount()
+//                eventOtherStepCount()
             }
         }
     }
