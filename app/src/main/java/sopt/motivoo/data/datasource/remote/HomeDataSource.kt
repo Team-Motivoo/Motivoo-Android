@@ -1,6 +1,5 @@
 package sopt.motivoo.data.datasource.remote
 
-import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import sopt.motivoo.data.model.request.home.RequestHomeDto
 import sopt.motivoo.data.model.request.home.RequestMissionImageDto

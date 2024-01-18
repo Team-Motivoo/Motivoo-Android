@@ -7,14 +7,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import sopt.motivoo.data.model.request.home.RequestHomeDto
 import sopt.motivoo.data.model.request.home.RequestMissionImageDto
 import sopt.motivoo.data.model.request.home.RequestMissionTodayDto
 import sopt.motivoo.domain.entity.home.HomeData
 import sopt.motivoo.domain.entity.home.MissionChoiceData
 import sopt.motivoo.domain.entity.home.MissionImageData
 import sopt.motivoo.domain.repository.HomeRepository
-import java.io.File
 import javax.inject.Inject
 
 @HiltViewModel
@@ -54,11 +52,15 @@ class HomeViewModel @Inject constructor(
         this.stepCount.value = stepCount
     }
 
+    fun setOtherStepCount(stepCount: Int) {
+        _otherStepCount.value = stepCount.toLong()
+    }
+
     fun setImageBitmap(imageBitmap: Bitmap) {
         this.imageBitmap.value = imageBitmap
     }
 
-    fun patchHome(myStepCount:Int, otherStepCount:Int) {
+    fun patchHome(myStepCount: Int, otherStepCount: Int) {
         viewModelScope.launch {
             repository.patchHome(myStepCount, otherStepCount).onSuccess {
                 _homeData.value = it
