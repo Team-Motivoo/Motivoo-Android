@@ -6,4 +6,9 @@
         <attr name="progressOtherColor" format="reference|color"/>
         <attr name="centerCicleColor" format="reference|color"/>
     </declare-styleable>
+    <declare-styleable name="MotivooStepCountText">
+        <attr name="myStepCountText" format="reference|string"/>
+    </declare-styleable>
+    <declare-styleable name="MotivooMissionCard">
+    </declare-styleable>
 </resources>

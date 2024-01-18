@@ -12,21 +12,32 @@ import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import dagger.hilt.android.AndroidEntryPoint
 import sopt.motivoo.R
 import sopt.motivoo.databinding.BottomSheetHomeBinding
+import sopt.motivoo.domain.entity.MotivooStorage
+import sopt.motivoo.util.Constants.S3_BUCKET_NAME
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class HomeBottomSheetFragment : BottomSheetDialogFragment() {
     private var _binding: BottomSheetHomeBinding? = null
     private val binding get() = _binding ?: error(getString(R.string.binding_error))
+
+    @Inject
+    lateinit var pref: MotivooStorage
+
+    private val viewModel: HomeViewModel by activityViewModels()
 
     private val isCameraPermissionResult =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
             var permissionGranted = true
             permissions.entries.forEach {
-                if (it.key in REQUIRED_PERMISSIONS && it.value == false) {
+                if (it.key in REQUIRED_CAMERA_PERMISSIONS && it.value == false) {
                     permissionGranted = false
                 }
             }
@@ -41,15 +52,12 @@ class HomeBottomSheetFragment : BottomSheetDialogFragment() {
     private val takePictureResult =
         registerForActivityResult(ActivityResultContracts.TakePicturePreview()) { photoBitmap ->
             if (photoBitmap != null) {
-                val action =
-                    HomeBottomSheetFragmentDirections.actionHomeBottomSheetFragmentToHomeConfirmDialogFragment(
-                        photoBitmap
-                    )
-                findNavController().navigate(action)
+                viewModel.patchMissionImage(S3_BUCKET_NAME)
+                viewModel.setImageBitmap(photoBitmap)
             }
         }
 
-    private val pickMedia =
+    private val pickMediaResult =
         registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { photoUri ->
             if (photoUri != null) {
                 val action =
@@ -67,7 +75,7 @@ class HomeBottomSheetFragment : BottomSheetDialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = BottomSheetHomeBinding.inflate(inflater, container, false)
         return binding.root
@@ -78,15 +86,34 @@ class HomeBottomSheetFragment : BottomSheetDialogFragment() {
         setLayoutSize()
 
         binding.clTakePhoto.setOnClickListener {
-            if (allPermissionGranted()) {
+            if (allCameraPermissionGranted()) {
                 start()
             } else {
-                isCameraPermissionResult.launch(REQUIRED_PERMISSIONS)
+                isCameraPermissionResult.launch(REQUIRED_CAMERA_PERMISSIONS)
             }
         }
 
         binding.clSelectAlbum.setOnClickListener {
-            pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+            pickMediaResult.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+        }
+
+        observeData()
+    }
+
+    private fun observeData() {
+        viewModel.imageData.observe(viewLifecycleOwner) {
+            viewModel.imageBitmap.value?.let { imageBitmap ->
+                viewModel.uploadPhoto(it.imgPresignedUrl, imageBitmap)
+            }
+        }
+        viewModel.isUploadImage.observe(viewLifecycleOwner) {
+            viewModel.imageBitmap.value?.let { imageBitmap ->
+                val action =
+                    HomeBottomSheetFragmentDirections.actionHomeBottomSheetFragmentToHomeConfirmDialogFragment(
+                        imageBitmap, null
+                    )
+                findNavController().navigate(action)
+            }
         }
     }
 
@@ -97,12 +124,12 @@ class HomeBottomSheetFragment : BottomSheetDialogFragment() {
     private fun setLayoutSize() {
         context?.resources?.displayMetrics?.let { metrics ->
             binding.root.layoutParams?.run {
-                height = (metrics.heightPixels * heightPercent).toInt()
+                height = (metrics.heightPixels * HEIGHT_PERCENT).toInt()
             }
         }
     }
 
-    private fun allPermissionGranted() = REQUIRED_PERMISSIONS.all {
+    private fun allCameraPermissionGranted() = REQUIRED_CAMERA_PERMISSIONS.all {
         ContextCompat.checkSelfPermission(
             requireContext(), it
         ) == PackageManager.PERMISSION_GRANTED
@@ -114,9 +141,9 @@ class HomeBottomSheetFragment : BottomSheetDialogFragment() {
     }
 
     companion object {
-        private const val heightPercent = 0.45f
+        private const val HEIGHT_PERCENT = 0.45f
 
-        private val REQUIRED_PERMISSIONS =
+        private val REQUIRED_CAMERA_PERMISSIONS =
             mutableListOf(
                 Manifest.permission.CAMERA
             ).apply {
