@@ -6,8 +6,11 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.ImageDecoder
+import android.net.Uri
 import android.os.Build
 import android.os.Environment
+import android.provider.MediaStore
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
@@ -65,8 +68,8 @@ fun Context.showKeyboard(view: View) {
 }
 
 fun Context.sendNotification(
-    title:String,
-    messageBody: String
+    title: String,
+    messageBody: String,
 ): Notification {
     val contentIntent = Intent(applicationContext, MainActivity::class.java)
     val contentPendingIntent = PendingIntent.getActivity(
@@ -87,24 +90,4 @@ fun Context.sendNotification(
             priority = NotificationCompat.PRIORITY_DEFAULT
         }
     }.build()
-}
-
-fun Context.bitmapToFile(bitmap: Bitmap, fileName: String): File {
-    val saveDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-    val tempFile = File(saveDir, fileName)
-
-    if (!tempFile.parentFile.exists()) {
-        tempFile.parentFile.mkdirs()
-    }
-
-    var out: OutputStream? = null
-    try {
-        if (tempFile.createNewFile()) {
-            out = FileOutputStream(tempFile)
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out)
-        }
-    } finally {
-        out?.close()
-    }
-    return tempFile
 }
