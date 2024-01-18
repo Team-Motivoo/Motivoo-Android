@@ -10,17 +10,16 @@ import sopt.motivoo.databinding.ItemExerciseBinding
 import sopt.motivoo.databinding.ItemExerciseNoticeBinding
 import sopt.motivoo.domain.entity.exercise.ExerciseData.ExerciseItemInfo
 import sopt.motivoo.presentation.ExerciseFragment.Companion.CHILD
+import sopt.motivoo.util.extension.prettyString
 import sopt.motivoo.util.extension.setVisible
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
+import java.time.LocalDate
 
 class ExerciseEachDateInfoViewHolder(private val binding: ItemExerciseBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
     fun onBind(exerciseItemInfoData: ExerciseItemInfo.EachDateItemInfo, userType: String) {
         val context = binding.root.context
-        initText(exerciseItemInfoData, binding, userType)
+        initText(exerciseIte트mInfoData, binding, userType)
         initImage(exerciseItemInfoData, binding)
         imageVisibility(exerciseItemInfoData, binding)
         checkStatus(exerciseItemInfoData, binding, context)
@@ -132,19 +131,24 @@ class ExerciseEachDateInfoViewHolder(private val binding: ItemExerciseBinding) :
     }
 
     private fun compareDate(binding: ItemExerciseBinding, context: Context) {
-        val currentDate = getCurrentDate()
-        if (currentDate == binding.tvItemExerciseDate.text.substring(0, 13)) {
+        fun String.isToday(): Boolean = this == binding.tvItemExerciseDate.text.let {
+            it.removeRange(it.length - 4 until it.length).toString()
+        }
+
+        if (LocalDate.now().prettyString.isToday()) {
             binding.tvItemExerciseNoImageBeforeExerciseLeft.text =
                 context.getString(R.string.exercise_no_image_before_exercise_today)
             binding.tvItemExerciseNoImageBeforeExerciseRight.text =
                 context.getString(R.string.exercise_no_image_before_exercise_today)
-        }
-    }
 
-    private fun getCurrentDate(): String {
-        val dataFormat = SimpleDateFormat("yyyy년 MM월 dd일", Locale.getDefault())
-        val currentDate = Date()
-        return dataFormat.format(currentDate)
+            binding.ivItemExerciseNoImageBeforeExerciseLeft.visibility = View.GONE
+            binding.ivItemExerciseNoImageBeforeExerciseRight.visibility = View.GONE
+        } else {
+            binding.tvItemExerciseNoImageBeforeExerciseLeft.text =
+                context.getString(R.string.exercise_no_image_before_exercise)
+            binding.tvItemExerciseNoImageBeforeExerciseRight.text =
+                context.getString(R.string.exercise_no_image_before_exercise)
+        }
     }
 
     companion object {
