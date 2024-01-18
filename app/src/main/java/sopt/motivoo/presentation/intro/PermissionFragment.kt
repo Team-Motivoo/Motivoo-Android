@@ -48,8 +48,6 @@ class PermissionFragment :
         initRequiredPermissions()
         if (checkPermissionsStatus() || isAllPermissionsGranted()) {
             navigateToNextFragment()
-        } else if (areAllDeniedPermissionsRationale()) {
-            navigateToNextFragment()
         } else {
             getPermission()
         }
@@ -109,13 +107,8 @@ class PermissionFragment :
         requestMultiplePermissionsLauncher.launch(permissions)
     }
 
-    private fun areAllDeniedPermissionsRationale(): Boolean {
-        return deniedPermissions.isNotEmpty() && deniedPermissions.all {
-            shouldShowRequestPermissionRationale(it)
-        }
-    }
-
     private fun navigateToNextFragment() {
+        motivooStorage.isFinishedPermission = true
         val navOptions = NavOptions.Builder()
             .setPopUpTo(R.id.permissionFragment, true)
             .build()
