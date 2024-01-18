@@ -1,7 +1,6 @@
 package sopt.motivoo.domain.entity
 
 interface MotivooStorage {
-    var stepCount: Int
     var nickName: String
     var myStepCount: Int
     var otherStepCount: Int

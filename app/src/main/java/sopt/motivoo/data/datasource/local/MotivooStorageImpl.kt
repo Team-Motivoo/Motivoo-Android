@@ -30,7 +30,7 @@ class MotivooStorageImpl @Inject constructor(@ApplicationContext context: Contex
             )
         }
     }
-
+    
     override var myStepCount: Int
         get() = pref.getInt(MY_STEP_COUNT, 0)
         set(value) = pref.edit { putInt(MY_STEP_COUNT, value) }
