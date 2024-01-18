@@ -31,7 +31,7 @@ class MyLogoutFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setLayoutSizeRatio(widthPercent = 1f, heightPercent = 1f)
+        setLayoutSizeRatio(widthPercent = 0.91f, heightPercent = 0.4f)
         clickButtons()
     }
 

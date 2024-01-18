@@ -9,6 +9,7 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.animation.AnimationUtils
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
@@ -49,11 +50,27 @@ class GetInviteCodeFragment :
         collectData()
         checkMatching()
         clickBackButton()
+        backPressed()
+    }
+
+    private fun backPressed() {
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    if (motivooStorage.isFinishedOnboarding) {
+                        passedOnboardingClickBackButton()
+                    } else {
+                        afterOnboardingClickBackButton()
+                    }
+                }
+            }
+        )
     }
 
     private fun clickBackButton() {
         binding.includeGetInviteCodeToolbar.tvToolbarBack.setOnSingleClickListener {
-            if (motivooStorage.isFinishedOnboarding) passedOnboardingClickBackButton() else afterOnboardingClickBackButton()
+            backPressed()
         }
     }
 
@@ -100,19 +117,17 @@ class GetInviteCodeFragment :
     }
 
     private fun afterOnboardingClickBackButton() {
-        binding.includeGetInviteCodeToolbar.tvToolbarBack.setOnSingleClickListener {
-            val navController = findNavController()
-            val startDestinationId = navController.findStartDestination().id
-            val navOptions = NavOptions.Builder()
-                .setPopUpTo(startDestinationId, true)
-                .build()
+        val navController = findNavController()
+        val startDestinationId = navController.findStartDestination().id
+        val navOptions = NavOptions.Builder()
+            .setPopUpTo(startDestinationId, true)
+            .build()
 
-            findNavController().navigate(
-                R.id.action_getInviteCodeFragment_to_startMotivooFragment,
-                null,
-                navOptions
-            )
-        }
+        findNavController().navigate(
+            R.id.action_getInviteCodeFragment_to_startMotivooFragment,
+            null,
+            navOptions
+        )
     }
 
     private fun setClipboard() {

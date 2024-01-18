@@ -23,6 +23,26 @@ class MyPageFragment : BindingFragment<FragmentMypageBinding>(R.layout.fragment_
         binding.clMypageExerciseInfo.setOnClickListener {
             navigateToMyExerciseInfo()
         }
+
+        binding.clMypageServiceUse.setOnClickListener {
+            navigateToServiceUseWebView()
+        }
+
+        binding.clMypagePrivacyPolicy.setOnClickListener {
+            navigateToPrivacyPolicyWebView()
+        }
+
+        binding.clMypageOpenSource.setOnClickListener {
+            navigateToOpenSourceWebView()
+        }
+
+        binding.clMypageDeveloperInfo.setOnClickListener {
+            navigateToDeveloperInfoWebView()
+        }
+
+        binding.clMypageAskKakao.setOnClickListener {
+            navigateToAskKakaoWebView()
+        }
     }
 
     private fun navigateToMyInfo() {
@@ -31,5 +51,35 @@ class MyPageFragment : BindingFragment<FragmentMypageBinding>(R.layout.fragment_
 
     private fun navigateToMyExerciseInfo() {
         findNavController().navigate(R.id.action_myPageFragment_to_myExerciseInfoFragment)
+    }
+
+    private fun navigateToServiceUseWebView() {
+        val action =
+            MyPageFragmentDirections.actionMyPageFragmentToWebViewFragment(getString(R.string.service_use_url))
+        findNavController().navigate(action)
+    }
+
+    private fun navigateToPrivacyPolicyWebView() {
+        val action =
+            MyPageFragmentDirections.actionMyPageFragmentToWebViewFragment(getString(R.string.privacy_policy_url))
+        findNavController().navigate(action)
+    }
+
+    private fun navigateToOpenSourceWebView() {
+        val action =
+            MyPageFragmentDirections.actionMyPageFragmentToWebViewFragment(getString(R.string.open_source_url))
+        findNavController().navigate(action)
+    }
+
+    private fun navigateToDeveloperInfoWebView() {
+        val action =
+            MyPageFragmentDirections.actionMyPageFragmentToWebViewFragment(getString(R.string.developer_info_url))
+        findNavController().navigate(action)
+    }
+
+    private fun navigateToAskKakaoWebView() {
+        val action =
+            MyPageFragmentDirections.actionMyPageFragmentToWebViewFragment(getString(R.string.ask_kakao_url))
+        findNavController().navigate(action)
     }
 }

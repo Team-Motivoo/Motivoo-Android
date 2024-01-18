@@ -100,7 +100,6 @@ class OnboardingViewModel @Inject constructor(
 
     private val _isPostOnboardingInfoSuccess = MutableStateFlow<UiState<Boolean>>(UiState.Loading)
     val isPostOnboardingInfoSuccess get() = _isPostOnboardingInfoSuccess.asStateFlow()
-
     fun setDoExerciseType(doExerciseType: DoExerciseType) {
         _doExerciseType.value = doExerciseType
         viewModelScope.launch {
@@ -186,7 +185,7 @@ class OnboardingViewModel @Inject constructor(
         }
     }
 
-    fun resetOnboardingFinishedState() {
+    private fun resetOnboardingFinishedState() {
         _isPostOnboardingInfoSuccess.value = UiState.Loading
     }
 }

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_rectangle_radius_8_solid_gray100">
+
+    <TextView
+        android:id="@+id/tv_denied_permission_title"
+        style="@style/Caption1_semi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:paddingHorizontal="64dp"
+        android:text="@string/permission_denied_description"
+        android:textColor="@color/gray_900_161616"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_allow"
+        style="@style/B5_med"
+        android:layout_width="wrap_content"
+        android:stateListAnimator="@null"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:background="@drawable/shape_rectangle_radius_8_solid_gray900"
+        android:paddingHorizontal="64dp"
+        android:text="@string/allow"
+        android:textColor="@color/white_FFFFFF"
+        android:layout_marginBottom="28dp"
+        app:layout_constraintEnd_toEndOf="@id/tv_denied_permission_title"
+        app:layout_constraintStart_toStartOf="@id/tv_denied_permission_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_denied_permission_title"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

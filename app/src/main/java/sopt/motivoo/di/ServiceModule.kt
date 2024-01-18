@@ -9,6 +9,7 @@ import sopt.motivoo.data.service.AuthService
 import sopt.motivoo.data.service.DummyService
 import sopt.motivoo.data.service.MyExerciseInfoService
 import sopt.motivoo.data.service.OnboardingService
+import sopt.motivoo.data.service.HomeService
 import javax.inject.Singleton
 
 @Module
@@ -31,4 +32,8 @@ object ServiceModule {
     @Provides
     @Singleton
     fun provideMyExerciseInfoService(retrofit: Retrofit): MyExerciseInfoService = retrofit.create()
+
+    @Provides
+    @Singleton
+    fun provideHomeService(retrofit: Retrofit): HomeService = retrofit.create()
 }

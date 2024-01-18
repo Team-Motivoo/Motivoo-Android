@@ -67,8 +67,10 @@ class AuthInterceptor @Inject constructor(
         return response
     }
 
-    private fun Request.newAuthBuilder() =
-        this.newBuilder().addHeader(AUTHORIZATION, motivooStorage.accessToken).build()
+    private fun Request.newAuthBuilder(): Request =
+        if (toString().contains(BuildConfig.BASE_URL)) this.newBuilder()
+            .addHeader(AUTHORIZATION, motivooStorage.accessToken).build()
+        else this
 
     companion object {
         private const val REFRESH_CODE = 401

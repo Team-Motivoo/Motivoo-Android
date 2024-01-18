@@ -15,6 +15,12 @@ class MotivooStepCountText @JvmOverloads constructor(
 
     init {
         initView()
+        context.theme.obtainStyledAttributes(
+            attributeSet, R.styleable.MotivooStepCountText, 0, 0
+        ).apply {
+            binding.tvStepCount.text = getString(R.styleable.MotivooStepCountText_myStepCountText)
+            recycle()
+        }
     }
 
     private fun initView() {
