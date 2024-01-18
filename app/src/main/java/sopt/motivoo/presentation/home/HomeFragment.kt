@@ -180,7 +180,10 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
                         R.drawable.ic_child_user,
                         R.drawable.ic_parent_other
                     )
-                    binding.motivooStepCountTextUnselectedMission.setOtherStepCountText(getString(R.string.home_parent))
+                    binding.motivooStepCountText.setOtherStepCountTitleText(getString(R.string.home_parent_step_count))
+                    binding.motivooStepCountTextUnselectedMission.setOtherStepCountTitleText(
+                        getString(R.string.home_parent_step_count)
+                    )
                 }
 
                 getString(R.string.home_parent) -> {
@@ -188,7 +191,10 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
                         R.drawable.ic_parent_user,
                         R.drawable.ic_child_other
                     )
-                    binding.motivooStepCountTextUnselectedMission.setOtherStepCountText(getString(R.string.home_child))
+                    binding.motivooStepCountText.setOtherStepCountTitleText(getString(R.string.home_child_step_count))
+                    binding.motivooStepCountTextUnselectedMission.setOtherStepCountTitleText(
+                        getString(R.string.home_child_step_count)
+                    )
                 }
             }
             pref.userId = it.userId

@@ -61,7 +61,8 @@
     <string name="home_today_exercise_description">오늘 할 운동을 고르세요!</string>
     <string name="home_step_count">걸음 수</string>
     <string name="home_my_step_count">내 걸음</string>
-    <string name="home_parent_step_count">부모 걸음</string>
+    <string name="home_parent_step_count">부모님 걸음</string>
+    <string name="home_child_step_count">자녀 걸음</string>
     <string name="home_today_exercise">오늘의 운동</string>
     <string name="home_exercise_method">운동 방법</string>
     <string name="home_exercise_percent">운동 달성률</string>
