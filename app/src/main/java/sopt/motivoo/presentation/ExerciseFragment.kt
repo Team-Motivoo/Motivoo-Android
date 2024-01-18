@@ -2,6 +2,8 @@ package sopt.motivoo.presentation
 
 import android.os.Bundle
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
@@ -10,7 +12,9 @@ import sopt.motivoo.databinding.FragmentExerciseBinding
 import sopt.motivoo.domain.entity.exercise.ExerciseData
 import sopt.motivoo.presentation.exercise.ExerciseAdapter
 import sopt.motivoo.presentation.exercise.ExerciseViewModel
+import sopt.motivoo.util.UiState
 import sopt.motivoo.util.binding.BindingFragment
+import sopt.motivoo.util.extension.setVisible
 
 @AndroidEntryPoint
 class ExerciseFragment : BindingFragment<FragmentExerciseBinding>(R.layout.fragment_exercise) {
@@ -31,8 +35,19 @@ class ExerciseFragment : BindingFragment<FragmentExerciseBinding>(R.layout.fragm
     }
 
     private fun observeLiveData() {
-        exerciseViewModel.exerciseHistoryInfo.observe(viewLifecycleOwner) { response ->
-            initViews(response)
+        exerciseViewModel.exerciseHistoryInfo.observe(viewLifecycleOwner) { uiState ->
+            when (uiState) {
+                is UiState.Success -> {
+                    initViews(uiState.data)
+                    binding.clExerciseRoot.setVisible(VISIBLE)
+                }
+
+                is UiState.Loading -> {
+                    binding.clExerciseRoot.setVisible(GONE)
+                }
+
+                else -> Unit
+            }
         }
     }
 

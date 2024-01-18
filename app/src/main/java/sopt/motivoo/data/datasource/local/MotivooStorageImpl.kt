@@ -101,13 +101,13 @@ class MotivooStorageImpl @Inject constructor(@ApplicationContext context: Contex
     }
 
     override fun logout() {
-        val userData = pref.edit()
-        userData.remove(USER_ID)
-        userData.remove(ACCESS_TOKEN)
-        userData.remove(REFRESH_TOKEN)
-        userData.remove(INVITE_CODE)
-        userData.remove(IS_LOGIN)
-        userData.apply()
+        pref.edit {
+            remove(USER_ID)
+            remove(ACCESS_TOKEN)
+            remove(REFRESH_TOKEN)
+            remove(INVITE_CODE)
+            remove(IS_LOGIN)
+        }
     }
 
     companion object {

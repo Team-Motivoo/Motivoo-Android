@@ -58,11 +58,7 @@ class GetInviteCodeFragment :
             viewLifecycleOwner,
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-                    if (motivooStorage.isFinishedOnboarding) {
-                        passedOnboardingClickBackButton()
-                    } else {
-                        afterOnboardingClickBackButton()
-                    }
+                    setBackPressed()
                 }
             }
         )
@@ -70,7 +66,15 @@ class GetInviteCodeFragment :
 
     private fun clickBackButton() {
         binding.includeGetInviteCodeToolbar.tvToolbarBack.setOnSingleClickListener {
-            backPressed()
+            setBackPressed()
+        }
+    }
+
+    private fun setBackPressed() {
+        if (motivooStorage.isFinishedOnboarding) {
+            passedOnboardingClickBackButton()
+        } else {
+            afterOnboardingClickBackButton()
         }
     }
 

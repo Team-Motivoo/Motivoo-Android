@@ -8,6 +8,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import sopt.motivoo.data.service.MyPageService
 import sopt.motivoo.domain.entity.mypage.UserInfo
+import sopt.motivoo.util.UiState
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -16,16 +17,15 @@ class MyPageViewModel @Inject constructor(
     private val myPageService: MyPageService,
 ) : ViewModel() {
 
-    private val _myPageResult: MutableLiveData<UserInfo> = MutableLiveData()
-    val myPageUserInfo: LiveData<UserInfo> = _myPageResult
+    private val _myPageResult = MutableLiveData<UiState<UserInfo>>(UiState.Loading)
+    val myPageUserInfo: LiveData<UiState<UserInfo>> = _myPageResult
 
     fun getUserInfo() {
         viewModelScope.launch {
             kotlin.runCatching {
                 myPageService.getUserInfo()
             }.onSuccess {
-                _myPageResult.value =
-                    UserInfo(it.data.userNickname, it.data.userAge, it.data.userType)
+                _myPageResult.value = UiState.Success(it.toUserInfo())
             }.onFailure {
                 Timber.e(it.message)
             }

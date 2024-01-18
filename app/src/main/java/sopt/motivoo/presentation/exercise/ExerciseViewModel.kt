@@ -8,6 +8,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import sopt.motivoo.data.service.ExerciseService
 import sopt.motivoo.domain.entity.exercise.ExerciseData
+import sopt.motivoo.util.UiState
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -16,16 +17,15 @@ class ExerciseViewModel @Inject constructor(
     private val exerciseService: ExerciseService,
 ) : ViewModel() {
 
-    private val _exerciseHistoryInfo: MutableLiveData<ExerciseData> =
-        MutableLiveData()
-    val exerciseHistoryInfo: LiveData<ExerciseData> = _exerciseHistoryInfo
+    private val _exerciseHistoryInfo = MutableLiveData<UiState<ExerciseData>>(UiState.Loading)
+    val exerciseHistoryInfo: LiveData<UiState<ExerciseData>> = _exerciseHistoryInfo
 
     fun getExerciseHistoryInfo() {
         viewModelScope.launch {
             kotlin.runCatching {
                 exerciseService.getExerciseHistoryInfo()
             }.onSuccess {
-                _exerciseHistoryInfo.value = it.toExerciseData()
+                _exerciseHistoryInfo.value = UiState.Success(it.toExerciseData())
             }.onFailure {
                 Timber.e(it.message)
             }
