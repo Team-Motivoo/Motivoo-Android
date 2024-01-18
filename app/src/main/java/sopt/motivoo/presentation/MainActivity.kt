@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
                     R.id.myExerciseInfoFragment,
                     R.id.myServiceOutFragment,
                     R.id.myLogoutFragment,
-                    R.id.loadingFragment
+                    R.id.loadingFragment,
                     R.id.myLogoutFragment,
                     R.id.homeConfirmDialogFragment
                 )
