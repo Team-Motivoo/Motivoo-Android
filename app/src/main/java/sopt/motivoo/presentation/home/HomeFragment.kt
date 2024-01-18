@@ -247,6 +247,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
     private fun initMissionSelectedHasPermission() {
         binding.motivooStepCountText.setVisible(VISIBLE)
         binding.motivooMyPieChart.setStepCount(pref.myStepCount / pref.myGoalStepCount.toFloat())
+        binding.motivooOtherPieChart.setStepCount(pref.otherStepCount / pref.otherGoalStepCount.toFloat())
         binding.motivooDeniedPermissionSelected.setVisible(GONE)
         binding.btnVerifyExercise.setVisible(VISIBLE)
     }
