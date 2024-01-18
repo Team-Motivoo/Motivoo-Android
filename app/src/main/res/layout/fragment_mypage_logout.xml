@@ -6,11 +6,6 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingHorizontal="16dp">
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -83,6 +78,5 @@
                 app:layout_constraintEnd_toEndOf="@id/tv_my_logout_btn"
                 app:layout_constraintStart_toStartOf="@id/tv_my_logout_btn"
                 app:layout_constraintTop_toBottomOf="@id/tv_my_logout_btn" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
