@@ -31,14 +31,24 @@ class MotivooStorageImpl @Inject constructor(@ApplicationContext context: Contex
         }
     }
 
-    override var stepCount: Int
-        get() = pref.getInt(STEP_COUNT, 0)
-        set(value) = pref.edit { putInt(STEP_COUNT, value) }
+    override var myStepCount: Int
+        get() = pref.getInt(MY_STEP_COUNT, 0)
+        set(value) = pref.edit { putInt(MY_STEP_COUNT, value) }
+
+    override var otherStepCount: Int
+        get() = pref.getInt(OTHER_GOAL_STEP_COUNT, 0)
+        set(value) = pref.edit { putInt(OTHER_STEP_COUNT, value) }
+    override var nickName: String
+        get() = pref.getString(NAME, "") ?: ""
+        set(value) = pref.edit { putString(NAME, value) }
 
     override var userId: Long
         set(value) = pref.edit { putLong(USER_ID, value) }
         get() = pref.getLong(USER_ID, 0L)
 
+    override var otherId: Long
+        get() = pref.getLong(OTHER_ID, 0L)
+        set(value) = pref.edit { putLong(OTHER_ID, value) }
     override var accessToken: String
         set(value) = pref.edit { putString(ACCESS_TOKEN, value) }
         get() = pref.getString(
@@ -72,6 +82,14 @@ class MotivooStorageImpl @Inject constructor(@ApplicationContext context: Contex
         set(value) = pref.edit { putBoolean(IS_ONBOARDING_FINISHED, value) }
         get() = pref.getBoolean(IS_ONBOARDING_FINISHED, false)
 
+    override var myGoalStepCount: Int
+        get() = pref.getInt(MY_GOAL_STEP_COUNT, 0)
+        set(value) = pref.edit { putInt(MY_GOAL_STEP_COUNT, value) }
+
+    override var otherGoalStepCount: Int
+        get() = pref.getInt(OTHER_GOAL_STEP_COUNT, 0)
+        set(value) = pref.edit { putInt(OTHER_GOAL_STEP_COUNT, value) }
+
     override fun clear() {
         pref.edit {
             clear()
@@ -92,12 +110,16 @@ class MotivooStorageImpl @Inject constructor(@ApplicationContext context: Contex
     companion object {
         private const val FILE_NAME = "MtDataStore"
         private const val NAME = "name"
-        private const val STEP_COUNT = "step_count"
+        private const val MY_STEP_COUNT = "my_step_count"
+        private const val OTHER_STEP_COUNT = "other_step_count"
         const val ACCESS_TOKEN = "accessToken"
         const val REFRESH_TOKEN = "refreshToken"
         private const val IS_LOGIN = "isLogin"
         private const val IS_MATCHED = "isMatched"
         private const val USER_ID = "userId"
+        private const val OTHER_ID = "otherId"
+        private const val MY_GOAL_STEP_COUNT = "my_goal_step_count"
+        private const val OTHER_GOAL_STEP_COUNT = "other_goal_step_count"
         private const val INVITE_CODE = "inviteCode"
         private const val IS_ONBOARDING_FINISHED = "isOnboardingFinished"
     }

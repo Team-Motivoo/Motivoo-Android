@@ -26,6 +26,8 @@ class MotivooOtherPieChart @JvmOverloads constructor(
     private val progressBarInnerPaint: Paint = Paint()
     private val progressBarOtherPaint: Paint = Paint()
 
+    private val centerCirclePaint: Paint = Paint()
+
     private val drawRectArea =
         RectF(LAYOUT_SPACING.px, LAYOUT_SPACING.px, DRAW_AREA_SIZE.px, DRAW_AREA_SIZE.px)
 
@@ -50,6 +52,11 @@ class MotivooOtherPieChart @JvmOverloads constructor(
                 color = typedArray.getColor(R.styleable.MotivooPieChart_progressOtherColor, Color.BLUE)
                 style = Paint.Style.STROKE
                 strokeWidth = 9.px
+            }
+            centerCirclePaint.run {
+                color = typedArray.getColor(R.styleable.MotivooPieChart_centerCicleColor, Color.BLACK)
+                style = Paint.Style.STROKE
+                strokeWidth = 3.px
             }
             typedArray.recycle()
         }
@@ -77,6 +84,7 @@ class MotivooOtherPieChart @JvmOverloads constructor(
         scaleX = -1f
         canvas.drawArc(drawRectArea, START_ANGLE, SWEEP_ANGLE, false, progressBarInnerPaint)
         canvas.drawArc(drawRectArea, START_ANGLE, ((stepCount) * DEGREE), false, progressBarOtherPaint)
+        canvas.drawCircle(ORIGIN_VALUE.px, SMALL_CIRCLE_Y.px, 2.px, centerCirclePaint)
         drawImage(canvas)
     }
 
@@ -107,6 +115,12 @@ class MotivooOtherPieChart @JvmOverloads constructor(
         invalidate()
     }
 
+    fun setOtherIcon(icon: Int) {
+        otherImage = ContextCompat.getDrawable(context, icon)?.run {
+            toBitmap(IMAGE_SIZE.px.toInt(), IMAGE_SIZE.px.toInt())
+        }
+    }
+
     companion object {
         private const val DIAMETER = 290 // fix
         private const val RADIUS = DIAMETER / 2
@@ -124,5 +138,7 @@ class MotivooOtherPieChart @JvmOverloads constructor(
         private const val SWEEP_ANGLE = 240f
 
         private const val ORIGIN_VALUE = 180
+
+        private const val SMALL_CIRCLE_Y = 20
     }
 }
