@@ -25,8 +25,6 @@ class MotivooMyPieChart @JvmOverloads constructor(
 
     private val progressBarMyPaint: Paint = Paint()
 
-    private val centerCirclePaint: Paint = Paint()
-
     private val drawRectArea =
         RectF(LAYOUT_SPACING.px, LAYOUT_SPACING.px, DRAW_AREA_SIZE.px, DRAW_AREA_SIZE.px)
 
@@ -47,11 +45,7 @@ class MotivooMyPieChart @JvmOverloads constructor(
                 style = Paint.Style.STROKE
                 strokeWidth = 9.px
             }
-            centerCirclePaint.run {
-                color = typedArray.getColor(R.styleable.MotivooPieChart_centerCicleColor, Color.BLACK)
-                style = Paint.Style.STROKE
-                strokeWidth = 3.px
-            }
+
             typedArray.recycle()
         }
     }
@@ -76,7 +70,6 @@ class MotivooMyPieChart @JvmOverloads constructor(
         super.onDraw(canvas)
 
         canvas.drawArc(drawRectArea, START_ANGLE, ((stepCount) * DEGREE), false, progressBarMyPaint)
-        canvas.drawCircle(ORIGIN_VALUE.px, SMALL_CIRCLE_Y.px, 2.px, centerCirclePaint)
         drawImage(canvas)
     }
 
@@ -85,7 +78,7 @@ class MotivooMyPieChart @JvmOverloads constructor(
         val radian = Math.toRadians(degree)
 
         val x =
-            (ORIGIN_VALUE.px - cos(radian) * RADIUS.px - (LAYOUT_SPACING + DIAMETER_SPACING).px)
+            (ORIGIN_VALUE.px - cos(radian) * RADIUS.px - (LAYOUT_SPACING + DIAMETER_SPACING - 3).px)
         val y: Float
         if ((30 - (stepCount * DEGREE)) >= 0) {
             y = (ORIGIN_VALUE.px + sin(radian) * RADIUS.px - (LAYOUT_SPACING + DIAMETER_SPACING).px).toFloat()
@@ -105,6 +98,12 @@ class MotivooMyPieChart @JvmOverloads constructor(
     fun setStepCount(stepCount: Float) {
         this.stepCount = stepCount
         invalidate()
+    }
+
+    fun setMyIcon(icon: Int) {
+        this.myImage = ContextCompat.getDrawable(context, icon)?.run {
+            toBitmap(IMAGE_SIZE.px.toInt(), IMAGE_SIZE.px.toInt())
+        }
     }
 
     companion object {
