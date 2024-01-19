@@ -1,5 +1,7 @@
 package sopt.motivoo.presentation.home
 
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.navArgs
@@ -20,13 +22,23 @@ class HomeConfirmDialogFragment :
 
         val safeArgs: HomeConfirmDialogFragmentArgs by navArgs()
 
-        binding.ivPhoto.load(safeArgs.photoUri) {
+        safeArgs.photoUri?.let { loadPhoto(it) }
+        safeArgs.photoBitmap?.let { loadPhoto(it) }
+        binding.btnConfirm.setOnClickListener { dismiss() }
+
+    }
+
+    private fun loadPhoto(bitmap: Bitmap) {
+        binding.ivPhoto.load(bitmap) {
             scale(Scale.FILL)
             transformations(RoundedCornersTransformation(8.px))
         }
+    }
 
-        binding.btnConfirm.setOnClickListener {
-            dismiss()
+    private fun loadPhoto(uri: Uri) {
+        binding.ivPhoto.load(uri) {
+            scale(Scale.FILL)
+            transformations(RoundedCornersTransformation(8.px))
         }
     }
 }
