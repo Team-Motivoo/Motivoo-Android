@@ -1,10 +1,12 @@
 package sopt.motivoo.data.repository
 
 import android.graphics.Bitmap
+import com.google.firebase.Firebase
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.database
 import okhttp3.RequestBody.Companion.toRequestBody
 import sopt.motivoo.data.datasource.remote.HomeDataSource
 import sopt.motivoo.data.model.request.home.RequestHomeDto
@@ -26,12 +28,12 @@ class HomeRepositoryImpl @Inject constructor(
     @Inject
     lateinit var pref: MotivooStorage
 
-    override fun getMyStepCount(myUid: Long, myStepCount: (Long) -> Unit) {
-        firebaseRealtimeDB.reference.child(USERS)
+    override fun getOtherStepCount(otherUid: String, onStepCountAction: (Long) -> Unit) {
+        firebaseRealtimeDB.reference.child(USERS).child(otherUid)
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    snapshot.child(myUid.toString()).apply {
-                        if (exists()) (value as Long).let { if (it == 0L) pref.myStepCount = 0 }
+                    if (snapshot.value != null) {
+                        onStepCountAction(snapshot.value as Long)
                     }
                 }
 
@@ -39,24 +41,13 @@ class HomeRepositoryImpl @Inject constructor(
             })
     }
 
-    override fun getEventOtherStepCount(otherUid: Long, otherStepCount: (Long) -> Unit) {
-        firebaseRealtimeDB.reference.child(USERS)
-            .addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    snapshot.child(otherUid.toString()).apply {
-                        if (exists()) {
-                            otherStepCount(value as Long)
-                            pref.otherStepCount = (value as Long).toInt()
-                        }
-                    }
+    override fun setMyStepCount(uid: String) {
+        firebaseRealtimeDB.reference.child(USERS).child(uid).get()
+            .addOnSuccessListener {
+                if (it.value == null) {
+                    Firebase.database.reference.child(USERS).child(uid).setValue(pref.myStepCount)
                 }
-
-                override fun onCancelled(error: DatabaseError) {}
-            })
-    }
-
-    override fun setMyStepCount(myUid: Long, stepCount: Int) {
-        firebaseRealtimeDB.reference.child(USERS).child(myUid.toString()).setValue(stepCount)
+            }
     }
 
     override suspend fun patchHome(myStepCount: Int, otherStepCount: Int): Result<HomeData> =
@@ -71,7 +62,9 @@ class HomeRepositoryImpl @Inject constructor(
         runCatching { homeDataSource.postMissionToday(requestMissionTodayDto) }
 
     override suspend fun patchMissionImage(requestMissionImageDto: RequestMissionImageDto): Result<MissionImageData> =
-        runCatching { homeDataSource.patchMissionImage(requestMissionImageDto).toMissionImageData() }
+        runCatching {
+            homeDataSource.patchMissionImage(requestMissionImageDto).toMissionImageData()
+        }
 
     override suspend fun uploadPhoto(url: String, bitmap: Bitmap): Result<Unit> {
         val outputStream = ByteArrayOutputStream()

@@ -40,4 +40,8 @@ class MotivooStepCountText @JvmOverloads constructor(
     fun setOtherStepCountText(otherStepCountText: String) {
         binding.tvOtherStepCount.text = otherStepCountText
     }
+
+    fun setOtherStepCountTitleText(otherStepCountTitle: String) {
+        binding.tvOtherStepCountTitle.text = otherStepCountTitle
+    }
 }

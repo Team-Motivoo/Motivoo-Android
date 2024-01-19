@@ -12,10 +12,7 @@ import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Build
 import android.os.IBinder
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -26,6 +23,7 @@ import sopt.motivoo.domain.entity.MotivooStorage
 import sopt.motivoo.presentation.home.HomeFragment.Companion.STEP_COUNT
 import sopt.motivoo.util.Constants.USERS
 import sopt.motivoo.util.extension.sendNotification
+import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -56,18 +54,18 @@ class StepCountService : Service() {
         sensorManager: SensorManager,
         sensorTypeStepDetector: Sensor?,
     ) {
+        Timber.tag("로그").e("job : ${job?.isActive}")
         if (job?.isActive == null) {
             job = CoroutineScope(Dispatchers.Default).launch {
                 object : SensorEventListener {
                     override fun onSensorChanged(sensorEvent: SensorEvent?) {
                         when (sensorEvent?.sensor?.type) {
                             Sensor.TYPE_STEP_DETECTOR -> {
-                                if (pref.myStepCount < pref.myGoalStepCount) {
-                                    pref.myStepCount += 1
-                                    firebaseRealtimeDB.reference.child(USERS)
-                                        .child(pref.userId.toString()).setValue(pref.myStepCount)
-                                    visibleStepCount()
-                                }
+                                Timber.tag("로그").e("count : ${pref.myStepCount}")
+                                pref.myStepCount += 1
+                                firebaseRealtimeDB.reference.child(USERS)
+                                    .child(pref.userId.toString()).setValue(pref.myStepCount)
+                                visibleStepCount()
                             }
                         }
                     }
@@ -78,26 +76,8 @@ class StepCountService : Service() {
                         it, sensorTypeStepDetector, SensorManager.SENSOR_DELAY_UI, 0
                     )
                 }
-
-                eventOtherStepCount()
             }
         }
-    }
-
-    private fun eventOtherStepCount() {
-        firebaseRealtimeDB.reference.child(USERS)
-            .addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    snapshot.child(pref.userId.toString()).apply {
-                        if (exists()) {
-                            (value as Long).let { if (it == 0L) pref.myStepCount = 0 }
-                            visibleStepCount()
-                        }
-                    }
-                }
-
-                override fun onCancelled(error: DatabaseError) {}
-            })
     }
 
     private fun visibleStepCount() {

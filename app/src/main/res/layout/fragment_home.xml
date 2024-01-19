@@ -223,7 +223,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="25dp"
                     android:background="@drawable/selector_home_verify_exercise"
-                    android:enabled="true"
+                    android:enabled="false"
                     android:stateListAnimator="@null"
                     android:text="@string/home_verify_exercise"
                     android:textColor="@drawable/selector_home_verify_exercise_text"

@@ -19,7 +19,7 @@ import kotlin.math.sin
 class MotivooMyPieChart @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
-    defStyleAttr: Int = 0
+    defStyleAttr: Int = 0,
 ) : View(context, attributeSet, defStyleAttr) {
     private var stepCount = 0f
 
@@ -33,9 +33,7 @@ class MotivooMyPieChart @JvmOverloads constructor(
     private val layoutSize = LAYOUT_SIZE.px.toInt()
 
     init {
-        myImage = ContextCompat.getDrawable(context, R.drawable.ic_child_user)?.run {
-            toBitmap(IMAGE_SIZE.px.toInt(), IMAGE_SIZE.px.toInt())
-        }
+        myImage = null
 
         context.theme.obtainStyledAttributes(
             attributeSet, R.styleable.MotivooPieChart, defStyleAttr, defStyleAttr
@@ -81,10 +79,12 @@ class MotivooMyPieChart @JvmOverloads constructor(
             (ORIGIN_VALUE.px - cos(radian) * RADIUS.px - (LAYOUT_SPACING + DIAMETER_SPACING - 3).px)
         val y: Float
         if ((30 - (stepCount * DEGREE)) >= 0) {
-            y = (ORIGIN_VALUE.px + sin(radian) * RADIUS.px - (LAYOUT_SPACING + DIAMETER_SPACING).px).toFloat()
+            y =
+                (ORIGIN_VALUE.px + sin(radian) * RADIUS.px - (LAYOUT_SPACING + DIAMETER_SPACING).px).toFloat()
             myImage?.let { canvas.drawBitmap(it, x.toFloat(), y, null) }
         } else {
-            y = (ORIGIN_VALUE.px - sin(radian) * RADIUS.px - (LAYOUT_SPACING + DIAMETER_SPACING).px).toFloat()
+            y =
+                (ORIGIN_VALUE.px - sin(radian) * RADIUS.px - (LAYOUT_SPACING + DIAMETER_SPACING).px).toFloat()
             if (degree <= 85) {
                 myImage?.let { canvas.drawBitmap(it, x.toFloat(), y, null) }
             } else {
@@ -96,7 +96,11 @@ class MotivooMyPieChart @JvmOverloads constructor(
     }
 
     fun setStepCount(stepCount: Float) {
-        this.stepCount = stepCount
+        if (stepCount * DEGREE >= DEGREE) {
+            this.stepCount = 1f
+        } else {
+            this.stepCount = stepCount
+        }
         invalidate()
     }
 
@@ -104,6 +108,18 @@ class MotivooMyPieChart @JvmOverloads constructor(
         this.myImage = ContextCompat.getDrawable(context, icon)?.run {
             toBitmap(IMAGE_SIZE.px.toInt(), IMAGE_SIZE.px.toInt())
         }
+        invalidate()
+    }
+
+    fun successStepCount(iconDrawable: Int?) {
+        myImage = if (iconDrawable == null) {
+            null
+        } else {
+            ContextCompat.getDrawable(context, iconDrawable)?.run {
+                toBitmap(IMAGE_SIZE.px.toInt(), IMAGE_SIZE.px.toInt())
+            }
+        }
+        invalidate()
     }
 
     companion object {

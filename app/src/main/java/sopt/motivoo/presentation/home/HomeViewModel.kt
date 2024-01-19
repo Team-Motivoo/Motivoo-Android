@@ -20,6 +20,8 @@ class HomeViewModel @Inject constructor(
     private val repository: HomeRepository,
 ) : ViewModel() {
     val stepCount = MutableLiveData<Int>()
+    val otherStepCount = MutableLiveData<Int>()
+    val isCompletedStepCount = MutableLiveData<Boolean>()
     val imageBitmap = MutableLiveData<Bitmap>()
 
     private val _homeData = MutableLiveData<HomeData>()
@@ -28,36 +30,35 @@ class HomeViewModel @Inject constructor(
     private val _missionChoiceData = MutableLiveData<MissionChoiceData>()
     val missionChoiceData: LiveData<MissionChoiceData> = _missionChoiceData
 
-    private val _otherStepCount = MutableLiveData<Long>()
-    val otherStepCount: LiveData<Long> = _otherStepCount
-
     private val _imageData = MutableLiveData<MissionImageData>()
     val imageData: LiveData<MissionImageData> = _imageData
 
     private val _isUploadImage = MutableLiveData<Boolean>()
     val isUploadImage: LiveData<Boolean> = _isUploadImage
 
-    fun getEventOtherStepCount(otherUid: Long) {
-        repository.getEventOtherStepCount(otherUid) {
-            _otherStepCount.value = it
-        }
-    }
-
-    fun setMyStepCount(myUid: Long, stepCount: Int) {
-        repository.setMyStepCount(myUid, stepCount)
-        setStepCount(stepCount)
-    }
+    private val _isSelectedMission = MutableLiveData<Boolean>()
+    val isSelectedMission: LiveData<Boolean> = _isSelectedMission
 
     fun setStepCount(stepCount: Int) {
         this.stepCount.value = stepCount
     }
 
-    fun setOtherStepCount(stepCount: Int) {
-        _otherStepCount.value = stepCount.toLong()
+    fun setMyStepCount(uid: String) {
+        repository.setMyStepCount(uid)
+    }
+
+    fun setOtherStepCount(otherUid: String) {
+        repository.getOtherStepCount(otherUid) {
+            this.otherStepCount.value = it.toInt()
+        }
     }
 
     fun setImageBitmap(imageBitmap: Bitmap) {
         this.imageBitmap.value = imageBitmap
+    }
+
+    fun setCompletedStepCount(isCompletedStepCount: Boolean) {
+        this.isCompletedStepCount.value = isCompletedStepCount
     }
 
     fun patchHome(myStepCount: Int, otherStepCount: Int) {
@@ -79,7 +80,7 @@ class HomeViewModel @Inject constructor(
     fun postMissionToday(missionId: Long) {
         viewModelScope.launch {
             repository.postMissionToday(RequestMissionTodayDto(missionId = missionId)).onSuccess {
-                postMissionTodayChoice()
+                _isSelectedMission.value = true
             }
         }
     }
