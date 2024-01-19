@@ -1,6 +1,5 @@
 package sopt.motivoo.presentation.onboarding
 
-import android.content.Context
 import android.os.Bundle
 import android.transition.TransitionManager
 import android.view.View
@@ -18,6 +17,7 @@ import sopt.motivoo.R
 import sopt.motivoo.databinding.FragmentAgeQusetionBinding
 import sopt.motivoo.util.binding.BindingFragment
 import sopt.motivoo.util.extension.drawableOf
+import sopt.motivoo.util.extension.px
 import sopt.motivoo.util.extension.setOnSingleClickListener
 import sopt.motivoo.util.extension.setVisible
 import sopt.motivoo.util.extension.showKeyboard
@@ -93,13 +93,8 @@ class AgeQuestionFragment :
 
     private fun changeTopMarginAfterAnimation() {
         val layoutParams = binding.clUserType.layoutParams as ConstraintLayout.LayoutParams
-        layoutParams.topMargin = dpToPx(TOP_MARGIN, requireContext())
+        layoutParams.topMargin = TOP_MARGIN.px.toInt()
         binding.clUserType.layoutParams = layoutParams
-    }
-
-    private fun dpToPx(dp: Int, context: Context): Int {
-        val scale = context.resources.displayMetrics.density
-        return (dp * scale).toInt()
     }
 
     companion object {
