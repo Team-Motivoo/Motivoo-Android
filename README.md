@@ -19,12 +19,11 @@
 
 ## 📱*****ScreenShot*****
 
-| <img width="200" src="https://github.com/DGU-SE-HOW-TODO/HowDroid/assets/113578158/f9c14055-586b-4727-997e-e3f5cfefdc9b"/> | <img width="200" src="https://github.com/DGU-SE-HOW-TODO/HowDroid/assets/113578158/b0a6aed7-af3f-4a40-8d55-c65232e56a75"/> | <img width="200" src="https://github.com/DGU-SE-HOW-TODO/HowDroid/assets/113578158/bcd63b80-d818-48dd-9cca-d0ddbcf83871"/> | <img width="200" src="https://github.com/DGU-SE-HOW-TODO/HowDroid/assets/113578158/ad3049cc-9d22-40f1-8d93-f99f5952e335"/> | <img width="200" src="https://github.com/DGU-SE-HOW-TODO/HowDroid/assets/113578158/93e8e3bb-bf79-4d71-a18a-e0341ccaa54d"/> |
-| :---: | :---: | :---: |:------------------------------------------------------------------------------------------------------------------------------:| :---:|
-|`로그인`|`회원가입` | `대분류 생성`|`투두 생성`|                                                        `투두 체크`                                                        |
-| <img width="200" src="https://github.com/DGU-SE-HOW-TODO/HowDroid/assets/113578158/39f689ee-d399-4c44-9253-ff377c877e0d"/> | <img width="200" src="https://github.com/DGU-SE-HOW-TODO/HowDroid/assets/113578158/b9d30cf9-5c2b-444a-8cea-61cc8e0fb39e"/> | <img width="200" src="https://github.com/DGU-SE-HOW-TODO/HowDroid/assets/113578158/7da6d736-2470-41eb-892a-2363f7ca86fe"/> | <img width="200" src="https://github.com/DGU-SE-HOW-TODO/HowDroid/assets/113578158/f46d7ca4-25a0-425f-a700-d57c1b6a4c27"> | <img width="200" src="https://github.com/DGU-SE-HOW-TODO/HowDroid/assets/113578158/7ce71eed-57a5-447b-ac1b-934b0ae49161">
-|`나만의 실패태그 만들기`|`실태패그 달기`|`미루기`|`투두 고정`|`통계/피드백`| 
-
+| <img width="200" src="https://github.com/Team-Motivoo/Motivoo-Android/assets/90740783/1154159a-cc71-4d15-996b-185190d722e0"/> | <img width="200" src="https://github.com/Team-Motivoo/Motivoo-Android/assets/90740783/03e88b0a-33a4-45e9-918b-8c7dc66cc55b"/> | 
+<img width="200" src="https://github.com/Team-Motivoo/Motivoo-Android/assets/90740783/86d398b3-fb85-43ee-959a-0bdda7a1d57a"/> | 
+<img width="200" src="https://github.com/Team-Motivoo/Motivoo-Android/assets/90740783/09a982d4-be0d-4ae5-bd98-48906c5e05a2"/> | <img width="200" src="https://github.com/Team-Motivoo/Motivoo-Android/assets/90740783/b4bbd953-c8c9-4d27-a68b-8694ec0993f0"/> |
+| :---: | :---: | :---: |:------------------------------------------------------------------------------------------------------------------------------:| :---:|:---:|
+|`소셜 로그인`|`온보딩 뷰` | `미션 선택 전 운동 모아보기`|`미션 선택 전 홈`|                                                        `내정보`                                                        |`홈`|
 
 
 ## Development
@@ -46,9 +45,15 @@
 - Coil & Glide
 - Timber
 - Retrofit2
-- Firebase (Analytics & Crahslytics)
+- Firebase
+    - Analytics & Crahslytics
+    - Realtime Database
 - Material Components
-
+- OkHttp3
+- Kakao login
+- Lottie
+- Aws s3
+- Java 8+ API desugaring support
 
 ### Test & Code analysis
 - Ktlint
