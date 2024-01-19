@@ -55,6 +55,7 @@
                 android:textColor="@color/gray_600_707276" />
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_withdrawal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="100dp"
