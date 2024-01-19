@@ -5,6 +5,7 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.animation.AnimationUtils
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
@@ -40,6 +41,18 @@ class LoginFragment : BindingFragment<FragmentLoginBinding>(R.layout.fragment_lo
         super.onViewCreated(view, savedInstanceState)
         clickKakaoLoginButton()
         collectData()
+        backPressed()
+    }
+
+    private fun backPressed() {
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    requireActivity().finishAffinity()
+                }
+            }
+        )
     }
 
     private fun checkReLoginUser() {

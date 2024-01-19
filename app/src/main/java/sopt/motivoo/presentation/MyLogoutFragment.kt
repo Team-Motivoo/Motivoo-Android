@@ -60,12 +60,6 @@ class MyLogoutFragment :
     }
 
     private fun navigateToLogin() {
-        val navController = findNavController()
-        val startDestinationId = navController.findStartDestination().id
-        val navOptions = NavOptions.Builder()
-            .setPopUpTo(startDestinationId, true)
-            .build()
-
-        navController.navigate(R.id.action_myLogout_to_loginFragment, null, navOptions)
+        findNavController().navigate(R.id.action_myLogout_to_loginFragment)
     }
 }
