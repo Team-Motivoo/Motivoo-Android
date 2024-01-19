@@ -79,26 +79,8 @@ class StepCountService : Service() {
                         it, sensorTypeStepDetector, SensorManager.SENSOR_DELAY_UI, 0
                     )
                 }
-
-//                eventOtherStepCount()
             }
         }
-    }
-
-    private fun eventOtherStepCount() {
-        firebaseRealtimeDB.reference.child(USERS)
-            .addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    snapshot.child(pref.userId.toString()).apply {
-                        if (exists()) {
-                            (value as Long).let { if (it == 0L) pref.myStepCount = 0 }
-                            visibleStepCount()
-                        }
-                    }
-                }
-
-                override fun onCancelled(error: DatabaseError) {}
-            })
     }
 
     private fun visibleStepCount() {
