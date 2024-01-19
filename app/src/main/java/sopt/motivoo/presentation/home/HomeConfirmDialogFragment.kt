@@ -25,7 +25,6 @@ class HomeConfirmDialogFragment :
         safeArgs.photoUri?.let { loadPhoto(it) }
         safeArgs.photoBitmap?.let { loadPhoto(it) }
         binding.btnConfirm.setOnClickListener { dismiss() }
-
     }
 
     private fun loadPhoto(bitmap: Bitmap) {

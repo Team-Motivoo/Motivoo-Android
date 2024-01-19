@@ -1,7 +1,6 @@
 package sopt.motivoo.data.repository
 
 import android.graphics.Bitmap
-import android.icu.text.UnicodeSetSpanner
 import com.google.firebase.Firebase
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -19,7 +18,6 @@ import sopt.motivoo.domain.entity.home.MissionChoiceData
 import sopt.motivoo.domain.entity.home.MissionImageData
 import sopt.motivoo.domain.repository.HomeRepository
 import sopt.motivoo.util.Constants.USERS
-import timber.log.Timber
 import java.io.ByteArrayOutputStream
 import javax.inject.Inject
 
@@ -32,7 +30,7 @@ class HomeRepositoryImpl @Inject constructor(
 
     override fun getMyStepCount(uid: String, isInitStepCount: (Boolean) -> Unit) {
         firebaseRealtimeDB.reference.child(USERS).child(uid)
-            .addValueEventListener(object: ValueEventListener {
+            .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.value == 0) {
                         pref.myStepCount = 0
