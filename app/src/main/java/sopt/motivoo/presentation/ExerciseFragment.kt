@@ -59,8 +59,6 @@ class ExerciseFragment : BindingFragment<FragmentExerciseBinding>(R.layout.fragm
     }
 
     private fun setViewsVisibility(exerciseData: ExerciseData) {
-        Timber.tag("aaa").e("${exerciseData.exerciseItemInfoList.isEmpty()}")
-        Timber.tag("aaa").e("${exerciseData}")
         if (exerciseData.exerciseItemInfoList.isEmpty()) {
             setRecyclerViewVisibility(false)
             setEmptyViewVisibility(true)

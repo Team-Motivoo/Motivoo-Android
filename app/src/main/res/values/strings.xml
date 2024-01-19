@@ -68,16 +68,19 @@
     <string name="home_exercise_method">운동 방법</string>
     <string name="home_exercise_percent">운동 달성률</string>
     <string name="home_verify_exercise">운동 인증하기</string>
+    <string name="home_success">운동 완료</string>
     <string name="home_bottom_sheet_take_photo">사진 찍기</string>
     <string name="home_bottom_sheet_select_in_album">앨범에서 선택하기</string>
     <string name="home_child">자녀</string>
     <string name="home_parent">부모</string>
+    <string name="home_success_hifive">하이파이브 성공!</string>
     <string name="verify_exercise">운동 인증이 완료되었어요!</string>
     <string name="verify_exercise_description">오늘도 멋지게 운동을 해내셨군요</string>
     <string name="motivoo_logo">motivoo_logo</string>
 
     <!-- my page -->
     <string name="mypage_nickname">의지뿜뿜 부모님</string>
+    <string name="mypage_nickname_child">행복팡팡 자녀</string>
     <string name="mypage_myinfo">내 정보</string>
     <string name="mypage_exercise_info">운동 정보</string>
     <string name="mypage_check_exercise_info">내 운동 정보를 확인하세요!</string>

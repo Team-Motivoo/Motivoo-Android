@@ -28,6 +28,20 @@ class HomeRepositoryImpl @Inject constructor(
     @Inject
     lateinit var pref: MotivooStorage
 
+    override fun getMyStepCount(uid: String, isInitStepCount: (Boolean) -> Unit) {
+        firebaseRealtimeDB.reference.child(USERS).child(uid)
+            .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.value == 0) {
+                        pref.myStepCount = 0
+                        isInitStepCount(true)
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {}
+            })
+    }
+
     override fun getOtherStepCount(otherUid: String, onStepCountAction: (Long) -> Unit) {
         firebaseRealtimeDB.reference.child(USERS).child(otherUid)
             .addValueEventListener(object : ValueEventListener {

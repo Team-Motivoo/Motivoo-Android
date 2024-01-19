@@ -35,7 +35,6 @@ import sopt.motivoo.domain.entity.home.MissionChoiceData
 import sopt.motivoo.util.Constants.USERS
 import sopt.motivoo.util.binding.BindingFragment
 import sopt.motivoo.util.extension.setVisible
-import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -83,9 +82,14 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
 //        Firebase.database.reference.child(USERS).child(pref.otherId.toString()).setValue(0) // TODO:: 상대 걸음 수 초기화
 
         if (homePermissionsGranted()) {
-            Timber.tag("로그").e("has perm in activity")
             startStepCountService()
             binding.motivooStepCountText.setMyStepCountText(pref.myStepCount.toString())
+        }
+
+        binding.vTest.setOnLongClickListener {
+            pref.myStepCount = 0
+            viewModel.setStepCount(0)
+            false
         }
 
         // TODO:: 홈 진입 시 상대 걸음 수 KEY 파이어베이스에 존재할 시, PATCH /home api
@@ -93,7 +97,6 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
             .addOnSuccessListener {
                 if (it.value != null) {
                     if (pref.myGoalStepCount != 0) {
-                        Timber.tag("로그").e("1 : ${pref.myStepCount} / 2: ${pref.myGoalStepCount} / 3: ${it.value} / 4: ${pref.otherGoalStepCount}")
                         if (pref.myStepCount >= pref.myGoalStepCount - MY_GOAL && (it.value as Long) >= pref.otherGoalStepCount - OTHER_GOAL) {
                             successMission()
                         }
@@ -214,11 +217,20 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
 
             // TODO: 파이어베이스 실시간으로 상대 걸음 수 가져오기
             viewModel.setOtherStepCount(it.opponentUserId.toString())
+
+            if (it.isMissionImageCompleted) {
+                binding.btnVerifyExercise.apply {
+                    isEnabled = false
+                    text = getString(R.string.home_success)
+                }
+            }
+
+            if (it.isOpponentUserWithdraw) {
+                findNavController().navigate(R.id.action_homeFragment_to_withdrawalFragment)
+            }
         }
         viewModel.otherStepCount.observe(viewLifecycleOwner) {
             viewModel.stepCount.value?.let { stepCount ->
-                Timber.tag("로그").e("1 : $it / 2: ${pref.otherGoalStepCount} / 3: $stepCount / 4: ${pref.myGoalStepCount}")
-
                 if (pref.myGoalStepCount != 0 && pref.otherStepCount != 0) {
                     if (it >= (pref.otherGoalStepCount - OTHER_GOAL) && stepCount >= (pref.myGoalStepCount - MY_GOAL)) {
                         successMission()
@@ -231,7 +243,6 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         }
         viewModel.stepCount.observe(viewLifecycleOwner) { stepCount ->
             viewModel.otherStepCount.value?.let {
-                Timber.tag("로그").e("1 : $it / 2: ${pref.otherGoalStepCount} / 3: $stepCount / 4: ${pref.myGoalStepCount}")
                 if (pref.myGoalStepCount != 0 && pref.otherStepCount != 0) {
                     if (it >= (pref.otherGoalStepCount - OTHER_GOAL) && stepCount >= (pref.myGoalStepCount - MY_GOAL)) {
                         successMission()
@@ -313,7 +324,10 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         TransitionManager.beginDelayedTransition(binding.root as? ViewGroup)
         binding.ivStepCount.setVisible(INVISIBLE)
         binding.ivMissionCompleted.setVisible(VISIBLE)
-        binding.tvExercisePercent.text = "하이파이브! 성공!"
+        binding.tvExercisePercent.apply {
+            text = getString(R.string.home_success_hifive)
+            setTextColor(ContextCompat.getColor(requireContext(), R.color.blue_700_065066))
+        }
     }
 
     private fun initRunnerIcon(myIcon: Int, otherIcon: Int) {
