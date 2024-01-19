@@ -5,7 +5,6 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
@@ -17,7 +16,6 @@ import sopt.motivoo.presentation.auth.AuthViewModel
 import sopt.motivoo.util.UiState
 import sopt.motivoo.util.binding.BindingDialogFragment
 import sopt.motivoo.util.extension.setOnSingleClickListener
-import sopt.motivoo.util.findStartDestination
 import javax.inject.Inject
 
 @AndroidEntryPoint
