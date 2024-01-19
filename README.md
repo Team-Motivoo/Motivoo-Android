@@ -21,10 +21,7 @@
 
 | <img width="200" src="https://github.com/Team-Motivoo/Motivoo-Android/assets/90740783/1154159a-cc71-4d15-996b-185190d722e0"/> | <img width="200" src="https://github.com/Team-Motivoo/Motivoo-Android/assets/90740783/03e88b0a-33a4-45e9-918b-8c7dc66cc55b"/> | 
 <img width="200" src="https://github.com/Team-Motivoo/Motivoo-Android/assets/90740783/86d398b3-fb85-43ee-959a-0bdda7a1d57a"/> | 
-<img width="200" src="https://github.com/Team-Motivoo/Motivoo-Android/assets/90740783/09a982d4-be0d-4ae5-bd98-48906c5e05a2"/> | <img width="200" src="https://github.com/Team-Motivoo/Motivoo-Android/assets/90740783/b4bbd953-c8c9-4d27-a68b-8694ec0993f0"/> |
-| :---: | :---: | :---: |:------------------------------------------------------------------------------------------------------------------------------:| :---:|:---:|
-|`소셜 로그인`|`온보딩 뷰` | `미션 선택 전 운동 모아보기`|`미션 선택 전 홈`|                                                        `내정보`                                                        |`홈`|
-
+<img width="200" src="https://github.com/Team-Motivoo/Motivoo-Android/assets/90740783/09a982d4-be0d-4ae5-bd98-48906c5e05a2"/> | <img width="200" src="https://github.com/Team-Motivoo/Motivoo-Android/assets/90740783/b4bbd953-c8c9-4d27-a68b-8694ec0993f0"/> 
 
 ## Development
 ### Libraries
