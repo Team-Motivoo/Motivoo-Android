@@ -80,6 +80,7 @@
 
     <!-- my page -->
     <string name="mypage_nickname">의지뿜뿜 부모님</string>
+    <string name="mypage_nickname_child">행복팡팡 자녀</string>
     <string name="mypage_myinfo">내 정보</string>
     <string name="mypage_exercise_info">운동 정보</string>
     <string name="mypage_check_exercise_info">내 운동 정보를 확인하세요!</string>

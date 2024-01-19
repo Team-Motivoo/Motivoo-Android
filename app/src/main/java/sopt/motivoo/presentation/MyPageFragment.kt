@@ -10,6 +10,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import sopt.motivoo.R
 import sopt.motivoo.databinding.FragmentMypageBinding
 import sopt.motivoo.presentation.mypage.MyPageViewModel
+import sopt.motivoo.presentation.type.UserType
 import sopt.motivoo.util.UiState
 import sopt.motivoo.util.binding.BindingFragment
 import sopt.motivoo.util.extension.setVisible
@@ -31,6 +32,11 @@ class MyPageFragment : BindingFragment<FragmentMypageBinding>(R.layout.fragment_
         myPageViewModel.myPageUserInfo.observe(viewLifecycleOwner) { uiState ->
             when (uiState) {
                 is UiState.Success -> {
+                    if (uiState.data.userType == UserType.CHILD.name) {
+                        binding.tvMypageNickname.text = getString(R.string.mypage_nickname_child)
+                    } else {
+                        binding.tvMypageNickname.text = getString(R.string.mypage_nickname)
+                    }
                     binding.tvMypageName.text = uiState.data.userNickname
                     binding.clMypageRoot.setVisible(VISIBLE)
                 }
