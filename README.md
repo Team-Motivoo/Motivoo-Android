@@ -16,6 +16,17 @@
 💛 <strong>동기 부여</strong> : 부모가 운동을 더이상 숙제처럼 느끼지 않도록<br>
 💙 <strong>연결</strong> : 부모와 자녀가 서로 함께하고 있다고 느낄 수 있도록
 
+
+## 📱*****ScreenShot*****
+
+| <img width="200" src="https://github.com/DGU-SE-HOW-TODO/HowDroid/assets/113578158/f9c14055-586b-4727-997e-e3f5cfefdc9b"/> | <img width="200" src="https://github.com/DGU-SE-HOW-TODO/HowDroid/assets/113578158/b0a6aed7-af3f-4a40-8d55-c65232e56a75"/> | <img width="200" src="https://github.com/DGU-SE-HOW-TODO/HowDroid/assets/113578158/bcd63b80-d818-48dd-9cca-d0ddbcf83871"/> | <img width="200" src="https://github.com/DGU-SE-HOW-TODO/HowDroid/assets/113578158/ad3049cc-9d22-40f1-8d93-f99f5952e335"/> | <img width="200" src="https://github.com/DGU-SE-HOW-TODO/HowDroid/assets/113578158/93e8e3bb-bf79-4d71-a18a-e0341ccaa54d"/> |
+| :---: | :---: | :---: |:------------------------------------------------------------------------------------------------------------------------------:| :---:|
+|`로그인`|`회원가입` | `대분류 생성`|`투두 생성`|                                                        `투두 체크`                                                        |
+| <img width="200" src="https://github.com/DGU-SE-HOW-TODO/HowDroid/assets/113578158/39f689ee-d399-4c44-9253-ff377c877e0d"/> | <img width="200" src="https://github.com/DGU-SE-HOW-TODO/HowDroid/assets/113578158/b9d30cf9-5c2b-444a-8cea-61cc8e0fb39e"/> | <img width="200" src="https://github.com/DGU-SE-HOW-TODO/HowDroid/assets/113578158/7da6d736-2470-41eb-892a-2363f7ca86fe"/> | <img width="200" src="https://github.com/DGU-SE-HOW-TODO/HowDroid/assets/113578158/f46d7ca4-25a0-425f-a700-d57c1b6a4c27"> | <img width="200" src="https://github.com/DGU-SE-HOW-TODO/HowDroid/assets/113578158/7ce71eed-57a5-447b-ac1b-934b0ae49161">
+|`나만의 실패태그 만들기`|`실태패그 달기`|`미루기`|`투두 고정`|`통계/피드백`| 
+
+
+
 ## Development
 ### Libraries
 - AndroidX
@@ -72,7 +83,6 @@
 │        └── 📁 extension
 └──
 ```
-
 
 ## Convention
 - [Git Convention](https://gayeong04.notion.site/Git-Convention-79ba08a6f1444d4aaf9a1f53ce1eb91c?pvs=4)
