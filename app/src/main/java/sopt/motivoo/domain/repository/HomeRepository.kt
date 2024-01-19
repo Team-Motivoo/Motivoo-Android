@@ -8,6 +8,7 @@ import sopt.motivoo.domain.entity.home.MissionChoiceData
 import sopt.motivoo.domain.entity.home.MissionImageData
 
 interface HomeRepository {
+    fun getMyStepCount(uid: String, isInitStepCount: (Boolean) -> Unit)
     fun getOtherStepCount(otherUid: String, onStepCountAction: (Long) -> Unit)
     fun setMyStepCount(uid: String)
     suspend fun patchHome(myStepCount: Int, otherStepCount: Int): Result<HomeData>
