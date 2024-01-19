@@ -35,6 +35,7 @@ import sopt.motivoo.domain.entity.home.MissionChoiceData
 import sopt.motivoo.util.Constants.USERS
 import sopt.motivoo.util.binding.BindingFragment
 import sopt.motivoo.util.extension.setVisible
+import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -82,6 +83,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
 //        Firebase.database.reference.child(USERS).child(pref.otherId.toString()).setValue(0) // TODO:: 상대 걸음 수 초기화
 
         if (homePermissionsGranted()) {
+            Timber.tag("로그").e("has perm in activity")
             startStepCountService()
             binding.motivooStepCountText.setMyStepCountText(pref.myStepCount.toString())
         }
@@ -418,10 +420,8 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         const val STEP_COUNT = "step_count"
         const val PACKAGE = "package"
 
-        const val MY_GOAL = 4950
-        const val OTHER_GOAL = 12950
-//        const val MY_GOAL = 12950
-//        const val OTHER_GOAL = 4950
+        const val MY_GOAL = 0
+        const val OTHER_GOAL = 0
 
         private val HOME_REQUIRED_PERMISSIONS =
             mutableListOf<String>().apply {
