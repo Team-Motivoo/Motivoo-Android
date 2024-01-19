@@ -55,7 +55,7 @@
             android:paddingHorizontal="16dp"
             android:paddingVertical="19dp"
             android:stateListAnimator="@null"
-            android:text="@string/mypage_service_out"
+            android:text="@string/withdrawal"
             android:textColor="@color/white_FFFFFF"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
