@@ -174,6 +174,7 @@ class OnboardingViewModel @Inject constructor(
             )
             onboardingRepository.postOnboardingInfo(requestDto)
                 .onSuccess {
+                    motivooStorage.isFinishedOnboarding = true
                     it.inviteCode.let { inviteCode ->
                         _inviteCode.value = inviteCode
                         motivooStorage.inviteCode = inviteCode.toString()

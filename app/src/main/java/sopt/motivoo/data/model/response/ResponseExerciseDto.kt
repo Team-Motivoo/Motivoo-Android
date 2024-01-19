@@ -15,8 +15,8 @@ data class ResponseExerciseDto(
     @Serializable
     data class ExerciseHistoryData(
         @SerialName("user_type") val userType: String,
-        @SerialName("today_mission") val todayMission: MissionContent,
-        @SerialName("mission_history") val missionHistory: List<MissionHistory>,
+        @SerialName("today_mission") val todayMission: MissionContent?,
+        @SerialName("mission_history") val missionHistory: List<MissionHistory>?,
     ) {
         @Serializable
         data class MissionContent(
@@ -36,10 +36,13 @@ data class ResponseExerciseDto(
     }
 
     fun toExerciseData(): ExerciseData {
-        val list: MutableList<ExerciseItemInfo> =
-            mutableListOf(ExerciseItemInfo.NoticeItemInfo(data.todayMission.missionContent))
+        val list: MutableList<ExerciseItemInfo> = if (data.todayMission?.missionContent == null) {
+            mutableListOf()
+        } else {
+            mutableListOf(ExerciseItemInfo.NoticeItemInfo(data.todayMission?.missionContent))
+        }
 
-        data.missionHistory.forEach {
+        data.missionHistory?.forEach {
             list.add(
                 ExerciseItemInfo.EachDateItemInfo(
                     date = it.date,

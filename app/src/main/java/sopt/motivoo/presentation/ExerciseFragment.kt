@@ -15,6 +15,7 @@ import sopt.motivoo.presentation.exercise.ExerciseViewModel
 import sopt.motivoo.util.UiState
 import sopt.motivoo.util.binding.BindingFragment
 import sopt.motivoo.util.extension.setVisible
+import timber.log.Timber
 
 @AndroidEntryPoint
 class ExerciseFragment : BindingFragment<FragmentExerciseBinding>(R.layout.fragment_exercise) {
@@ -38,11 +39,13 @@ class ExerciseFragment : BindingFragment<FragmentExerciseBinding>(R.layout.fragm
         exerciseViewModel.exerciseHistoryInfo.observe(viewLifecycleOwner) { uiState ->
             when (uiState) {
                 is UiState.Success -> {
+                    Timber.tag("aaa").e("${uiState.data}")
                     initViews(uiState.data)
                     binding.clExerciseRoot.setVisible(VISIBLE)
                 }
 
                 is UiState.Loading -> {
+                    Timber.tag("aaa").e("로딩")
                     binding.clExerciseRoot.setVisible(GONE)
                 }
 
@@ -56,6 +59,8 @@ class ExerciseFragment : BindingFragment<FragmentExerciseBinding>(R.layout.fragm
     }
 
     private fun setViewsVisibility(exerciseData: ExerciseData) {
+        Timber.tag("aaa").e("${exerciseData.exerciseItemInfoList.isEmpty()}")
+        Timber.tag("aaa").e("${exerciseData}")
         if (exerciseData.exerciseItemInfoList.isEmpty()) {
             setRecyclerViewVisibility(false)
             setEmptyViewVisibility(true)

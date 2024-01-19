@@ -93,6 +93,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
             .addOnSuccessListener {
                 if (it.value != null) {
                     if (pref.myGoalStepCount != 0) {
+                        Timber.tag("로그").e("1 : ${pref.myStepCount} / 2: ${pref.myGoalStepCount} / 3: ${it.value} / 4: ${pref.otherGoalStepCount}")
                         if (pref.myStepCount >= pref.myGoalStepCount - MY_GOAL && (it.value as Long) >= pref.otherGoalStepCount - OTHER_GOAL) {
                             successMission()
                         }
@@ -216,8 +217,12 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         }
         viewModel.otherStepCount.observe(viewLifecycleOwner) {
             viewModel.stepCount.value?.let { stepCount ->
-                if (it >= (pref.otherGoalStepCount - OTHER_GOAL) && stepCount >= (pref.myGoalStepCount - MY_GOAL)) {
-                    successMission()
+                Timber.tag("로그").e("1 : $it / 2: ${pref.otherGoalStepCount} / 3: $stepCount / 4: ${pref.myGoalStepCount}")
+
+                if (pref.myGoalStepCount != 0 && pref.otherStepCount != 0) {
+                    if (it >= (pref.otherGoalStepCount - OTHER_GOAL) && stepCount >= (pref.myGoalStepCount - MY_GOAL)) {
+                        successMission()
+                    }
                 }
             }
             binding.motivooStepCountText.setOtherStepCountText(it.toString())
@@ -226,8 +231,11 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         }
         viewModel.stepCount.observe(viewLifecycleOwner) { stepCount ->
             viewModel.otherStepCount.value?.let {
-                if (it >= (pref.otherGoalStepCount - OTHER_GOAL) && stepCount >= (pref.myGoalStepCount - MY_GOAL)) {
-                    successMission()
+                Timber.tag("로그").e("1 : $it / 2: ${pref.otherGoalStepCount} / 3: $stepCount / 4: ${pref.myGoalStepCount}")
+                if (pref.myGoalStepCount != 0 && pref.otherStepCount != 0) {
+                    if (it >= (pref.otherGoalStepCount - OTHER_GOAL) && stepCount >= (pref.myGoalStepCount - MY_GOAL)) {
+                        successMission()
+                    }
                 }
             }
             if (stepCount == (pref.myGoalStepCount - MY_GOAL)) {
