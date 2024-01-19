@@ -19,7 +19,7 @@ import kotlin.math.sin
 class MotivooOtherPieChart @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
-    defStyleAttr: Int = 0
+    defStyleAttr: Int = 0,
 ) : View(context, attributeSet, defStyleAttr) {
     private var stepCount = 0f
 
@@ -36,25 +36,26 @@ class MotivooOtherPieChart @JvmOverloads constructor(
     private val layoutSize = LAYOUT_SIZE.px.toInt()
 
     init {
-        otherImage = ContextCompat.getDrawable(context, R.drawable.ic_parent_other)?.run {
-            toBitmap(IMAGE_SIZE.px.toInt(), IMAGE_SIZE.px.toInt())
-        }
+        otherImage = null
 
         context.theme.obtainStyledAttributes(
             attributeSet, R.styleable.MotivooPieChart, defStyleAttr, defStyleAttr
         ).let { typedArray ->
             progressBarInnerPaint.run {
-                color = typedArray.getColor(R.styleable.MotivooPieChart_progressInnerColor, Color.BLUE)
+                color =
+                    typedArray.getColor(R.styleable.MotivooPieChart_progressInnerColor, Color.BLUE)
                 style = Paint.Style.STROKE
                 strokeWidth = 9.px
             }
             progressBarOtherPaint.run {
-                color = typedArray.getColor(R.styleable.MotivooPieChart_progressOtherColor, Color.BLUE)
+                color =
+                    typedArray.getColor(R.styleable.MotivooPieChart_progressOtherColor, Color.BLUE)
                 style = Paint.Style.STROKE
                 strokeWidth = 9.px
             }
             centerCirclePaint.run {
-                color = typedArray.getColor(R.styleable.MotivooPieChart_centerCicleColor, Color.BLACK)
+                color =
+                    typedArray.getColor(R.styleable.MotivooPieChart_centerCicleColor, Color.BLACK)
                 style = Paint.Style.STROKE
                 strokeWidth = 3.px
             }
@@ -83,7 +84,13 @@ class MotivooOtherPieChart @JvmOverloads constructor(
 
         scaleX = -1f
         canvas.drawArc(drawRectArea, START_ANGLE, SWEEP_ANGLE, false, progressBarInnerPaint)
-        canvas.drawArc(drawRectArea, START_ANGLE, ((stepCount) * DEGREE), false, progressBarOtherPaint)
+        canvas.drawArc(
+            drawRectArea,
+            START_ANGLE,
+            ((stepCount) * DEGREE),
+            false,
+            progressBarOtherPaint
+        )
         canvas.drawCircle(ORIGIN_VALUE.px, SMALL_CIRCLE_Y.px, 2.px, centerCirclePaint)
         drawImage(canvas)
     }
@@ -96,10 +103,12 @@ class MotivooOtherPieChart @JvmOverloads constructor(
             (ORIGIN_VALUE.px - cos(radian) * RADIUS.px - (LAYOUT_SPACING + DIAMETER_SPACING).px)
         val y: Float
         if ((30 - (stepCount * DEGREE)) >= 0) {
-            y = (ORIGIN_VALUE.px + sin(radian) * RADIUS.px - (LAYOUT_SPACING + DIAMETER_SPACING).px).toFloat()
+            y =
+                (ORIGIN_VALUE.px + sin(radian) * RADIUS.px - (LAYOUT_SPACING + DIAMETER_SPACING).px).toFloat()
             otherImage?.let { canvas.drawBitmap(it, x.toFloat(), y, null) }
         } else {
-            y = (ORIGIN_VALUE.px - sin(radian) * RADIUS.px - (LAYOUT_SPACING + DIAMETER_SPACING).px).toFloat()
+            y =
+                (ORIGIN_VALUE.px - sin(radian) * RADIUS.px - (LAYOUT_SPACING + DIAMETER_SPACING).px).toFloat()
             if (degree <= 85) {
                 otherImage?.let { canvas.drawBitmap(it, x.toFloat(), y, null) }
             } else {
@@ -127,8 +136,15 @@ class MotivooOtherPieChart @JvmOverloads constructor(
         invalidate()
     }
 
-    fun successStepCount() {
-        otherImage = null
+    fun successStepCount(iconDrawable: Int?) {
+        otherImage = if (iconDrawable == null) {
+            null
+        } else {
+            ContextCompat.getDrawable(context, iconDrawable)?.run {
+                toBitmap(IMAGE_SIZE.px.toInt(), IMAGE_SIZE.px.toInt())
+            }
+        }
+        invalidate()
     }
 
     companion object {

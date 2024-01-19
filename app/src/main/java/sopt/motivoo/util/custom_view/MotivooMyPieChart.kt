@@ -12,7 +12,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
 import sopt.motivoo.R
 import sopt.motivoo.util.extension.px
-import timber.log.Timber
 import kotlin.math.abs
 import kotlin.math.cos
 import kotlin.math.sin
@@ -34,9 +33,7 @@ class MotivooMyPieChart @JvmOverloads constructor(
     private val layoutSize = LAYOUT_SIZE.px.toInt()
 
     init {
-        myImage = ContextCompat.getDrawable(context, R.drawable.ic_child_user)?.run {
-            toBitmap(IMAGE_SIZE.px.toInt(), IMAGE_SIZE.px.toInt())
-        }
+        myImage = null
 
         context.theme.obtainStyledAttributes(
             attributeSet, R.styleable.MotivooPieChart, defStyleAttr, defStyleAttr
@@ -114,13 +111,16 @@ class MotivooMyPieChart @JvmOverloads constructor(
         invalidate()
     }
 
-    fun successStepCount() {
-        this.myImage = ContextCompat.getDrawable(context,R.drawable.ic_launcher_background )?.run {
-            toBitmap(0.px.toInt(), 0.px.toInt())
+    fun successStepCount(iconDrawable: Int?) {
+        myImage = if (iconDrawable == null) {
+            null
+        } else {
+            ContextCompat.getDrawable(context, iconDrawable)?.run {
+                toBitmap(IMAGE_SIZE.px.toInt(), IMAGE_SIZE.px.toInt())
+            }
         }
         invalidate()
     }
-
 
     companion object {
         private const val DIAMETER = 290 // fix
