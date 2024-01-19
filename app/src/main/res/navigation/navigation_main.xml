@@ -46,6 +46,9 @@
         <action
             android:id="@+id/action_homeFragment_to_webViewFragment"
             app:destination="@+id/webViewFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_withdrawalFragment"
+            app:destination="@id/withdrawalFragment" />
     </fragment>
     <fragment
         android:id="@+id/myPageFragment"
@@ -382,5 +385,9 @@
     <fragment
         android:id="@+id/withdrawalFragment"
         android:name="sopt.motivoo.presentation.withdrawal.WithdrawalFragment"
-        android:label="WithdrawalFragment" />
+        android:label="WithdrawalFragment" >
+        <action
+            android:id="@+id/action_withdrawalFragment_to_myServiceOutFragment"
+            app:destination="@id/myServiceOutFragment" />
+    </fragment>
 </navigation>

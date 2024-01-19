@@ -34,7 +34,7 @@ class MyServiceOutFragment :
 
     private fun clickButtons() {
         binding.tvMyServiceOutBtn.setOnClickListener {
-            kakaoAuthService.logoutKakao(authViewModel::withDraw)
+            kakaoAuthService.withdrawKakao(authViewModel::withDraw)
             collectData()
         }
 
