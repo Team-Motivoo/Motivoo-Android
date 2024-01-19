@@ -2,6 +2,7 @@ package sopt.motivoo.data.model.response
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import sopt.motivoo.domain.entity.mypage.UserInfo
 
 @Serializable
 data class ResponseMyPageDto(
@@ -16,4 +17,12 @@ data class ResponseMyPageDto(
         @SerialName("user_age") val userAge: Int,
         @SerialName("user_type") val userType: String,
     )
+
+    fun toUserInfo(): UserInfo {
+        return UserInfo(
+            userNickname = data.userNickname,
+            userAge = data.userAge,
+            userType = data.userType,
+        )
+    }
 }

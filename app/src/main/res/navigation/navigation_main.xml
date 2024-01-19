@@ -28,6 +28,12 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_loginFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
@@ -39,6 +45,9 @@
         <action
             android:id="@+id/action_homeFragment_to_webViewFragment"
             app:destination="@+id/webViewFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_withdrawalFragment"
+            app:destination="@id/withdrawalFragment" />
     </fragment>
     <fragment
         android:id="@+id/myPageFragment"
@@ -60,7 +69,7 @@
     <fragment
         android:id="@+id/exerciseFragment"
         android:name="sopt.motivoo.presentation.ExerciseFragment"
-        android:label="ExerciseFragment" >
+        android:label="ExerciseFragment">
         <action
             android:id="@+id/action_exerciseFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
@@ -372,4 +381,12 @@
         android:id="@+id/loadingFragment"
         android:name="sopt.motivoo.presentation.LoadingFragment"
         android:label="LoadingFragment" />
+    <fragment
+        android:id="@+id/withdrawalFragment"
+        android:name="sopt.motivoo.presentation.withdrawal.WithdrawalFragment"
+        android:label="WithdrawalFragment" >
+        <action
+            android:id="@+id/action_withdrawalFragment_to_myServiceOutFragment"
+            app:destination="@id/myServiceOutFragment" />
+    </fragment>
 </navigation>

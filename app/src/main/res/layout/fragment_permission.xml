@@ -245,6 +245,7 @@
             android:layout_marginBottom="44dp"
             android:background="@drawable/selector_button_background"
             android:paddingVertical="18dp"
+            android:stateListAnimator="@null"
             android:text="@string/next"
             android:textColor="@drawable/selector_text_color"
             app:layout_constraintBottom_toBottomOf="parent"
