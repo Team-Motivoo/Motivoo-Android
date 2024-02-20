@@ -51,6 +51,7 @@
 - Lottie
 - Aws s3
 - Java 8+ API desugaring support
+- LeakCanary
 
 ### Test & Code analysis
 - Ktlint
