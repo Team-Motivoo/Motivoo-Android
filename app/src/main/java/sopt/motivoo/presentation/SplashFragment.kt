@@ -34,6 +34,7 @@ class SplashFragment : BindingFragment<FragmentSplashBinding>(R.layout.fragment_
         }
     }
 
+    // TODO-l2zh 다이얼로그 나오면 수정
     private fun showNetworkErrorDialog() {
         AlertDialog.Builder(requireContext()).apply {
             setTitle("네트워크 오류")
