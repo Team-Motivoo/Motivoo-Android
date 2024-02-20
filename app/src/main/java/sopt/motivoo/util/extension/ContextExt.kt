@@ -5,6 +5,8 @@ import android.app.Notification
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.os.Build
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -82,3 +84,11 @@ fun Context.sendNotification(
         }
     }.build()
 }
+
+fun Context.checkNetworkState(): Boolean {
+    val connectivityManager = this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    val network = connectivityManager.activeNetwork ?: return false
+    val actNetwork = connectivityManager.getNetworkCapabilities(network) ?: return false
+    return actNetwork.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) || actNetwork.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
+}
+

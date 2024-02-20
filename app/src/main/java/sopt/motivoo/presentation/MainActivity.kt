@@ -3,6 +3,8 @@ package sopt.motivoo.presentation
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
+import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavController
@@ -13,6 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import sopt.motivoo.R
 import sopt.motivoo.data.datasource.remote.listener.AuthTokenRefreshListenerImpl
 import sopt.motivoo.databinding.ActivityMainBinding
+import sopt.motivoo.util.extension.checkNetworkState
 import sopt.motivoo.util.extension.colorOf
 import sopt.motivoo.util.extension.hideKeyboard
 import sopt.motivoo.util.extension.setOnSingleClickListener
@@ -21,6 +24,8 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
+
+    private val mainViewModel by viewModels<MainViewModel>()
 
     @Inject
     lateinit var authTokenRefreshListener: AuthTokenRefreshListenerImpl
@@ -33,6 +38,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         initView()
         setupTokenRefreshListener()
+        observeNetwork()
+    }
+
+    private fun observeNetwork() {
+        mainViewModel.networkStateLiveData.observe(this) { isConnected ->
+            if (!isConnected) {
+                showNetworkErrorDialog()
+            }
+        }
     }
 
     private fun initView() {
@@ -131,6 +145,22 @@ class MainActivity : AppCompatActivity() {
             val navController = findNavController(R.id.fc_main)
             navController.popBackStack(R.id.loginFragment, false)
             navController.navigate(R.id.loginFragment)
+        }
+    }
+
+    private fun showNetworkErrorDialog() {
+        AlertDialog.Builder(this).apply {
+            setTitle("네트워크 오류")
+            setMessage("네트워크 연결을 확인해주세요.")
+            setPositiveButton("재시도") { dialog, _ ->
+                if (checkNetworkState()) {
+                    dialog.dismiss()
+                } else {
+                    showNetworkErrorDialog()
+                }
+            }
+            setCancelable(false)
+            create().show()
         }
     }
 
