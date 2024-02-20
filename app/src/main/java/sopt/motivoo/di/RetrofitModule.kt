@@ -14,7 +14,7 @@ import retrofit2.Retrofit
 import sopt.motivoo.BuildConfig.BASE_URL
 import sopt.motivoo.BuildConfig.DEBUG
 import sopt.motivoo.data.datasource.local.MotivooStorageImpl
-import sopt.motivoo.data.datasource.remote.AuthInterceptor
+import sopt.motivoo.data.datasource.remote.intercepter.AuthInterceptor
 import sopt.motivoo.data.datasource.remote.listener.AuthTokenRefreshListener
 import sopt.motivoo.data.datasource.remote.listener.AuthTokenRefreshListenerImpl
 import sopt.motivoo.domain.entity.MotivooStorage
