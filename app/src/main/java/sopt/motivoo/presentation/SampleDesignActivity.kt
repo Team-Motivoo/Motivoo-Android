@@ -17,14 +17,14 @@ class SampleDesignActivity : AppCompatActivity() {
 //        binding.customView.setUserType(Child)
 //        binding.customViewOther.setUserType(Parent)
 
-        binding.customView.setUserType(Parent)
+        binding.customView.userType = Parent
         binding.customViewOther.userType = Child
 
         binding.leftSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(p0: SeekBar?, seekValue: Int, p2: Boolean) {
                 binding.customView.setPercent(seekValue / 50f)
-                binding.customView.setUserType(Parent)
-//                binding.customView.setUserType(Child)
+                binding.customView.userType = Parent
+//                binding.customView.userType = Child
             }
 
             override fun onStartTrackingTouch(p0: SeekBar?) {
@@ -38,7 +38,7 @@ class SampleDesignActivity : AppCompatActivity() {
             override fun onProgressChanged(p0: SeekBar?, seekValue: Int, p2: Boolean) {
                 binding.customViewOther.setPercent(seekValue / 50f)
                 binding.customViewOther.userType = Child
-//                binding.customViewOther.setUserType(Parent)
+//                binding.customViewOther.userType = Parent
             }
 
             override fun onStartTrackingTouch(p0: SeekBar?) {

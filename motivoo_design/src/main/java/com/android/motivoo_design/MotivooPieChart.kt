@@ -33,6 +33,22 @@ class MotivooPieChart @JvmOverloads constructor(
     private val drawRectArea =
         RectF(LAYOUT_SPACING.px, LAYOUT_SPACING.px, DRAW_AREA_SIZE.px, DRAW_AREA_SIZE.px)
 
+    var userType: PieChartUserType? = null
+        set(value) {
+            when (value) {
+                Child -> {
+                    setMyImageBitmap(R.drawable.ic_child_user)
+                }
+
+                Parent -> {
+                    setMyImageBitmap(R.drawable.ic_parent_user)
+                }
+
+                else -> Unit
+            }
+            field = value
+        }
+
     init {
         context.theme.obtainStyledAttributes(
             attributeSet, R.styleable.MotivooPieChart, defStyleAttr, defStyleAttr
@@ -72,18 +88,6 @@ class MotivooPieChart @JvmOverloads constructor(
         canvas.drawArc(drawRectArea, START_ANGLE, degree.toFloat(), false, myProgressBarPaint)
         myImageBitmap?.let {
             canvas.drawBitmap(it, x.toFloat(), y.toFloat(), null)
-        }
-    }
-
-    fun setUserType(userType: PieChartUserType) {
-        when (userType) {
-            Child -> {
-                setMyImageBitmap(R.drawable.ic_child_user)
-            }
-
-            Parent -> {
-                setMyImageBitmap(R.drawable.ic_parent_user)
-            }
         }
     }
 
