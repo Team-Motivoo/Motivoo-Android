@@ -11,10 +11,16 @@ import android.view.View
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
+import com.android.utils.BitmapCacheManager
 import com.android.utils.Child
 import com.android.utils.Parent
 import com.android.utils.PieChartUserType
 import com.android.utils.px
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
 import kotlin.math.cos
 import kotlin.math.sin
 
@@ -34,6 +40,8 @@ class MotivooOtherPieChart @JvmOverloads constructor(
 
     private val drawRectArea =
         RectF(LAYOUT_SPACING.px, LAYOUT_SPACING.px, DRAW_AREA_SIZE.px, DRAW_AREA_SIZE.px)
+
+    private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
 
     var userType: PieChartUserType? = null
         set(value) {
@@ -148,13 +156,34 @@ class MotivooOtherPieChart @JvmOverloads constructor(
             (LAYOUT_SIZE / 2).px - sin(radian) * RADIUS.px - (IMAGE_SIZE / 2).px
         }
 
-        otherImageBitmap = ContextCompat.getDrawable(context, imageDrawable)?.run {
-            toBitmap(
-                IMAGE_SIZE.px.toInt(),
-                IMAGE_SIZE.px.toInt()
-            )
-        }
+        initImageDrawableToBitmap(imageDrawable)
+        getBitmapCacheOtherImage()
         invalidate()
+    }
+
+    private fun initImageDrawableToBitmap(imageDrawable: Int) {
+        if (otherImageBitmap == null) {
+            otherImageBitmap = ContextCompat.getDrawable(context, imageDrawable)?.run {
+                toBitmap(
+                    IMAGE_SIZE.px.toInt(),
+                    IMAGE_SIZE.px.toInt()
+                )
+            }
+        }
+    }
+
+    private fun getBitmapCacheOtherImage() {
+        scope.launch {
+            BitmapCacheManager.apply {
+                if (getInstance().getBitmapFromMemoryCache(OTHER_IMAGE) == null) {
+                    otherImageBitmap?.let {
+                        getInstance().addBitmapToMemoryCache(OTHER_IMAGE, it)
+                    }
+                } else {
+                    otherImageBitmap = getInstance().getBitmapFromMemoryCache(OTHER_IMAGE)
+                }
+            }
+        }
     }
 
     fun successStepCount(iconDrawable: Int?) {
@@ -166,6 +195,11 @@ class MotivooOtherPieChart @JvmOverloads constructor(
             }
         }
         invalidate()
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        scope.cancel()
     }
 
     companion object {
