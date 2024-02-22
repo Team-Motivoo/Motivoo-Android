@@ -149,6 +149,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showNetworkErrorDialog() {
+        // TODO-l2zh 다이얼로그 수정
         AlertDialog.Builder(this).apply {
             setTitle("네트워크 오류")
             setMessage("네트워크 연결을 확인해주세요.")
