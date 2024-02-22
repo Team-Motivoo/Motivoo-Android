@@ -32,8 +32,8 @@ class MotivooOtherPieChart @JvmOverloads constructor(
     private val innerProgressBarPaint: Paint = Paint()
     private val otherProgressBarPaint: Paint = Paint()
     private val centerCirclePaint: Paint = Paint()
-    private var percent = 0f
-    private var degree = 0.0
+    private var percent: Float = 0f
+    private var degree: Double = 0.0
     private var otherImageBitmap: Bitmap? = null
     private var x: Double = 0.0
     private var y: Double = 0.0

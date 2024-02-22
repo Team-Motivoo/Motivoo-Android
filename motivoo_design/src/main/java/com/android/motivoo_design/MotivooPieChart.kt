@@ -30,8 +30,8 @@ class MotivooPieChart @JvmOverloads constructor(
     defStyleAttr: Int = 0,
 ) : View(context, attributeSet, defStyleAttr) {
     private val myProgressBarPaint: Paint = Paint()
-    private var percent = 0f
-    private var degree = 0.0
+    private var percent: Float = 0f
+    private var degree: Double = 0.0
     private var myImageBitmap: Bitmap? = null
     private var x: Double = 0.0
     private var y: Double = 0.0
