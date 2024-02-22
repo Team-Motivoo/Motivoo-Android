@@ -37,7 +37,7 @@ class BitmapCacheManager(
         @Volatile
         private var instance: BitmapCacheManager? = null
 
-        fun getInstance(dispatcher: CoroutineDispatcher = Dispatchers.IO) =
+        fun getInstance(dispatcher: CoroutineDispatcher = Dispatchers.Default) =
             instance ?: synchronized(this) {
                 instance ?: BitmapCacheManager(dispatcher).also { instance = it }
             }
