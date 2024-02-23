@@ -199,6 +199,8 @@ class MotivooOtherPieChart @JvmOverloads constructor(
 
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
+        otherImageBitmap?.recycle()
+        otherImageBitmap = null
         scope.cancel()
     }
 
