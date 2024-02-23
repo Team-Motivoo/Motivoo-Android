@@ -17,4 +17,3 @@ class AuthTokenRefreshListenerImpl @Inject constructor() : AuthTokenRefreshListe
         onTokenRefreshFailedCallback = null
     }
 }
-

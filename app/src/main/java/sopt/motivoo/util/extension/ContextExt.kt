@@ -91,4 +91,3 @@ fun Context.checkNetworkState(): Boolean {
     val actNetwork = connectivityManager.getNetworkCapabilities(network) ?: return false
     return actNetwork.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) || actNetwork.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
 }
-

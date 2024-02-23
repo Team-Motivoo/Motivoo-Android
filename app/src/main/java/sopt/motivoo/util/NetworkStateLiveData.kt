@@ -23,9 +23,15 @@ class NetworkStateLiveData(context: Context) : LiveData<Boolean>() {
     override fun onActive() {
         super.onActive()
         val network = connectivityManager.activeNetwork
-        postValue(network != null && connectivityManager.getNetworkCapabilities(network)?.run {
-            hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) || hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
-        } ?: false)
+
+        postValue(
+            network != null && connectivityManager.getNetworkCapabilities(network)?.run {
+                hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) || hasTransport(
+                    NetworkCapabilities.TRANSPORT_WIFI
+                )
+            } ?: false
+        )
+
         connectivityManager.registerDefaultNetworkCallback(networkCallback)
     }
 

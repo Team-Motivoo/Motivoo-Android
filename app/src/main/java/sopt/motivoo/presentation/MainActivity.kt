@@ -13,6 +13,9 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import sopt.motivoo.R
 import sopt.motivoo.data.datasource.remote.listener.AuthTokenRefreshListener
 import sopt.motivoo.data.datasource.remote.listener.NetworkErrorListener
@@ -149,25 +152,29 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupTokenRefreshListener() {
         authTokenRefreshListener.setOnTokenRefreshFailedCallback {
-            val navController: NavController = findNavController(R.id.fc_main)
-            val startDestinationId = navController.findStartDestination().id
-            val navOptions = NavOptions.Builder()
-                .setPopUpTo(startDestinationId, true)
-                .build()
+            CoroutineScope(Dispatchers.Main).launch {
+                val navController: NavController = findNavController(R.id.fc_main)
+                val startDestinationId = navController.findStartDestination().id
+                val navOptions = NavOptions.Builder()
+                    .setPopUpTo(startDestinationId, true)
+                    .build()
 
-            navController.navigate(R.id.loginFragment, null, navOptions)
+                navController.navigate(R.id.loginFragment, null, navOptions)
+            }
         }
     }
 
     private fun setupApiCallFailed() {
         networkErrorListener.setOnApiCallFailedCallback {
-            val navController: NavController = findNavController(R.id.fc_main)
-            val startDestinationId = navController.findStartDestination().id
-            val navOptions = NavOptions.Builder()
-                .setPopUpTo(startDestinationId, true)
-                .build()
+            CoroutineScope(Dispatchers.Main).launch {
+                val navController: NavController = findNavController(R.id.fc_main)
+                val startDestinationId = navController.findStartDestination().id
+                val navOptions = NavOptions.Builder()
+                    .setPopUpTo(startDestinationId, true)
+                    .build()
 
-            navController.navigate(R.id.networkErrorFragment, null, navOptions)
+                navController.navigate(R.id.networkErrorFragment, null, navOptions)
+            }
         }
     }
 
@@ -197,5 +204,4 @@ class MainActivity : AppCompatActivity() {
         super.onDestroy()
         authTokenRefreshListener.clearOnTokenRefreshFailedCallback()
     }
-
 }
