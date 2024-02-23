@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "MOTIVOO-AOS"
 include ':app'
+include ':motivoo_design'

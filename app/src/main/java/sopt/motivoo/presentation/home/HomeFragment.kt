@@ -239,7 +239,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
             }
             binding.motivooStepCountText.setOtherStepCountText(it.toString())
             binding.motivooStepCountTextUnselectedMission.setOtherStepCountText(it.toString())
-            if (pref.otherGoalStepCount != 0) binding.motivooOtherPieChart.setStepCount(it / (pref.otherGoalStepCount.toFloat() - OTHER_GOAL))
+            if (pref.otherGoalStepCount != 0) binding.motivooOtherPieChart.setPercent(it / (pref.otherGoalStepCount.toFloat() - OTHER_GOAL))
         }
         viewModel.stepCount.observe(viewLifecycleOwner) { stepCount ->
             viewModel.otherStepCount.value?.let {
@@ -263,7 +263,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
             binding.motivooStepCountText.setMyStepCountText(stepCount.toString())
             binding.motivooStepCountTextUnselectedMission.setMyStepCountText(stepCount.toString())
             if (pref.myGoalStepCount != 0) {
-                binding.motivooMyPieChart.setStepCount(stepCount / (pref.myGoalStepCount.toFloat() - MY_GOAL))
+                binding.motivooMyPieChart.setPercent(stepCount / (pref.myGoalStepCount.toFloat() - MY_GOAL))
             }
         }
         viewModel.isSelectedMission.observe(viewLifecycleOwner) {
@@ -279,8 +279,8 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
                 getString(R.string.home_parent_step_count)
             )
             if (viewModel.isCompletedStepCount.value == false) {
-                binding.motivooMyPieChart.successStepCount(R.drawable.ic_child_user)
-                binding.motivooOtherPieChart.successStepCount(R.drawable.ic_parent_other)
+//                binding.motivooMyPieChart.successStepCount(R.drawable.ic_child_user)
+//                binding.motivooOtherPieChart.successStepCount(R.drawable.ic_parent_other)
             }
         } else {
             binding.motivooStepCountText.setOtherStepCountTitleText(getString(R.string.home_child_step_count))
@@ -288,8 +288,8 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
                 getString(R.string.home_child_step_count)
             )
             if (viewModel.isCompletedStepCount.value == false) {
-                binding.motivooMyPieChart.successStepCount(R.drawable.ic_parent_user)
-                binding.motivooOtherPieChart.successStepCount(R.drawable.ic_child_other)
+//                binding.motivooMyPieChart.successStepCount(R.drawable.ic_parent_user)
+//                binding.motivooOtherPieChart.successStepCount(R.drawable.ic_child_other)
             }
         }
     }
@@ -297,15 +297,15 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
     private fun initUserIcon(it: HomeData) {
         if (!it.isStepCountCompleted) {
             if (it.userType == getString(R.string.home_child)) {
-                initRunnerIcon(
-                    R.drawable.ic_child_user,
-                    R.drawable.ic_parent_other
-                )
+//                initRunnerIcon(
+//                    R.drawable.ic_child_user,
+//                    R.drawable.ic_parent_other
+//                )
             } else {
-                initRunnerIcon(
-                    R.drawable.ic_parent_user,
-                    R.drawable.ic_child_other
-                )
+//                initRunnerIcon(
+//                    R.drawable.ic_parent_user,
+//                    R.drawable.ic_child_other
+//                )
             }
         }
     }
@@ -331,8 +331,8 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
     }
 
     private fun initRunnerIcon(myIcon: Int, otherIcon: Int) {
-        binding.motivooMyPieChart.setMyIcon(myIcon)
-        binding.motivooOtherPieChart.setOtherIcon(otherIcon)
+        binding.motivooMyPieChart.setMyImageBitmap(myIcon)
+        binding.motivooOtherPieChart.setOtherImageBitmap(otherIcon)
     }
 
     private fun initMissionUnSelectedNotPermission() {
