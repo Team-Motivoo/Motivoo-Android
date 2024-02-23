@@ -3,11 +3,18 @@ package sopt.motivoo.data.datasource.remote.listener
 import javax.inject.Inject
 
 class AuthTokenRefreshListenerImpl @Inject constructor() : AuthTokenRefreshListener {
-    lateinit var onTokenRefreshFailedCallback: (() -> Unit)
+    private var onTokenRefreshFailedCallback: (() -> Unit)? = null
 
     override fun onTokenRefreshFailed() {
-        if (this::onTokenRefreshFailedCallback.isInitialized) {
-            onTokenRefreshFailedCallback()
-        }
+        onTokenRefreshFailedCallback?.invoke()
+    }
+
+    override fun setOnTokenRefreshFailedCallback(callback: () -> Unit) {
+        onTokenRefreshFailedCallback = callback
+    }
+
+    override fun clearOnTokenRefreshFailedCallback() {
+        onTokenRefreshFailedCallback = null
     }
 }
+

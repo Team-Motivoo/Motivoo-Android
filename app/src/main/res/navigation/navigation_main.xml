@@ -390,4 +390,8 @@
             android:id="@+id/action_withdrawalFragment_to_myServiceOutFragment"
             app:destination="@id/myServiceOutFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/networkErrorFragment"
+        android:name="sopt.motivoo.presentation.NetworkErrorFragment"
+        android:label="NetworkErrorFragment" />
 </navigation>

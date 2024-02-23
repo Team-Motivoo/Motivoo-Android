@@ -8,17 +8,20 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavController
+import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 import sopt.motivoo.R
-import sopt.motivoo.data.datasource.remote.listener.AuthTokenRefreshListenerImpl
+import sopt.motivoo.data.datasource.remote.listener.AuthTokenRefreshListener
+import sopt.motivoo.data.datasource.remote.listener.NetworkErrorListener
 import sopt.motivoo.databinding.ActivityMainBinding
 import sopt.motivoo.util.extension.checkNetworkState
 import sopt.motivoo.util.extension.colorOf
 import sopt.motivoo.util.extension.hideKeyboard
 import sopt.motivoo.util.extension.setOnSingleClickListener
+import sopt.motivoo.util.findStartDestination
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -28,7 +31,10 @@ class MainActivity : AppCompatActivity() {
     private val mainViewModel by viewModels<MainViewModel>()
 
     @Inject
-    lateinit var authTokenRefreshListener: AuthTokenRefreshListenerImpl
+    lateinit var authTokenRefreshListener: AuthTokenRefreshListener
+
+    @Inject
+    lateinit var networkErrorListener: NetworkErrorListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_MOTIVOOAOS)
@@ -38,6 +44,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         initView()
         setupTokenRefreshListener()
+        setupApiCallFailed()
         observeNetwork()
     }
 
@@ -75,9 +82,9 @@ class MainActivity : AppCompatActivity() {
                     R.id.myExerciseInfoFragment
                 )
             ) {
-                window.statusBarColor = (this.colorOf(R.color.gray_100_F4F5F9))
+                window.statusBarColor = (colorOf(R.color.gray_100_F4F5F9))
             } else {
-                window.statusBarColor = (this.colorOf(R.color.white_FFFFFF))
+                window.statusBarColor = (colorOf(R.color.white_FFFFFF))
             }
         }
     }
@@ -141,10 +148,26 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupTokenRefreshListener() {
-        authTokenRefreshListener.onTokenRefreshFailedCallback = {
-            val navController = findNavController(R.id.fc_main)
-            navController.popBackStack(R.id.loginFragment, false)
-            navController.navigate(R.id.loginFragment)
+        authTokenRefreshListener.setOnTokenRefreshFailedCallback {
+            val navController: NavController = findNavController(R.id.fc_main)
+            val startDestinationId = navController.findStartDestination().id
+            val navOptions = NavOptions.Builder()
+                .setPopUpTo(startDestinationId, true)
+                .build()
+
+            navController.navigate(R.id.loginFragment, null, navOptions)
+        }
+    }
+
+    private fun setupApiCallFailed() {
+        networkErrorListener.setOnApiCallFailedCallback {
+            val navController: NavController = findNavController(R.id.fc_main)
+            val startDestinationId = navController.findStartDestination().id
+            val navOptions = NavOptions.Builder()
+                .setPopUpTo(startDestinationId, true)
+                .build()
+
+            navController.navigate(R.id.networkErrorFragment, null, navOptions)
         }
     }
 
@@ -169,4 +192,10 @@ class MainActivity : AppCompatActivity() {
         hideKeyboard(currentFocus ?: View(this))
         return super.dispatchTouchEvent(ev)
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        authTokenRefreshListener.clearOnTokenRefreshFailedCallback()
+    }
+
 }
