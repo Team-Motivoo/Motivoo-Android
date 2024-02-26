@@ -52,7 +52,7 @@
     </fragment>
     <fragment
         android:id="@+id/myPageFragment"
-        android:name="sopt.motivoo.presentation.MyPageFragment"
+        android:name="sopt.motivoo.presentation.mypage.MyPageFragment"
         android:label="MyPageFragment">
         <action
             android:id="@+id/action_myPageFragment_to_myInfoFragment"
@@ -69,7 +69,7 @@
     </fragment>
     <fragment
         android:id="@+id/exerciseFragment"
-        android:name="sopt.motivoo.presentation.ExerciseFragment"
+        android:name="sopt.motivoo.presentation.exercise.ExerciseFragment"
         android:label="ExerciseFragment">
         <action
             android:id="@+id/action_exerciseFragment_to_homeFragment"
@@ -224,7 +224,7 @@
     </fragment>
     <fragment
         android:id="@+id/myInfoFragment"
-        android:name="sopt.motivoo.presentation.MyInfoFragment"
+        android:name="sopt.motivoo.presentation.mypage.MyInfoFragment"
         android:label="MyInfoFragment">
         <action
             android:id="@+id/action_myInfoFragment_to_myServiceOut"
@@ -244,7 +244,7 @@
     </fragment>
     <fragment
         android:id="@+id/myExerciseInfoFragment"
-        android:name="sopt.motivoo.presentation.MyExerciseInfoFragment"
+        android:name="sopt.motivoo.presentation.my_exercise_info.MyExerciseInfoFragment"
         android:label="MyExerciseInfoFragment">
         <action
             android:id="@+id/action_myExerciseInfoFragment_to_myPageFragment"
@@ -252,7 +252,7 @@
     </fragment>
     <dialog
         android:id="@+id/myServiceOutFragment"
-        android:name="sopt.motivoo.presentation.MyServiceOutFragment"
+        android:name="sopt.motivoo.presentation.mypage.MyServiceOutFragment"
         android:label="MyServiceOutFragment">
         <action
             android:id="@+id/action_myServiceOut_to_loginFragment"
@@ -260,7 +260,7 @@
     </dialog>
     <dialog
         android:id="@+id/myLogoutFragment"
-        android:name="sopt.motivoo.presentation.MyLogoutFragment"
+        android:name="sopt.motivoo.presentation.mypage.MyLogoutFragment"
         android:label="MyLogoutFragment">
         <action
             android:id="@+id/action_myLogout_to_loginFragment"
@@ -380,7 +380,7 @@
     </dialog>
     <fragment
         android:id="@+id/loadingFragment"
-        android:name="sopt.motivoo.presentation.LoadingFragment"
+        android:name="sopt.motivoo.presentation.loading.LoadingFragment"
         android:label="LoadingFragment" />
     <fragment
         android:id="@+id/withdrawalFragment"

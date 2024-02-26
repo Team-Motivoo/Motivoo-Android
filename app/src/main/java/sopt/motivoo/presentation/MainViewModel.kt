@@ -1,14 +1,17 @@
 package sopt.motivoo.presentation
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import sopt.motivoo.util.NetworkStateLiveData
+import sopt.motivoo.domain.repository.NetworkRepository
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    networkState: NetworkStateLiveData
+    networkRepository: NetworkRepository
 ) : ViewModel() {
 
-    val networkStateLiveData = networkState
+    val networkState: LiveData<Boolean> = networkRepository.networkStateLiveData
+    val isLoading: LiveData<Boolean> = networkRepository.isLoading
+
 }

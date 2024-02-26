@@ -15,6 +15,7 @@ import sopt.motivoo.domain.entity.MotivooStorage
 import sopt.motivoo.util.UiState
 import sopt.motivoo.util.binding.BindingFragment
 import sopt.motivoo.util.extension.setOnSingleClickListener
+import sopt.motivoo.util.extension.showSnackbar
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -44,7 +45,7 @@ class StartMotivooFragment :
     }
 
     private fun collectData() {
-        startMotivooViewModel.isOnboardingFinished.flowWithLifecycle(lifecycle)
+        startMotivooViewModel.isOnboardingFinished.flowWithLifecycle(viewLifecycleOwner.lifecycle)
             .onEach { uiState ->
                 when (uiState) {
                     is UiState.Success -> {
@@ -61,10 +62,10 @@ class StartMotivooFragment :
                         )
                     }
 
-                    is UiState.Failure -> TODO("서버통신 실패를 알리는 무언가 필요")
+                    is UiState.Failure -> requireContext().showSnackbar(binding.root, "서버통신 오류")
 
                     else -> Unit
                 }
-            }.launchIn(lifecycleScope)
+            }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 }

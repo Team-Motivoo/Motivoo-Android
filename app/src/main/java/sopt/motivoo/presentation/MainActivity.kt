@@ -49,10 +49,23 @@ class MainActivity : AppCompatActivity() {
         setupTokenRefreshListener()
         setupApiCallFailed()
         observeNetwork()
+        observeLoadingState()
+
+    }
+
+    private fun observeLoadingState() {
+        mainViewModel.isLoading.observe(this) { isLoading ->
+            val navController: NavController = findNavController(R.id.fc_main)
+            if (isLoading) {
+                navController.navigate(R.id.loadingFragment)
+            } else {
+                navController.popBackStack()
+            }
+        }
     }
 
     private fun observeNetwork() {
-        mainViewModel.networkStateLiveData.observe(this) { isConnected ->
+        mainViewModel.networkState.observe(this) { isConnected ->
             if (!isConnected) {
                 showNetworkErrorDialog()
             }
@@ -82,7 +95,8 @@ class MainActivity : AppCompatActivity() {
             if (destination.id in listOf(
                     R.id.myPageFragment,
                     R.id.myInfoFragment,
-                    R.id.myExerciseInfoFragment
+                    R.id.myExerciseInfoFragment,
+                    R.id.loadingFragment
                 )
             ) {
                 window.statusBarColor = (colorOf(R.color.gray_100_F4F5F9))
@@ -102,7 +116,6 @@ class MainActivity : AppCompatActivity() {
                     R.id.myExerciseInfoFragment,
                     R.id.myServiceOutFragment,
                     R.id.myLogoutFragment,
-                    R.id.loadingFragment,
                     R.id.myLogoutFragment,
                     R.id.homeConfirmDialogFragment,
                     R.id.withdrawalFragment

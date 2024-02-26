@@ -1,4 +1,4 @@
-package sopt.motivoo.presentation
+package sopt.motivoo.presentation.mypage
 
 import android.os.Bundle
 import android.view.View

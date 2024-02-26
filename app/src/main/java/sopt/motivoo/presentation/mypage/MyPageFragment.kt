@@ -1,4 +1,4 @@
-package sopt.motivoo.presentation
+package sopt.motivoo.presentation.mypage
 
 import android.os.Bundle
 import android.view.View
@@ -9,7 +9,6 @@ import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import sopt.motivoo.R
 import sopt.motivoo.databinding.FragmentMypageBinding
-import sopt.motivoo.presentation.mypage.MyPageViewModel
 import sopt.motivoo.presentation.type.UserType
 import sopt.motivoo.util.UiState
 import sopt.motivoo.util.binding.BindingFragment
