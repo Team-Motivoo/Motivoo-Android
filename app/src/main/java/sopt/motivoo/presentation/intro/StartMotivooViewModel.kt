@@ -7,7 +7,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import sopt.motivoo.domain.entity.MotivooStorage
-import sopt.motivoo.domain.repository.NetworkRepository
 import sopt.motivoo.domain.repository.OnboardingRepository
 import sopt.motivoo.util.UiState
 import timber.log.Timber

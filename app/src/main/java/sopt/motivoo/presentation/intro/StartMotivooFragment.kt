@@ -15,7 +15,6 @@ import sopt.motivoo.domain.entity.MotivooStorage
 import sopt.motivoo.util.UiState
 import sopt.motivoo.util.binding.BindingFragment
 import sopt.motivoo.util.extension.setOnSingleClickListener
-import sopt.motivoo.util.extension.showSnackbar
 import javax.inject.Inject
 
 @AndroidEntryPoint
