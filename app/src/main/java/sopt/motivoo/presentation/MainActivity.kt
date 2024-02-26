@@ -50,7 +50,6 @@ class MainActivity : AppCompatActivity() {
         setupApiCallFailed()
         observeNetwork()
         observeLoadingState()
-
     }
 
     private fun observeLoadingState() {

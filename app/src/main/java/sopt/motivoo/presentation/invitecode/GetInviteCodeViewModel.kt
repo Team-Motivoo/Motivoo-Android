@@ -7,7 +7,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import sopt.motivoo.domain.entity.MotivooStorage
-import sopt.motivoo.domain.repository.NetworkRepository
 import sopt.motivoo.domain.repository.OnboardingRepository
 import sopt.motivoo.util.UiState
 import timber.log.Timber
@@ -17,7 +16,6 @@ import javax.inject.Inject
 class GetInviteCodeViewModel @Inject constructor(
     private val motivooStorage: MotivooStorage,
     private val onboardingRepository: OnboardingRepository,
-    private val networkRepository: NetworkRepository,
 ) : ViewModel() {
 
     private val _checkMatchState = MutableStateFlow<UiState<Boolean>>(UiState.Loading)
@@ -26,16 +24,13 @@ class GetInviteCodeViewModel @Inject constructor(
     fun getInviteCode() {
         viewModelScope.launch {
             _checkMatchState.value = UiState.Loading
-            networkRepository.setLoading(true)
             onboardingRepository.getInviteCode()
                 .onSuccess {
                     if (it.isMatched) {
-                        networkRepository.setLoading(false)
                         motivooStorage.isUserMatched = true
                         _checkMatchState.value = UiState.Success(true)
                     }
                 }.onFailure {
-                    networkRepository.setLoading(false)
                     Timber.e(it.message)
                     _checkMatchState.value = UiState.Failure(it.toString())
                 }
