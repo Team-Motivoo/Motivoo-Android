@@ -62,8 +62,6 @@ class StartMotivooFragment :
                         )
                     }
 
-                    is UiState.Failure -> requireContext().showSnackbar(binding.root, "서버통신 오류")
-
                     else -> Unit
                 }
             }.launchIn(viewLifecycleOwner.lifecycleScope)

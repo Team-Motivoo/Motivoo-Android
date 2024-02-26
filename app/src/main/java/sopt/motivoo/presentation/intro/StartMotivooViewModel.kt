@@ -17,7 +17,6 @@ import javax.inject.Inject
 class StartMotivooViewModel @Inject constructor(
     private val motivooStorage: MotivooStorage,
     private val onboardingRepository: OnboardingRepository,
-    private val networkRepository: NetworkRepository,
 ) : ViewModel() {
 
     private val _isOnboardingFinished = MutableStateFlow<UiState<Boolean>>(UiState.Loading)
@@ -25,14 +24,11 @@ class StartMotivooViewModel @Inject constructor(
 
     fun getOnboardingFinished() {
         viewModelScope.launch {
-            networkRepository.setLoading(true)
             onboardingRepository.getOnboardingFinished()
                 .onSuccess { isOnboardingFinished ->
-                    networkRepository.setLoading(false)
                     motivooStorage.isFinishedOnboarding = isOnboardingFinished.isFinishedOnboarding
                     _isOnboardingFinished.value = UiState.Success(true)
                 }.onFailure {
-                    networkRepository.setLoading(false)
                     Timber.e(it.message)
                     _isOnboardingFinished.value = UiState.Failure(it.toString())
                 }
