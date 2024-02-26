@@ -20,7 +20,6 @@ class ErrorInterceptor @Inject constructor(
                 response.close()
                 response = chain.proceed(request)
             }
-
         }
         return response
     }

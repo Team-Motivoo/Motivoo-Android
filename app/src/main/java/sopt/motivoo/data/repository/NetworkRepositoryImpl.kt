@@ -18,5 +18,4 @@ class NetworkRepositoryImpl @Inject constructor(
     override fun setLoading(isLoading: Boolean) {
         _isLoading.value = isLoading
     }
-
 }

@@ -189,5 +189,4 @@ class OnboardingViewModel @Inject constructor(
     private fun resetOnboardingFinishedState() {
         _isPostOnboardingInfoSuccess.value = UiState.Loading
     }
-
 }

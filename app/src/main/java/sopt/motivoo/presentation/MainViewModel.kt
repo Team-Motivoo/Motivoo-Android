@@ -13,5 +13,4 @@ class MainViewModel @Inject constructor(
 
     val networkState: LiveData<Boolean> = networkRepository.networkStateLiveData
     val isLoading: LiveData<Boolean> = networkRepository.isLoading
-
 }
