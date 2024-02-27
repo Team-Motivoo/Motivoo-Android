@@ -43,7 +43,8 @@
             android:name=".presentation.home.StepCountService"
             android:exported="false"
             android:foregroundServiceType="dataSync" />
-
+        <activity android:name=".presentation.SampleDesignActivity"
+            android:exported="false"/>
         <activity
             android:name=".presentation.MainActivity"
             android:exported="true"

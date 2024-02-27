@@ -57,6 +57,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":motivoo_design"))
+
     // Hilt
     implementation "com.google.dagger:hilt-android:$hiltVersion"
     implementation 'androidx.hilt:hilt-navigation-fragment:1.0.0'
@@ -152,6 +154,9 @@ dependencies {
 
     // Java 8+ API desugaring support
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.4'
+
+    // leakcanary
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.13'
 }
 
 ktlint {

@@ -23,6 +23,10 @@
 <img width="200" src="https://github.com/Team-Motivoo/Motivoo-Android/assets/90740783/86d398b3-fb85-43ee-959a-0bdda7a1d57a"/> | 
 <img width="200" src="https://github.com/Team-Motivoo/Motivoo-Android/assets/90740783/09a982d4-be0d-4ae5-bd98-48906c5e05a2"/> | <img width="200" src="https://github.com/Team-Motivoo/Motivoo-Android/assets/90740783/b4bbd953-c8c9-4d27-a68b-8694ec0993f0"/> 
 
+## How to use Deisgn Component?
+ [learn from README 👀](/motivoo_design/README.md)
+
+
 ## Development
 ### Libraries
 - AndroidX
@@ -51,6 +55,7 @@
 - Lottie
 - Aws s3
 - Java 8+ API desugaring support
+- LeakCanary
 
 ### Test & Code analysis
 - Ktlint
