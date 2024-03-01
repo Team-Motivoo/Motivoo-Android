@@ -1,6 +1,5 @@
 package sopt.motivoo.presentation
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -13,10 +12,10 @@ import kotlinx.coroutines.flow.onEach
 import sopt.motivoo.R
 import sopt.motivoo.data.service.KakaoAuthService
 import sopt.motivoo.databinding.FragmentMypageLogoutBinding
-import sopt.motivoo.presentation.MainActivity.Companion.REDIRECT_TO_LOGIN
 import sopt.motivoo.presentation.auth.AuthViewModel
 import sopt.motivoo.util.UiState
 import sopt.motivoo.util.binding.BindingDialogFragment
+import sopt.motivoo.util.extension.redirectToLogin
 import sopt.motivoo.util.extension.setOnSingleClickListener
 import javax.inject.Inject
 
@@ -52,18 +51,11 @@ class MyLogoutFragment :
                 when (uiState) {
                     is UiState.Success -> {
                         authViewModel.resetLogoutState()
-                        navigateToLogin()
+                        requireContext().redirectToLogin()
                     }
 
                     else -> Unit
                 }
             }.launchIn(viewLifecycleOwner.lifecycleScope)
-    }
-
-    private fun navigateToLogin() {
-        val intent = Intent(requireContext(), MainActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-        intent.putExtra(REDIRECT_TO_LOGIN, "new_activity")
-        startActivity(intent)
     }
 }
