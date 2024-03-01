@@ -1,10 +1,10 @@
 package sopt.motivoo.domain.repository
 
-import androidx.lifecycle.LiveData
+import kotlinx.coroutines.flow.SharedFlow
 
 interface NetworkRepository {
 
-    val networkStateLiveData: LiveData<Boolean>
-    val isLoading: LiveData<Boolean>
-    fun setLoading(isLoading: Boolean)
+    val networkStateFlow: SharedFlow<Boolean>
+    val isLoading: SharedFlow<Boolean>
+    suspend fun setLoading(isLoading: Boolean)
 }

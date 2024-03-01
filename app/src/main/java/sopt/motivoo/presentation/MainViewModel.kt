@@ -1,8 +1,8 @@
 package sopt.motivoo.presentation
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.SharedFlow
 import sopt.motivoo.domain.repository.NetworkRepository
 import javax.inject.Inject
 
@@ -11,6 +11,6 @@ class MainViewModel @Inject constructor(
     networkRepository: NetworkRepository
 ) : ViewModel() {
 
-    val networkState: LiveData<Boolean> = networkRepository.networkStateLiveData
-    val isLoading: LiveData<Boolean> = networkRepository.isLoading
+    val networkState: SharedFlow<Boolean> = networkRepository.networkStateFlow
+    val isLoading: SharedFlow<Boolean> = networkRepository.isLoading
 }

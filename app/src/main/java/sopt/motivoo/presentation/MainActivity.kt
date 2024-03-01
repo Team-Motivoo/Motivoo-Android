@@ -7,6 +7,9 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
@@ -15,6 +18,8 @@ import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import sopt.motivoo.R
 import sopt.motivoo.data.datasource.remote.listener.AuthTokenRefreshListener
@@ -48,27 +53,30 @@ class MainActivity : AppCompatActivity() {
         initView()
         setupTokenRefreshListener()
         setupApiCallFailed()
-        observeNetwork()
-        observeLoadingState()
+        collectData()
     }
 
-    private fun observeLoadingState() {
-        mainViewModel.isLoading.observe(this) { isLoading ->
+    private fun collectData() {
+        mainViewModel.isLoading.flowWithLifecycle(
+            lifecycle,
+            Lifecycle.State.STARTED
+        ).onEach { isLoading ->
             val navController: NavController = findNavController(R.id.fc_main)
-            if (isLoading) {
+            if (isLoading && navController.currentDestination?.id != R.id.loadingFragment) {
                 navController.navigate(R.id.loadingFragment)
-            } else {
+            } else if (!isLoading && navController.currentDestination?.id == R.id.loadingFragment) {
                 navController.popBackStack()
             }
-        }
-    }
+        }.launchIn(lifecycleScope)
 
-    private fun observeNetwork() {
-        mainViewModel.networkState.observe(this) { isConnected ->
+        mainViewModel.networkState.flowWithLifecycle(
+            lifecycle,
+            Lifecycle.State.STARTED
+        ).onEach { isConnected ->
             if (!isConnected) {
                 showNetworkErrorDialog()
             }
-        }
+        }.launchIn(lifecycleScope)
     }
 
     private fun initView() {
