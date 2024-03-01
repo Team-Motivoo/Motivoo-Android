@@ -15,7 +15,7 @@ class NetworkErrorFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        backPressed()
+        overrideOnBackPressed()
         clickRetry()
     }
 
@@ -25,7 +25,7 @@ class NetworkErrorFragment :
         }
     }
 
-    private fun backPressed() {
+    private fun overrideOnBackPressed() {
         requireActivity().onBackPressedDispatcher.addCallback(
             viewLifecycleOwner,
             object : OnBackPressedCallback(true) {
