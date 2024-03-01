@@ -41,11 +41,7 @@ class MyExerciseInfoFragment :
 
     private fun clickButtons() {
         binding.tvExerciseInfoBack.setOnClickListener {
-            navigateToMyPage()
+            findNavController().popBackStack()
         }
-    }
-
-    private fun navigateToMyPage() {
-        findNavController().navigate(R.id.action_myExerciseInfoFragment_to_myPageFragment)
     }
 }
