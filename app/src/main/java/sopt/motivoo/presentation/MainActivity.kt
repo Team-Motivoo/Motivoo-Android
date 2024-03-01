@@ -16,8 +16,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -43,6 +43,9 @@ class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var networkErrorListener: NetworkErrorListener
+
+    @Inject
+    lateinit var mainDispatcher: CoroutineDispatcher
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_MOTIVOOAOS)
@@ -172,7 +175,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupTokenRefreshListener() {
         authTokenRefreshListener.setOnTokenRefreshFailedCallback {
-            CoroutineScope(Dispatchers.Main).launch {
+            CoroutineScope(mainDispatcher).launch {
                 val navController: NavController = findNavController(R.id.fc_main)
                 val startDestinationId = navController.findStartDestination().id
                 val navOptions = NavOptions.Builder()
@@ -186,7 +189,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupApiCallFailed() {
         networkErrorListener.setOnApiCallFailedCallback {
-            CoroutineScope(Dispatchers.Main).launch {
+            CoroutineScope(mainDispatcher).launch {
                 val navController: NavController = findNavController(R.id.fc_main)
                 val startDestinationId = navController.findStartDestination().id
                 val navOptions = NavOptions.Builder()
