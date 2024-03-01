@@ -37,12 +37,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun checkRedirectToLogin() {
-        val redirectToLogin = intent.getStringExtra(REDIRECT_TO_LOGIN)
+        val redirectToLogin = intent.getBooleanExtra(REDIRECT_TO_LOGIN, false)
 
-        if (redirectToLogin != null) {
-            val navController =
-                supportFragmentManager.findFragmentById(R.id.fc_main)?.findNavController()
-            navController?.navigate(R.id.loginFragment)
+        if (redirectToLogin) {
+            val bundle = Bundle().apply {
+                putBoolean(REDIRECT_TO_LOGIN, true)
+            }
+
+            val navController = findNavController(R.id.fc_main)
+            navController.setGraph(R.navigation.navigation_main, bundle)
         }
     }
 
