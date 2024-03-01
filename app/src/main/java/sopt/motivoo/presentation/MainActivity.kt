@@ -31,8 +31,19 @@ class MainActivity : AppCompatActivity() {
         installSplashScreen()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        checkRedirectToLogin()
         initView()
         setupTokenRefreshListener()
+    }
+
+    private fun checkRedirectToLogin() {
+        val redirectToLogin = intent.getStringExtra(REDIRECT_TO_LOGIN)
+
+        if (redirectToLogin != null) {
+            val navController =
+                supportFragmentManager.findFragmentById(R.id.fc_main)?.findNavController()
+            navController?.navigate(R.id.loginFragment)
+        }
     }
 
     private fun initView() {
@@ -137,5 +148,9 @@ class MainActivity : AppCompatActivity() {
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
         hideKeyboard(currentFocus ?: View(this))
         return super.dispatchTouchEvent(ev)
+    }
+
+    companion object {
+        const val REDIRECT_TO_LOGIN = "redirectToLogin"
     }
 }
