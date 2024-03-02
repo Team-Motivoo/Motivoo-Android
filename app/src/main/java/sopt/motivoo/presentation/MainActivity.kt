@@ -53,6 +53,7 @@ class MainActivity : AppCompatActivity() {
         installSplashScreen()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        checkRedirectToLogin()
         initView()
         setupTokenRefreshListener()
         setupApiCallFailed()
@@ -80,6 +81,19 @@ class MainActivity : AppCompatActivity() {
                 showNetworkErrorDialog()
             }
         }.launchIn(lifecycleScope)
+    }
+
+    private fun checkRedirectToLogin() {
+        val redirectToLogin = intent.getBooleanExtra(REDIRECT_TO_LOGIN, false)
+
+        if (redirectToLogin) {
+            val bundle = Bundle().apply {
+                putBoolean(REDIRECT_TO_LOGIN, true)
+            }
+
+            val navController = findNavController(R.id.fc_main)
+            navController.setGraph(R.navigation.navigation_main, bundle)
+        }
     }
 
     private fun initView() {
@@ -226,5 +240,9 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         authTokenRefreshListener.clearOnTokenRefreshFailedCallback()
+    }
+
+    companion object {
+        const val REDIRECT_TO_LOGIN = "redirectToLogin"
     }
 }

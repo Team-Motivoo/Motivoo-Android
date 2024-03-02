@@ -15,6 +15,7 @@ import sopt.motivoo.databinding.FragmentMypageServiceOutBinding
 import sopt.motivoo.presentation.auth.AuthViewModel
 import sopt.motivoo.util.UiState
 import sopt.motivoo.util.binding.BindingDialogFragment
+import sopt.motivoo.util.extension.redirectToLogin
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -44,19 +45,16 @@ class MyServiceOutFragment :
     }
 
     private fun collectData() {
-        authViewModel.withDrawState.flowWithLifecycle(lifecycle).onEach { uiState ->
-            when (uiState) {
-                is UiState.Success -> {
-                    authViewModel.resetWithDrawState()
-                    navigateToLogin()
+        authViewModel.withDrawState.flowWithLifecycle(viewLifecycleOwner.lifecycle)
+            .onEach { uiState ->
+                when (uiState) {
+                    is UiState.Success -> {
+                        authViewModel.resetWithDrawState()
+                        requireContext().redirectToLogin()
+                    }
+
+                    else -> Unit
                 }
-
-                else -> Unit
-            }
-        }.launchIn(lifecycleScope)
-    }
-
-    private fun navigateToLogin() {
-        findNavController().navigate(R.id.action_myServiceOut_to_loginFragment)
+            }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 }

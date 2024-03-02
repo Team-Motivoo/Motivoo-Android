@@ -15,6 +15,7 @@ import sopt.motivoo.databinding.FragmentMypageLogoutBinding
 import sopt.motivoo.presentation.auth.AuthViewModel
 import sopt.motivoo.util.UiState
 import sopt.motivoo.util.binding.BindingDialogFragment
+import sopt.motivoo.util.extension.redirectToLogin
 import sopt.motivoo.util.extension.setOnSingleClickListener
 import javax.inject.Inject
 
@@ -45,19 +46,16 @@ class MyLogoutFragment :
     }
 
     private fun collectData() {
-        authViewModel.logoutState.flowWithLifecycle(lifecycle).onEach { uiState ->
-            when (uiState) {
-                is UiState.Success -> {
-                    authViewModel.resetLogoutState()
-                    navigateToLogin()
+        authViewModel.logoutState.flowWithLifecycle(viewLifecycleOwner.lifecycle)
+            .onEach { uiState ->
+                when (uiState) {
+                    is UiState.Success -> {
+                        authViewModel.resetLogoutState()
+                        requireContext().redirectToLogin()
+                    }
+
+                    else -> Unit
                 }
-
-                else -> Unit
-            }
-        }.launchIn(lifecycleScope)
-    }
-
-    private fun navigateToLogin() {
-        findNavController().navigate(R.id.action_myLogout_to_loginFragment)
+            }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 }
