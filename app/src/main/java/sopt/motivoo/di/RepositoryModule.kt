@@ -6,12 +6,14 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import sopt.motivoo.data.repository.AuthRepositoryImpl
 import sopt.motivoo.data.repository.DummyRepositoryImpl
-import sopt.motivoo.data.repository.OnboardingRepositoryImpl
 import sopt.motivoo.data.repository.HomeRepositoryImpl
+import sopt.motivoo.data.repository.NetworkRepositoryImpl
+import sopt.motivoo.data.repository.OnboardingRepositoryImpl
 import sopt.motivoo.domain.repository.AuthRepository
 import sopt.motivoo.domain.repository.DummyRepository
-import sopt.motivoo.domain.repository.OnboardingRepository
 import sopt.motivoo.domain.repository.HomeRepository
+import sopt.motivoo.domain.repository.NetworkRepository
+import sopt.motivoo.domain.repository.OnboardingRepository
 import javax.inject.Singleton
 
 @Module
@@ -37,4 +39,9 @@ object RepositoryModule {
     @Singleton
     fun providesOnboardingRepository(onboardingRepositoryImpl: OnboardingRepositoryImpl): OnboardingRepository =
         onboardingRepositoryImpl
+
+    @Provides
+    @Singleton
+    fun providesNetworkRepository(networkRepositoryImpl: NetworkRepositoryImpl): NetworkRepository =
+        networkRepositoryImpl
 }

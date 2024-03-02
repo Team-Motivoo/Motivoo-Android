@@ -10,6 +10,7 @@ import sopt.motivoo.data.model.request.auth.RequestLoginDto
 import sopt.motivoo.domain.entity.MotivooStorage
 import sopt.motivoo.domain.entity.auth.LoginInfo
 import sopt.motivoo.domain.repository.AuthRepository
+import sopt.motivoo.domain.repository.NetworkRepository
 import sopt.motivoo.presentation.type.SocialType
 import sopt.motivoo.util.UiState
 import timber.log.Timber
@@ -19,6 +20,7 @@ import javax.inject.Inject
 class AuthViewModel @Inject constructor(
     private val motivooStorage: MotivooStorage,
     private val authRepository: AuthRepository,
+    private val networkRepository: NetworkRepository,
 ) : ViewModel() {
 
     private val _loginState = MutableStateFlow<UiState<Boolean>>(UiState.Loading)
@@ -46,14 +48,17 @@ class AuthViewModel @Inject constructor(
         platformToken: String,
     ) {
         viewModelScope.launch {
+            networkRepository.setLoading(true)
             authRepository.postLogin(
                 RequestLoginDto(
                     platformToken,
                     SocialType.kakao.name,
                 ),
             ).onSuccess { signUpResponse ->
+                networkRepository.setLoading(false)
                 handleLoginSuccess(signUpResponse)
             }.onFailure { throwable ->
+                networkRepository.setLoading(false)
                 Timber.e(throwable.message)
             }
         }
