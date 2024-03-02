@@ -85,29 +85,30 @@ class GetInviteCodeFragment :
     }
 
     private fun collectData() {
-        getInviteCodeViewModel.checkMatchState.flowWithLifecycle(lifecycle).onEach { uiState ->
-            when (uiState) {
-                is UiState.Success -> {
-                    val navController = findNavController()
-                    val startDestinationId = navController.findStartDestination().id
-                    val navOptions = NavOptions.Builder()
-                        .setPopUpTo(startDestinationId, true)
-                        .build()
+        getInviteCodeViewModel.checkMatchState.flowWithLifecycle(viewLifecycleOwner.lifecycle)
+            .onEach { uiState ->
+                when (uiState) {
+                    is UiState.Success -> {
+                        val navController = findNavController()
+                        val startDestinationId = navController.findStartDestination().id
+                        val navOptions = NavOptions.Builder()
+                            .setPopUpTo(startDestinationId, true)
+                            .build()
 
-                    findNavController().navigate(
-                        R.id.action_getInviteCodeFragment_to_homeFragment,
-                        null,
-                        navOptions
-                    )
+                        findNavController().navigate(
+                            R.id.action_getInviteCodeFragment_to_homeFragment,
+                            null,
+                            navOptions
+                        )
+                    }
+
+                    is UiState.Failure -> {
+                        setMatchingToastAnimation()
+                    }
+
+                    else -> Unit
                 }
-
-                is UiState.Loading -> Unit
-
-                else -> {
-                    setMatchingToastAnimation()
-                }
-            }
-        }.launchIn(lifecycleScope)
+            }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
     private fun setInviteCode() {

@@ -44,7 +44,7 @@ class StartMotivooFragment :
     }
 
     private fun collectData() {
-        startMotivooViewModel.isOnboardingFinished.flowWithLifecycle(lifecycle)
+        startMotivooViewModel.isOnboardingFinished.flowWithLifecycle(viewLifecycleOwner.lifecycle)
             .onEach { uiState ->
                 when (uiState) {
                     is UiState.Success -> {
@@ -61,10 +61,8 @@ class StartMotivooFragment :
                         )
                     }
 
-                    is UiState.Failure -> TODO("서버통신 실패를 알리는 무언가 필요")
-
                     else -> Unit
                 }
-            }.launchIn(lifecycleScope)
+            }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 }

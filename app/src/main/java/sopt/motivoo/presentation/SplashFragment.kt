@@ -33,7 +33,7 @@ class SplashFragment : BindingFragment<FragmentSplashBinding>(R.layout.fragment_
 
     private fun showSplash() {
         lifecycleScope.launch {
-            delay(2000)
+            delay(SPLASH_DISPLAY_LENGTH)
             navigateToFragment(R.id.action_splashFragment_to_permissionFragment)
         }
     }
@@ -46,5 +46,9 @@ class SplashFragment : BindingFragment<FragmentSplashBinding>(R.layout.fragment_
             .build()
 
         navController.navigate(destinationId, null, navOptions)
+    }
+
+    companion object {
+        private const val SPLASH_DISPLAY_LENGTH = 2000L
     }
 }

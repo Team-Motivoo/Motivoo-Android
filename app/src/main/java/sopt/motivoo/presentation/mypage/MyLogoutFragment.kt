@@ -1,4 +1,4 @@
-package sopt.motivoo.presentation
+package sopt.motivoo.presentation.mypage
 
 import android.os.Bundle
 import android.view.View
@@ -11,16 +11,17 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import sopt.motivoo.R
 import sopt.motivoo.data.service.KakaoAuthService
-import sopt.motivoo.databinding.FragmentMypageServiceOutBinding
+import sopt.motivoo.databinding.FragmentMypageLogoutBinding
 import sopt.motivoo.presentation.auth.AuthViewModel
 import sopt.motivoo.util.UiState
 import sopt.motivoo.util.binding.BindingDialogFragment
 import sopt.motivoo.util.extension.redirectToLogin
+import sopt.motivoo.util.extension.setOnSingleClickListener
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MyServiceOutFragment :
-    BindingDialogFragment<FragmentMypageServiceOutBinding>(R.layout.fragment_mypage_service_out) {
+class MyLogoutFragment :
+    BindingDialogFragment<FragmentMypageLogoutBinding>(R.layout.fragment_mypage_logout) {
 
     private val authViewModel by viewModels<AuthViewModel>()
 
@@ -34,22 +35,22 @@ class MyServiceOutFragment :
     }
 
     private fun clickButtons() {
-        binding.tvMyServiceOutBtn.setOnClickListener {
-            kakaoAuthService.withdrawKakao(authViewModel::withDraw)
+        binding.tvMyLogoutBtn.setOnSingleClickListener {
+            kakaoAuthService.logoutKakao(authViewModel::postLogout)
             collectData()
         }
 
-        binding.tvMyServiceOutCancelBtn.setOnClickListener {
+        binding.tvMyLogoutCancelBtn.setOnSingleClickListener {
             findNavController().popBackStack()
         }
     }
 
     private fun collectData() {
-        authViewModel.withDrawState.flowWithLifecycle(viewLifecycleOwner.lifecycle)
+        authViewModel.logoutState.flowWithLifecycle(viewLifecycleOwner.lifecycle)
             .onEach { uiState ->
                 when (uiState) {
                     is UiState.Success -> {
-                        authViewModel.resetWithDrawState()
+                        authViewModel.resetLogoutState()
                         requireContext().redirectToLogin()
                     }
 

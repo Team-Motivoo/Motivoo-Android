@@ -5,7 +5,7 @@ import androidx.navigation.NavDestination
 import androidx.navigation.NavGraph
 
 fun NavController.findStartDestination(): NavDestination {
-    var startDestination: NavDestination = this.graph
+    var startDestination: NavDestination = graph
     while (startDestination is NavGraph) {
         val graphStartDestination = startDestination
         startDestination = graphStartDestination.findNode(graphStartDestination.startDestinationId)
