@@ -141,8 +141,7 @@ class GetInviteCodeFragment :
         val inviteCode = safeArgs.inviteCode.ifEmpty {
             motivooStorage.inviteCode
         }
-        val formattedText = getString(R.string.share_text_message, inviteCode)
-        val clip = ClipData.newPlainText(SHARE_TEXT, formattedText)
+        val clip = ClipData.newPlainText(INVITE_CODE, inviteCode)
 
         binding.btnGetInviteCodeCopy.setOnSingleClickListener {
             clipboard.setPrimaryClip(clip)
@@ -179,6 +178,6 @@ class GetInviteCodeFragment :
 
     companion object {
         const val TWO_SECONDS = 2000L
-        private const val SHARE_TEXT = "share_text"
+        private const val INVITE_CODE = "invite_code"
     }
 }
