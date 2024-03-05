@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,6 +21,8 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class PermissionFragment :
     BindingFragment<FragmentPermissionBinding>(R.layout.fragment_permission) {
+
+    private val permissionViewModel by viewModels<PermissionViewModel>()
 
     @Inject
     lateinit var motivooStorage: MotivooStorage
@@ -42,6 +45,11 @@ class PermissionFragment :
             }
             return@registerForActivityResult
         }
+
+    override fun onStart() {
+        super.onStart()
+        permissionViewModel.getOnboardingFinished()
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -117,13 +125,19 @@ class PermissionFragment :
             .setPopUpTo(startDestinationId, true)
             .build()
 
-        if (motivooStorage.isUserMatched && motivooStorage.isUserLoggedIn) {
+        if (motivooStorage.isUserMatched && motivooStorage.isUserLoggedIn && motivooStorage.isFinishedOnboarding) {
             findNavController().navigate(
                 R.id.action_permissionFragment_to_homeFragment,
                 null,
                 navOptions
             )
-        } else if (!motivooStorage.isUserMatched && motivooStorage.isUserLoggedIn) {
+        } else if (!motivooStorage.isUserMatched && !motivooStorage.isFinishedOnboarding && motivooStorage.isUserLoggedIn) {
+            findNavController().navigate(
+                R.id.action_permissionFragment_to_ageQuestionFragment,
+                null,
+                navOptions
+            )
+        } else if (!motivooStorage.isUserMatched && motivooStorage.isFinishedOnboarding && motivooStorage.isUserLoggedIn) {
             findNavController().navigate(
                 R.id.action_permissionFragment_to_startMotivooFragment,
                 null,

@@ -12,7 +12,9 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import sopt.motivoo.data.model.request.onboarding.RequestPostInviteCodeDto
 import sopt.motivoo.domain.entity.MotivooStorage
+import sopt.motivoo.domain.repository.NetworkRepository
 import sopt.motivoo.domain.repository.OnboardingRepository
+import sopt.motivoo.util.UiState
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -20,6 +22,7 @@ import javax.inject.Inject
 class PostInviteCodeViewModel @Inject constructor(
     private val motivooStorage: MotivooStorage,
     private val onboardingRepository: OnboardingRepository,
+    private val networkRepository: NetworkRepository,
 ) : ViewModel() {
 
     val postInviteCode = MutableStateFlow("")
@@ -28,46 +31,30 @@ class PostInviteCodeViewModel @Inject constructor(
         .map { it.isEmpty() }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), false)
 
-    private val _postInviteCodeState = MutableStateFlow<OnboardingState>(OnboardingState.Init)
+    private val _postInviteCodeState = MutableStateFlow<UiState<Boolean>>(UiState.Empty)
     val postInviteCodeState get() = _postInviteCodeState.asStateFlow()
 
     fun postInviteCode() {
         viewModelScope.launch {
             resetOnboardingState()
+            networkRepository.setLoading(true)
             onboardingRepository.patchInviteCode(
                 RequestPostInviteCodeDto(
                     postInviteCode.value
                 )
-            )
-                .onSuccess { isMatchedState ->
-                    if (!isMatchedState.isMyInviteCode && isMatchedState.isMatched) {
-                        motivooStorage.isUserMatched = true
-                        _postInviteCodeState.value = if (isMatchedState.isFinishedOnboarding) {
-                            OnboardingState.PassOnboarding
-                        } else {
-                            OnboardingState.GoToOnboarding
-                        }
-                    } else {
-                        _postInviteCodeState.value =
-                            OnboardingState.SameWithMyInviteCode
-                    }
-                }.onFailure {
-                    Timber.e(it.message)
-                    _postInviteCodeState.value = OnboardingState.Failure(it.toString())
-                }
+            ).onSuccess {
+                motivooStorage.isUserMatched = it.isMatched
+                _postInviteCodeState.value = UiState.Success(true)
+                networkRepository.setLoading(false)
+            }.onFailure {
+                Timber.e(it.message)
+                _postInviteCodeState.value = UiState.Failure(it.toString())
+                networkRepository.setLoading(false)
+            }
         }
     }
 
     fun resetOnboardingState() {
-        _postInviteCodeState.value = OnboardingState.Init
-    }
-
-    sealed class OnboardingState {
-        data object Init : OnboardingState()
-        data object GoToOnboarding : OnboardingState()
-        data class Failure(val message: String) : OnboardingState()
-        data object PassOnboarding : OnboardingState()
-
-        data object SameWithMyInviteCode : OnboardingState()
+        _postInviteCodeState.value = UiState.Loading
     }
 }

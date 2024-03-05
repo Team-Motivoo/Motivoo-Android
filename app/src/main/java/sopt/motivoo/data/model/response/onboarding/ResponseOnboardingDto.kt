@@ -2,7 +2,6 @@ package sopt.motivoo.data.model.response.onboarding
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import sopt.motivoo.domain.entity.onboarding.InviteCodeInfo
 
 @Serializable
 data class ResponseOnboardingDto(
@@ -24,10 +23,4 @@ data class ResponseOnboardingDto(
         @SerialName("user_id")
         val userId: Int
     )
-
-    fun toInviteCodeInfo(): InviteCodeInfo {
-        return InviteCodeInfo(
-            inviteCode = data.inviteCode
-        )
-    }
 }

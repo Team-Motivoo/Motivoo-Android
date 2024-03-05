@@ -115,36 +115,37 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setStatusBarColor(navController: NavController) {
+        val grayStatusBarDestinations = setOf(
+            R.id.myPageFragment,
+            R.id.myInfoFragment,
+            R.id.myExerciseInfoFragment,
+            R.id.loadingFragment
+        )
+
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.id in listOf(
-                    R.id.myPageFragment,
-                    R.id.myInfoFragment,
-                    R.id.myExerciseInfoFragment,
-                    R.id.loadingFragment
-                )
-            ) {
-                window.statusBarColor = (colorOf(R.color.gray_100_F4F5F9))
+            window.statusBarColor = if (destination.id in grayStatusBarDestinations) {
+                colorOf(R.color.gray_100_F4F5F9)
             } else {
-                window.statusBarColor = (colorOf(R.color.white_FFFFFF))
+                colorOf(R.color.white_FFFFFF)
             }
         }
     }
 
     private fun setBottomVisible(navController: NavController) {
+        val bottomVisibleDestinations = setOf(
+            R.id.homeFragment,
+            R.id.myPageFragment,
+            R.id.exerciseFragment,
+            R.id.myInfoFragment,
+            R.id.myExerciseInfoFragment,
+            R.id.myServiceOutFragment,
+            R.id.myLogoutFragment,
+            R.id.homeConfirmDialogFragment,
+            R.id.withdrawalFragment
+        )
+
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            binding.bnvMain.visibility = if (destination.id in listOf(
-                    R.id.homeFragment,
-                    R.id.myPageFragment,
-                    R.id.exerciseFragment,
-                    R.id.myInfoFragment,
-                    R.id.myExerciseInfoFragment,
-                    R.id.myServiceOutFragment,
-                    R.id.myLogoutFragment,
-                    R.id.myLogoutFragment,
-                    R.id.homeConfirmDialogFragment,
-                    R.id.withdrawalFragment
-                )
-            ) {
+            binding.bnvMain.visibility = if (destination.id in bottomVisibleDestinations) {
                 View.VISIBLE
             } else {
                 View.GONE
@@ -153,24 +154,23 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setTopVisible(navController: NavController) {
-        navController.addOnDestinationChangedListener { _, destination, _ ->
-            binding.clOnboardingToolbar.visibility = if (destination.id in listOf(
-                    R.id.ageQuestionFragment,
-                    R.id.doExerciseQuestionFragment,
-                    R.id.frequencyQuestionFragment,
-                    R.id.soreSpotQuestionFragment,
-                    R.id.timeQuestionFragment,
-                    R.id.whatExerciseQuestionFragment,
-                    R.id.whatActivityQuestionFragment,
-                )
-            ) {
-                View.VISIBLE
-            } else {
-                View.GONE
-            }
+        val topVisibleDestinations = setOf(
+            R.id.ageQuestionFragment,
+            R.id.doExerciseQuestionFragment,
+            R.id.frequencyQuestionFragment,
+            R.id.soreSpotQuestionFragment,
+            R.id.timeQuestionFragment,
+            R.id.whatExerciseQuestionFragment,
+            R.id.whatActivityQuestionFragment
+        )
+        val backInvisibleDestinations = setOf(R.id.ageQuestionFragment)
 
-            val progressValue = getProgressValue(destination.id)
-            binding.onboardingProgress.progress = progressValue
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            binding.clOnboardingToolbar.visibility =
+                if (destination.id in topVisibleDestinations) View.VISIBLE else View.GONE
+            binding.includeToolbar.tvToolbarBack.visibility =
+                if (destination.id in backInvisibleDestinations) View.INVISIBLE else View.VISIBLE
+            binding.onboardingProgress.progress = getProgressValue(destination.id)
         }
     }
 
@@ -238,8 +238,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
-        super.onDestroy()
         authTokenRefreshListener.clearOnTokenRefreshFailedCallback()
+        super.onDestroy()
     }
 
     companion object {

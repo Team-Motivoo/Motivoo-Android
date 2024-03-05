@@ -41,10 +41,10 @@ class LoginFragment : BindingFragment<FragmentLoginBinding>(R.layout.fragment_lo
         super.onViewCreated(view, savedInstanceState)
         clickKakaoLoginButton()
         collectData()
-        backPressed()
+        overrideOnBackPressed()
     }
 
-    private fun backPressed() {
+    private fun overrideOnBackPressed() {
         requireActivity().onBackPressedDispatcher.addCallback(
             viewLifecycleOwner,
             object : OnBackPressedCallback(true) {

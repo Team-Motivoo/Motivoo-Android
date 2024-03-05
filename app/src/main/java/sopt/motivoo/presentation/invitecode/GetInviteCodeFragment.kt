@@ -11,13 +11,14 @@ import android.view.View.VISIBLE
 import android.view.animation.AnimationUtils
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -40,25 +41,22 @@ class GetInviteCodeFragment :
     @Inject
     lateinit var motivooStorage: MotivooStorage
 
-    private val safeArgs: GetInviteCodeFragmentArgs by navArgs()
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        binding.getInviteCodeViewModel = getInviteCodeViewModel
         setClipboard()
-        setInviteCode()
         collectData()
         checkMatching()
         clickBackButton()
-        backPressed()
+        overrideOnBackPressed()
     }
 
-    private fun backPressed() {
+    private fun overrideOnBackPressed() {
         requireActivity().onBackPressedDispatcher.addCallback(
             viewLifecycleOwner,
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-                    setBackPressed()
+                    findNavController().popBackStack()
                 }
             }
         )
@@ -66,26 +64,22 @@ class GetInviteCodeFragment :
 
     private fun clickBackButton() {
         binding.includeGetInviteCodeToolbar.tvToolbarBack.setOnSingleClickListener {
-            setBackPressed()
-        }
-    }
-
-    private fun setBackPressed() {
-        if (motivooStorage.isFinishedOnboarding) {
-            passedOnboardingClickBackButton()
-        } else {
-            afterOnboardingClickBackButton()
+            findNavController().popBackStack()
         }
     }
 
     private fun checkMatching() {
         binding.btnGetInviteCodeCheckMatching.setOnSingleClickListener {
-            getInviteCodeViewModel.getInviteCode()
+            getInviteCodeViewModel.getMatchedResult()
         }
     }
 
     private fun collectData() {
-        getInviteCodeViewModel.checkMatchState.flowWithLifecycle(viewLifecycleOwner.lifecycle)
+        getInviteCodeViewModel.checkMatchState.flowWithLifecycle(
+            viewLifecycleOwner.lifecycle,
+            Lifecycle.State.STARTED
+        )
+            .distinctUntilChanged()
             .onEach { uiState ->
                 when (uiState) {
                     is UiState.Success -> {
@@ -111,36 +105,10 @@ class GetInviteCodeFragment :
             }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
-    private fun setInviteCode() {
-        binding.tvGetInviteCode.text = safeArgs.inviteCode.ifEmpty {
-            motivooStorage.inviteCode
-        }
-    }
-
-    private fun passedOnboardingClickBackButton() {
-        findNavController().popBackStack()
-    }
-
-    private fun afterOnboardingClickBackButton() {
-        val navController = findNavController()
-        val startDestinationId = navController.findStartDestination().id
-        val navOptions = NavOptions.Builder()
-            .setPopUpTo(startDestinationId, true)
-            .build()
-
-        findNavController().navigate(
-            R.id.action_getInviteCodeFragment_to_startMotivooFragment,
-            null,
-            navOptions
-        )
-    }
-
     private fun setClipboard() {
         val clipboard: ClipboardManager =
             requireContext().getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
-        val inviteCode = safeArgs.inviteCode.ifEmpty {
-            motivooStorage.inviteCode
-        }
+        val inviteCode = binding.tvGetInviteCode.text
         val clip = ClipData.newPlainText(INVITE_CODE, inviteCode)
 
         binding.btnGetInviteCodeCopy.setOnSingleClickListener {

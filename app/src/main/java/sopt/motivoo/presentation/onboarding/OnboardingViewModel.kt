@@ -33,9 +33,6 @@ class OnboardingViewModel @Inject constructor(
     private val onboardingRepository: OnboardingRepository
 ) : ViewModel() {
 
-    private val _inviteCode = MutableStateFlow<String?>(null)
-    val inviteCode get() = _inviteCode.asStateFlow()
-
     private val _userType = MutableStateFlow<UserType?>(null)
     val userType get() = _userType.asStateFlow()
 
@@ -175,10 +172,6 @@ class OnboardingViewModel @Inject constructor(
             onboardingRepository.postOnboardingInfo(requestDto)
                 .onSuccess {
                     motivooStorage.isFinishedOnboarding = true
-                    it.inviteCode.let { inviteCode ->
-                        _inviteCode.value = inviteCode
-                        motivooStorage.inviteCode = inviteCode.toString()
-                    }
                     _isPostOnboardingInfoSuccess.value = UiState.Success(true)
                 }.onFailure {
                     Timber.e(it.message)

@@ -90,25 +90,16 @@ class SoreSpotQuestionFragment :
     }
 
     private fun moveToNextFragment() {
-        if (motivooStorage.isUserMatched) {
-            val navController = findNavController()
-            val startDestinationId = navController.findStartDestination().id
-            val navOptions = NavOptions.Builder()
-                .setPopUpTo(startDestinationId, true)
-                .build()
+        val navController = findNavController()
+        val startDestinationId = navController.findStartDestination().id
+        val navOptions = NavOptions.Builder()
+            .setPopUpTo(startDestinationId, true)
+            .build()
 
-            findNavController().navigate(
-                R.id.action_soreSpotQuestionFragment_to_homeFragment,
-                null,
-                navOptions
-            )
-        } else {
-            val inviteCode = onboardingViewModel.inviteCode.value.toString()
-            val action =
-                SoreSpotQuestionFragmentDirections.actionSoreSpotQuestionFragmentToGetInviteCodeFragment(
-                    inviteCode
-                )
-            findNavController().navigate(action)
-        }
+        findNavController().navigate(
+            R.id.action_soreSpotQuestionFragment_to_startMotivooFragment,
+            null,
+            navOptions
+        )
     }
 }

@@ -18,13 +18,31 @@ class GetInviteCodeViewModel @Inject constructor(
     private val onboardingRepository: OnboardingRepository,
 ) : ViewModel() {
 
+    private val _inviteCode = MutableStateFlow<String?>(null)
+    val inviteCode get() = _inviteCode.asStateFlow()
+
     private val _checkMatchState = MutableStateFlow<UiState<Boolean>>(UiState.Loading)
     val checkMatchState get() = _checkMatchState.asStateFlow()
 
-    fun getInviteCode() {
+    init {
+        getInviteCode()
+    }
+
+    private fun getInviteCode() {
+        viewModelScope.launch {
+            onboardingRepository.getInviteCode()
+                .onSuccess {
+                    _inviteCode.value = it.inviteCode
+                }.onFailure {
+                    Timber.e(it.message)
+                }
+        }
+    }
+
+    fun getMatchedResult() {
         viewModelScope.launch {
             _checkMatchState.value = UiState.Loading
-            onboardingRepository.getInviteCode()
+            onboardingRepository.getMatchedResult()
                 .onSuccess {
                     if (it.isMatched) {
                         motivooStorage.isUserMatched = true
