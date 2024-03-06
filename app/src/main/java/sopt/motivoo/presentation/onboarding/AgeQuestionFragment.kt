@@ -6,6 +6,7 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.flowWithLifecycle
@@ -34,6 +35,7 @@ class AgeQuestionFragment :
 
         collectData()
         clickNextButton()
+        overrideOnBackPressed()
     }
 
     private fun clickNextButton() {
@@ -95,6 +97,17 @@ class AgeQuestionFragment :
         val layoutParams = binding.clUserType.layoutParams as ConstraintLayout.LayoutParams
         layoutParams.topMargin = TOP_MARGIN.px.toInt()
         binding.clUserType.layoutParams = layoutParams
+    }
+
+    private fun overrideOnBackPressed() {
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    requireActivity().finishAffinity()
+                }
+            }
+        )
     }
 
     companion object {
