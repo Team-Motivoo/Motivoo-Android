@@ -53,7 +53,6 @@ class MainActivity : AppCompatActivity() {
         installSplashScreen()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        checkRedirectToLogin()
         initView()
         setupTokenRefreshListener()
         setupApiCallFailed()
@@ -83,22 +82,17 @@ class MainActivity : AppCompatActivity() {
         }.launchIn(lifecycleScope)
     }
 
-    private fun checkRedirectToLogin() {
+    private fun initView() {
         val redirectToLogin = intent.getBooleanExtra(REDIRECT_TO_LOGIN, false)
+        val navController =
+            supportFragmentManager.findFragmentById(R.id.fc_main)?.findNavController()
 
         if (redirectToLogin) {
             val bundle = Bundle().apply {
                 putBoolean(REDIRECT_TO_LOGIN, true)
             }
-
-            val navController = findNavController(R.id.fc_main)
-            navController.setGraph(R.navigation.navigation_main, bundle)
+            navController?.setGraph(R.navigation.navigation_main, bundle)
         }
-    }
-
-    private fun initView() {
-        val navController =
-            supportFragmentManager.findFragmentById(R.id.fc_main)?.findNavController()
 
         with(binding) {
             bnvMain.itemIconTintList = null

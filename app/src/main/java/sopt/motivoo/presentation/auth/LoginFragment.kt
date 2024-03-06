@@ -7,12 +7,13 @@ import android.view.View.VISIBLE
 import android.view.animation.AnimationUtils
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -25,6 +26,7 @@ import sopt.motivoo.util.UiState
 import sopt.motivoo.util.binding.BindingFragment
 import sopt.motivoo.util.extension.setOnSingleClickListener
 import sopt.motivoo.util.extension.setVisible
+import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -55,17 +57,14 @@ class LoginFragment : BindingFragment<FragmentLoginBinding>(R.layout.fragment_lo
         )
     }
 
-    private fun checkReLoginUser() {
-        val navOptions = NavOptions.Builder()
-            .setPopUpTo(R.id.loginFragment, true)
-            .build()
-
-        findNavController().navigate(
-            R.id.action_loginFragment_to_homeFragment,
-            null,
-            navOptions
-        )
+    private fun goToHome() {
+        findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
     }
+
+    private fun goToStartMotivoo() {
+        findNavController().navigate(R.id.action_loginFragment_to_startMotivooFragment)
+    }
+
 
     private fun clickKakaoLoginButton() {
         binding.llKakaoLogin.setOnSingleClickListener {
@@ -76,24 +75,36 @@ class LoginFragment : BindingFragment<FragmentLoginBinding>(R.layout.fragment_lo
     }
 
     private fun collectData() {
-        authViewModel.loginState.flowWithLifecycle(lifecycle).onEach { uiState ->
-            when (uiState) {
-                is UiState.Success -> {
-                    authViewModel.resetLoginState()
-                    if (motivooStorage.isFinishedOnboarding) {
-                        checkReLoginUser()
-                    } else {
-                        findNavController().navigate(R.id.action_loginFragment_to_termsOfUseFragment)
+        authViewModel.loginState.flowWithLifecycle(
+            viewLifecycleOwner.lifecycle,
+            Lifecycle.State.STARTED
+        )
+            .distinctUntilChanged()
+            .onEach { uiState ->
+                when (uiState) {
+                    is UiState.Success -> {
+                        authViewModel.resetLoginState()
+                        viewLifecycleOwner.lifecycleScope.launch {
+                            authViewModel.getOnboardingFinished()
+                            if (motivooStorage.isUserMatched) {
+                                goToHome()
+                            } else if (!motivooStorage.isUserMatched && motivooStorage.isFinishedOnboarding) {
+                                Timber.tag("bbb")
+                                    .e("${motivooStorage.isUserMatched}, ${motivooStorage.isUserLoggedIn}, ${motivooStorage.isFinishedOnboarding}")
+                                goToStartMotivoo()
+                            } else {
+                                findNavController().navigate(R.id.action_loginFragment_to_termsOfUseFragment)
+                            }
+                        }
                     }
-                }
 
-                is UiState.Failure -> {
-                    showLoginErrorMessage()
-                }
+                    is UiState.Failure -> {
+                        showLoginErrorMessage()
+                    }
 
-                else -> Unit
-            }
-        }.launchIn(lifecycleScope)
+                    else -> Unit
+                }
+            }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
     private fun showLoginErrorMessage() {
