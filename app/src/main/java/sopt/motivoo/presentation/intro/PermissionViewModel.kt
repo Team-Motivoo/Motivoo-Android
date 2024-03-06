@@ -19,10 +19,9 @@ class PermissionViewModel @Inject constructor(
         viewModelScope.launch {
             onboardingRepository.getOnboardingFinished()
                 .onSuccess {
-                    motivooStorage.isFinishedOnboarding = true
+                    motivooStorage.isFinishedOnboarding = it.data.isFinishedOnboarding
                 }.onFailure {
                     Timber.e(it.message)
-                    motivooStorage.isFinishedOnboarding = false
                 }
         }
     }
