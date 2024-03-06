@@ -20,9 +20,9 @@ data class ResponsePostInviteCodeDto(
         @SerialName("is_matched")
         val isMatched: Boolean,
         @SerialName("opponent_user_id")
-        val opponentUserId: Boolean,
+        val opponentUserId: Long,
         @SerialName("user_id")
-        val userId: Int,
+        val userId: Long,
     )
 
     fun toMatchedInfo(): MatchedInfo {
