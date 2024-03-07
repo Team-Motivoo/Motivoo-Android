@@ -9,9 +9,11 @@ import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import sopt.motivoo.R
@@ -45,17 +47,25 @@ class AgeQuestionFragment :
     }
 
     private fun collectData() {
-        onboardingViewModel.userType.flowWithLifecycle(lifecycle).onEach { userType ->
-            if (userType != null) {
-                showAgeLayout(
-                    binding.clAgeQuestion,
-                    getString(R.string.age_question_title_second),
-                    getString(R.string.age_question_description_second)
-                )
-            }
-        }.launchIn(lifecycleScope)
+        onboardingViewModel.userType.flowWithLifecycle(
+            viewLifecycleOwner.lifecycle,
+            Lifecycle.State.STARTED
+        )
+            .distinctUntilChanged()
+            .onEach { userType ->
+                if (userType != null) {
+                    showAgeLayout(
+                        binding.clAgeQuestion,
+                        getString(R.string.age_question_title_second),
+                        getString(R.string.age_question_description_second)
+                    )
+                }
+            }.launchIn(viewLifecycleOwner.lifecycleScope)
 
-        onboardingViewModel.isValidAge.flowWithLifecycle(lifecycle).onEach { isValidAge ->
+        onboardingViewModel.isValidAge.flowWithLifecycle(
+            viewLifecycleOwner.lifecycle,
+            Lifecycle.State.STARTED
+        ).onEach { isValidAge ->
             when (isValidAge) {
                 null, true -> {
                     binding.etAgeQuestion.background =
@@ -69,11 +79,14 @@ class AgeQuestionFragment :
                     binding.tvAgeQuestionErrorMessage.setVisible(VISIBLE)
                 }
             }
-        }.launchIn(lifecycleScope)
+        }.launchIn(viewLifecycleOwner.lifecycleScope)
 
-        onboardingViewModel.isValidNext.flowWithLifecycle(lifecycle).onEach { isValidNext ->
+        onboardingViewModel.isValidNext.flowWithLifecycle(
+            viewLifecycleOwner.lifecycle,
+            Lifecycle.State.STARTED
+        ).onEach { isValidNext ->
             binding.btnAgeQuestionDone.isEnabled = isValidNext
-        }.launchIn(lifecycleScope)
+        }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
     private fun showAgeLayout(view: View, newTitle: String, newDescription: String) {

@@ -30,7 +30,7 @@ import javax.inject.Inject
 @HiltViewModel
 class OnboardingViewModel @Inject constructor(
     private val motivooStorage: MotivooStorage,
-    private val onboardingRepository: OnboardingRepository
+    private val onboardingRepository: OnboardingRepository,
 ) : ViewModel() {
 
     private val _userType = MutableStateFlow<UserType?>(null)
@@ -158,7 +158,6 @@ class OnboardingViewModel @Inject constructor(
         selectedSoreSpotString: List<String>
     ) {
         viewModelScope.launch {
-            resetOnboardingFinishedState()
             val exerciseType = if (isDoExercise) whatExerciseTypeString else whatActivityTypeString
             val requestDto = RequestOnboardingDto(
                 age = age.value?.toIntOrNull() ?: 0,
@@ -177,9 +176,5 @@ class OnboardingViewModel @Inject constructor(
                     Timber.e(it.message)
                 }
         }
-    }
-
-    private fun resetOnboardingFinishedState() {
-        _isPostOnboardingInfoSuccess.value = UiState.Loading
     }
 }

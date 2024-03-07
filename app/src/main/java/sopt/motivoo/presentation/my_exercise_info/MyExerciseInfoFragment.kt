@@ -40,7 +40,7 @@ class MyExerciseInfoFragment :
 
     private fun clickButtons() {
         binding.tvExerciseInfoBack.setOnClickListener {
-            findNavController().popBackStack()
+            findNavController().popBackStack(R.id.myPageFragment, false)
         }
     }
 }

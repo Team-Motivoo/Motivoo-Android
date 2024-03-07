@@ -3,9 +3,11 @@ package sopt.motivoo.presentation.onboarding
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import sopt.motivoo.R
@@ -25,7 +27,11 @@ class FrequencyQuestionFragment :
     }
 
     private fun collectData() {
-        onboardingViewModel.doExerciseType.flowWithLifecycle(lifecycle)
+        onboardingViewModel.doExerciseType.flowWithLifecycle(
+            viewLifecycleOwner.lifecycle,
+            Lifecycle.State.STARTED
+        )
+            .distinctUntilChanged()
             .onEach { doExercise ->
                 when (doExercise) {
                     DoExerciseType.YES ->
@@ -36,12 +42,17 @@ class FrequencyQuestionFragment :
 
                     else -> Unit
                 }
-            }.launchIn(lifecycleScope)
+            }.launchIn(viewLifecycleOwner.lifecycleScope)
 
-        onboardingViewModel.navigateToSixthPage.flowWithLifecycle(lifecycle).onEach {
-            if (findNavController().currentDestination?.id == R.id.frequencyQuestionFragment) {
-                findNavController().navigate(R.id.action_frequencyQuestionFragment_to_timeQuestionFragment)
-            }
-        }.launchIn(lifecycleScope)
+        onboardingViewModel.navigateToSixthPage.flowWithLifecycle(
+            viewLifecycleOwner.lifecycle,
+            Lifecycle.State.STARTED
+        )
+            .distinctUntilChanged()
+            .onEach {
+                if (findNavController().currentDestination?.id == R.id.frequencyQuestionFragment) {
+                    findNavController().navigate(R.id.action_frequencyQuestionFragment_to_timeQuestionFragment)
+                }
+            }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 }

@@ -3,9 +3,11 @@ package sopt.motivoo.presentation.onboarding
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import sopt.motivoo.R
@@ -26,7 +28,11 @@ class DoExerciseQuestionFragment :
     }
 
     private fun collectData() {
-        onboardingViewModel.navigateToForthPage.flowWithLifecycle(lifecycle)
+        onboardingViewModel.navigateToForthPage.flowWithLifecycle(
+            viewLifecycleOwner.lifecycle,
+            Lifecycle.State.STARTED
+        )
+            .distinctUntilChanged()
             .onEach { doExercise ->
                 if (findNavController().currentDestination?.id == R.id.doExerciseQuestionFragment) {
                     when (doExercise) {
@@ -34,6 +40,6 @@ class DoExerciseQuestionFragment :
                         DoExerciseType.NO -> findNavController().navigate(R.id.action_doExerciseQuestionFragment_to_whatActivityQuestionFragment)
                     }
                 }
-            }.launchIn(lifecycleScope)
+            }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 }
