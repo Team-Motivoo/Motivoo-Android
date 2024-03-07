@@ -22,19 +22,19 @@ class WhatExerciseQuestionFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.onboardingViewModel = onboardingViewModel
-        collectData()
+        //collectData()
     }
 
-    private fun collectData() {
-        onboardingViewModel.navigateToFifthPageExe.flowWithLifecycle(
-            viewLifecycleOwner.lifecycle,
-            Lifecycle.State.STARTED
-        )
-            .distinctUntilChanged()
-            .onEach {
-                if (findNavController().currentDestination?.id == R.id.whatExerciseQuestionFragment) {
-                    findNavController().navigate(R.id.action_whatExerciseQuestionFragment_to_frequencyQuestionFragment)
-                }
-            }.launchIn(viewLifecycleOwner.lifecycleScope)
-    }
+//    private fun collectData() {
+//        onboardingViewModel.navigateToFifthPageExe.flowWithLifecycle(
+//            viewLifecycleOwner.lifecycle,
+//            Lifecycle.State.STARTED
+//        )
+//            .distinctUntilChanged()
+//            .onEach {
+//                if (findNavController().currentDestination?.id == R.id.whatExerciseQuestionFragment) {
+//                    findNavController().navigate(R.id.action_whatExerciseQuestionFragment_to_frequencyQuestionFragment)
+//                }
+//            }.launchIn(viewLifecycleOwner.lifecycleScope)
+//    }
 }

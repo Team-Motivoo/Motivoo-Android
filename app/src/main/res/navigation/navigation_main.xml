@@ -165,6 +165,9 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <argument
+            android:name="doExerciseType"
+            app:argType="sopt.motivoo.presentation.type.DoExerciseType" />
     </fragment>
     <fragment
         android:id="@+id/timeQuestionFragment"
@@ -177,6 +180,9 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <argument
+            android:name="doExerciseType"
+            app:argType="sopt.motivoo.presentation.type.DoExerciseType" />
     </fragment>
     <fragment
         android:id="@+id/getInviteCodeFragment"
@@ -354,11 +360,7 @@
     <fragment
         android:id="@+id/loadingFragment"
         android:name="sopt.motivoo.presentation.loading.LoadingFragment"
-        android:label="LoadingFragment"
-        app:enterAnim="@anim/slide_in_right"
-        app:exitAnim="@anim/slide_out_left"
-        app:popEnterAnim="@anim/slide_in_left"
-        app:popExitAnim="@anim/slide_out_right" />
+        android:label="LoadingFragment" />
     <fragment
         android:id="@+id/withdrawalFragment"
         android:name="sopt.motivoo.presentation.withdrawal.WithdrawalFragment"

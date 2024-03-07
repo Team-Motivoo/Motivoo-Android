@@ -25,6 +25,12 @@ import sopt.motivoo.R
 import sopt.motivoo.data.datasource.remote.listener.AuthTokenRefreshListener
 import sopt.motivoo.data.datasource.remote.listener.NetworkErrorListener
 import sopt.motivoo.databinding.ActivityMainBinding
+import sopt.motivoo.presentation.onboarding.FrequencyQuestionFragmentDirections
+import sopt.motivoo.presentation.onboarding.OnboardingNavigationEvent
+import sopt.motivoo.presentation.onboarding.OnboardingViewModel
+import sopt.motivoo.presentation.onboarding.WhatActivityQuestionFragmentDirections
+import sopt.motivoo.presentation.onboarding.WhatExerciseQuestionFragmentDirections
+import sopt.motivoo.presentation.type.NavigationSourceType
 import sopt.motivoo.util.extension.checkNetworkState
 import sopt.motivoo.util.extension.colorOf
 import sopt.motivoo.util.extension.hideKeyboard
@@ -37,6 +43,8 @@ class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
 
     private val mainViewModel by viewModels<MainViewModel>()
+
+    private val onboardingViewModel by viewModels<OnboardingViewModel>()
 
     @Inject
     lateinit var authTokenRefreshListener: AuthTokenRefreshListener
@@ -80,6 +88,51 @@ class MainActivity : AppCompatActivity() {
                 showNetworkErrorDialog()
             }
         }.launchIn(lifecycleScope)
+
+        onboardingViewModel.navigationEvent.flowWithLifecycle(
+            lifecycle,
+            Lifecycle.State.STARTED
+        )
+            .onEach { onboardingNavigationEvent ->
+                val navController: NavController = findNavController(R.id.fc_main)
+                when (onboardingNavigationEvent) {
+                    is OnboardingNavigationEvent.NavigateToForthPageExe -> navController.navigate(
+                        R.id.action_doExerciseQuestionFragment_to_whatExerciseQuestionFragment
+                    )
+
+                    is OnboardingNavigationEvent.NavigateToForthPageAct -> navController.navigate(
+                        R.id.action_doExerciseQuestionFragment_to_whatActivityQuestionFragment
+                    )
+
+                    is OnboardingNavigationEvent.NavigateToFifthPage -> {
+                        if (onboardingNavigationEvent.navigationSourceType == NavigationSourceType.FROM_EXERCISE) {
+                            val action =
+                                WhatExerciseQuestionFragmentDirections.actionWhatExerciseQuestionFragmentToFrequencyQuestionFragment(
+                                    onboardingNavigationEvent.doExerciseType
+                                )
+                            navController.navigate(action)
+                        } else {
+                            val action =
+                                WhatActivityQuestionFragmentDirections.actionWhatActivityQuestionFragmentToFrequencyQuestionFragment(
+                                    onboardingNavigationEvent.doExerciseType
+                                )
+                            navController.navigate(action)
+                        }
+                    }
+
+                    is OnboardingNavigationEvent.NavigateToSixthPage -> {
+                        val action =
+                            FrequencyQuestionFragmentDirections.actionFrequencyQuestionFragmentToTimeQuestionFragment(
+                                onboardingNavigationEvent.doExerciseType
+                            )
+                        navController.navigate(action)
+                    }
+
+                    is OnboardingNavigationEvent.NavigateToLastPage -> navController.navigate(
+                        R.id.action_timeQuestionFragment_to_soreSpotQuestionFragment
+                    )
+                }
+            }.launchIn(lifecycleScope)
     }
 
     private fun initView() {
