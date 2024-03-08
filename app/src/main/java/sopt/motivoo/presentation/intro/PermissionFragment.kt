@@ -126,13 +126,14 @@ class PermissionFragment :
 
     private fun navigateToNextFragment() {
         motivooStorage.isFinishedPermission = true
-        Timber.tag("aaa").e("${motivooStorage.isUserMatched}, ${motivooStorage.isUserLoggedIn}, ${motivooStorage.isFinishedOnboarding}")
+        Timber.tag("aaa")
+            .e("${motivooStorage.isUserMatched}, ${motivooStorage.isUserLoggedIn}, ${motivooStorage.isFinishedOnboarding}")
         val startDestinationId = findNavController().findStartDestination().id
         val navOptions = NavOptions.Builder()
             .setPopUpTo(startDestinationId, true)
             .build()
 
-        if (motivooStorage.isUserMatched && motivooStorage.isUserLoggedIn && motivooStorage.isFinishedOnboarding) {
+        if (motivooStorage.isUserMatched && motivooStorage.isFinishedOnboarding && motivooStorage.isUserLoggedIn) {
             findNavController().navigate(
                 R.id.action_permissionFragment_to_homeFragment,
                 null,
@@ -150,9 +151,15 @@ class PermissionFragment :
                 null,
                 navOptions
             )
-        } else {
+        } else if (motivooStorage.isFinishedTermsOfUse && !motivooStorage.isUserLoggedIn) {
             findNavController().navigate(
                 R.id.action_permissionFragment_to_loginFragment,
+                null,
+                navOptions
+            )
+        } else {
+            findNavController().navigate(
+                R.id.action_permissionFragment_to_termsOfUseFragment,
                 null,
                 navOptions
             )

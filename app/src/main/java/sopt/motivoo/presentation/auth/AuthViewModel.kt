@@ -59,6 +59,7 @@ class AuthViewModel @Inject constructor(
             ).onSuccess { signUpResponse ->
                 networkRepository.setLoading(false)
                 handleLoginSuccess(signUpResponse)
+                motivooStorage.isUserLoggedIn = true
             }.onFailure { throwable ->
                 networkRepository.setLoading(false)
                 Timber.e(throwable.message)

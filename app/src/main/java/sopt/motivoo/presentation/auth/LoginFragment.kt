@@ -65,7 +65,6 @@ class LoginFragment : BindingFragment<FragmentLoginBinding>(R.layout.fragment_lo
         findNavController().navigate(R.id.action_loginFragment_to_startMotivooFragment)
     }
 
-
     private fun clickKakaoLoginButton() {
         binding.llKakaoLogin.setOnSingleClickListener {
             kakaoAuthService.startKakaoLogin { token ->
@@ -93,7 +92,7 @@ class LoginFragment : BindingFragment<FragmentLoginBinding>(R.layout.fragment_lo
                                     .e("${motivooStorage.isUserMatched}, ${motivooStorage.isUserLoggedIn}, ${motivooStorage.isFinishedOnboarding}")
                                 goToStartMotivoo()
                             } else {
-                                findNavController().navigate(R.id.action_loginFragment_to_termsOfUseFragment)
+                                findNavController().navigate(R.id.action_loginFragment_to_ageQuestionFragment)
                             }
                         }
                     }

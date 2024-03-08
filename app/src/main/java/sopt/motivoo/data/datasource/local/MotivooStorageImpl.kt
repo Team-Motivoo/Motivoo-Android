@@ -63,13 +63,6 @@ class MotivooStorageImpl @Inject constructor(@ApplicationContext context: Contex
             "",
         ) ?: ""
 
-    override var inviteCode: String
-        set(value) = pref.edit { putString(INVITE_CODE, value) }
-        get() = pref.getString(
-            INVITE_CODE,
-            "",
-        ) ?: ""
-
     override var isUserLoggedIn: Boolean
         set(value) = pref.edit { putBoolean(IS_LOGIN, value) }
         get() = pref.getBoolean(IS_LOGIN, false)
@@ -85,6 +78,10 @@ class MotivooStorageImpl @Inject constructor(@ApplicationContext context: Contex
     override var isFinishedPermission: Boolean
         set(value) = pref.edit { putBoolean(IS_PERMISSION_FINISHED, value) }
         get() = pref.getBoolean(IS_PERMISSION_FINISHED, false)
+
+    override var isFinishedTermsOfUse: Boolean
+        set(value) = pref.edit { putBoolean(IS_TERMS_FINISHED, value) }
+        get() = pref.getBoolean(IS_TERMS_FINISHED, false)
 
     override var myGoalStepCount: Int
         get() = pref.getInt(MY_GOAL_STEP_COUNT, 0)
@@ -105,7 +102,6 @@ class MotivooStorageImpl @Inject constructor(@ApplicationContext context: Contex
             remove(USER_ID)
             remove(ACCESS_TOKEN)
             remove(REFRESH_TOKEN)
-            remove(INVITE_CODE)
             remove(IS_LOGIN)
         }
     }
@@ -123,8 +119,8 @@ class MotivooStorageImpl @Inject constructor(@ApplicationContext context: Contex
         private const val OTHER_ID = "otherId"
         private const val MY_GOAL_STEP_COUNT = "my_goal_step_count"
         private const val OTHER_GOAL_STEP_COUNT = "other_goal_step_count"
-        private const val INVITE_CODE = "inviteCode"
         private const val IS_ONBOARDING_FINISHED = "isOnboardingFinished"
         private const val IS_PERMISSION_FINISHED = "isPermissionFinished"
+        private const val IS_TERMS_FINISHED = "isTermsFinished"
     }
 }

@@ -3,6 +3,7 @@ package sopt.motivoo.presentation.intro
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 
@@ -25,7 +26,7 @@ class TermsOfUseViewModel : ViewModel() {
                 termsUseInfoState
             ) { termsOfUse, termsGetInfo, termsUseInfo ->
                 termsOfUse && termsGetInfo && termsUseInfo
-            }.collect { allTermsAgreed ->
+            }.collectLatest { allTermsAgreed ->
                 termsAllCheckState.value = allTermsAgreed
             }
         }
