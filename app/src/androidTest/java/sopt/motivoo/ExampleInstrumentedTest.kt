@@ -2,6 +2,16 @@ package sopt.motivoo
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ensureActive
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert.*
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -18,5 +28,19 @@ class ExampleInstrumentedTest {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
         assertEquals("sopt.motivoo", appContext.packageName)
+
+        val a = flow<Int> {
+            emit(1)
+        }
+
+        CoroutineScope(Dispatchers.Main).launch {
+            a.collect {
+                ensureActive()
+                assertEquals(1, it)
+            }
+        }
+    }
+
+    fun test(): Flow<Int> = flow {
     }
 }
