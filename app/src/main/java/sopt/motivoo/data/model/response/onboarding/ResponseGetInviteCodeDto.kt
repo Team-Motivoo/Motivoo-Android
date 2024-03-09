@@ -28,6 +28,8 @@ data class ResponseGetInviteCodeDto(
     fun toGetMatchedInfo(): GetMatchedInfo {
         return GetMatchedInfo(
             isMatched = data.isMatched,
+            userId = data.userId,
+            opponentUserId = data.opponentUserId
         )
     }
 }

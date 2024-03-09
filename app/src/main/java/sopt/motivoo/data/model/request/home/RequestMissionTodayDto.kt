@@ -6,5 +6,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class RequestMissionTodayDto(
     @SerialName("mission_id")
-    val missionId: Long,
+    val missionId: Int,
 )

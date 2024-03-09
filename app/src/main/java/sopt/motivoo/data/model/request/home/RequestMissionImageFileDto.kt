@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class RequestMissionImageDto(
-    @SerialName("img_prefix")
-    val img_prefix: String
+data class RequestMissionImageFileDto(
+    @SerialName("file_name")
+    val fileName: String
 )
