@@ -8,6 +8,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 import sopt.motivoo.R
@@ -51,6 +52,17 @@ class MainActivity : AppCompatActivity() {
         navController?.let { setStatusBarColor(it) }
 
         binding.includeToolbar.tvToolbarBack.setOnSingleClickListener { navController?.popBackStack() }
+
+        moveSelectedItemDestination(navController)
+    }
+
+    private fun moveSelectedItemDestination(navController: NavController?) {
+        binding.bnvMain.setOnItemSelectedListener { item ->
+            navController?.let {
+                NavigationUI.onNavDestinationSelected(item, it)
+            }
+            true
+        }
     }
 
     private fun setStatusBarColor(navController: NavController) {
