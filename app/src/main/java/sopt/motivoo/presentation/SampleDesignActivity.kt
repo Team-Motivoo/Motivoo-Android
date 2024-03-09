@@ -14,13 +14,13 @@ class SampleDesignActivity : AppCompatActivity() {
         binding = ActivitySampleBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.customView.userType = Parent
-        binding.customViewOther.userType = Child
+        binding.customView.chartUserType = Parent
+        binding.customViewOther.chartUserType = Child
 
         binding.leftSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(p0: SeekBar?, seekValue: Int, p2: Boolean) {
                 binding.customView.setPercent(seekValue / 50f)
-                binding.customView.userType = Parent
+                binding.customView.chartUserType = Parent
             }
 
             override fun onStartTrackingTouch(p0: SeekBar?) {
@@ -33,7 +33,7 @@ class SampleDesignActivity : AppCompatActivity() {
         binding.rightSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(p0: SeekBar?, seekValue: Int, p2: Boolean) {
                 binding.customViewOther.setPercent(seekValue / 50f)
-                binding.customViewOther.userType = Child
+                binding.customViewOther.chartUserType = Child
             }
 
             override fun onStartTrackingTouch(p0: SeekBar?) {
