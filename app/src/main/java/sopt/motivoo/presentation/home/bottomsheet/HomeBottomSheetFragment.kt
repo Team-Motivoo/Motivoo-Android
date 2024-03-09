@@ -2,12 +2,10 @@ package sopt.motivoo.presentation.home.bottomsheet
 
 import android.Manifest
 import android.app.Dialog
-import android.content.ContentValues
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,7 +30,6 @@ import sopt.motivoo.presentation.home.viewmodel.HomeViewModel
 import sopt.motivoo.util.Constants.S3_BUCKET_NAME
 import sopt.motivoo.util.UriManager
 import sopt.motivoo.util.extension.createUriToBitmap
-import java.text.SimpleDateFormat
 
 @AndroidEntryPoint
 class HomeBottomSheetFragment : BottomSheetDialogFragment() {

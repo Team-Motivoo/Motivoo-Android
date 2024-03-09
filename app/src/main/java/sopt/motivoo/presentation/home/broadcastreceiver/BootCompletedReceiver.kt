@@ -6,21 +6,15 @@ import android.content.Intent
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
-import sopt.motivoo.data.repository.HomeRepositoryImpl
-import sopt.motivoo.data.repository.StepCountRepositoryImpl
 import sopt.motivoo.di.DefaultDispatcher
-import sopt.motivoo.domain.entity.MotivooStorage
-import sopt.motivoo.domain.repository.StepCountRepository
 import sopt.motivoo.domain.repository.UserRepository
 import sopt.motivoo.presentation.home.service.StepCountService
 import sopt.motivoo.util.Constants.USER_ID
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class BootCompletedReceiver  : BroadcastReceiver() {
+class BootCompletedReceiver : BroadcastReceiver() {
     @Inject
     lateinit var userRepository: UserRepository
 

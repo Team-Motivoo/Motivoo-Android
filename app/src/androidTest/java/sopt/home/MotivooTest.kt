@@ -40,7 +40,6 @@ class MotivooTest {
         }
     """.trimIndent()
 
-
     @Before
     fun `서버_초기화`() {
         server = MockWebServer()

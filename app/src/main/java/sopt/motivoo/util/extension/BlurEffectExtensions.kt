@@ -11,7 +11,6 @@ fun View.updateBlurEffect() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
         10f, 10f, Shader.TileMode.CLAMP
     ).also { this.setRenderEffect(it) } else Timber.e("not supported blur effect")
 
-
 fun View.removeBlurEffect() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
     RenderEffect.createBlurEffect(
         10f, 10f, Shader.TileMode.CLAMP

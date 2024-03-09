@@ -16,16 +16,13 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import sopt.motivoo.R
 import sopt.motivoo.domain.repository.FirebaseRepository
 import sopt.motivoo.domain.repository.StepCountRepository
 import sopt.motivoo.util.Constants.USER_ID
 import sopt.motivoo.util.extension.sendNotification
-import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -84,10 +81,10 @@ class StepCountService : LifecycleService() {
                                 Intent(
                                     baseContext,
                                     StepCountService::class.java
-                                ).apply { action = STEP_COUNT_ACTION })
+                                ).apply { action = STEP_COUNT_ACTION }
+                            )
                         }
                     }
-
                     override fun onAccuracyChanged(p0: Sensor?, p1: Int) {}
                 }.also {
                     sensorManager?.registerListener(
@@ -103,11 +100,9 @@ class StepCountService : LifecycleService() {
         return START_NOT_STICKY
     }
 
-
     private fun initializeNotification(stepCount: Int) {
         val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         createNotificationChannel(manager)
-
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.TIRAMISU) {
             startForeground(
                 FOREGROUND_SERVICE_ID,

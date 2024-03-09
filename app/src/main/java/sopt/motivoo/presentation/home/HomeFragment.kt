@@ -295,7 +295,6 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         }
     }
 
-
     companion object {
         const val PACKAGE = "package"
         const val HOME_STATE_CONFIRM = "home_state_confirm"

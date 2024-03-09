@@ -15,11 +15,9 @@ import sopt.motivoo.R
 import sopt.motivoo.databinding.DialogHomeCofirmBinding
 import sopt.motivoo.presentation.home.HomeFragment.Companion.HOME_STATE_CONFIRM
 import sopt.motivoo.presentation.home.HomeFragment.Companion.HOME_STATE_CONFIRM_RESULT_OK
-import sopt.motivoo.presentation.home.HomeState
 import sopt.motivoo.presentation.home.viewmodel.HomeViewModel
 import sopt.motivoo.util.binding.BindingDialogFragment
 import sopt.motivoo.util.extension.px
-import timber.log.Timber
 
 @AndroidEntryPoint
 class HomeConfirmDialogFragment :
@@ -54,4 +52,3 @@ class HomeConfirmDialogFragment :
         )
     }
 }
-

@@ -4,17 +4,12 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.getValue
-import com.google.firebase.database.values
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await
 import sopt.motivoo.domain.repository.FirebaseRepository
 import sopt.motivoo.util.Constants.USERS
-import timber.log.Timber
 import javax.inject.Inject
 
 class FirebaseRepositoryImpl @Inject constructor(
@@ -25,7 +20,7 @@ class FirebaseRepositoryImpl @Inject constructor(
             trySend(it.value.toString().toInt())
         }
 
-        awaitClose {  } // TODO : No cleanup addOnSuccessListener
+        awaitClose { } // TODO : No cleanup addOnSuccessListener
     }
 
     override fun getUpdatedStepCount(otherId: Long): Flow<Int> = callbackFlow<Int> {
