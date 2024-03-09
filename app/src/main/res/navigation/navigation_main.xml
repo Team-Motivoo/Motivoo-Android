@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_main"
     app:startDestination="@id/splashFragment">
 
@@ -339,7 +340,7 @@
     </fragment>
     <dialog
         android:id="@+id/homeBottomSheetFragment"
-        android:name="sopt.motivoo.presentation.home.HomeBottomSheetFragment"
+        android:name="sopt.motivoo.presentation.home.bottomsheet.HomeBottomSheetFragment"
         android:label="HomeBottomSheetFragment">
         <action
             android:id="@+id/action_homeBottomSheetFragment_to_homePhotoDialogFragment"
@@ -354,7 +355,7 @@
     </dialog>
     <dialog
         android:id="@+id/homePhotoDialogFragment"
-        android:name="sopt.motivoo.presentation.home.HomePhotoDialogFragment"
+        android:name="sopt.motivoo.presentation.home.dialog.HomePhotoDialogFragment"
         android:label="HomePhotoDialogFragment">
         <action
             android:id="@+id/action_homePhotoDialogFragment_to_homeConfirmDialogFragment"
@@ -367,12 +368,8 @@
     </dialog>
     <dialog
         android:id="@+id/homeConfirmDialogFragment"
-        android:name="sopt.motivoo.presentation.home.HomeConfirmDialogFragment"
+        android:name="sopt.motivoo.presentation.home.dialog.HomeConfirmDialogFragment"
         android:label="HomeConfirmDialogFragment">
-        <argument
-            android:name="photoBitmap"
-            app:argType="android.graphics.Bitmap"
-            app:nullable="true" />
         <argument
             android:name="photoUri"
             app:argType="android.net.Uri"
