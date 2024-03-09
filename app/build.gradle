@@ -157,6 +157,9 @@ dependencies {
 
     // leakcanary
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.13'
+
+    // dataStore
+    implementation 'androidx.datastore:datastore-preferences:1.0.0'
 }
 
 ktlint {
