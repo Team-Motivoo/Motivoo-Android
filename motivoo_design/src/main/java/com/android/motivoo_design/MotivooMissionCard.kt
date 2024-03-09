@@ -1,11 +1,10 @@
-package sopt.motivoo.util.custom_view
+package com.android.motivoo_design
 
 import android.content.Context
 import android.util.AttributeSet
 import androidx.constraintlayout.widget.ConstraintLayout
 import coil.load
-import sopt.motivoo.R
-import sopt.motivoo.databinding.MotivooMissionCardBinding
+import com.android.motivoo_design.databinding.MotivooMissionCardBinding
 
 class MotivooMissionCard @JvmOverloads constructor(
     context: Context,
