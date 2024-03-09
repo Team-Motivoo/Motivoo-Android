@@ -1,4 +1,4 @@
-package sopt.motivoo.data.datasource.remote
+package sopt.motivoo.data.datasource.remote.intercepter
 
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json

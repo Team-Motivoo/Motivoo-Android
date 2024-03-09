@@ -1,4 +1,4 @@
-package sopt.motivoo.presentation
+package sopt.motivoo.presentation.exercise
 
 import android.os.Bundle
 import android.view.View
@@ -10,8 +10,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import sopt.motivoo.R
 import sopt.motivoo.databinding.FragmentExerciseBinding
 import sopt.motivoo.domain.entity.exercise.ExerciseData
-import sopt.motivoo.presentation.exercise.ExerciseAdapter
-import sopt.motivoo.presentation.exercise.ExerciseViewModel
 import sopt.motivoo.util.UiState
 import sopt.motivoo.util.binding.BindingFragment
 import sopt.motivoo.util.extension.setVisible

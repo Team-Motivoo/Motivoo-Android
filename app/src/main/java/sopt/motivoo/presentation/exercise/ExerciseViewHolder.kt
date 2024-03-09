@@ -9,7 +9,7 @@ import sopt.motivoo.R
 import sopt.motivoo.databinding.ItemExerciseBinding
 import sopt.motivoo.databinding.ItemExerciseNoticeBinding
 import sopt.motivoo.domain.entity.exercise.ExerciseData.ExerciseItemInfo
-import sopt.motivoo.presentation.ExerciseFragment.Companion.CHILD
+import sopt.motivoo.presentation.exercise.ExerciseFragment.Companion.CHILD
 import sopt.motivoo.util.extension.prettyString
 import sopt.motivoo.util.extension.setVisible
 import java.time.LocalDate

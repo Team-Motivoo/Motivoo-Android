@@ -1,4 +1,4 @@
-package sopt.motivoo.presentation
+package sopt.motivoo.presentation.my_exercise_info
 
 import android.os.Bundle
 import android.view.View
@@ -7,7 +7,6 @@ import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import sopt.motivoo.R
 import sopt.motivoo.databinding.FragmentMypageExerciseInfoBinding
-import sopt.motivoo.presentation.my_exercise_info.MyExerciseInfoViewModel
 import sopt.motivoo.util.binding.BindingFragment
 
 @AndroidEntryPoint
@@ -41,11 +40,7 @@ class MyExerciseInfoFragment :
 
     private fun clickButtons() {
         binding.tvExerciseInfoBack.setOnClickListener {
-            navigateToMyPage()
+            findNavController().popBackStack()
         }
-    }
-
-    private fun navigateToMyPage() {
-        findNavController().navigate(R.id.action_myExerciseInfoFragment_to_myPageFragment)
     }
 }
