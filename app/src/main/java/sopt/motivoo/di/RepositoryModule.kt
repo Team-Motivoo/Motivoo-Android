@@ -37,4 +37,15 @@ object RepositoryModule {
     @Singleton
     fun providesOnboardingRepository(onboardingRepositoryImpl: OnboardingRepositoryImpl): OnboardingRepository =
         onboardingRepositoryImpl
+
+
+    @Provides
+    @Singleton
+    fun providesStepCountRepository(stepCountRepositoryImpl: StepCountRepositoryImpl): StepCountRepository =
+        stepCountRepositoryImpl
+
+    @Provides
+    @Singleton
+    fun providesUserRepository(userRepositoryImpl: UserRepositoryImpl): UserRepository =
+        userRepositoryImpl
 }
