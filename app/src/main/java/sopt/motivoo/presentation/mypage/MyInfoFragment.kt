@@ -39,7 +39,7 @@ class MyInfoFragment :
     }
 
     private fun navigateToMyPage() {
-        findNavController().navigate(R.id.action_myInfoFragment_to_myPageFragment)
+        findNavController().popBackStack(R.id.myPageFragment, false)
     }
 
     private fun navigateToMyLogout() {

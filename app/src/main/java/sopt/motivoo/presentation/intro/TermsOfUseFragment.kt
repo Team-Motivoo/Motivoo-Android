@@ -3,6 +3,7 @@ package sopt.motivoo.presentation.intro
 import android.os.Bundle
 import android.view.View
 import android.widget.CheckBox
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
@@ -17,19 +18,32 @@ import javax.inject.Inject
 class TermsOfUseFragment :
     BindingFragment<FragmentTermsOfUseBinding>(R.layout.fragment_terms_of_use) {
 
+    private val termsOfUseViewModel by viewModels<TermsOfUseViewModel>()
+
     @Inject
     lateinit var motivooStorage: MotivooStorage
-    private val termsOfUseViewModel by viewModels<TermsOfUseViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.termsOfViewModel = termsOfUseViewModel
 
-        goToBack()
+        overrideOnBackPressed()
+        makeBackButtonGone()
         clickDoneButton()
         setupCheckAllListener()
         goToTermsWebFragment()
         setupTermsCheckListeners()
+    }
+
+    private fun overrideOnBackPressed() {
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    requireActivity().finishAffinity()
+                }
+            }
+        )
     }
 
     private fun setupTermsCheckListeners() {
@@ -77,16 +91,13 @@ class TermsOfUseFragment :
 
     private fun clickDoneButton() {
         binding.btnTermsOfUseDone.setOnSingleClickListener {
-            findNavController().navigate(R.id.action_termsOfUseFragment_to_startMotivooFragment)
-            motivooStorage.isUserLoggedIn = true
+            motivooStorage.isFinishedTermsOfUse = true
+            findNavController().navigate(R.id.action_termsOfUseFragment_to_loginFragment)
         }
     }
 
-    private fun goToBack() {
-        binding.includeTermsToolbar.tvToolbarBack.setOnSingleClickListener {
-            motivooStorage.clear()
-            findNavController().popBackStack()
-        }
+    private fun makeBackButtonGone() {
+        binding.includeTermsToolbar.tvToolbarBack.visibility = View.INVISIBLE
     }
 
     private fun setupCheckAllListener() {

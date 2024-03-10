@@ -18,6 +18,7 @@ import sopt.motivoo.domain.entity.MotivooStorage
 import sopt.motivoo.domain.repository.OnboardingRepository
 import sopt.motivoo.presentation.type.DoExerciseType
 import sopt.motivoo.presentation.type.FrequencyType
+import sopt.motivoo.presentation.type.NavigationSourceType
 import sopt.motivoo.presentation.type.SoreSpotType
 import sopt.motivoo.presentation.type.TimeType
 import sopt.motivoo.presentation.type.UserType
@@ -30,11 +31,8 @@ import javax.inject.Inject
 @HiltViewModel
 class OnboardingViewModel @Inject constructor(
     private val motivooStorage: MotivooStorage,
-    private val onboardingRepository: OnboardingRepository
+    private val onboardingRepository: OnboardingRepository,
 ) : ViewModel() {
-
-    private val _inviteCode = MutableStateFlow<String?>(null)
-    val inviteCode get() = _inviteCode.asStateFlow()
 
     private val _userType = MutableStateFlow<UserType?>(null)
     val userType get() = _userType.asStateFlow()
@@ -72,22 +70,10 @@ class OnboardingViewModel @Inject constructor(
     private val _timeType = MutableStateFlow<TimeType?>(null)
     val timeType get() = _timeType.asStateFlow()
 
-    private val _navigateToForthPage = MutableSharedFlow<DoExerciseType>()
-    val navigateToForthPage get() = _navigateToForthPage.asSharedFlow()
+    private val _navigationEvent = MutableSharedFlow<OnboardingNavigationEvent>()
+    val navigationEvent get() = _navigationEvent.asSharedFlow()
 
-    private val _navigateToFifthPageExe = MutableSharedFlow<WhatExerciseType>()
-    val navigateToFifthPageExe get() = _navigateToFifthPageExe.asSharedFlow()
-
-    private val _navigateToFifthPageAct = MutableSharedFlow<WhatActivityType>()
-    val navigateToFifthPageAct get() = _navigateToFifthPageAct.asSharedFlow()
-
-    private val _navigateToSixthPage = MutableSharedFlow<FrequencyType>()
-    val navigateToSixthPage get() = _navigateToSixthPage.asSharedFlow()
-
-    private val _navigateToLastPage = MutableSharedFlow<TimeType>()
-    val navigateToLastPage get() = _navigateToLastPage.asSharedFlow()
-
-    val soreSpotFilterType: MutableStateFlow<Map<SoreSpotType, Boolean>> = MutableStateFlow(
+    val soreSpotFilterType = MutableStateFlow(
         mapOf(
             SoreSpotType.NECK to false,
             SoreSpotType.SHOULDER to false,
@@ -95,7 +81,7 @@ class OnboardingViewModel @Inject constructor(
             SoreSpotType.KNEE to false,
             SoreSpotType.WRIST to false,
             SoreSpotType.ANKLE to false,
-        ),
+        )
     )
 
     private val _isPostOnboardingInfoSuccess = MutableStateFlow<UiState<Boolean>>(UiState.Loading)
@@ -103,35 +89,55 @@ class OnboardingViewModel @Inject constructor(
     fun setDoExerciseType(doExerciseType: DoExerciseType) {
         _doExerciseType.value = doExerciseType
         viewModelScope.launch {
-            _navigateToForthPage.emit(doExerciseType)
+            if (doExerciseType == DoExerciseType.YES) {
+                _navigationEvent.emit(OnboardingNavigationEvent.NavigateToForthPageExe)
+            } else {
+                _navigationEvent.emit(OnboardingNavigationEvent.NavigateToForthPageAct)
+            }
         }
     }
 
     fun setWhatExerciseType(whatExerciseType: WhatExerciseType) {
         _whatExerciseType.value = whatExerciseType
         viewModelScope.launch {
-            _navigateToFifthPageExe.emit(whatExerciseType)
+            doExerciseType.value?.let {
+                _navigationEvent.emit(
+                    OnboardingNavigationEvent.NavigateToFifthPage(
+                        it,
+                        NavigationSourceType.FROM_EXERCISE
+                    )
+                )
+            }
         }
     }
 
     fun setWhatActivityType(whatActivityType: WhatActivityType) {
         _whatActivityType.value = whatActivityType
         viewModelScope.launch {
-            _navigateToFifthPageAct.emit(whatActivityType)
+            doExerciseType.value?.let {
+                _navigationEvent.emit(
+                    OnboardingNavigationEvent.NavigateToFifthPage(
+                        it,
+                        NavigationSourceType.FROM_ACTIVITY
+                    )
+                )
+            }
         }
     }
 
     fun setFrequencyType(frequencyType: FrequencyType) {
         _frequencyType.value = frequencyType
         viewModelScope.launch {
-            _navigateToSixthPage.emit(frequencyType)
+            doExerciseType.value?.let {
+                _navigationEvent.emit(OnboardingNavigationEvent.NavigateToSixthPage(it))
+            }
         }
     }
 
     fun setTimeType(timeType: TimeType) {
         _timeType.value = timeType
         viewModelScope.launch {
-            _navigateToLastPage.emit(timeType)
+            _navigationEvent.emit(OnboardingNavigationEvent.NavigateToLastPage)
         }
     }
 
@@ -139,9 +145,8 @@ class OnboardingViewModel @Inject constructor(
         val isSelected = soreSpotFilterType.value[soreSpotType] ?: return
         val selectedCount = soreSpotFilterType.value.count { it.value }
 
-        if (selectedCount >= 3 && !isSelected) {
-            return
-        }
+        if (selectedCount >= 3 && !isSelected) return
+
         soreSpotFilterType.value = soreSpotFilterType.value.toMutableMap().apply {
             this[soreSpotType] = !isSelected
         }
@@ -161,8 +166,8 @@ class OnboardingViewModel @Inject constructor(
         selectedSoreSpotString: List<String>
     ) {
         viewModelScope.launch {
-            resetOnboardingFinishedState()
-            val exerciseType = if (isDoExercise) whatExerciseTypeString else whatActivityTypeString
+            val exerciseType =
+                if (isDoExercise) whatExerciseTypeString else whatActivityTypeString
             val requestDto = RequestOnboardingDto(
                 age = age.value?.toIntOrNull() ?: 0,
                 exerciseCount = frequencyTypeString,
@@ -175,18 +180,26 @@ class OnboardingViewModel @Inject constructor(
             onboardingRepository.postOnboardingInfo(requestDto)
                 .onSuccess {
                     motivooStorage.isFinishedOnboarding = true
-                    it.inviteCode.let { inviteCode ->
-                        _inviteCode.value = inviteCode
-                        motivooStorage.inviteCode = inviteCode.toString()
-                    }
                     _isPostOnboardingInfoSuccess.value = UiState.Success(true)
                 }.onFailure {
                     Timber.e(it.message)
                 }
         }
     }
+}
 
-    private fun resetOnboardingFinishedState() {
-        _isPostOnboardingInfoSuccess.value = UiState.Loading
-    }
+sealed class OnboardingNavigationEvent {
+    data object NavigateToForthPageExe : OnboardingNavigationEvent()
+
+    data object NavigateToForthPageAct : OnboardingNavigationEvent()
+
+    data class NavigateToFifthPage(
+        val doExerciseType: DoExerciseType,
+        val navigationSourceType: NavigationSourceType
+    ) : OnboardingNavigationEvent()
+
+    data class NavigateToSixthPage(val doExerciseType: DoExerciseType) :
+        OnboardingNavigationEvent()
+
+    data object NavigateToLastPage : OnboardingNavigationEvent()
 }

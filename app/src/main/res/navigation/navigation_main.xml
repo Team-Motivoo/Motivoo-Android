@@ -20,17 +20,23 @@
         android:id="@+id/loginFragment"
         android:name="sopt.motivoo.presentation.auth.LoginFragment"
         android:label="LoginFragment">
-
         <action
-            android:id="@+id/action_loginFragment_to_termsOfUseFragment"
-            app:destination="@id/termsOfUseFragment"
+            android:id="@+id/action_loginFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
         <action
-            android:id="@+id/action_loginFragment_to_homeFragment"
-            app:destination="@id/homeFragment"
+            android:id="@+id/action_loginFragment_to_startMotivooFragment"
+            app:destination="@id/startMotivooFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_loginFragment_to_ageQuestionFragment"
+            app:destination="@id/ageQuestionFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -60,9 +66,6 @@
         <action
             android:id="@+id/action_myPageFragment_to_myExerciseInfoFragment"
             app:destination="@id/myExerciseInfoFragment" />
-        <action
-            android:id="@+id/action_myPageFragment_to_exerciseFragment"
-            app:destination="@id/exerciseFragment" />
         <action
             android:id="@+id/action_myPageFragment_to_webViewFragment"
             app:destination="@id/webViewFragment" />
@@ -119,15 +122,8 @@
         android:name="sopt.motivoo.presentation.onboarding.SoreSpotQuestionFragment"
         android:label="soreSpotQuestionFragment">
         <action
-            android:id="@+id/action_soreSpotQuestionFragment_to_getInviteCodeFragment"
-            app:destination="@id/getInviteCodeFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-        <action
-            android:id="@+id/action_soreSpotQuestionFragment_to_homeFragment"
-            app:destination="@id/homeFragment"
+            android:id="@+id/action_soreSpotQuestionFragment_to_startMotivooFragment"
+            app:destination="@id/startMotivooFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -168,6 +164,9 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <argument
+            android:name="doExerciseType"
+            app:argType="sopt.motivoo.presentation.type.DoExerciseType" />
     </fragment>
     <fragment
         android:id="@+id/timeQuestionFragment"
@@ -180,21 +179,14 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <argument
+            android:name="doExerciseType"
+            app:argType="sopt.motivoo.presentation.type.DoExerciseType" />
     </fragment>
     <fragment
         android:id="@+id/getInviteCodeFragment"
         android:name="sopt.motivoo.presentation.invitecode.GetInviteCodeFragment"
         android:label="GetInviteCodeFragment">
-        <argument
-            android:name="inviteCode"
-            app:argType="string" />
-        <action
-            android:id="@+id/action_getInviteCodeFragment_to_startMotivooFragment"
-            app:destination="@id/startMotivooFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_getInviteCodeFragment_to_homeFragment"
             app:destination="@id/homeFragment"
@@ -207,13 +199,6 @@
         android:id="@+id/postInviteCodeFragment"
         android:name="sopt.motivoo.presentation.invitecode.PostInviteCodeFragment"
         android:label="PostInviteCodeFragment">
-        <action
-            android:id="@+id/action_postInviteCodeFragment_to_ageQuestionFragment"
-            app:destination="@id/ageQuestionFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_postInviteCodeFragment_to_homeFragment"
             app:destination="@id/homeFragment"
@@ -229,9 +214,6 @@
         <action
             android:id="@+id/action_myInfoFragment_to_myServiceOut"
             app:destination="@id/myServiceOutFragment" />
-        <action
-            android:id="@+id/action_myInfoFragment_to_myPageFragment"
-            app:destination="@id/myPageFragment" />
         <action
             android:id="@+id/action_myInfoFragment_to_myLogout"
             app:destination="@id/myLogoutFragment" />
@@ -254,29 +236,18 @@
         android:id="@+id/myServiceOutFragment"
         android:name="sopt.motivoo.presentation.mypage.MyServiceOutFragment"
         android:label="MyServiceOutFragment">
-        <action
-            android:id="@+id/action_myServiceOut_to_loginFragment"
-            app:destination="@id/loginFragment" />
+
     </dialog>
     <dialog
         android:id="@+id/myLogoutFragment"
         android:name="sopt.motivoo.presentation.mypage.MyLogoutFragment"
         android:label="MyLogoutFragment">
-        <action
-            android:id="@+id/action_myLogout_to_loginFragment"
-            app:destination="@id/loginFragment" />
+
     </dialog>
     <fragment
         android:id="@+id/permissionFragment"
         android:name="sopt.motivoo.presentation.intro.PermissionFragment"
         android:label="PermissionFragment">
-        <action
-            android:id="@+id/action_permissionFragment_to_loginFragment"
-            app:destination="@id/loginFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_permissionFragment_to_homeFragment"
             app:destination="@id/homeFragment"
@@ -291,21 +262,42 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_permissionFragment_to_ageQuestionFragment"
+            app:destination="@id/ageQuestionFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_permissionFragment_to_termsOfUseFragment"
+            app:destination="@id/termsOfUseFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_permissionFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/termsOfUseFragment"
         android:name="sopt.motivoo.presentation.intro.TermsOfUseFragment"
         android:label="TermsOfUseFragment">
         <action
-            android:id="@+id/action_termsOfUseFragment_to_startMotivooFragment"
-            app:destination="@id/startMotivooFragment"
+            android:id="@+id/action_termsOfUseFragment_to_webViewFragment"
+            app:destination="@id/webViewFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
         <action
-            android:id="@+id/action_termsOfUseFragment_to_webViewFragment"
-            app:destination="@id/webViewFragment"
+            android:id="@+id/action_termsOfUseFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -315,13 +307,6 @@
         android:id="@+id/startMotivooFragment"
         android:name="sopt.motivoo.presentation.intro.StartMotivooFragment"
         android:label="StartMotivooFragment">
-        <action
-            android:id="@+id/action_startMotivooFragment_to_ageQuestionFragment"
-            app:destination="@id/ageQuestionFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_startMotivooFragment_to_postInviteCodeFragment"
             app:destination="@id/postInviteCodeFragment"
@@ -385,7 +370,7 @@
     <fragment
         android:id="@+id/withdrawalFragment"
         android:name="sopt.motivoo.presentation.withdrawal.WithdrawalFragment"
-        android:label="WithdrawalFragment" >
+        android:label="WithdrawalFragment">
         <action
             android:id="@+id/action_withdrawalFragment_to_myServiceOutFragment"
             app:destination="@id/myServiceOutFragment" />
