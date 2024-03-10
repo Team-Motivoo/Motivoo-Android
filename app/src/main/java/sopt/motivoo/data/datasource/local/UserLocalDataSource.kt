@@ -20,4 +20,10 @@ class UserLocalDataSource @Inject constructor(
             preferences[PreferencesKeys.USER_ID] = userId
         }
     }
+
+    suspend fun clearUserId() {
+        dataStore.edit { preferences ->
+            preferences.remove(PreferencesKeys.USER_ID)
+        }
+    }
 }

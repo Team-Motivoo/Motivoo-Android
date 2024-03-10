@@ -15,4 +15,8 @@ class UserRepositoryImpl @Inject constructor(
     override suspend fun setUserId(userId: Int) {
         userLocalDataSource.setUserId(userId)
     }
+
+    override suspend fun clearUserId() {
+        userLocalDataSource.clearUserId()
+    }
 }

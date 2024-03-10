@@ -12,6 +12,8 @@ import sopt.motivoo.domain.entity.auth.LoginInfo
 import sopt.motivoo.domain.repository.AuthRepository
 import sopt.motivoo.domain.repository.NetworkRepository
 import sopt.motivoo.domain.repository.OnboardingRepository
+import sopt.motivoo.domain.repository.StepCountRepository
+import sopt.motivoo.domain.repository.UserRepository
 import sopt.motivoo.presentation.type.SocialType
 import sopt.motivoo.util.UiState
 import timber.log.Timber
@@ -23,6 +25,8 @@ class AuthViewModel @Inject constructor(
     private val authRepository: AuthRepository,
     private val networkRepository: NetworkRepository,
     private val onboardingRepository: OnboardingRepository,
+    private val stepCountRepository: StepCountRepository,
+    private val userRepository: UserRepository
 ) : ViewModel() {
 
     private val _loginState = MutableStateFlow<UiState<Boolean>>(UiState.Loading)
@@ -106,6 +110,13 @@ class AuthViewModel @Inject constructor(
             .onFailure {
                 Timber.e(it.message)
             }
+    }
+
+    fun clearLocalDataStore() {
+        viewModelScope.launch {
+            stepCountRepository.clearMyStepCount()
+            userRepository.clearUserId()
+        }
     }
 
     companion object {
