@@ -92,7 +92,7 @@ class HomeViewModel @Inject constructor(
         _homeState.value = homeState
     }
 
-    fun setHomePictureState(homePictureState: HomePictureState) {
+    private fun setHomePictureState(homePictureState: HomePictureState) {
         _homePictureState.value = homePictureState
     }
 
@@ -140,7 +140,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun postMissionTodayChoice() {
+    private fun postMissionTodayChoice() {
         viewModelScope.launch {
             repository.postMissionTodayChoice()?.let { missionData ->
                 transactionWithMissionChoiceData(missionData)
@@ -175,7 +175,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun patchHome(stepCount: Int, otherStepCount: Int) {
+    private fun patchHome(stepCount: Int, otherStepCount: Int) {
         viewModelScope.launch {
             repository.patchHome(stepCount, otherStepCount)?.let { homeData ->
                 stepCountGoal.value = homeData.userGoalStepCount
