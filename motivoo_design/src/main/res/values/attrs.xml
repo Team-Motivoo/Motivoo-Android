@@ -4,5 +4,19 @@
         <attr name="progressInnerColor" format="reference|color"/>
         <attr name="progressBackgroundColor" format="reference|color"/>
         <attr name="centerCircleColor" format="reference|color"/>
+        <attr name="chartUserType" format="enum">
+            <enum name="Child" value="1"/>
+            <enum name="Parent" value="2"/>
+        </attr>
+    </declare-styleable>
+    <declare-styleable name="MotivooStepCountText">
+        <attr name="myStepCountText" format="reference|string"/>
+        <attr name="otherStepCountText" format="reference|string"/>
+        <attr name="userType" format="enum">
+            <enum name="Child" value="1"/>
+            <enum name="Parent" value="2"/>
+        </attr>
+    </declare-styleable>
+    <declare-styleable name="MotivooMissionCard">
     </declare-styleable>
 </resources>

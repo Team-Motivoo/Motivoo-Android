@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <declare-styleable name="MotivooStepCountText">
-        <attr name="myStepCountText" format="reference|string"/>
-    </declare-styleable>
-    <declare-styleable name="MotivooMissionCard">
-    </declare-styleable>
-</resources>

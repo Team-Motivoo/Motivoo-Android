@@ -21,6 +21,9 @@
     <color name="gray_300_D5D5D7">#D5D5D7</color>
     <color name="gray_400_C0C1C3">#C0C1C3</color>
     <color name="gray_500_9D9EA0">#9D9EA0</color>
+
+    <color name="gray_600_7072764d">#4d707276</color>
+
     <color name="gray_600_707276">#707276</color>
     <color name="gray_700_464747">#464747</color>
     <color name="gray_800_303031">#303031</color>

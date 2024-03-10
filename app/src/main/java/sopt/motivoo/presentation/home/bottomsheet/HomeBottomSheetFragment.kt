@@ -1,8 +1,9 @@
-package sopt.motivoo.presentation.home
+package sopt.motivoo.presentation.home.bottomsheet
 
 import android.Manifest
 import android.app.Dialog
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,26 +13,32 @@ import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import sopt.motivoo.R
 import sopt.motivoo.databinding.BottomSheetHomeBinding
-import sopt.motivoo.domain.entity.MotivooStorage
+import sopt.motivoo.presentation.home.HomePictureState
+import sopt.motivoo.presentation.home.viewmodel.HomeViewModel
 import sopt.motivoo.util.Constants.S3_BUCKET_NAME
-import javax.inject.Inject
+import sopt.motivoo.util.UriManager
+import sopt.motivoo.util.extension.createUriToBitmap
 
 @AndroidEntryPoint
 class HomeBottomSheetFragment : BottomSheetDialogFragment() {
     private var _binding: BottomSheetHomeBinding? = null
     private val binding get() = _binding ?: error(getString(R.string.binding_error))
 
-    @Inject
-    lateinit var pref: MotivooStorage
+    private val viewModel: HomeViewModel by viewModels()
 
-    private val viewModel: HomeViewModel by activityViewModels()
+    var pictureUri: Uri? = null
 
     private val isCameraPermissionResult =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
@@ -45,15 +52,17 @@ class HomeBottomSheetFragment : BottomSheetDialogFragment() {
                 Toast.makeText(requireContext(), "Permission request denied", Toast.LENGTH_SHORT)
                     .show()
             } else {
-                start()
+                takePhoto()
             }
         }
 
     private val takePictureResult =
-        registerForActivityResult(ActivityResultContracts.TakePicturePreview()) { photoBitmap ->
-            if (photoBitmap != null) {
-                viewModel.patchMissionImage(S3_BUCKET_NAME)
-                viewModel.setImageBitmap(photoBitmap)
+        registerForActivityResult(ActivityResultContracts.TakePicture()) { isSuccess ->
+            if (isSuccess) {
+                binding.pvLoading.visibility = View.VISIBLE
+                pictureUri?.let {
+                    viewModel.getMissionImage(S3_BUCKET_NAME, requireContext().createUriToBitmap(it))
+                }
             }
         }
 
@@ -84,41 +93,69 @@ class HomeBottomSheetFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setLayoutSize()
+        collectHomePictureState()
+        onClickTakePicture()
+        onClickAlbum()
+    }
 
+    private fun onClickAlbum() {
+        binding.clSelectAlbum.setOnClickListener {
+            pickMediaResult.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+        }
+    }
+
+    private fun onClickTakePicture() {
         binding.clTakePhoto.setOnClickListener {
             if (allCameraPermissionGranted()) {
-                start()
+                takePhoto()
             } else {
                 isCameraPermissionResult.launch(REQUIRED_CAMERA_PERMISSIONS)
             }
         }
-
-        binding.clSelectAlbum.setOnClickListener {
-            pickMediaResult.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
-        }
-
-        observeData()
     }
 
-    private fun observeData() {
-        viewModel.imageData.observe(viewLifecycleOwner) {
-            viewModel.imageBitmap.value?.let { imageBitmap ->
-                viewModel.uploadPhoto(it.imgPresignedUrl, imageBitmap)
-            }
-        }
-        viewModel.isUploadImage.observe(viewLifecycleOwner) {
-            viewModel.imageBitmap.value?.let { imageBitmap ->
-                val action =
-                    HomeBottomSheetFragmentDirections.actionHomeBottomSheetFragmentToHomeConfirmDialogFragment(
-                        imageBitmap, null
-                    )
-                findNavController().navigate(action)
+    private fun collectHomePictureState() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.homePictureState.flowWithLifecycle(
+                viewLifecycleOwner.lifecycle,
+                Lifecycle.State.STARTED
+            ).collectLatest { homeBottomSheetState ->
+                when (homeBottomSheetState) {
+                    HomePictureState.Idle -> Unit
+
+                    is HomePictureState.SuccessMissionData -> {
+                        viewModel.uploadPhoto(
+                            homeBottomSheetState.imgPresignedUrl,
+                            homeBottomSheetState.fileName,
+                            homeBottomSheetState.pictureBitmap
+                        )
+                    }
+
+                    is HomePictureState.UploadFile -> {
+                        viewModel.patchMissionImage(
+                            homeBottomSheetState.fileName,
+                            homeBottomSheetState.pictureBitmap
+                        )
+                    }
+
+                    is HomePictureState.SuccessImageUpload -> {
+                        binding.pvLoading.visibility = View.GONE
+                        val action =
+                            HomeBottomSheetFragmentDirections.actionHomeBottomSheetFragmentToHomeConfirmDialogFragment(
+                                photoUri = pictureUri
+                            )
+                        findNavController().navigate(action)
+                    }
+                }
             }
         }
     }
 
-    private fun start() {
-        takePictureResult.launch(null)
+    private fun takePhoto() {
+        UriManager(requireContext()).createImageUri()?.let {
+            pictureUri = it
+            takePictureResult.launch(it)
+        }
     }
 
     private fun setLayoutSize() {

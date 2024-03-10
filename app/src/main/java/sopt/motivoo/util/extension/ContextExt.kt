@@ -5,9 +5,13 @@ import android.app.Notification
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.ImageDecoder
+import android.net.Uri
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
+import android.provider.MediaStore
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
@@ -85,6 +89,18 @@ fun Context.sendNotification(
         }
     }.build()
 }
+
+fun Context.createUriToBitmap(photoUri: Uri): Bitmap =
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+        val source =
+            ImageDecoder.createSource(contentResolver, photoUri)
+        ImageDecoder.decodeBitmap(source)
+    } else {
+        MediaStore.Images.Media.getBitmap(
+            contentResolver,
+            photoUri
+        )
+    }
 
 fun Context.checkNetworkState(): Boolean {
     val connectivityManager = this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager

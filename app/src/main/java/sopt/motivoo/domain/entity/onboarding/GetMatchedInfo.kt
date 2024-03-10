@@ -1,5 +1,7 @@
 package sopt.motivoo.domain.entity.onboarding
 
 data class GetMatchedInfo(
-    val isMatched: Boolean
+    val userId: Int,
+    val opponentUserId: Int,
+    val isMatched: Boolean,
 )

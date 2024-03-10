@@ -13,9 +13,10 @@ import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
 import com.android.utils.BitmapCacheManager
 import com.android.utils.Child
+import com.android.utils.MotivooUserType
 import com.android.utils.Parent
-import com.android.utils.PieChartUserType
 import com.android.utils.px
+import com.android.utils.toMotivooUserType
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -31,7 +32,7 @@ class MotivooPieChart @JvmOverloads constructor(
 ) : View(context, attributeSet, defStyleAttr) {
     private val myProgressBarPaint: Paint = Paint()
     private var percent: Float = 0f
-    private var degree: Double = 0.0
+    var degree: Double = 0.0
     private var myImageBitmap: Bitmap? = null
     private var x: Double = 0.0
     private var y: Double = 0.0
@@ -41,7 +42,7 @@ class MotivooPieChart @JvmOverloads constructor(
 
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
 
-    var userType: PieChartUserType? = null
+    var chartUserType: MotivooUserType? = null
         set(value) {
             when (value) {
                 Child -> {
@@ -53,6 +54,16 @@ class MotivooPieChart @JvmOverloads constructor(
                 }
 
                 else -> Unit
+            }
+            field = value
+        }
+
+    var iconEnabled: Boolean? = null
+        set(value) {
+            if (value == true) {
+                myImageBitmap = null
+                degree = FULL_ANGLE / 2
+                invalidate()
             }
             field = value
         }
@@ -69,6 +80,9 @@ class MotivooPieChart @JvmOverloads constructor(
                 style = Paint.Style.STROKE
                 strokeWidth = STROKE_SIZE.px
             }
+
+            chartUserType =
+                typedArray.getInt(R.styleable.MotivooPieChart_chartUserType, 0).toMotivooUserType
 
             typedArray.recycle()
         }
@@ -107,13 +121,12 @@ class MotivooPieChart @JvmOverloads constructor(
             this.percent = percent
             degree = percent * SWEEP_ANGLE
         }
+        setImageLocation()
         invalidate()
     }
 
-    fun setMyImageBitmap(
-        @DrawableRes imageDrawable: Int,
-    ) {
-        var radian: Double = if (degree - OVER_ANGLE < 0) {
+    private fun setImageLocation() {
+        val radian: Double = if (degree - OVER_ANGLE < 0) {
             Math.toRadians(OVER_ANGLE - degree)
         } else {
             Math.toRadians(degree - OVER_ANGLE)
@@ -125,7 +138,11 @@ class MotivooPieChart @JvmOverloads constructor(
         } else {
             (LAYOUT_SIZE / 2).px - sin(radian) * RADIUS.px - (IMAGE_SIZE / 2).px
         }
+    }
 
+    private fun setMyImageBitmap(
+        @DrawableRes imageDrawable: Int,
+    ) {
         initImageDrawableToBitmap(imageDrawable)
         getBitmapCacheMyImage()
         invalidate()
@@ -156,20 +173,8 @@ class MotivooPieChart @JvmOverloads constructor(
         }
     }
 
-    fun successStepCount(iconDrawable: Int?) {
-        myImageBitmap = if (iconDrawable == null) {
-            null
-        } else {
-            ContextCompat.getDrawable(context, iconDrawable)?.run {
-                toBitmap(IMAGE_SIZE.px.toInt(), IMAGE_SIZE.px.toInt())
-            }
-        }
-        invalidate()
-    }
-
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
-        myImageBitmap?.recycle()
         myImageBitmap = null
         scope.cancel()
     }

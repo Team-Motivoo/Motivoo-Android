@@ -1,5 +1,6 @@
 package sopt.motivoo.presentation.mypage
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -13,6 +14,7 @@ import sopt.motivoo.R
 import sopt.motivoo.data.service.KakaoAuthService
 import sopt.motivoo.databinding.FragmentMypageServiceOutBinding
 import sopt.motivoo.presentation.auth.AuthViewModel
+import sopt.motivoo.presentation.home.service.StepCountService
 import sopt.motivoo.util.UiState
 import sopt.motivoo.util.binding.BindingDialogFragment
 import sopt.motivoo.util.extension.redirectToLogin
@@ -50,7 +52,11 @@ class MyServiceOutFragment :
                 when (uiState) {
                     is UiState.Success -> {
                         authViewModel.resetWithDrawState()
-                        requireContext().redirectToLogin()
+                        authViewModel.clearLocalDataStore()
+                        requireContext().apply {
+                            stopService(Intent(this, StepCountService::class.java))
+                            requireContext().redirectToLogin()
+                        }
                     }
 
                     else -> Unit

@@ -17,7 +17,7 @@ data class ResponseMissionImageDto(
 ) {
     @Serializable
     data class ResponseMissionImageDataDto(
-        @SerialName("img_presigned_url")
+        @SerialName("url")
         val imgPresignedUrl: String,
         @SerialName("file_name")
         val fileName: String,

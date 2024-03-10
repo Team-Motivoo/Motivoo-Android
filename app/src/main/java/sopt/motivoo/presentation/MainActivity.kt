@@ -14,6 +14,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineDispatcher
@@ -153,12 +154,29 @@ class MainActivity : AppCompatActivity() {
                 bnvMain.setupWithNavController(navController)
                 setTopVisible(navController)
             }
-            bnvMain.setOnItemReselectedListener(null)
+            bnvMain.setOnItemReselectedListener { menuItem ->
+                when (menuItem.itemId) {
+                    R.id.homeFragment -> {}
+                    R.id.exerciseFragment -> {}
+                    R.id.myPageFragment -> {}
+                }
+            }
         }
         navController?.let { setBottomVisible(it) }
         navController?.let { setStatusBarColor(it) }
 
         binding.includeToolbar.tvToolbarBack.setOnSingleClickListener { navController?.popBackStack() }
+
+        moveSelectedItemDestination(navController)
+    }
+
+    private fun moveSelectedItemDestination(navController: NavController?) {
+        binding.bnvMain.setOnItemSelectedListener { item ->
+            navController?.let {
+                NavigationUI.onNavDestinationSelected(item, it)
+            }
+            true
+        }
     }
 
     private fun setStatusBarColor(navController: NavController) {

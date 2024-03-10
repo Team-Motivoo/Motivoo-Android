@@ -1,8 +1,7 @@
 package sopt.motivoo.data.datasource.remote
 
 import okhttp3.RequestBody
-import sopt.motivoo.data.model.request.home.RequestHomeDto
-import sopt.motivoo.data.model.request.home.RequestMissionImageDto
+import sopt.motivoo.data.model.request.home.RequestMissionImageFileDto
 import sopt.motivoo.data.model.request.home.RequestMissionTodayDto
 import sopt.motivoo.data.model.response.home.ResponseHomeDto
 import sopt.motivoo.data.model.response.home.ResponseMissionChoiceDto
@@ -17,14 +16,17 @@ class HomeDataSource @Inject constructor(
     suspend fun postMissionTodayChoice(): ResponseMissionChoiceDto =
         homeService.postMissionTodayChoice()
 
-    suspend fun patchHome(requestHomeDto: RequestHomeDto): ResponseHomeDto =
-        homeService.patchHome(requestHomeDto)
+    suspend fun patchHome(): ResponseHomeDto =
+        homeService.patchHome()
 
     suspend fun postMissionToday(requestMissionTodayDto: RequestMissionTodayDto): ResponseMissionTodayDto =
         homeService.postMissionToday(requestMissionTodayDto)
 
-    suspend fun patchMissionImage(requestMissionImageDto: RequestMissionImageDto): ResponseMissionImageDto =
-        homeService.patchMissionImage(requestMissionImageDto)
+    suspend fun getMissionImage(imagePrefix: String): ResponseMissionImageDto =
+        homeService.getMissionImage(imagePrefix)
+
+    suspend fun patchMissionImage(fileName: String): ResponseMissionTodayDto =
+        homeService.patchMissionImage(RequestMissionImageFileDto(fileName))
 
     suspend fun uploadPhoto(url: String, photo: RequestBody) {
         homeService.uploadPhoto(url, photo)

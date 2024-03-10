@@ -27,6 +27,8 @@ data class ResponseGetMatchedResultDto(
 
     fun toGetMatchedInfo(): GetMatchedInfo {
         return GetMatchedInfo(
+            userId = data.userId,
+            opponentUserId = data.opponentUserId,
             isMatched = data.isMatched,
         )
     }

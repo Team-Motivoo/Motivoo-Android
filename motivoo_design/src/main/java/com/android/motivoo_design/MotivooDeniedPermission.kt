@@ -1,11 +1,11 @@
-package sopt.motivoo.util.custom_view
+package com.android.motivoo_design
 
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
+import android.view.View.OnClickListener
 import androidx.constraintlayout.widget.ConstraintLayout
-import sopt.motivoo.R
-import sopt.motivoo.databinding.MotivooDeniedPermissionBinding
+import com.android.motivoo_design.databinding.MotivooDeniedPermissionBinding
 
 class MotivooDeniedPermission @JvmOverloads constructor(
     context: Context,

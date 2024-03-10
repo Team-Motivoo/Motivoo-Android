@@ -24,17 +24,17 @@
         android:id="@+id/btn_allow"
         style="@style/B5_med"
         android:layout_width="wrap_content"
-        android:stateListAnimator="@null"
         android:layout_height="wrap_content"
         android:layout_marginTop="18dp"
+        android:layout_marginBottom="28dp"
         android:background="@drawable/shape_rectangle_radius_8_solid_gray900"
         android:paddingHorizontal="64dp"
+        android:stateListAnimator="@null"
         android:text="@string/allow"
         android:textColor="@color/white_FFFFFF"
-        android:layout_marginBottom="28dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/tv_denied_permission_title"
         app:layout_constraintStart_toStartOf="@id/tv_denied_permission_title"
-        app:layout_constraintTop_toBottomOf="@id/tv_denied_permission_title"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/tv_denied_permission_title" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
