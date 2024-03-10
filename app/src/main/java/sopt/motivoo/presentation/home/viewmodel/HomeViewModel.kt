@@ -83,8 +83,13 @@ class HomeViewModel @Inject constructor(
             initialValue = firebaseRepository.getStepCount(otherUserId.toLong()).first(),
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(50000)
-        ).collect {
-            this@HomeViewModel.otherStepCount.value = it
+        ).collect { otherStepCountFlow ->
+            this@HomeViewModel.otherStepCount.value = otherStepCountFlow
+            otherStepCountGoal.value?.let {
+                if (isCompletedMission.value == true && otherStepCountFlow >= it && it != 0) {
+                    setHomeState(HomeState.HighFive)
+                }
+            }
         }
     }
 
