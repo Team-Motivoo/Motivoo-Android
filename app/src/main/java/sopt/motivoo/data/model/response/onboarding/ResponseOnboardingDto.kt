@@ -18,8 +18,6 @@ data class ResponseOnboardingDto(
     data class Data(
         @SerialName("exercise_level")
         val exerciseLevel: String,
-        @SerialName("invite_code")
-        val inviteCode: String?,
         @SerialName("user_id")
         val userId: Int
     )
