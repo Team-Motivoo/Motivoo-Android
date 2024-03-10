@@ -154,7 +154,13 @@ class MainActivity : AppCompatActivity() {
                 bnvMain.setupWithNavController(navController)
                 setTopVisible(navController)
             }
-            bnvMain.setOnItemReselectedListener(null)
+            bnvMain.setOnItemReselectedListener { menuItem ->
+                when (menuItem.itemId) {
+                    R.id.homeFragment -> {}
+                    R.id.exerciseFragment -> {}
+                    R.id.myPageFragment -> {}
+                }
+            }
         }
         navController?.let { setBottomVisible(it) }
         navController?.let { setStatusBarColor(it) }
