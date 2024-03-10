@@ -9,7 +9,6 @@ import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Path
 import retrofit2.http.Url
-import sopt.motivoo.data.model.request.home.RequestHomeDto
 import sopt.motivoo.data.model.request.home.RequestMissionImageFileDto
 import sopt.motivoo.data.model.request.home.RequestMissionTodayDto
 import sopt.motivoo.data.model.response.home.ResponseHomeDto
@@ -18,10 +17,8 @@ import sopt.motivoo.data.model.response.home.ResponseMissionImageDto
 import sopt.motivoo.data.model.response.home.ResponseMissionTodayDto
 
 interface HomeService {
-    @PATCH("home")
-    suspend fun patchHome(
-        @Body requestHomeDto: RequestHomeDto,
-    ): ResponseHomeDto
+    @GET("home")
+    suspend fun patchHome(): ResponseHomeDto
 
     @POST("mission/today/choice")
     suspend fun postMissionTodayChoice(): ResponseMissionChoiceDto

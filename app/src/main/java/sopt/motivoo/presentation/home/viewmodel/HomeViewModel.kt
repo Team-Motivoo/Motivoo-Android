@@ -156,12 +156,7 @@ class HomeViewModel @Inject constructor(
                         )
                     }
                 }
-                otherUserId.value?.let {
-                    patchHome(
-                        stepCountRepository.myStepCount.first(),
-                        firebaseRepository.getStepCount(it.toLong()).first()
-                    )
-                }
+                otherUserId.value?.let { patchHome(firebaseRepository.getStepCount(it.toLong()).first()) }
             }
         }
     }
@@ -180,9 +175,9 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    private fun patchHome(stepCount: Int, otherStepCount: Int) {
+    private fun patchHome(otherStepCount: Int) {
         viewModelScope.launch {
-            repository.patchHome(stepCount, otherStepCount)?.let { homeData ->
+            repository.patchHome()?.let { homeData ->
                 stepCountGoal.value = homeData.userGoalStepCount
                 otherStepCountGoal.value = homeData.opponentUserGoalStepCount
                 isCompletedMission.value = homeData.isMissionImageCompleted

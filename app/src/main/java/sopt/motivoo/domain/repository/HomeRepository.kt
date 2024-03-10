@@ -6,7 +6,7 @@ import sopt.motivoo.domain.entity.home.MissionChoiceData
 import sopt.motivoo.domain.entity.home.MissionImageData
 
 interface HomeRepository {
-    suspend fun patchHome(myStepCount: Int, otherStepCount: Int): HomeData?
+    suspend fun patchHome(): HomeData?
     suspend fun postMissionTodayChoice(): MissionChoiceData?
     suspend fun postMissionToday(missionId: Int): Unit?
     suspend fun getMissionImage(imagePrefix: String): MissionImageData?

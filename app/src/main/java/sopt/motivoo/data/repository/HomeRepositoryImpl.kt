@@ -3,7 +3,6 @@ package sopt.motivoo.data.repository
 import android.graphics.Bitmap
 import okhttp3.RequestBody.Companion.toRequestBody
 import sopt.motivoo.data.datasource.remote.HomeDataSource
-import sopt.motivoo.data.model.request.home.RequestHomeDto
 import sopt.motivoo.data.model.request.home.RequestMissionTodayDto
 import sopt.motivoo.domain.entity.home.HomeData
 import sopt.motivoo.domain.entity.home.MissionChoiceData
@@ -15,9 +14,9 @@ import javax.inject.Inject
 class HomeRepositoryImpl @Inject constructor(
     private val homeDataSource: HomeDataSource,
 ) : HomeRepository {
-    override suspend fun patchHome(myStepCount: Int, otherStepCount: Int): HomeData? =
+    override suspend fun patchHome(): HomeData? =
         try {
-            homeDataSource.patchHome(RequestHomeDto(myStepCount, otherStepCount)).toHomeData()
+            homeDataSource.patchHome().toHomeData()
         } catch (e: Exception) {
             null
         }
