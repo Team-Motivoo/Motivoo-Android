@@ -10,7 +10,6 @@ interface MotivooStorage {
     var isFinishedOnboarding: Boolean
     var isFinishedPermission: Boolean
     var isFinishedTermsOfUse: Boolean
-    var otherId: Long
     var myGoalStepCount: Int
     var otherGoalStepCount: Int
     fun logout()

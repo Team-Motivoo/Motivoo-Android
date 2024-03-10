@@ -120,7 +120,7 @@ class HomeViewModel @Inject constructor(
     fun getUserId() {
         viewModelScope.launch {
             setHomeState(HomeState.Loading)
-            onboardingRepository.getInviteCode().onSuccess { matchedItem ->
+            onboardingRepository.getMatchedResult().onSuccess { matchedItem ->
                 transactionWithUserId(matchedItem.userId, matchedItem.opponentUserId)
                 postMissionTodayChoice()
             }.onFailure {
