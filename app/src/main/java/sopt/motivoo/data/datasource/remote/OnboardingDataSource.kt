@@ -4,6 +4,7 @@ import sopt.motivoo.data.model.request.onboarding.RequestOnboardingDto
 import sopt.motivoo.data.model.request.onboarding.RequestPostInviteCodeDto
 import sopt.motivoo.data.model.response.onboarding.ResponseFinishedOnboardingDto
 import sopt.motivoo.data.model.response.onboarding.ResponseGetInviteCodeDto
+import sopt.motivoo.data.model.response.onboarding.ResponseGetMatchedResultDto
 import sopt.motivoo.data.model.response.onboarding.ResponseOnboardingDto
 import sopt.motivoo.data.model.response.onboarding.ResponsePostInviteCodeDto
 import sopt.motivoo.data.service.OnboardingService
@@ -17,6 +18,9 @@ class OnboardingDataSource @Inject constructor(
     ): ResponseOnboardingDto =
         onboardingService.postOnboardingInfo(requestOnboardingDto)
 
+    suspend fun getInviteCode(): ResponseGetInviteCodeDto =
+        onboardingService.getInviteCode()
+
     suspend fun getOnboardingFinished(): ResponseFinishedOnboardingDto =
         onboardingService.getOnboardingFinished()
 
@@ -25,6 +29,6 @@ class OnboardingDataSource @Inject constructor(
     ): ResponsePostInviteCodeDto =
         onboardingService.patchInviteCode(requestPostInviteCodeDto)
 
-    suspend fun getInviteCode(): ResponseGetInviteCodeDto =
-        onboardingService.getInviteCode()
+    suspend fun getMatchedResult(): ResponseGetMatchedResultDto =
+        onboardingService.getMatchedResult()
 }

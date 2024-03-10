@@ -3,11 +3,13 @@ package sopt.motivoo.presentation.onboarding
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import sopt.motivoo.R
@@ -52,7 +54,11 @@ class SoreSpotQuestionFragment :
     }
 
     private fun collectData() {
-        onboardingViewModel.isPostOnboardingInfoSuccess.flowWithLifecycle(lifecycle)
+        onboardingViewModel.isPostOnboardingInfoSuccess.flowWithLifecycle(
+            viewLifecycleOwner.lifecycle,
+            Lifecycle.State.STARTED
+        )
+            .distinctUntilChanged()
             .onEach { uiState ->
                 when (uiState) {
                     is UiState.Success -> {
@@ -61,7 +67,7 @@ class SoreSpotQuestionFragment :
 
                     else -> Unit
                 }
-            }.launchIn(lifecycleScope)
+            }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
     private fun getUserTypeString() =
@@ -90,25 +96,16 @@ class SoreSpotQuestionFragment :
     }
 
     private fun moveToNextFragment() {
-        if (motivooStorage.isUserMatched) {
-            val navController = findNavController()
-            val startDestinationId = navController.findStartDestination().id
-            val navOptions = NavOptions.Builder()
-                .setPopUpTo(startDestinationId, true)
-                .build()
+        val navController = findNavController()
+        val startDestinationId = navController.findStartDestination().id
+        val navOptions = NavOptions.Builder()
+            .setPopUpTo(startDestinationId, true)
+            .build()
 
-            findNavController().navigate(
-                R.id.action_soreSpotQuestionFragment_to_homeFragment,
-                null,
-                navOptions
-            )
-        } else {
-            val inviteCode = onboardingViewModel.inviteCode.value.toString()
-            val action =
-                SoreSpotQuestionFragmentDirections.actionSoreSpotQuestionFragmentToGetInviteCodeFragment(
-                    inviteCode
-                )
-            findNavController().navigate(action)
-        }
+        findNavController().navigate(
+            R.id.action_soreSpotQuestionFragment_to_startMotivooFragment,
+            null,
+            navOptions
+        )
     }
 }

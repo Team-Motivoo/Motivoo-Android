@@ -8,6 +8,7 @@ import sopt.motivoo.data.model.request.onboarding.RequestOnboardingDto
 import sopt.motivoo.data.model.request.onboarding.RequestPostInviteCodeDto
 import sopt.motivoo.data.model.response.onboarding.ResponseFinishedOnboardingDto
 import sopt.motivoo.data.model.response.onboarding.ResponseGetInviteCodeDto
+import sopt.motivoo.data.model.response.onboarding.ResponseGetMatchedResultDto
 import sopt.motivoo.data.model.response.onboarding.ResponseOnboardingDto
 import sopt.motivoo.data.model.response.onboarding.ResponsePostInviteCodeDto
 
@@ -16,6 +17,9 @@ interface OnboardingService {
     suspend fun postOnboardingInfo(
         @Body requestOnboardingDto: RequestOnboardingDto,
     ): ResponseOnboardingDto
+
+    @POST("parentchild/invite")
+    suspend fun getInviteCode(): ResponseGetInviteCodeDto
 
     @GET("user/onboarding")
     suspend fun getOnboardingFinished(): ResponseFinishedOnboardingDto
@@ -26,5 +30,5 @@ interface OnboardingService {
     ): ResponsePostInviteCodeDto
 
     @GET("onboarding/match")
-    suspend fun getInviteCode(): ResponseGetInviteCodeDto
+    suspend fun getMatchedResult(): ResponseGetMatchedResultDto
 }

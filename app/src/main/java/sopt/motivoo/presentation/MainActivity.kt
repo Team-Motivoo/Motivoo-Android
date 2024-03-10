@@ -26,6 +26,12 @@ import sopt.motivoo.R
 import sopt.motivoo.data.datasource.remote.listener.AuthTokenRefreshListener
 import sopt.motivoo.data.datasource.remote.listener.NetworkErrorListener
 import sopt.motivoo.databinding.ActivityMainBinding
+import sopt.motivoo.presentation.onboarding.FrequencyQuestionFragmentDirections
+import sopt.motivoo.presentation.onboarding.OnboardingNavigationEvent
+import sopt.motivoo.presentation.onboarding.OnboardingViewModel
+import sopt.motivoo.presentation.onboarding.WhatActivityQuestionFragmentDirections
+import sopt.motivoo.presentation.onboarding.WhatExerciseQuestionFragmentDirections
+import sopt.motivoo.presentation.type.NavigationSourceType
 import sopt.motivoo.util.extension.checkNetworkState
 import sopt.motivoo.util.extension.colorOf
 import sopt.motivoo.util.extension.hideKeyboard
@@ -38,6 +44,8 @@ class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
 
     private val mainViewModel by viewModels<MainViewModel>()
+
+    private val onboardingViewModel by viewModels<OnboardingViewModel>()
 
     @Inject
     lateinit var authTokenRefreshListener: AuthTokenRefreshListener
@@ -54,7 +62,6 @@ class MainActivity : AppCompatActivity() {
         installSplashScreen()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        checkRedirectToLogin()
         initView()
         setupTokenRefreshListener()
         setupApiCallFailed()
@@ -82,24 +89,64 @@ class MainActivity : AppCompatActivity() {
                 showNetworkErrorDialog()
             }
         }.launchIn(lifecycleScope)
+
+        onboardingViewModel.navigationEvent.flowWithLifecycle(
+            lifecycle,
+            Lifecycle.State.STARTED
+        )
+            .onEach { onboardingNavigationEvent ->
+                val navController: NavController = findNavController(R.id.fc_main)
+                when (onboardingNavigationEvent) {
+                    is OnboardingNavigationEvent.NavigateToForthPageExe -> navController.navigate(
+                        R.id.action_doExerciseQuestionFragment_to_whatExerciseQuestionFragment
+                    )
+
+                    is OnboardingNavigationEvent.NavigateToForthPageAct -> navController.navigate(
+                        R.id.action_doExerciseQuestionFragment_to_whatActivityQuestionFragment
+                    )
+
+                    is OnboardingNavigationEvent.NavigateToFifthPage -> {
+                        if (onboardingNavigationEvent.navigationSourceType == NavigationSourceType.FROM_EXERCISE) {
+                            val action =
+                                WhatExerciseQuestionFragmentDirections.actionWhatExerciseQuestionFragmentToFrequencyQuestionFragment(
+                                    onboardingNavigationEvent.doExerciseType
+                                )
+                            navController.navigate(action)
+                        } else {
+                            val action =
+                                WhatActivityQuestionFragmentDirections.actionWhatActivityQuestionFragmentToFrequencyQuestionFragment(
+                                    onboardingNavigationEvent.doExerciseType
+                                )
+                            navController.navigate(action)
+                        }
+                    }
+
+                    is OnboardingNavigationEvent.NavigateToSixthPage -> {
+                        val action =
+                            FrequencyQuestionFragmentDirections.actionFrequencyQuestionFragmentToTimeQuestionFragment(
+                                onboardingNavigationEvent.doExerciseType
+                            )
+                        navController.navigate(action)
+                    }
+
+                    is OnboardingNavigationEvent.NavigateToLastPage -> navController.navigate(
+                        R.id.action_timeQuestionFragment_to_soreSpotQuestionFragment
+                    )
+                }
+            }.launchIn(lifecycleScope)
     }
 
-    private fun checkRedirectToLogin() {
+    private fun initView() {
         val redirectToLogin = intent.getBooleanExtra(REDIRECT_TO_LOGIN, false)
+        val navController =
+            supportFragmentManager.findFragmentById(R.id.fc_main)?.findNavController()
 
         if (redirectToLogin) {
             val bundle = Bundle().apply {
                 putBoolean(REDIRECT_TO_LOGIN, true)
             }
-
-            val navController = findNavController(R.id.fc_main)
-            navController.setGraph(R.navigation.navigation_main, bundle)
+            navController?.setGraph(R.navigation.navigation_main, bundle)
         }
-    }
-
-    private fun initView() {
-        val navController =
-            supportFragmentManager.findFragmentById(R.id.fc_main)?.findNavController()
 
         with(binding) {
             bnvMain.itemIconTintList = null
@@ -127,36 +174,37 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setStatusBarColor(navController: NavController) {
+        val grayStatusBarDestinations = setOf(
+            R.id.myPageFragment,
+            R.id.myInfoFragment,
+            R.id.myExerciseInfoFragment,
+            R.id.loadingFragment
+        )
+
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.id in listOf(
-                    R.id.myPageFragment,
-                    R.id.myInfoFragment,
-                    R.id.myExerciseInfoFragment,
-                    R.id.loadingFragment
-                )
-            ) {
-                window.statusBarColor = (colorOf(R.color.gray_100_F4F5F9))
+            window.statusBarColor = if (destination.id in grayStatusBarDestinations) {
+                colorOf(R.color.gray_100_F4F5F9)
             } else {
-                window.statusBarColor = (colorOf(R.color.white_FFFFFF))
+                colorOf(R.color.white_FFFFFF)
             }
         }
     }
 
     private fun setBottomVisible(navController: NavController) {
+        val bottomVisibleDestinations = setOf(
+            R.id.homeFragment,
+            R.id.myPageFragment,
+            R.id.exerciseFragment,
+            R.id.myInfoFragment,
+            R.id.myExerciseInfoFragment,
+            R.id.myServiceOutFragment,
+            R.id.myLogoutFragment,
+            R.id.homeConfirmDialogFragment,
+            R.id.withdrawalFragment
+        )
+
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            binding.bnvMain.visibility = if (destination.id in listOf(
-                    R.id.homeFragment,
-                    R.id.myPageFragment,
-                    R.id.exerciseFragment,
-                    R.id.myInfoFragment,
-                    R.id.myExerciseInfoFragment,
-                    R.id.myServiceOutFragment,
-                    R.id.myLogoutFragment,
-                    R.id.myLogoutFragment,
-                    R.id.homeConfirmDialogFragment,
-                    R.id.withdrawalFragment
-                )
-            ) {
+            binding.bnvMain.visibility = if (destination.id in bottomVisibleDestinations) {
                 View.VISIBLE
             } else {
                 View.GONE
@@ -165,24 +213,23 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setTopVisible(navController: NavController) {
-        navController.addOnDestinationChangedListener { _, destination, _ ->
-            binding.clOnboardingToolbar.visibility = if (destination.id in listOf(
-                    R.id.ageQuestionFragment,
-                    R.id.doExerciseQuestionFragment,
-                    R.id.frequencyQuestionFragment,
-                    R.id.soreSpotQuestionFragment,
-                    R.id.timeQuestionFragment,
-                    R.id.whatExerciseQuestionFragment,
-                    R.id.whatActivityQuestionFragment,
-                )
-            ) {
-                View.VISIBLE
-            } else {
-                View.GONE
-            }
+        val topVisibleDestinations = setOf(
+            R.id.ageQuestionFragment,
+            R.id.doExerciseQuestionFragment,
+            R.id.frequencyQuestionFragment,
+            R.id.soreSpotQuestionFragment,
+            R.id.timeQuestionFragment,
+            R.id.whatExerciseQuestionFragment,
+            R.id.whatActivityQuestionFragment
+        )
+        val backInvisibleDestinations = setOf(R.id.ageQuestionFragment)
 
-            val progressValue = getProgressValue(destination.id)
-            binding.onboardingProgress.progress = progressValue
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            binding.clOnboardingToolbar.visibility =
+                if (destination.id in topVisibleDestinations) View.VISIBLE else View.GONE
+            binding.includeToolbar.tvToolbarBack.visibility =
+                if (destination.id in backInvisibleDestinations) View.INVISIBLE else View.VISIBLE
+            binding.onboardingProgress.progress = getProgressValue(destination.id)
         }
     }
 
@@ -250,8 +297,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
-        super.onDestroy()
         authTokenRefreshListener.clearOnTokenRefreshFailedCallback()
+        super.onDestroy()
     }
 
     companion object {

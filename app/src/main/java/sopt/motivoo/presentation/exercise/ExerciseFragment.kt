@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,6 +26,18 @@ class ExerciseFragment : BindingFragment<FragmentExerciseBinding>(R.layout.fragm
         exerciseViewModel.getExerciseHistoryInfo()
         setClickEvents()
         observeLiveData()
+        overrideOnBackPressed()
+    }
+
+    private fun overrideOnBackPressed() {
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    findNavController().navigate(R.id.homeFragment)
+                }
+            }
+        )
     }
 
     private fun setClickEvents() {

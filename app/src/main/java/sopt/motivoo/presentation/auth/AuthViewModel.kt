@@ -11,6 +11,7 @@ import sopt.motivoo.domain.entity.MotivooStorage
 import sopt.motivoo.domain.entity.auth.LoginInfo
 import sopt.motivoo.domain.repository.AuthRepository
 import sopt.motivoo.domain.repository.NetworkRepository
+import sopt.motivoo.domain.repository.OnboardingRepository
 import sopt.motivoo.presentation.type.SocialType
 import sopt.motivoo.util.UiState
 import timber.log.Timber
@@ -21,6 +22,7 @@ class AuthViewModel @Inject constructor(
     private val motivooStorage: MotivooStorage,
     private val authRepository: AuthRepository,
     private val networkRepository: NetworkRepository,
+    private val onboardingRepository: OnboardingRepository,
 ) : ViewModel() {
 
     private val _loginState = MutableStateFlow<UiState<Boolean>>(UiState.Loading)
@@ -57,6 +59,7 @@ class AuthViewModel @Inject constructor(
             ).onSuccess { signUpResponse ->
                 networkRepository.setLoading(false)
                 handleLoginSuccess(signUpResponse)
+                motivooStorage.isUserLoggedIn = true
             }.onFailure { throwable ->
                 networkRepository.setLoading(false)
                 Timber.e(throwable.message)
@@ -93,6 +96,16 @@ class AuthViewModel @Inject constructor(
                     _withDrawState.value = UiState.Failure(throwable.message.toString())
                 }
         }
+    }
+
+    suspend fun getOnboardingFinished() {
+        onboardingRepository.getOnboardingFinished()
+            .onSuccess {
+                motivooStorage.isFinishedOnboarding = it.data.isFinishedOnboarding
+            }
+            .onFailure {
+                Timber.e(it.message)
+            }
     }
 
     companion object {

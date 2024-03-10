@@ -5,15 +5,18 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import sopt.motivoo.R
 import sopt.motivoo.databinding.FragmentPostInviteCodeBinding
+import sopt.motivoo.util.UiState
 import sopt.motivoo.util.binding.BindingFragment
 import sopt.motivoo.util.extension.drawableOf
 import sopt.motivoo.util.extension.setOnSingleClickListener
@@ -45,29 +48,27 @@ class PostInviteCodeFragment :
     }
 
     private fun collectData() {
-        inviteCodeViewModel.isPostInviteCodeEmpty.flowWithLifecycle(lifecycle).onEach { isEmpty ->
-            when (isEmpty) {
-                true -> setDefaultUi()
-                false -> Unit
-            }
-        }.launchIn(lifecycleScope)
+        inviteCodeViewModel.isPostInviteCodeEmpty.flowWithLifecycle(
+            viewLifecycleOwner.lifecycle,
+            Lifecycle.State.STARTED
+        )
+            .distinctUntilChanged()
+            .onEach { isEmpty ->
+                when (isEmpty) {
+                    true -> setDefaultUi()
+                    false -> Unit
+                }
+            }.launchIn(viewLifecycleOwner.lifecycleScope)
 
-        inviteCodeViewModel.postInviteCodeState.flowWithLifecycle(lifecycle)
-            .onEach {
-                when (inviteCodeViewModel.postInviteCodeState.value) {
-                    is PostInviteCodeViewModel.OnboardingState.GoToOnboarding -> {
-                        findNavController().navigate(R.id.action_postInviteCodeFragment_to_ageQuestionFragment)
+        inviteCodeViewModel.postInviteCodeState.flowWithLifecycle(
+            viewLifecycleOwner.lifecycle,
+            Lifecycle.State.STARTED
+        )
+            .distinctUntilChanged()
+            .onEach { uiState ->
+                when (uiState) {
+                    is UiState.Success -> {
                         inviteCodeViewModel.resetOnboardingState()
-                    }
-
-                    is PostInviteCodeViewModel.OnboardingState.SameWithMyInviteCode,
-                    is PostInviteCodeViewModel.OnboardingState.Failure -> {
-                        binding.etPostInviteCode.background =
-                            requireContext().drawableOf(R.drawable.shape_edittext_error_radius8)
-                        binding.tvPostInviteCodeErrorMessage.setVisible(VISIBLE)
-                    }
-
-                    is PostInviteCodeViewModel.OnboardingState.PassOnboarding -> {
                         val navController = findNavController()
                         val startDestinationId = navController.findStartDestination().id
                         val navOptions = NavOptions.Builder()
@@ -81,9 +82,15 @@ class PostInviteCodeFragment :
                         )
                     }
 
+                    is UiState.Failure -> {
+                        binding.etPostInviteCode.background =
+                            requireContext().drawableOf(R.drawable.shape_edittext_error_radius8)
+                        binding.tvPostInviteCodeErrorMessage.setVisible(VISIBLE)
+                    }
+
                     else -> Unit
                 }
-            }.launchIn(lifecycleScope)
+            }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
     private fun setDefaultUi() {
