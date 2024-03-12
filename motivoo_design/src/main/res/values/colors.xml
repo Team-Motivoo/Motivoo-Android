@@ -4,6 +4,11 @@
     <color name="white_FFFFFF">#FFFFFF</color>
     <color name="pink_FF19A3">#FF19A3</color>
     <color name="pink_100_FFE6F5">#FFE6F5</color>
+    <!--Red-->
+    <color name="red_50_FFEDEC">#FFEDEC</color>
+    <color name="red_200_FFA8A4">#FFA8A4</color>
+    <color name="red_400_FF6259">#FFEDEC</color>
+    <color name="red_800_BC2016">#BC2016</color>
     <!--Blue-->
     <color name="blue_50_EAFAFF">#EAFAFF</color>
     <color name="blue_100_D7F6FF">#D7F6FF</color>
