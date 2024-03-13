@@ -90,7 +90,7 @@
     <string name="mypage_open_source">오픈소스 라이선스</string>
     <string name="mypage_version_info">버전 정보</string>
     <string name="mypage_version">v.1.1.0</string>
-    <string name="mypage_ask_kakao">카카오채널 문의하기</string>
+    <string name="mypage_ask_kakao">문의하기</string>
     <string name="mypage_before">이전</string>
     <string name="mypage_name">이름</string>
     <string name="mypage_age">나이</string>
@@ -106,6 +106,7 @@
     <string name="mypage_service_out_content">회원 탈퇴 시 모든 정보가 삭제되며 복구가 불가능해요.</string>
     <string name="mypage_cancel">취소</string>
     <string name="mypage_logout_check">정말 로그아웃 하시겠어요?</string>
+    <string name="mypage_look_more_info">모티부 더 알아보기</string>
 
     <!-- notification -->
     <string name="step_count_notification_channel_id">step_count_channel</string>
@@ -193,5 +194,6 @@
     <string name="withdrawal_title">매칭이 끊어졌어요</string>
     <string name="withdrawal_desc">매칭이 끊어져 모티부를 이용할 수 없어요\n탈퇴 후 다시 가입해주세요</string>
     <string name="network_error_title">잠시 연결이 불안정해요</string>
+
 
 </resources>
