@@ -1,5 +1,7 @@
 package sopt.motivoo.presentation.mypage
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.view.View.GONE
@@ -84,12 +86,8 @@ class MyPageFragment : BindingFragment<FragmentMypageBinding>(R.layout.fragment_
             navigateToOpenSourceWebView()
         }
 
-        binding.clMypageDeveloperInfo.setOnClickListener {
-            navigateToDeveloperInfoWebView()
-        }
-
         binding.clMypageAskKakao.setOnClickListener {
-            navigateToAskKakaoWebView()
+            openKakaoChat()
         }
     }
 
@@ -125,15 +123,9 @@ class MyPageFragment : BindingFragment<FragmentMypageBinding>(R.layout.fragment_
         findNavController().navigate(action)
     }
 
-    private fun navigateToDeveloperInfoWebView() {
-        val action =
-            MyPageFragmentDirections.actionMyPageFragmentToWebViewFragment(getString(R.string.developer_info_url))
-        findNavController().navigate(action)
-    }
-
-    private fun navigateToAskKakaoWebView() {
-        val action =
-            MyPageFragmentDirections.actionMyPageFragmentToWebViewFragment(getString(R.string.ask_kakao_url))
-        findNavController().navigate(action)
+    private fun openKakaoChat() {
+        val kakaoOpenChatUrl = "https://open.kakao.com/o/sSCxapcg"
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(kakaoOpenChatUrl))
+        startActivity(intent)
     }
 }
