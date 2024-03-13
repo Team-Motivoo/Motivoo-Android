@@ -281,28 +281,31 @@
                 app:layout_constraintTop_toBottomOf="@id/view_mypage_bar3">
 
                 <TextView
-                    android:id="@+id/tv_mypage_developer_info"
+                    android:id="@+id/tv_mypage_version_info"
                     style="@style/B5_med"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:paddingVertical="26dp"
                     android:paddingStart="20dp"
-                    android:text="@string/mypage_developer_info"
+                    android:text="@string/mypage_version_info"
                     android:textColor="@color/gray_900_161616"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/iv_mypage_arrow5"
+                <TextView
+                    android:id="@+id/tv_mypage_version"
+                    style="@style/B6_re"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginBottom="2dp"
-                    android:src="@drawable/ic_arrow"
-                    app:layout_constraintBottom_toBottomOf="@id/tv_mypage_developer_info"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="26dp"
+                    android:layout_marginBottom="1dp"
+                    android:text="@string/mypage_version"
+                    android:textColor="@color/gray_900_161616"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/tv_mypage_developer_info" />
+                    app:layout_constraintTop_toTopOf="parent" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout

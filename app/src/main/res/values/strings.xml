@@ -88,7 +88,8 @@
     <string name="mypage_service_use">서비스 이용약관</string>
     <string name="mypage_privacy_policy">개인정보 처리방침</string>
     <string name="mypage_open_source">오픈소스 라이선스</string>
-    <string name="mypage_developer_info">개발자 정보</string>
+    <string name="mypage_version_info">버전 정보</string>
+    <string name="mypage_version">v.1.1.0</string>
     <string name="mypage_ask_kakao">카카오채널 문의하기</string>
     <string name="mypage_before">이전</string>
     <string name="mypage_name">이름</string>
