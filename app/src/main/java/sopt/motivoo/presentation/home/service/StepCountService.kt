@@ -116,7 +116,7 @@ class StepCountService : LifecycleService() {
         val intent = Intent(this, HomeAlarmReceiver::class.java).apply {
             action = ALARM_INIT_OK
         }
-        pendingIntent = PendingIntent.getBroadcast(this, 0 ,intent, PendingIntent.FLAG_IMMUTABLE)
+        pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
 
         val calendar = Calendar.getInstance().apply {
             set(Calendar.HOUR_OF_DAY, 0)

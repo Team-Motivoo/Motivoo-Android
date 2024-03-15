@@ -20,7 +20,7 @@ import java.util.Calendar
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class HomeAlarmReceiver: BroadcastReceiver(){
+class HomeAlarmReceiver : BroadcastReceiver() {
     @Inject
     lateinit var stepCountRepository: StepCountRepository
 
@@ -67,7 +67,11 @@ class HomeAlarmReceiver: BroadcastReceiver(){
             add(Calendar.DAY_OF_YEAR, 1)
         }
 
-        alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
+        alarmManager.setExactAndAllowWhileIdle(
+            AlarmManager.RTC_WAKEUP,
+            calendar.timeInMillis,
+            pendingIntent
+        )
     }
 
     companion object {

@@ -36,7 +36,6 @@ class BootCompletedReceiver : BroadcastReceiver() {
                     }
                 }
             }
-
         }
     }
 }
