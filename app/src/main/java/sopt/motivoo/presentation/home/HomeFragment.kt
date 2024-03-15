@@ -290,7 +290,11 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
             val intent = Intent(this, StepCountService::class.java).apply {
                 putExtra(USER_ID, userId)
             }
-            startService(intent)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                startForegroundService(intent)
+            } else {
+                startService(intent)
+            }
         }
     }
 

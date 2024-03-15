@@ -6,6 +6,7 @@ import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
@@ -40,7 +41,11 @@ class HomeAlarmReceiver : BroadcastReceiver() {
                         val intent = Intent(context, StepCountService::class.java).apply {
                             action = STEP_COUNT_INIT_ACTION
                         }
-                        context?.startService(intent)
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                            context?.startForegroundService(intent)
+                        } else {
+                            context?.startService(intent)
+                        }
                         this.cancel()
                     }
                 }
