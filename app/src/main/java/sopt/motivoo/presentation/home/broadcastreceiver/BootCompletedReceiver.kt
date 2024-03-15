@@ -26,14 +26,17 @@ class BootCompletedReceiver : BroadcastReceiver() {
         val action = intent?.action
         val intentStepCountService = Intent(context, StepCountService::class.java)
 
-        if (action == Intent.ACTION_BOOT_COMPLETED) {
-            CoroutineScope(coroutineDispatcher).launch {
-                val userId = userRepository.getUserId()
-                if (userId != -1) {
-                    intentStepCountService.putExtra(USER_ID, userId)
-                    context?.startService(intentStepCountService)
+        when (action) {
+            Intent.ACTION_BOOT_COMPLETED -> {
+                CoroutineScope(coroutineDispatcher).launch {
+                    val userId = userRepository.getUserId()
+                    if (userId != -1) {
+                        intentStepCountService.putExtra(USER_ID, userId)
+                        context?.startService(intentStepCountService)
+                    }
                 }
             }
+
         }
     }
 }
