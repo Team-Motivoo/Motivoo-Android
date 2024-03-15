@@ -14,7 +14,7 @@ import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
@@ -36,7 +36,7 @@ import timber.log.Timber
 @AndroidEntryPoint
 class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     private var isCreated = false
-    private val viewModel: HomeViewModel by viewModels()
+    private val viewModel: HomeViewModel by activityViewModels()
 
     private val requestHomePermissionRequest = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
@@ -66,7 +66,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         backPressed()
 
         initHomePermissionsState()
-        viewModel.getUserId()
+        viewModel.postMissionTodayChoice()
 
         onClickPermission()
         onClickMission()
@@ -95,6 +95,12 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
                     is HomeState.FetchHomeData -> {
                         binding.pvLoading.visibility = View.GONE
 
+                        viewModel.stepCountGoal.value = homeState.homeData.userGoalStepCount
+                        viewModel.otherStepCountGoal.value =
+                            homeState.homeData.opponentUserGoalStepCount
+                        viewModel.isCompletedMission.value =
+                            homeState.homeData.isMissionImageCompleted
+
                         viewModel.userType.value = when (homeState.homeData.userType) {
                             requireContext().getString(R.string.home_child) -> Child
                             requireContext().getString(R.string.home_parent) -> Parent
@@ -107,13 +113,8 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
                         }
 
                         if (checkPermission()) {
-                            viewModel.userId.value?.let { startStepCountService(it) }
+                            startStepCountService(homeState.homeData.userId.toInt())
                         }
-                        viewModel.getMyStepCountFlow()
-                    }
-
-                    is HomeState.SelectedMission -> {
-                        viewModel.postMissionToday(homeState.missionId)
                     }
 
                     is HomeState.SelectedMissionData -> {
@@ -157,7 +158,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
                     }
 
                     is HomeState.Confirm -> {
-                        viewModel.getUserId()
+                        viewModel.postMissionTodayChoice()
                     }
                 }
             }
@@ -196,12 +197,10 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
 
     private fun onClickMission() {
         binding.motivooFirstMissionCard.setOnClickListener {
-            viewModel.setHomeState(HomeState.Loading)
             viewModel.handleHomeIntent(HomeIntent.FirstSelectMission)
         }
 
         binding.motivooSecondMissionCard.setOnClickListener {
-            viewModel.setHomeState(HomeState.Loading)
             viewModel.handleHomeIntent(HomeIntent.SecondSelectMission)
         }
     }
@@ -212,7 +211,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
             isCreated = false
         } else {
             initHomePermissionsState()
-            viewModel.getUserId()
+            viewModel.postMissionTodayChoice()
         }
     }
 
