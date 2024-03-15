@@ -1,7 +1,10 @@
 package sopt.motivoo.presentation.home.service
 
+import android.annotation.SuppressLint
+import android.app.AlarmManager
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ServiceInfo
@@ -16,13 +19,15 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import sopt.motivoo.R
 import sopt.motivoo.domain.repository.FirebaseRepository
 import sopt.motivoo.domain.repository.StepCountRepository
+import sopt.motivoo.presentation.home.broadcastreceiver.HomeAlarmReceiver
+import sopt.motivoo.presentation.home.broadcastreceiver.HomeAlarmReceiver.Companion.ALARM_INIT_OK
 import sopt.motivoo.util.Constants.USER_ID
 import sopt.motivoo.util.extension.sendNotification
+import java.util.Calendar
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -32,6 +37,8 @@ class StepCountService : LifecycleService() {
     private var userId: Int? = null
     private var sensorEventListener: SensorEventListener? = null
     private var sensorManager: SensorManager? = null
+    private var alarmManager: AlarmManager? = null
+    private lateinit var pendingIntent: PendingIntent
 
     @Inject
     lateinit var stepCountRepository: StepCountRepository
@@ -43,6 +50,7 @@ class StepCountService : LifecycleService() {
         super.onCreate()
         isInitValue = true
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
+        setAlarm()
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -51,12 +59,7 @@ class StepCountService : LifecycleService() {
         lifecycleScope.launch {
             if (isInitValue) {
                 userId = intent?.getIntExtra(USER_ID, 0)
-                firebaseRepository.getStepCount(
-                    userId?.toLong() ?: return@launch
-                ).first().let {
-                    initializeNotification(it)
-                    stepCountRepository.setMyStepCount(it)
-                }
+                initializeNotification(stepCountRepository.getMyStepCount())
                 isInitValue = false
             }
         }
@@ -68,6 +71,12 @@ class StepCountService : LifecycleService() {
                     userId?.let {
                         firebaseRepository.setUserStepCount(it.toLong(), count)
                     }
+                }
+            }
+            STEP_COUNT_INIT_ACTION -> lifecycleScope.launch {
+                val stepCount = stepCountRepository.getMyStepCount()
+                if (stepCount != -1) {
+                    initializeNotification(stepCount)
                 }
             }
         }
@@ -85,6 +94,7 @@ class StepCountService : LifecycleService() {
                             )
                         }
                     }
+
                     override fun onAccuracyChanged(p0: Sensor?, p1: Int) {}
                 }.also {
                     sensorManager?.registerListener(
@@ -98,6 +108,24 @@ class StepCountService : LifecycleService() {
         }
 
         return START_NOT_STICKY
+    }
+
+    @SuppressLint("ScheduleExactAlarm")
+    private fun setAlarm() {
+        alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val intent = Intent(this, HomeAlarmReceiver::class.java).apply {
+            action = ALARM_INIT_OK
+        }
+        pendingIntent = PendingIntent.getBroadcast(this, 0 ,intent, PendingIntent.FLAG_IMMUTABLE)
+
+        val calendar = Calendar.getInstance().apply {
+            set(Calendar.HOUR_OF_DAY, 0)
+            set(Calendar.MINUTE, 0)
+            set(Calendar.SECOND, 0)
+            add(Calendar.DAY_OF_YEAR, 1)
+        }
+
+        alarmManager?.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
     }
 
     private fun initializeNotification(stepCount: Int) {
@@ -137,12 +165,14 @@ class StepCountService : LifecycleService() {
 
     override fun onDestroy() {
         sensorManager?.unregisterListener(sensorEventListener)
+        alarmManager?.cancel(pendingIntent)
         job?.cancel()
         super.onDestroy()
     }
 
     companion object {
         private const val STEP_COUNT_ACTION = "STEP_COUNT_ACTION"
+        const val STEP_COUNT_INIT_ACTION = "STEP_COUNT_INIT_ACTION"
 
         private const val FOREGROUND_SERVICE_ID = 1
     }
