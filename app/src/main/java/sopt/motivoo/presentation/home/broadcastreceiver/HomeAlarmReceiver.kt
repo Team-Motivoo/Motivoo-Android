@@ -31,20 +31,20 @@ class HomeAlarmReceiver : BroadcastReceiver() {
 
     private var job: Job? = null
 
-    override fun onReceive(context: Context?, intent: Intent?) {
-        when (intent?.action) {
+    override fun onReceive(context: Context, intent: Intent) {
+        when (intent.action) {
             ALARM_INIT_OK -> {
                 job = CoroutineScope(ioDispatcher).launch {
                     try {
                         stepCountRepository.setMyStepCount(0)
                     } finally {
-                        val intent = Intent(context, StepCountService::class.java).apply {
+                        val stepCountServiceIntent = Intent(context, StepCountService::class.java).apply {
                             action = STEP_COUNT_INIT_ACTION
                         }
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                            context?.startForegroundService(intent)
+                            context.startForegroundService(stepCountServiceIntent)
                         } else {
-                            context?.startService(intent)
+                            context.startService(stepCountServiceIntent)
                         }
                         this.cancel()
                     }
