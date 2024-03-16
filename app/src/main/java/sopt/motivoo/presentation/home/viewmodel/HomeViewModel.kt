@@ -53,7 +53,7 @@ class HomeViewModel @Inject constructor(
         MutableStateFlow<HomePictureState>(HomePictureState.Idle)
     val homePictureState: StateFlow<HomePictureState> = _homePictureState.asStateFlow()
 
-    fun getMyStepCountFlow(userId: Long, stepCountGoal: Int) {
+    private fun getMyStepCountFlow(userId: Long, stepCountGoal: Int) {
         viewModelScope.launch {
             stepCountRepository.myStepCount.stateIn(
                 initialValue = stepCountRepository.getMyStepCount(),
@@ -71,7 +71,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun getOtherStepCountFlow(otherUserId: Int, otherStepCountGoal: Int) {
+    private fun getOtherStepCountFlow(otherUserId: Int, otherStepCountGoal: Int) {
         viewModelScope.launch {
             firebaseRepository.getUpdatedStepCount(otherUserId.toLong()).stateIn(
                 initialValue = firebaseRepository.getStepCount(otherUserId.toLong())?.toInt(),
