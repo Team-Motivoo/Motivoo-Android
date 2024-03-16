@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import sopt.motivoo.domain.entity.home.HomeData
 import sopt.motivoo.domain.entity.home.MissionChoiceData
 import sopt.motivoo.domain.repository.FirebaseRepository
 import sopt.motivoo.domain.repository.HomeRepository
@@ -138,53 +139,63 @@ class HomeViewModel @Inject constructor(
     private fun patchHome() {
         viewModelScope.launch {
             repository.patchHome()?.let { homeData ->
-                getMyStepCountFlow(
-                    homeData.userId,
-                    homeData.userGoalStepCount
-                )
-                getOtherStepCountFlow(
-                    homeData.opponentUserId.toInt(),
-                    homeData.opponentUserGoalStepCount
-                )
-
-                if (stepCountRepository.getMyStepCount() != -1 && userRepository.getUserId() != -1) {
-                    val stepCount = stepCountRepository.getMyStepCount()
-                    val userId = userRepository.getUserId()
-                    firebaseRepository.setUserStepCount(userId.toLong(), stepCount)
-                } else {
-                    if (stepCountRepository.getMyStepCount() == -1) {
-                        firebaseRepository.getStepCount(homeData.userId)?.let {
-                            stepCountRepository.setMyStepCount(it.toInt())
-                        }
-                    }
-                    userRepository.setUserId(homeData.userId.toInt())
-                }
-
+                getStepCount(homeData)
+                setUserStepCountAndUserId(homeData)
                 setHomeState(HomeState.FetchHomeData(homeData))
-
-                if (homeData.isOpponentUserWithdraw) {
-                    setHomeState(HomeState.FailMatching)
-                    return@launch
-                }
-
-                firebaseRepository.getStepCount(homeData.opponentUserId)?.let {
-                    if (!homeData.isStepCountCompleted && homeData.isMissionImageCompleted && homeData.opponentUserGoalStepCount != 0 &&
-                        it >= homeData.opponentUserGoalStepCount
-                    ) {
-                        setHomeState(HomeState.HighFive)
-                        return@launch
-                    }
-                }
-
-                if (homeData.isStepCountCompleted && !homeData.isMissionImageCompleted) {
-                    setHomeState(HomeState.CompletedStepCount)
-                }
-
-                if (homeData.isMissionImageCompleted) {
-                    setHomeState(HomeState.CompletedMission)
-                }
+                if (setPatchHomeState(homeData)) return@launch
             }
         }
+    }
+
+    private suspend fun setPatchHomeState(homeData: HomeData): Boolean {
+        if (homeData.isOpponentUserWithdraw) {
+            setHomeState(HomeState.FailMatching)
+            return true
+        }
+
+        firebaseRepository.getStepCount(homeData.opponentUserId)?.let {
+            if (!homeData.isStepCountCompleted && homeData.isMissionImageCompleted && homeData.opponentUserGoalStepCount != 0 &&
+                it >= homeData.opponentUserGoalStepCount
+            ) {
+                setHomeState(HomeState.HighFive)
+                return true
+            }
+        }
+
+        if (homeData.isStepCountCompleted && !homeData.isMissionImageCompleted) {
+            setHomeState(HomeState.CompletedStepCount)
+        }
+
+        if (homeData.isMissionImageCompleted) {
+            setHomeState(HomeState.CompletedMission)
+        }
+        return false
+    }
+
+    private suspend fun setUserStepCountAndUserId(homeData: HomeData) {
+        if (stepCountRepository.getMyStepCount() != -1 && userRepository.getUserId() != -1) {
+            val stepCount = stepCountRepository.getMyStepCount()
+            val userId = userRepository.getUserId()
+            firebaseRepository.setUserStepCount(userId.toLong(), stepCount)
+        } else {
+            if (stepCountRepository.getMyStepCount() == -1) {
+                firebaseRepository.getStepCount(homeData.userId)?.let {
+                    stepCountRepository.setMyStepCount(it.toInt())
+                }
+            }
+            userRepository.setUserId(homeData.userId.toInt())
+        }
+    }
+
+    private fun getStepCount(homeData: HomeData) {
+        getMyStepCountFlow(
+            homeData.userId,
+            homeData.userGoalStepCount
+        )
+        getOtherStepCountFlow(
+            homeData.opponentUserId.toInt(),
+            homeData.opponentUserGoalStepCount
+        )
     }
 
     private fun postMissionToday(missionId: Int) {
