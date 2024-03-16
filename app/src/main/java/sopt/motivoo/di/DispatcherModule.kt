@@ -8,14 +8,6 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import javax.inject.Qualifier
 
-@Qualifier
-@Retention(AnnotationRetention.RUNTIME)
-annotation class DefaultDispatcher
-
-@Qualifier
-@Retention(AnnotationRetention.RUNTIME)
-annotation class IoDispatcher
-
 @InstallIn(SingletonComponent::class)
 @Module
 object DispatcherModule {
