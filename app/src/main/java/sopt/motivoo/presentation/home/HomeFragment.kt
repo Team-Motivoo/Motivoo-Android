@@ -115,7 +115,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
                             else -> null
                         }
 
-                        checkHomePermission(homeState)
+                        checkHomeAlarmPermission(homeState)
                     }
 
                     is HomeState.SelectedMissionData -> {
@@ -166,7 +166,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         }
     }
 
-    private fun checkHomePermission(homeState: HomeState.FetchHomeData) {
+    private fun checkHomeAlarmPermission(homeState: HomeState.FetchHomeData) {
         if (checkPermission()) {
             val alarmManager = context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
