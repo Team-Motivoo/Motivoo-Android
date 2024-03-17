@@ -49,45 +49,51 @@ class HomeAlarmReceiver : BroadcastReceiver() {
                         this.cancel()
                     }
                 }
-                setAlarm(context)
+                initAlarm(context)
             }
 
             AlarmManager.ACTION_SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED -> {
-                setAlarm(context)
+                initAlarm(context)
             }
         }
     }
 
-    private fun setAlarm(context: Context?) {
+    private fun initAlarm(context: Context?) {
         val alarmManager = context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             if (alarmManager.canScheduleExactAlarms()) {
-                val intentAlarm = Intent(context, HomeAlarmReceiver::class.java).apply {
-                    action = ALARM_INIT_OK
-                }
-
-                val pendingIntent =
-                    PendingIntent.getBroadcast(
-                        context,
-                        0,
-                        intentAlarm,
-                        PendingIntent.FLAG_IMMUTABLE
-                    )
-
-                val calendar = Calendar.getInstance().apply {
-                    set(Calendar.HOUR_OF_DAY, 0)
-                    set(Calendar.MINUTE, 0)
-                    set(Calendar.SECOND, 0)
-                    add(Calendar.DAY_OF_YEAR, 1)
-                }
-
-                alarmManager.setExactAndAllowWhileIdle(
-                    AlarmManager.RTC_WAKEUP,
-                    calendar.timeInMillis,
-                    pendingIntent
-                )
+                setAlarmManager(context, alarmManager)
             }
+        } else {
+            setAlarmManager(context, alarmManager)
         }
+    }
+
+    private fun setAlarmManager(context: Context?, alarmManager: AlarmManager) {
+        val intentAlarm = Intent(context, HomeAlarmReceiver::class.java).apply {
+            action = ALARM_INIT_OK
+        }
+
+        val pendingIntent =
+            PendingIntent.getBroadcast(
+                context,
+                0,
+                intentAlarm,
+                PendingIntent.FLAG_IMMUTABLE
+            )
+
+        val calendar = Calendar.getInstance().apply {
+            set(Calendar.HOUR_OF_DAY, 0)
+            set(Calendar.MINUTE, 0)
+            set(Calendar.SECOND, 0)
+            add(Calendar.DAY_OF_YEAR, 1)
+        }
+
+        alarmManager.setExactAndAllowWhileIdle(
+            AlarmManager.RTC_WAKEUP,
+            calendar.timeInMillis,
+            pendingIntent
+        )
     }
 
     companion object {

@@ -115,20 +115,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
                             else -> null
                         }
 
-                        if (checkPermission()) {
-                            val alarmManager = context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                                if (!alarmManager.canScheduleExactAlarms()) {
-                                    Timber.e("aaa canScheduleExactAlarms :${alarmManager.canScheduleExactAlarms()}")
-                                    requireContext().showSnackbar(binding.root, "자정마다 걸음 수를 초기화하려면 알림 및 리마인더를 허용해주세요.", "설정으로 이동", true) {
-                                        val intent = Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM)
-                                        startActivity(intent)
-                                    }
-                                } else {
-                                    startStepCountService(homeState.homeData.userId.toInt())
-                                }
-                            }
-                        }
+                        checkHomePermission(homeState)
                     }
 
                     is HomeState.SelectedMissionData -> {
@@ -175,6 +162,29 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
                         viewModel.postMissionTodayChoice()
                     }
                 }
+            }
+        }
+    }
+
+    private fun checkHomePermission(homeState: HomeState.FetchHomeData) {
+        if (checkPermission()) {
+            val alarmManager = context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                if (!alarmManager.canScheduleExactAlarms()) {
+                    requireContext().showSnackbar(
+                        binding.root,
+                        "자정마다 걸음 수를 초기화하려면 알림 및 리마인더를 허용해주세요.",
+                        "설정으로 이동",
+                        true
+                    ) {
+                        val intent = Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM)
+                        startActivity(intent)
+                    }
+                } else {
+                    startStepCountService(homeState.homeData.userId.toInt())
+                }
+            } else {
+                startStepCountService(homeState.homeData.userId.toInt())
             }
         }
     }
