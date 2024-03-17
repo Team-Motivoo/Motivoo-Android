@@ -1,6 +1,5 @@
 package sopt.motivoo.presentation.home.service
 
-import android.annotation.SuppressLint
 import android.app.AlarmManager
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -13,6 +12,7 @@ import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Build
+import android.widget.Toast
 import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
@@ -73,6 +73,7 @@ class StepCountService : LifecycleService() {
                     }
                 }
             }
+
             STEP_COUNT_INIT_ACTION -> lifecycleScope.launch {
                 val stepCount = stepCountRepository.getMyStepCount()
                 if (stepCount != -1) {
@@ -110,22 +111,30 @@ class StepCountService : LifecycleService() {
         return START_NOT_STICKY
     }
 
-    @SuppressLint("ScheduleExactAlarm")
     private fun setAlarm() {
         alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val intent = Intent(this, HomeAlarmReceiver::class.java).apply {
-            action = ALARM_INIT_OK
-        }
-        pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            if (alarmManager?.canScheduleExactAlarms() == true) {
+                val intent = Intent(this, HomeAlarmReceiver::class.java).apply {
+                    action = ALARM_INIT_OK
+                }
+                pendingIntent =
+                    PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
 
-        val calendar = Calendar.getInstance().apply {
-            set(Calendar.HOUR_OF_DAY, 0)
-            set(Calendar.MINUTE, 0)
-            set(Calendar.SECOND, 0)
-            add(Calendar.DAY_OF_YEAR, 1)
-        }
+                val calendar = Calendar.getInstance().apply {
+                    set(Calendar.HOUR_OF_DAY, 0)
+                    set(Calendar.MINUTE, 0)
+                    set(Calendar.SECOND, 0)
+                    add(Calendar.DAY_OF_YEAR, 1)
+                }
 
-        alarmManager?.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
+                alarmManager?.setExactAndAllowWhileIdle(
+                    AlarmManager.RTC_WAKEUP,
+                    calendar.timeInMillis,
+                    pendingIntent
+                )
+            }
+        }
     }
 
     private fun initializeNotification(stepCount: Int) {

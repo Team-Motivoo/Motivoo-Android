@@ -1,6 +1,5 @@
 package sopt.motivoo.presentation.home.broadcastreceiver
 
-import android.annotation.SuppressLint
 import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.BroadcastReceiver
@@ -38,9 +37,10 @@ class HomeAlarmReceiver : BroadcastReceiver() {
                     try {
                         stepCountRepository.setMyStepCount(0)
                     } finally {
-                        val stepCountServiceIntent = Intent(context, StepCountService::class.java).apply {
-                            action = STEP_COUNT_INIT_ACTION
-                        }
+                        val stepCountServiceIntent =
+                            Intent(context, StepCountService::class.java).apply {
+                                action = STEP_COUNT_INIT_ACTION
+                            }
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                             context.startForegroundService(stepCountServiceIntent)
                         } else {
@@ -51,32 +51,43 @@ class HomeAlarmReceiver : BroadcastReceiver() {
                 }
                 setAlarm(context)
             }
+
+            AlarmManager.ACTION_SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED -> {
+                setAlarm(context)
+            }
         }
     }
 
-    @SuppressLint("ScheduleExactAlarm")
     private fun setAlarm(context: Context?) {
         val alarmManager = context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            if (alarmManager.canScheduleExactAlarms()) {
+                val intentAlarm = Intent(context, HomeAlarmReceiver::class.java).apply {
+                    action = ALARM_INIT_OK
+                }
 
-        val intentAlarm = Intent(context, HomeAlarmReceiver::class.java).apply {
-            action = ALARM_INIT_OK
+                val pendingIntent =
+                    PendingIntent.getBroadcast(
+                        context,
+                        0,
+                        intentAlarm,
+                        PendingIntent.FLAG_IMMUTABLE
+                    )
+
+                val calendar = Calendar.getInstance().apply {
+                    set(Calendar.HOUR_OF_DAY, 0)
+                    set(Calendar.MINUTE, 0)
+                    set(Calendar.SECOND, 0)
+                    add(Calendar.DAY_OF_YEAR, 1)
+                }
+
+                alarmManager.setExactAndAllowWhileIdle(
+                    AlarmManager.RTC_WAKEUP,
+                    calendar.timeInMillis,
+                    pendingIntent
+                )
+            }
         }
-
-        val pendingIntent =
-            PendingIntent.getBroadcast(context, 0, intentAlarm, PendingIntent.FLAG_IMMUTABLE)
-
-        val calendar = Calendar.getInstance().apply {
-            set(Calendar.HOUR_OF_DAY, 0)
-            set(Calendar.MINUTE, 0)
-            set(Calendar.SECOND, 0)
-            add(Calendar.DAY_OF_YEAR, 1)
-        }
-
-        alarmManager.setExactAndAllowWhileIdle(
-            AlarmManager.RTC_WAKEUP,
-            calendar.timeInMillis,
-            pendingIntent
-        )
     }
 
     companion object {

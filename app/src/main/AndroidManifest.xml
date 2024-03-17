@@ -40,7 +40,12 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".presentation.home.broadcastreceiver.HomeAlarmReceiver"/>
+        <receiver android:name=".presentation.home.broadcastreceiver.HomeAlarmReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.app.action.SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED" />
+            </intent-filter>
+        </receiver>
         <service
             android:name=".presentation.home.service.StepCountService"
             android:exported="false"
