@@ -1,6 +1,8 @@
 package sopt.motivoo.presentation.home
 
 import android.Manifest
+import android.app.AlarmManager
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -14,7 +16,7 @@ import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
@@ -30,13 +32,14 @@ import sopt.motivoo.presentation.home.viewmodel.HomeViewModel
 import sopt.motivoo.util.Constants.USER_ID
 import sopt.motivoo.util.binding.BindingFragment
 import sopt.motivoo.util.extension.removeBlurEffect
+import sopt.motivoo.util.extension.showSnackbar
 import sopt.motivoo.util.extension.updateBlurEffect
 import timber.log.Timber
 
 @AndroidEntryPoint
 class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     private var isCreated = false
-    private val viewModel: HomeViewModel by viewModels()
+    private val viewModel: HomeViewModel by activityViewModels()
 
     private val requestHomePermissionRequest = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
@@ -66,7 +69,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         backPressed()
 
         initHomePermissionsState()
-        viewModel.getUserId()
+        viewModel.postMissionTodayChoice()
 
         onClickPermission()
         onClickMission()
@@ -95,6 +98,12 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
                     is HomeState.FetchHomeData -> {
                         binding.pvLoading.visibility = View.GONE
 
+                        viewModel.stepCountGoal.value = homeState.homeData.userGoalStepCount
+                        viewModel.otherStepCountGoal.value =
+                            homeState.homeData.opponentUserGoalStepCount
+                        viewModel.isCompletedMission.value =
+                            homeState.homeData.isMissionImageCompleted
+
                         viewModel.userType.value = when (homeState.homeData.userType) {
                             requireContext().getString(R.string.home_child) -> Child
                             requireContext().getString(R.string.home_parent) -> Parent
@@ -107,13 +116,19 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
                         }
 
                         if (checkPermission()) {
-                            viewModel.userId.value?.let { startStepCountService(it) }
+                            val alarmManager = context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                                if (!alarmManager.canScheduleExactAlarms()) {
+                                    Timber.e("aaa canScheduleExactAlarms :${alarmManager.canScheduleExactAlarms()}")
+                                    requireContext().showSnackbar(binding.root, "자정마다 걸음 수를 초기화하려면 알림 및 리마인더를 허용해주세요.", "설정으로 이동", true) {
+                                        val intent = Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM)
+                                        startActivity(intent)
+                                    }
+                                } else {
+                                    startStepCountService(homeState.homeData.userId.toInt())
+                                }
+                            }
                         }
-                        viewModel.getMyStepCountFlow()
-                    }
-
-                    is HomeState.SelectedMission -> {
-                        viewModel.postMissionToday(homeState.missionId)
                     }
 
                     is HomeState.SelectedMissionData -> {
@@ -157,7 +172,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
                     }
 
                     is HomeState.Confirm -> {
-                        viewModel.getUserId()
+                        viewModel.postMissionTodayChoice()
                     }
                 }
             }
@@ -196,12 +211,10 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
 
     private fun onClickMission() {
         binding.motivooFirstMissionCard.setOnClickListener {
-            viewModel.setHomeState(HomeState.Loading)
             viewModel.handleHomeIntent(HomeIntent.FirstSelectMission)
         }
 
         binding.motivooSecondMissionCard.setOnClickListener {
-            viewModel.setHomeState(HomeState.Loading)
             viewModel.handleHomeIntent(HomeIntent.SecondSelectMission)
         }
     }
@@ -212,7 +225,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
             isCreated = false
         } else {
             initHomePermissionsState()
-            viewModel.getUserId()
+            viewModel.postMissionTodayChoice()
         }
     }
 
@@ -291,7 +304,11 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
             val intent = Intent(this, StepCountService::class.java).apply {
                 putExtra(USER_ID, userId)
             }
-            startService(intent)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                startForegroundService(intent)
+            } else {
+                startService(intent)
+            }
         }
     }
 

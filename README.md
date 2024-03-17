@@ -41,6 +41,7 @@
 
 - Kotlin Libraries
     - kotlinx-serialization
+    - coroutines-play-services
 
 - Hilt 
 - Coil & Glide

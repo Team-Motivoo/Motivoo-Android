@@ -3,6 +3,7 @@ package sopt.motivoo.presentation.home.broadcastreceiver
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
@@ -26,12 +27,19 @@ class BootCompletedReceiver : BroadcastReceiver() {
         val action = intent?.action
         val intentStepCountService = Intent(context, StepCountService::class.java)
 
-        if (action == Intent.ACTION_BOOT_COMPLETED) {
-            CoroutineScope(coroutineDispatcher).launch {
-                val userId = userRepository.getUserId()
-                if (userId != -1) {
-                    intentStepCountService.putExtra(USER_ID, userId)
-                    context?.startService(intentStepCountService)
+        when (action) {
+            Intent.ACTION_BOOT_COMPLETED -> {
+                CoroutineScope(coroutineDispatcher).launch {
+                    val userId = userRepository.getUserId()
+                    if (userId != -1) {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                            intentStepCountService.putExtra(USER_ID, userId)
+                            context?.startForegroundService(intentStepCountService)
+                        } else {
+                            intentStepCountService.putExtra(USER_ID, userId)
+                            context?.startService(intentStepCountService)
+                        }
+                    }
                 }
             }
         }
