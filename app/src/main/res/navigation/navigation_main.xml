@@ -1,21 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_main"
     app:startDestination="@id/splashFragment">
 
     <fragment
         android:id="@+id/splashFragment"
-        android:name="sopt.motivoo.presentation.SplashFragment"
+        android:name="sopt.motivoo.presentation.intro.SplashFragment"
         android:label="SplashFragment">
-
         <action
             android:id="@+id/action_splashFragment_to_permissionFragment"
             app:destination="@id/permissionFragment" />
         <action
             android:id="@+id/action_splashFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_startMotivooFragment"
+            app:destination="@id/startMotivooFragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_ageQuestionFragment"
+            app:destination="@id/ageQuestionFragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_termsOfUseFragment"
+            app:destination="@id/termsOfUseFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -38,6 +48,20 @@
         <action
             android:id="@+id/action_loginFragment_to_ageQuestionFragment"
             app:destination="@id/ageQuestionFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_loginFragment_to_termsOfUseFragment"
+            app:destination="@id/termsOfUseFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_loginFragment_to_permissionFragment"
+            app:destination="@id/permissionFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -250,36 +274,8 @@
         android:name="sopt.motivoo.presentation.intro.PermissionFragment"
         android:label="PermissionFragment">
         <action
-            android:id="@+id/action_permissionFragment_to_homeFragment"
-            app:destination="@id/homeFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-        <action
-            android:id="@+id/action_permissionFragment_to_startMotivooFragment"
-            app:destination="@id/startMotivooFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-        <action
-            android:id="@+id/action_permissionFragment_to_ageQuestionFragment"
-            app:destination="@id/ageQuestionFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-        <action
             android:id="@+id/action_permissionFragment_to_termsOfUseFragment"
             app:destination="@id/termsOfUseFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-        <action
-            android:id="@+id/action_permissionFragment_to_loginFragment"
-            app:destination="@id/loginFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -297,8 +293,8 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
         <action
-            android:id="@+id/action_termsOfUseFragment_to_loginFragment"
-            app:destination="@id/loginFragment"
+            android:id="@+id/action_termsOfUseFragment_to_AgeQuestionFragment"
+            app:destination="@id/ageQuestionFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"

@@ -137,16 +137,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        val redirectToLogin = intent.getBooleanExtra(REDIRECT_TO_LOGIN, false)
         val navController =
             supportFragmentManager.findFragmentById(R.id.fc_main)?.findNavController()
-
-        if (redirectToLogin) {
-            val bundle = Bundle().apply {
-                putBoolean(REDIRECT_TO_LOGIN, true)
-            }
-            navController?.setGraph(R.navigation.navigation_main, bundle)
-        }
 
         with(binding) {
             bnvMain.itemIconTintList = null
@@ -305,9 +297,5 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         authTokenRefreshListener.clearOnTokenRefreshFailedCallback()
         super.onDestroy()
-    }
-
-    companion object {
-        const val REDIRECT_TO_LOGIN = "redirectToLogin"
     }
 }
