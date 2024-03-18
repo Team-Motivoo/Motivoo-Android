@@ -31,7 +31,6 @@ class HomeRepositoryImpl @Inject constructor(
         userErrorHandler.handleUserError(throwable = e, null)
     }
 
-
     override suspend fun postMissionToday(missionId: Int): Unit? =
         try {
             if (homeDataSource.postMissionToday(RequestMissionTodayDto(missionId)).success) Unit else null
