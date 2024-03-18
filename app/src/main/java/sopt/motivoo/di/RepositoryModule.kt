@@ -4,6 +4,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import sopt.motivoo.data.error.UserErrorHandlerImpl
 import sopt.motivoo.data.repository.AuthRepositoryImpl
 import sopt.motivoo.data.repository.DummyRepositoryImpl
 import sopt.motivoo.data.repository.FirebaseRepositoryImpl
@@ -12,6 +13,7 @@ import sopt.motivoo.data.repository.NetworkRepositoryImpl
 import sopt.motivoo.data.repository.OnboardingRepositoryImpl
 import sopt.motivoo.data.repository.StepCountRepositoryImpl
 import sopt.motivoo.data.repository.UserRepositoryImpl
+import sopt.motivoo.domain.error.UserErrorHandler
 import sopt.motivoo.domain.repository.AuthRepository
 import sopt.motivoo.domain.repository.DummyRepository
 import sopt.motivoo.domain.repository.FirebaseRepository
@@ -65,4 +67,9 @@ object RepositoryModule {
     @Singleton
     fun providesNetworkRepository(networkRepositoryImpl: NetworkRepositoryImpl): NetworkRepository =
         networkRepositoryImpl
+
+    @Provides
+    @Singleton
+    fun providesUserErrorHandler(userErrorHandlerImpl: UserErrorHandlerImpl): UserErrorHandler =
+        userErrorHandlerImpl
 }

@@ -115,9 +115,21 @@ class HomeViewModel @Inject constructor(
     fun postMissionTodayChoice() {
         viewModelScope.launch {
             setHomeState(HomeState.Loading)
-            repository.postMissionTodayChoice()?.let { missionData ->
-                transactionWithMissionChoiceData(missionData)
-                patchHome()
+            repository.postMissionTodayChoice().let { missonChoiceData ->
+                when (missonChoiceData.code) {
+                    in 200..201 -> {
+                        missonChoiceData.data?.let {
+                            transactionWithMissionChoiceData(missionData = it)
+                            patchHome()
+                        }
+                    }
+
+                    412 -> {
+                        setHomeState(HomeState.FailMatching)
+                    }
+
+                    null -> Unit
+                }
             }
         }
     }

@@ -4,15 +4,18 @@ import android.graphics.Bitmap
 import okhttp3.RequestBody.Companion.toRequestBody
 import sopt.motivoo.data.datasource.remote.HomeDataSource
 import sopt.motivoo.data.model.request.home.RequestMissionTodayDto
+import sopt.motivoo.domain.entity.error.ResponseHandler
 import sopt.motivoo.domain.entity.home.HomeData
 import sopt.motivoo.domain.entity.home.MissionChoiceData
 import sopt.motivoo.domain.entity.home.MissionImageData
+import sopt.motivoo.domain.error.UserErrorHandler
 import sopt.motivoo.domain.repository.HomeRepository
 import java.io.ByteArrayOutputStream
 import javax.inject.Inject
 
 class HomeRepositoryImpl @Inject constructor(
     private val homeDataSource: HomeDataSource,
+    private val userErrorHandler: UserErrorHandler,
 ) : HomeRepository {
     override suspend fun patchHome(): HomeData? =
         try {
@@ -21,12 +24,12 @@ class HomeRepositoryImpl @Inject constructor(
             null
         }
 
-    override suspend fun postMissionTodayChoice(): MissionChoiceData? =
-        try {
-            homeDataSource.postMissionTodayChoice().toMissionChoiceData()
-        } catch (e: Exception) {
-            null
-        }
+    override suspend fun postMissionTodayChoice(): ResponseHandler<MissionChoiceData?> = try {
+        val missionChoiceData = homeDataSource.postMissionTodayChoice().toMissionChoiceData()
+        ResponseHandler(code = missionChoiceData.code, data = missionChoiceData)
+    } catch (e: Exception) {
+        userErrorHandler.handleUserError(throwable = e, null)
+    }
 
     override suspend fun postMissionToday(missionId: Int): Unit? =
         try {
