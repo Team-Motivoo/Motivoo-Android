@@ -32,9 +32,11 @@ fun Context.showToast(msg: String) {
     Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
 }
 
-fun Context.showSnackbar(view: View, message: String, isShort: Boolean = true) {
+fun Context.showSnackbar(view: View, message: String, actionMessage: String, isShort: Boolean = true, onClick: () -> Unit) {
     val duration = if (isShort) Snackbar.LENGTH_SHORT else Snackbar.LENGTH_LONG
-    Snackbar.make(view, message, duration).show()
+    Snackbar.make(view, message, duration)
+        .setAction(actionMessage) { onClick() }
+        .show()
 }
 
 fun Context.colorOf(@ColorRes resId: Int) = ContextCompat.getColor(this, resId)
@@ -83,6 +85,7 @@ fun Context.sendNotification(
         setContentIntent(contentPendingIntent)
         setAutoCancel(true)
         setOngoing(true)
+        setShowWhen(false)
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
             priority = NotificationCompat.PRIORITY_DEFAULT
         }

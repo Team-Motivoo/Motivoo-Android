@@ -65,6 +65,7 @@ data class ResponseMissionChoiceDto(
     }
 
     fun toMissionChoiceData(): MissionChoiceData = MissionChoiceData(
+        code = code,
         isChoiceFinished = data.isChoiceFinished,
         date = data.date ?: "",
         missionChoiceList = data.missionChoiceList?.map {
