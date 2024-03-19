@@ -33,15 +33,17 @@
 
         <ImageView
             android:id="@+id/iv_login"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="69dp"
             android:layout_marginTop="70dp"
-            android:layout_marginBottom="99dp"
+            android:layout_marginBottom="119dp"
+            android:adjustViewBounds="true"
             android:src="@drawable/img_login"
+            app:layout_constraintBottom_toTopOf="@+id/ll_kakao_login"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_login_description" />
-
 
         <TextView
             android:id="@+id/tv_login_error_message"

@@ -84,7 +84,7 @@
             android:enabled="@{inviteCodeViewModel.postInviteCode.length() > 0}"
             android:paddingVertical="18dp"
             android:stateListAnimator="@null"
-            android:text="@string/onboarding_motivoo_start"
+            android:text="@string/motivoo_start"
             android:textColor="@drawable/selector_text_color"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
