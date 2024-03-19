@@ -76,7 +76,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="5dp"
                     android:src="@drawable/ic_shoes"
                     app:layout_constraintBottom_toBottomOf="@id/tv_mypage_check_exercise"
                     app:layout_constraintStart_toStartOf="parent"
