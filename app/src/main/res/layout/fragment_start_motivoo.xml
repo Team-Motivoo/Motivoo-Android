@@ -91,7 +91,7 @@
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="6dp"
             android:layout_marginBottom="44dp"
-            android:background="@drawable/shape_get_invite_code_radius8"
+            android:background="@drawable/shape_stroke_button_radius8"
             android:paddingVertical="18dp"
             android:stateListAnimator="@null"
             android:text="@string/post_invite_code"
