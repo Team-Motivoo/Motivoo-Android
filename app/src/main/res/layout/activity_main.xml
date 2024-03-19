@@ -30,7 +30,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/include_toolbar"
                 app:progressView_autoAnimate="true"
                 app:progressView_colorBackground="@color/gray_100_F4F5F9"
-                app:progressView_colorProgress="@color/blue_400_65DBFF"
+                app:progressView_colorProgress="@color/red_400_FF6259"
                 app:progressView_max="6"
                 app:progressView_min="0"
                 app:progressView_progress="4"

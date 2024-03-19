@@ -65,28 +65,32 @@ class AgeQuestionFragment :
         onboardingViewModel.isValidAge.flowWithLifecycle(
             viewLifecycleOwner.lifecycle,
             Lifecycle.State.STARTED
-        ).onEach { isValidAge ->
-            when (isValidAge) {
-                null, true -> {
-                    binding.etAgeQuestion.background =
-                        requireContext().drawableOf(R.drawable.selector_edittext_input)
-                    binding.tvAgeQuestionErrorMessage.setVisible(GONE)
-                }
+        )
+            .distinctUntilChanged()
+            .onEach { isValidAge ->
+                when (isValidAge) {
+                    null, true -> {
+                        binding.etAgeQuestion.background =
+                            requireContext().drawableOf(R.drawable.selector_edittext_input)
+                        binding.tvAgeQuestionErrorMessage.setVisible(GONE)
+                    }
 
-                false -> {
-                    binding.etAgeQuestion.background =
-                        requireContext().drawableOf(R.drawable.shape_edittext_error_radius8)
-                    binding.tvAgeQuestionErrorMessage.setVisible(VISIBLE)
+                    false -> {
+                        binding.etAgeQuestion.background =
+                            requireContext().drawableOf(R.drawable.shape_edittext_error_radius8)
+                        binding.tvAgeQuestionErrorMessage.setVisible(VISIBLE)
+                    }
                 }
-            }
-        }.launchIn(viewLifecycleOwner.lifecycleScope)
+            }.launchIn(viewLifecycleOwner.lifecycleScope)
 
         onboardingViewModel.isValidNext.flowWithLifecycle(
             viewLifecycleOwner.lifecycle,
             Lifecycle.State.STARTED
-        ).onEach { isValidNext ->
-            binding.btnAgeQuestionDone.isEnabled = isValidNext
-        }.launchIn(viewLifecycleOwner.lifecycleScope)
+        )
+            .distinctUntilChanged()
+            .onEach { isValidNext ->
+                binding.btnAgeQuestionDone.isEnabled = isValidNext
+            }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
     private fun showAgeLayout(view: View, newTitle: String, newDescription: String) {
