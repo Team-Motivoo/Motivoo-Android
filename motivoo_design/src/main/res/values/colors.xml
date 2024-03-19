@@ -6,10 +6,25 @@
     <color name="pink_100_FFE6F5">#FFE6F5</color>
     <!--Red-->
     <color name="red_50_FFEDEC">#FFEDEC</color>
+    <color name="red_100_FFCBC8">#FFCBC8</color>
     <color name="red_200_FFA8A4">#FFA8A4</color>
-    <color name="red_400_FF6259">#FFEDEC</color>
+    <color name="red_300_FF847E">#FF847E</color>
+    <color name="red_400_FF6259">#FF6259</color>
+    <color name="red_500_FF473C">#FF473C</color>
+    <color name="red_600_F62E21">#F62E21</color>
+    <color name="red_700_DC2519">#DC2519</color>
     <color name="red_800_BC2016">#BC2016</color>
     <!--Blue-->
+    <color name="blue_50_E6E9FF">#E6E9FF</color>
+    <color name="blue_100_C8CDFF">#C8CDFF</color>
+    <color name="blue_200_949EFF">#949EFF</color>
+    <color name="blue_300_6272FF">#6272FF</color>
+    <color name="blue_400_384CFF">#384CFF</color>
+    <color name="blue_500_1E34FD">#1E34FD</color>
+    <color name="blue_600_1025DC">#1025DC</color>
+    <color name="blue_700_0517BE">#0517BE</color>
+    <color name="blue_800_000F96">#000F96</color>
+    <!--old Blue-->
     <color name="blue_50_EAFAFF">#EAFAFF</color>
     <color name="blue_100_D7F6FF">#D7F6FF</color>
     <color name="blue_200_B4EEFF">#B4EEFF</color>
@@ -26,6 +41,7 @@
     <color name="gray_300_D5D5D7">#D5D5D7</color>
     <color name="gray_400_C0C1C3">#C0C1C3</color>
     <color name="gray_500_9D9EA0">#9D9EA0</color>
+    <color name="gray_600_7072764d">#4d707276</color>
     <color name="gray_600_707276">#707276</color>
     <color name="gray_700_464747">#464747</color>
     <color name="gray_800_303031">#303031</color>
