@@ -8,6 +8,9 @@
         <item name="android:statusBarColor">@color/white_FFFFFF</item>
         <item name="android:windowLightStatusBar">true</item>
         <!-- Customize your theme here. -->
+        <item name="colorControlActivated">@color/red_100_FFCBC8</item>
+        <item name="android:textColorHighlight">@color/red_100_FFCBC8</item>
+        <!-- Customize your theme here. -->
         <item name="android:includeFontPadding">false</item>
     </style>
 
