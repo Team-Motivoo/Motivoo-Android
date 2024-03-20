@@ -1,5 +1,6 @@
 package sopt.motivoo.presentation.mypage
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.View.GONE
@@ -7,6 +8,7 @@ import android.view.View.VISIBLE
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import dagger.hilt.android.AndroidEntryPoint
 import sopt.motivoo.R
 import sopt.motivoo.databinding.FragmentMypageBinding
@@ -81,7 +83,7 @@ class MyPageFragment : BindingFragment<FragmentMypageBinding>(R.layout.fragment_
         }
 
         binding.clMypageOpenSource.setOnClickListener {
-            navigateToOpenSourceWebView()
+            startActivity(Intent(requireContext(), OssLicensesMenuActivity::class.java))
         }
 
         binding.clMypageDeveloperInfo.setOnClickListener {
@@ -116,12 +118,6 @@ class MyPageFragment : BindingFragment<FragmentMypageBinding>(R.layout.fragment_
     private fun navigateToPrivacyPolicyWebView() {
         val action =
             MyPageFragmentDirections.actionMyPageFragmentToWebViewFragment(getString(R.string.privacy_policy_url))
-        findNavController().navigate(action)
-    }
-
-    private fun navigateToOpenSourceWebView() {
-        val action =
-            MyPageFragmentDirections.actionMyPageFragmentToWebViewFragment(getString(R.string.open_source_url))
         findNavController().navigate(action)
     }
 
