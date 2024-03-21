@@ -12,7 +12,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:progressInnerColor="@color/gray_100_F4F5F9"
-        app:centerCircleColor="@color/white_FFFFFF"
         app:layout_constraintTop_toTopOf="parent"
         app:progressBackgroundColor="@color/gray_600_707276" />
 
