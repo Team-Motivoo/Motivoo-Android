@@ -10,18 +10,22 @@
     app:layout_constraintTop_toTopOf="parent">
 
     <TextView
+        android:id="@+id/tv_exercise_our_history"
         style="@style/H5_semi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="32dp"
+        android:layout_marginBottom="8dp"
         android:drawableEnd="@drawable/ic_question"
         android:drawablePadding="8dp"
         android:paddingVertical="5dp"
         android:text="@string/exercise_our_exercise_history"
         android:textColor="@color/gray_900_161616"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cl_exercise_today" />
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_exercise_today"

@@ -19,94 +19,30 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="@string/exercise_date" />
 
-    <LinearLayout
-        android:id="@+id/ll_item_exercise_no_image_before_exercise_left"
+    <ImageView
+        android:id="@+id/iv_item_exercise_fail_exercise_left"
         android:layout_width="0dp"
+        android:src="@drawable/img_success_next_exercise"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/shape_rectangle_gray50_radius8"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:paddingHorizontal="18dp"
         app:layout_constraintDimensionRatio="1"
-        app:layout_constraintEnd_toStartOf="@id/ll_item_exercise_no_image_before_exercise_right"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toStartOf="@id/iv_item_exercise_fail_exercise_right"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_item_exercise_date">
+        app:layout_constraintTop_toBottomOf="@id/tv_item_exercise_date"/>
 
-        <ImageView
-            android:id="@+id/iv_item_exercise_no_image_before_exercise_left"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_thumb_up" />
-
-        <TextView
-            android:id="@+id/tv_item_exercise_no_image_before_exercise_left"
-            style="@style/Caption2_re"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:gravity="center"
-            android:paddingVertical="4dp"
-            android:textColor="@color/gray_400_C0C1C3"
-            tools:text="@string/exercise_no_image_before_exercise" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/ll_item_exercise_no_image_before_exercise_right"
-        style="@style/Caption2_re"
+    <ImageView
+        android:id="@+id/iv_item_exercise_fail_exercise_right"
         android:layout_width="0dp"
+        android:src="@drawable/img_success_next_exercise"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="16dp"
-        android:background="@drawable/shape_rectangle_gray50_radius8"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:paddingHorizontal="18dp"
-        app:layout_constraintBottom_toBottomOf="@id/ll_item_exercise_no_image_before_exercise_left"
+        app:layout_constraintBottom_toBottomOf="@id/iv_item_exercise_fail_exercise_left"
         app:layout_constraintDimensionRatio="1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/ll_item_exercise_no_image_before_exercise_left"
-        app:layout_constraintTop_toTopOf="@id/ll_item_exercise_no_image_before_exercise_left">
-
-        <ImageView
-            android:id="@+id/iv_item_exercise_no_image_before_exercise_right"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_thumb_up" />
-
-        <TextView
-            android:id="@+id/tv_item_exercise_no_image_before_exercise_right"
-            style="@style/Caption2_re"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:gravity="center"
-            android:paddingVertical="4dp"
-            android:textColor="@color/gray_400_C0C1C3"
-            tools:text="@string/exercise_no_image_before_exercise" />
-
-    </LinearLayout>
-
-    <ImageView
-        android:id="@+id/iv_item_exercise_finish_left"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@id/ll_item_exercise_no_image_before_exercise_left"
-        app:layout_constraintEnd_toEndOf="@id/ll_item_exercise_no_image_before_exercise_left"
-        app:layout_constraintStart_toStartOf="@id/ll_item_exercise_no_image_before_exercise_left"
-        app:layout_constraintTop_toTopOf="@id/ll_item_exercise_no_image_before_exercise_left" />
-
-    <ImageView
-        android:id="@+id/iv_item_exercise_finish_right"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@id/ll_item_exercise_no_image_before_exercise_right"
-        app:layout_constraintEnd_toEndOf="@id/ll_item_exercise_no_image_before_exercise_right"
-        app:layout_constraintStart_toStartOf="@id/ll_item_exercise_no_image_before_exercise_right"
-        app:layout_constraintTop_toTopOf="@id/ll_item_exercise_no_image_before_exercise_right"
-        tools:src="@drawable/img_exercise_fake" />
+        app:layout_constraintStart_toEndOf="@id/iv_item_exercise_fail_exercise_left"
+        app:layout_constraintTop_toTopOf="@id/iv_item_exercise_fail_exercise_left"/>
 
     <TextView
         android:id="@+id/tv_item_exercise_img_bottom_txt_left"
@@ -116,9 +52,9 @@
         android:layout_marginTop="8dp"
         android:paddingVertical="5dp"
         android:textColor="@color/gray_900_161616"
-        app:layout_constraintEnd_toEndOf="@id/iv_item_exercise_finish_left"
-        app:layout_constraintStart_toStartOf="@id/ll_item_exercise_no_image_before_exercise_left"
-        app:layout_constraintTop_toBottomOf="@id/ll_item_exercise_no_image_before_exercise_left"
+        app:layout_constraintEnd_toEndOf="@id/iv_item_exercise_fail_exercise_left"
+        app:layout_constraintStart_toStartOf="@id/iv_item_exercise_fail_exercise_left"
+        app:layout_constraintTop_toBottomOf="@id/iv_item_exercise_fail_exercise_left"
         tools:text="@string/exercise_today_mission" />
 
     <TextView
@@ -129,9 +65,9 @@
         android:layout_marginTop="8dp"
         android:paddingVertical="5dp"
         android:textColor="@color/gray_900_161616"
-        app:layout_constraintEnd_toEndOf="@id/iv_item_exercise_finish_right"
-        app:layout_constraintStart_toStartOf="@id/ll_item_exercise_no_image_before_exercise_right"
-        app:layout_constraintTop_toBottomOf="@id/ll_item_exercise_no_image_before_exercise_right"
+        app:layout_constraintEnd_toEndOf="@id/iv_item_exercise_fail_exercise_right"
+        app:layout_constraintStart_toStartOf="@id/iv_item_exercise_fail_exercise_right"
+        app:layout_constraintTop_toBottomOf="@id/iv_item_exercise_fail_exercise_right"
         tools:text="@string/exercise_today_mission" />
 
     <TextView
@@ -148,7 +84,7 @@
         android:text="@string/exercise_my_exercise"
         android:textColor="@color/gray_600_707276"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@id/ll_item_exercise_no_image_before_exercise_left"
+        app:layout_constraintStart_toStartOf="@id/iv_item_exercise_fail_exercise_left"
         app:layout_constraintTop_toBottomOf="@id/tv_item_exercise_img_bottom_txt_left" />
 
     <TextView
@@ -179,7 +115,7 @@
         android:paddingVertical="7dp"
         android:text="@string/exercise_parent_exercise"
         android:textColor="@color/gray_600_707276"
-        app:layout_constraintStart_toStartOf="@id/ll_item_exercise_no_image_before_exercise_right"
+        app:layout_constraintStart_toStartOf="@id/iv_item_exercise_fail_exercise_right"
         app:layout_constraintTop_toBottomOf="@id/tv_item_exercise_img_bottom_txt_right" />
 
     <TextView
