@@ -10,9 +10,6 @@ import sopt.motivoo.databinding.ItemExerciseBinding
 import sopt.motivoo.databinding.ItemExerciseNoticeBinding
 import sopt.motivoo.domain.entity.exercise.ExerciseData.ExerciseItemInfo
 import sopt.motivoo.presentation.exercise.ExerciseFragment.Companion.CHILD
-import sopt.motivoo.util.extension.prettyString
-import sopt.motivoo.util.extension.setVisible
-import java.time.LocalDate
 
 class ExerciseEachDateInfoViewHolder(private val binding: ItemExerciseBinding) :
     RecyclerView.ViewHolder(binding.root) {
@@ -21,9 +18,7 @@ class ExerciseEachDateInfoViewHolder(private val binding: ItemExerciseBinding) :
         val context = binding.root.context
         initText(exerciseItemInfoData, binding, userType)
         initImage(exerciseItemInfoData, binding)
-        imageVisibility(exerciseItemInfoData, binding)
         checkStatus(exerciseItemInfoData, binding, context)
-        compareDate(binding, context)
     }
 
     private fun initText(
@@ -49,33 +44,20 @@ class ExerciseEachDateInfoViewHolder(private val binding: ItemExerciseBinding) :
         binding: ItemExerciseBinding,
     ) {
         with(binding) {
-            ivItemExerciseFinishLeft.load(exerciseItemInfoData.myMissionImgUrl)
-            if (exerciseItemInfoData.myMissionImgUrl == null) {
-                ivItemExerciseFinishLeft.visibility = View.GONE
+            if (exerciseItemInfoData.myMissionImgUrl != null) {
+                ivItemExerciseLeftImage.load(exerciseItemInfoData.myMissionImgUrl)
+            } else if (exerciseItemInfoData.myMissionStatus == "없음") {
+                ivItemExerciseLeftImage.setImageResource(R.drawable.img_choose_exercise)
+            } else {
+                ivItemExerciseLeftImage.setImageResource(R.drawable.img_success_next_exercise)
             }
-            if (exerciseItemInfoData.opponentMissionImgUrl == null) {
-                ivItemExerciseFinishRight.visibility = View.GONE
+            if (exerciseItemInfoData.opponentMissionImgUrl != null) {
+                ivItemExerciseRightImage.load(exerciseItemInfoData.opponentMissionImgUrl)
+            } else if (exerciseItemInfoData.opponentMissionStatus == "없음") {
+                ivItemExerciseRightImage.setImageResource(R.drawable.img_choose_exercise)
+            } else {
+                ivItemExerciseRightImage.setImageResource(R.drawable.img_success_next_exercise)
             }
-        }
-    }
-
-    private fun imageVisibility(
-        exerciseItemInfoData: ExerciseItemInfo.EachDateItemInfo,
-        binding: ItemExerciseBinding,
-    ) {
-        if (exerciseItemInfoData.myMissionImgUrl == null) {
-            binding.ivItemExerciseFinishLeft.setVisible(View.INVISIBLE)
-            binding.tvItemExerciseNoImageBeforeExerciseLeft.setVisible(View.VISIBLE)
-        } else {
-            binding.ivItemExerciseFinishLeft.setVisible(View.VISIBLE)
-            binding.tvItemExerciseNoImageBeforeExerciseLeft.setVisible(View.INVISIBLE)
-        }
-        if (exerciseItemInfoData.opponentMissionImgUrl == null) {
-            binding.ivItemExerciseFinishRight.setVisible(View.INVISIBLE)
-            binding.tvItemExerciseNoImageBeforeExerciseRight.setVisible(View.VISIBLE)
-        } else {
-            binding.ivItemExerciseFinishRight.setVisible(View.VISIBLE)
-            binding.tvItemExerciseNoImageBeforeExerciseRight.setVisible(View.INVISIBLE)
         }
     }
 
@@ -85,13 +67,6 @@ class ExerciseEachDateInfoViewHolder(private val binding: ItemExerciseBinding) :
         context: Context,
     ) {
         when (exerciseItemInfoData.myMissionStatus) {
-            STATE_EXERCISING_TYPE -> {
-                binding.tvItemExerciseMyState.backgroundTintList =
-                    ContextCompat.getColorStateList(context, R.color.pink_100_FFE6F5)
-                val textColorPink: Int = ContextCompat.getColor(context, R.color.pink_FF19A3)
-                binding.tvItemExerciseMyState.setTextColor(textColorPink)
-            }
-
             STATE_SUCCESS_TYPE -> {
                 binding.tvItemExerciseMyState.backgroundTintList =
                     ContextCompat.getColorStateList(context, R.color.blue_100_D7F6FF)
@@ -99,37 +74,16 @@ class ExerciseEachDateInfoViewHolder(private val binding: ItemExerciseBinding) :
                 binding.tvItemExerciseMyState.setTextColor(textColorBlue)
             }
 
-            STATE_FAILURE_TYPE -> {
-                binding.tvItemExerciseMyState.backgroundTintList =
-                    ContextCompat.getColorStateList(context, R.color.gray_300_D5D5D7)
-                val textColorGray: Int = ContextCompat.getColor(context, R.color.gray_700_464747)
-                binding.tvItemExerciseMyState.setTextColor(textColorGray)
-            }
-
             else -> {
                 binding.tvItemExerciseMyState.visibility = View.GONE
             }
         }
         when (exerciseItemInfoData.opponentMissionStatus) {
-            STATE_EXERCISING_TYPE -> {
-                binding.tvItemExerciseParentState.backgroundTintList =
-                    ContextCompat.getColorStateList(context, R.color.pink_100_FFE6F5)
-                val textColorPink: Int = ContextCompat.getColor(context, R.color.pink_FF19A3)
-                binding.tvItemExerciseParentState.setTextColor(textColorPink)
-            }
-
             STATE_SUCCESS_TYPE -> {
                 binding.tvItemExerciseParentState.backgroundTintList =
                     ContextCompat.getColorStateList(context, R.color.blue_100_D7F6FF)
                 val textColorBlue: Int = ContextCompat.getColor(context, R.color.blue_600_2E9ABB)
                 binding.tvItemExerciseParentState.setTextColor(textColorBlue)
-            }
-
-            STATE_FAILURE_TYPE -> {
-                binding.tvItemExerciseParentState.backgroundTintList =
-                    ContextCompat.getColorStateList(context, R.color.gray_300_D5D5D7)
-                val textColorGray: Int = ContextCompat.getColor(context, R.color.gray_700_464747)
-                binding.tvItemExerciseParentState.setTextColor(textColorGray)
             }
 
             else -> {
@@ -138,30 +92,8 @@ class ExerciseEachDateInfoViewHolder(private val binding: ItemExerciseBinding) :
         }
     }
 
-    private fun compareDate(binding: ItemExerciseBinding, context: Context) {
-        fun String.isToday(): Boolean = this == LocalDate.now().prettyString
-        fun String.removeDayOfTheWeek(): String = this.removeRange(length - 4 until length)
-
-        if (binding.tvItemExerciseDate.text.toString().removeDayOfTheWeek().isToday()) {
-            binding.tvItemExerciseNoImageBeforeExerciseLeft.text =
-                context.getString(R.string.exercise_no_image_before_exercise_today)
-            binding.tvItemExerciseNoImageBeforeExerciseRight.text =
-                context.getString(R.string.exercise_no_image_before_exercise_today)
-
-            binding.ivItemExerciseNoImageBeforeExerciseLeft.visibility = View.GONE
-            binding.ivItemExerciseNoImageBeforeExerciseRight.visibility = View.GONE
-        } else {
-            binding.tvItemExerciseNoImageBeforeExerciseLeft.text =
-                context.getString(R.string.exercise_no_image_before_exercise)
-            binding.tvItemExerciseNoImageBeforeExerciseRight.text =
-                context.getString(R.string.exercise_no_image_before_exercise)
-        }
-    }
-
     companion object {
-        const val STATE_EXERCISING_TYPE = "진행중"
         const val STATE_SUCCESS_TYPE = "성공"
-        const val STATE_FAILURE_TYPE = "실패"
     }
 }
 

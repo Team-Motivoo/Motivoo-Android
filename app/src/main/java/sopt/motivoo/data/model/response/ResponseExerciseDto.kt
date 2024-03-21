@@ -21,6 +21,7 @@ data class ResponseExerciseDto(
         @Serializable
         data class MissionContent(
             @SerialName("mission_content") val missionContent: String,
+            @SerialName("date") val date: String,
         )
 
         @Serializable
