@@ -56,16 +56,51 @@
             app:layout_constraintTop_toBottomOf="@id/tv_exercise_today_exercise" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_exercise_select_today_mission"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/shape_rectangle_radius8"
+            android:backgroundTint="@color/gray_900_161616"
+            app:layout_constraintStart_toStartOf="@id/tv_exercise_today_exercise"
+            app:layout_constraintTop_toBottomOf="@id/tv_exercise_today_exercise">
+
+            <TextView
+                android:id="@+id/tv_exercise_select_today_mission"
+                style="@style/H5_semi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingVertical="10dp"
+                android:paddingStart="10dp"
+                android:text="@string/exercise_select_today_mission"
+                android:textColor="@color/white_FFFFFF"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:paddingEnd="6dp"
+                android:src="@drawable/ic_small_arrow"
+                app:layout_constraintBottom_toBottomOf="@id/tv_exercise_select_today_mission"
+                app:layout_constraintStart_toEndOf="@id/tv_exercise_select_today_mission"
+                app:layout_constraintTop_toTopOf="@id/tv_exercise_select_today_mission" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_exercise_today_left"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="78dp"
             android:layout_marginBottom="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/cl_exercise_today_right"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_exercise_today_mission">
+            app:layout_constraintTop_toBottomOf="@id/tv_exercise_today_exercise">
 
             <ImageView
                 android:id="@+id/iv_exercise_today_empty_left"
