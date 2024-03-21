@@ -193,5 +193,6 @@
     <string name="withdrawal_title">매칭이 끊어졌어요</string>
     <string name="withdrawal_desc">매칭이 끊어져 모티부를 이용할 수 없어요\n탈퇴 후 다시 가입해주세요</string>
     <string name="network_error_title">잠시 연결이 불안정해요</string>
+    <string name="exercise_our_exercise_history">우리들의 운동 기록</string>
 
 </resources>
