@@ -11,10 +11,6 @@ sealed class HomeState {
         val homeData: HomeData,
     ) : HomeState()
 
-    data class SelectedMission(
-        val missionId: Int,
-    ) : HomeState()
-
     data class SelectedMissionData(
         val todayMission: TodayMissionData,
     ) : HomeState()

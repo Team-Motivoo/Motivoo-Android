@@ -11,13 +11,12 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import sopt.motivoo.domain.entity.home.HomeData
 import sopt.motivoo.domain.entity.home.MissionChoiceData
 import sopt.motivoo.domain.repository.FirebaseRepository
 import sopt.motivoo.domain.repository.HomeRepository
-import sopt.motivoo.domain.repository.OnboardingRepository
 import sopt.motivoo.domain.repository.StepCountRepository
 import sopt.motivoo.domain.repository.UserRepository
 import sopt.motivoo.presentation.home.HomeIntent
@@ -29,12 +28,9 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val repository: HomeRepository,
     private val stepCountRepository: StepCountRepository,
-    private val onboardingRepository: OnboardingRepository,
     private val firebaseRepository: FirebaseRepository,
     private val userRepository: UserRepository,
 ) : ViewModel() {
-    val userId = MutableLiveData<Int>()
-    val otherUserId = MutableLiveData<Int>()
     val stepCount = MutableLiveData<Int>()
     val otherStepCount = MutableLiveData<Int>()
     val stepCountGoal = MutableLiveData<Int>()
@@ -57,20 +53,17 @@ class HomeViewModel @Inject constructor(
         MutableStateFlow<HomePictureState>(HomePictureState.Idle)
     val homePictureState: StateFlow<HomePictureState> = _homePictureState.asStateFlow()
 
-    fun getMyStepCountFlow() {
+    private fun getMyStepCountFlow(userId: Long, stepCountGoal: Int) {
         viewModelScope.launch {
             stepCountRepository.myStepCount.stateIn(
-                initialValue = stepCountRepository.myStepCount.first(),
-                scope = viewModelScope,
+                initialValue = stepCountRepository.getMyStepCount(),
+                scope = this,
                 started = SharingStarted.WhileSubscribed(5000)
             ).collect { stepCountFlow ->
-                stepCount.value = stepCountFlow
-                firebaseRepository.setUserStepCount(
-                    userId.value?.toLong() ?: return@collect,
-                    stepCountFlow
-                )
-                stepCountGoal.value?.let {
-                    if (isCompletedMission.value == false && stepCountFlow >= it && it != 0) {
+                if (stepCountFlow != -1) {
+                    stepCount.value = stepCountFlow
+                    firebaseRepository.setUserStepCount(userId, stepCountFlow)
+                    if (isCompletedMission.value == false && stepCountFlow >= stepCountGoal && stepCountGoal != 0) {
                         setHomeState(HomeState.CompletedStepCount)
                     }
                 }
@@ -78,16 +71,18 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    private suspend fun getOtherStepCountFlow(otherUserId: Int) {
-        firebaseRepository.getUpdatedStepCount(otherUserId.toLong()).stateIn(
-            initialValue = firebaseRepository.getStepCount(otherUserId.toLong()).first(),
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(50000)
-        ).collect { otherStepCountFlow ->
-            this@HomeViewModel.otherStepCount.value = otherStepCountFlow
-            otherStepCountGoal.value?.let {
-                if (isCompletedMission.value == true && otherStepCountFlow >= it && it != 0) {
-                    setHomeState(HomeState.HighFive)
+    private fun getOtherStepCountFlow(otherUserId: Int, otherStepCountGoal: Int) {
+        viewModelScope.launch {
+            firebaseRepository.getUpdatedStepCount(otherUserId.toLong()).stateIn(
+                initialValue = firebaseRepository.getStepCount(otherUserId.toLong())?.toInt(),
+                scope = this,
+                started = SharingStarted.WhileSubscribed(50000)
+            ).collect { otherStepCountFlow ->
+                if (otherStepCountFlow != null) {
+                    otherStepCount.value = otherStepCountFlow.toInt()
+                    if (isCompletedMission.value == true && otherStepCountFlow >= otherStepCountGoal && otherStepCountGoal != 0) {
+                        setHomeState(HomeState.HighFive)
+                    }
                 }
             }
         }
@@ -105,58 +100,36 @@ class HomeViewModel @Inject constructor(
         when (homeIntent) {
             HomeIntent.FirstSelectMission -> {
                 missionChoiceData.value?.missionChoiceList?.get(0)?.missionId?.let { missionId ->
-                    setHomeState(HomeState.SelectedMission(missionId.toInt()))
+                    postMissionToday(missionId.toInt())
                 }
             }
 
             HomeIntent.SecondSelectMission -> {
                 missionChoiceData.value?.missionChoiceList?.get(1)?.missionId?.let { missionId ->
-                    setHomeState(HomeState.SelectedMission(missionId.toInt()))
+                    postMissionToday(missionId.toInt())
                 }
             }
         }
     }
 
-    fun getUserId() {
+    fun postMissionTodayChoice() {
         viewModelScope.launch {
             setHomeState(HomeState.Loading)
-            onboardingRepository.getMatchedResult().onSuccess { matchedItem ->
-                transactionWithUserId(matchedItem.userId, matchedItem.opponentUserId)
-                postMissionTodayChoice()
-            }.onFailure {
-                // TODO :: 상대방 유저가 회원 탈퇴할 경우를 고려
-            }
-        }
-    }
-
-    private fun transactionWithUserId(myUserId: Int, otherUserId: Int) {
-        viewModelScope.launch {
-            userRepository.setUserId(myUserId)
-            this@HomeViewModel.userId.value = myUserId
-            this@HomeViewModel.otherUserId.value = otherUserId
-            firebaseRepository.getStepCount(myUserId.toLong()).first().let {
-                stepCount.value = it
-                stepCountRepository.setMyStepCount(it)
-            }
-            firebaseRepository.getStepCount(otherUserId.toLong()).first().let {
-                otherStepCount.value = it
-            }
-            getOtherStepCountFlow(otherUserId)
-        }
-    }
-
-    private fun postMissionTodayChoice() {
-        viewModelScope.launch {
-            repository.postMissionTodayChoice()?.let { missionData ->
-                transactionWithMissionChoiceData(missionData)
-                if (stepCountRepository.myStepCount.first() == -1) {
-                    userId.value?.let {
-                        stepCountRepository.setMyStepCount(
-                            firebaseRepository.getStepCount(it.toLong()).first()
-                        )
+            repository.postMissionTodayChoice().let { missonChoiceData ->
+                when (missonChoiceData.code) {
+                    in 200..201 -> {
+                        missonChoiceData.data?.let {
+                            transactionWithMissionChoiceData(missionData = it)
+                            patchHome()
+                        }
                     }
+
+                    412 -> {
+                        setHomeState(HomeState.FailMatching)
+                    }
+
+                    null -> Unit
                 }
-                otherUserId.value?.let { patchHome(firebaseRepository.getStepCount(it.toLong()).first()) }
             }
         }
     }
@@ -175,41 +148,69 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    private fun patchHome(otherStepCount: Int) {
+    private fun patchHome() {
         viewModelScope.launch {
             repository.patchHome()?.let { homeData ->
-                stepCountGoal.value = homeData.userGoalStepCount
-                otherStepCountGoal.value = homeData.opponentUserGoalStepCount
-                isCompletedMission.value = homeData.isMissionImageCompleted
-
+                getStepCount(homeData)
+                setUserStepCountAndUserId(homeData)
                 setHomeState(HomeState.FetchHomeData(homeData))
-
-                if (homeData.isOpponentUserWithdraw) {
-                    setHomeState(HomeState.FailMatching)
-                    return@launch
-                }
-
-                if (homeData.isStepCountCompleted && homeData.isMissionImageCompleted && homeData.opponentUserGoalStepCount != 0 && (otherStepCount >= homeData.opponentUserGoalStepCount)) {
-                    setHomeState(HomeState.HighFive)
-                    return@launch
-                }
-
-                if (homeData.isStepCountCompleted && !homeData.isMissionImageCompleted) {
-                    setHomeState(HomeState.CompletedStepCount)
-                }
-
-                if (homeData.isMissionImageCompleted) {
-                    if (homeData.opponentUserGoalStepCount != 0 && otherStepCount >= homeData.opponentUserGoalStepCount) {
-                        setHomeState(HomeState.HighFive)
-                    } else {
-                        setHomeState(HomeState.CompletedMission)
-                    }
-                }
+                if (setPatchHomeState(homeData)) return@launch
             }
         }
     }
 
-    fun postMissionToday(missionId: Int) {
+    private suspend fun setPatchHomeState(homeData: HomeData): Boolean {
+        if (homeData.isOpponentUserWithdraw) {
+            setHomeState(HomeState.FailMatching)
+            return true
+        }
+
+        firebaseRepository.getStepCount(homeData.opponentUserId)?.let {
+            if (!homeData.isStepCountCompleted && homeData.isMissionImageCompleted && homeData.opponentUserGoalStepCount != 0 &&
+                it >= homeData.opponentUserGoalStepCount
+            ) {
+                setHomeState(HomeState.HighFive)
+                return true
+            }
+        }
+
+        if (homeData.isStepCountCompleted && !homeData.isMissionImageCompleted) {
+            setHomeState(HomeState.CompletedStepCount)
+        }
+
+        if (homeData.isMissionImageCompleted) {
+            setHomeState(HomeState.CompletedMission)
+        }
+        return false
+    }
+
+    private suspend fun setUserStepCountAndUserId(homeData: HomeData) {
+        if (stepCountRepository.getMyStepCount() != -1 && userRepository.getUserId() != -1) {
+            val stepCount = stepCountRepository.getMyStepCount()
+            val userId = userRepository.getUserId()
+            firebaseRepository.setUserStepCount(userId.toLong(), stepCount)
+        } else {
+            if (stepCountRepository.getMyStepCount() == -1) {
+                firebaseRepository.getStepCount(homeData.userId)?.let {
+                    stepCountRepository.setMyStepCount(it.toInt())
+                }
+            }
+            userRepository.setUserId(homeData.userId.toInt())
+        }
+    }
+
+    private fun getStepCount(homeData: HomeData) {
+        getMyStepCountFlow(
+            homeData.userId,
+            homeData.userGoalStepCount
+        )
+        getOtherStepCountFlow(
+            homeData.opponentUserId.toInt(),
+            homeData.opponentUserGoalStepCount
+        )
+    }
+
+    private fun postMissionToday(missionId: Int) {
         viewModelScope.launch {
             if (repository.postMissionToday(missionId) != null) {
                 postMissionTodayChoice()

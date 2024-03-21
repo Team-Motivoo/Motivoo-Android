@@ -10,6 +10,7 @@ plugins {
     id 'com.google.firebase.crashlytics'
     id "io.sentry.android.gradle" version "4.1.1"
     id 'androidx.navigation.safeargs.kotlin'
+    id 'com.google.android.gms.oss-licenses-plugin'
 }
 
 Properties properties = new Properties()
@@ -137,11 +138,9 @@ dependencies {
     //progress Bar
     implementation "com.github.skydoves:progressview:1.1.3"
 
-    // Firebase
-    implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
-
     // Firebase Realtime Database
     implementation "com.google.firebase:firebase-database-ktx"
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.3'
 
     // kakao login
     implementation "com.kakao.sdk:v2-user:2.19.0"

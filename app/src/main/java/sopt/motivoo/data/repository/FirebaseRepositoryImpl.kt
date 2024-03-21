@@ -4,23 +4,27 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.async
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.tasks.await
+import sopt.motivoo.di.IoDispatcher
 import sopt.motivoo.domain.repository.FirebaseRepository
 import sopt.motivoo.util.Constants.USERS
 import javax.inject.Inject
 
 class FirebaseRepositoryImpl @Inject constructor(
     private val firebaseRealtimeDatabase: FirebaseDatabase,
+    @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
 ) : FirebaseRepository {
-    override fun getStepCount(id: Long): Flow<Int> = callbackFlow {
-        firebaseRealtimeDatabase.reference.child(USERS).child(id.toString()).get().addOnSuccessListener {
-            trySend(it.value.toString().toInt())
-        }
-
-        awaitClose { } // TODO : No cleanup addOnSuccessListener
+    override suspend fun getStepCount(id: Long): Long? {
+        return CoroutineScope(ioDispatcher).async {
+            (firebaseRealtimeDatabase.reference.child(USERS).child(id.toString()).get().await().value as? Long)
+        }.await()
     }
 
     override fun getUpdatedStepCount(otherId: Long): Flow<Int> = callbackFlow<Int> {
