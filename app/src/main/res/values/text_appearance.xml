@@ -92,4 +92,11 @@
         <item name="android:lineSpacingExtra">7.2sp</item>
     </style>
 
+    <style name="Code_med">
+        <item name="android:textSize">24sp</item>
+        <item name="fontFamily">@font/pretendard_medium</item>
+        <item name="android:lineSpacingExtra">17.28sp</item>
+        <item name="android:letterSpacing">-0.01</item>
+    </style>
+
 </resources>

@@ -59,7 +59,7 @@
 
             <TextView
                 android:id="@+id/tv_get_invite_code"
-                style="@style/H3_semi"
+                style="@style/Code_med"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
