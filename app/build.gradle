@@ -29,7 +29,7 @@ android {
         versionName "1.0"
 
         buildConfigField "String", "BASE_URL", properties["base_url"]
-
+        buildConfigField "String", "FIREBASE_RULE_UID", properties["firebase_rule_uid"]
         buildConfigField("String", "KAKAO_APP_KEY", "\"${properties.get('KAKAO_APP_KEY')}\"")
         manifestPlaceholders = [KAKAO_APP_KEY: properties.get('KAKAO_APP_KEY')]
 

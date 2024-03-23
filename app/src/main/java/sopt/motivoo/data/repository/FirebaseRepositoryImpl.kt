@@ -12,9 +12,9 @@ import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.tasks.await
+import sopt.motivoo.BuildConfig
 import sopt.motivoo.di.IoDispatcher
 import sopt.motivoo.domain.repository.FirebaseRepository
-import sopt.motivoo.util.Constants.USERS
 import javax.inject.Inject
 
 class FirebaseRepositoryImpl @Inject constructor(
@@ -23,12 +23,12 @@ class FirebaseRepositoryImpl @Inject constructor(
 ) : FirebaseRepository {
     override suspend fun getStepCount(id: Long): Long? {
         return CoroutineScope(ioDispatcher).async {
-            (firebaseRealtimeDatabase.reference.child(USERS).child(id.toString()).get().await().value as? Long)
+            (firebaseRealtimeDatabase.reference.child(BuildConfig.FIREBASE_RULE_UID).child(id.toString()).get().await().value as? Long)
         }.await()
     }
 
     override fun getUpdatedStepCount(otherId: Long): Flow<Int> = callbackFlow<Int> {
-        val ref = firebaseRealtimeDatabase.reference.child(USERS)
+        val ref = firebaseRealtimeDatabase.reference.child(BuildConfig.FIREBASE_RULE_UID)
         val listener = ref.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 trySend(snapshot.child(otherId.toString()).getValue(Int::class.java) ?: return)
@@ -46,7 +46,7 @@ class FirebaseRepositoryImpl @Inject constructor(
     }
 
     override fun setUserStepCount(userId: Long, myStepCount: Int) {
-        firebaseRealtimeDatabase.reference.child(USERS).child(userId.toString())
+        firebaseRealtimeDatabase.reference.child(BuildConfig.FIREBASE_RULE_UID).child(userId.toString())
             .setValue(myStepCount)
     }
 }
