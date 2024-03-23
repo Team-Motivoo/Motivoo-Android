@@ -17,6 +17,11 @@ class ExerciseViewModel @Inject constructor(
     private val exerciseService: ExerciseService,
 ) : ViewModel() {
 
+    private val _exerciseHistoryInfoList = ArrayList<ExerciseData.ExerciseItemInfo>()
+    val exerciseHistoryInfoList: MutableLiveData<ArrayList<ExerciseData.ExerciseItemInfo>> by lazy {
+        MutableLiveData<ArrayList<ExerciseData.ExerciseItemInfo>>()
+    }
+
     private val _exerciseHistoryInfo = MutableLiveData<UiState<ExerciseData>>(UiState.Loading)
     val exerciseHistoryInfo: LiveData<UiState<ExerciseData>> = _exerciseHistoryInfo
 
