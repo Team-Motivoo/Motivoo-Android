@@ -16,21 +16,16 @@ import sopt.motivoo.util.extension.prettyString
 import java.time.LocalDate
 
 class ExerciseEachDateInfoViewHolder(
-    private val bindingBottom: ItemExerciseBinding,
-    private val bindingTop: ItemExerciseNoticeBinding,
+    private val binding: ItemExerciseBinding,
 ) :
-    RecyclerView.ViewHolder(bindingBottom.root) {
+    RecyclerView.ViewHolder(binding.root) {
 
     fun onBind(
         exerciseItemInfoData: ExerciseItemInfo.EachDateItemInfo,
         userType: String,
         itemSize: Int,
     ) {
-        val context = bindingBottom.root.context
-        Log.d("itemsize", itemSize.toString())
         setHistoryOrNot(exerciseItemInfoData, userType, itemSize)
-        checkStatus(exerciseItemInfoData, bindingBottom, context)
-        setTodayImageAndBubble(exerciseItemInfoData, bindingTop)
     }
 
     private fun setHistoryOrNot(
@@ -38,7 +33,7 @@ class ExerciseEachDateInfoViewHolder(
         userType: String,
         itemSize: Int,
     ) {
-        with(bindingBottom) {
+        with(binding) {
             fun String.removeDayOfTheWeek(): String = this.removeRange(length - 4 until length)
             if (itemSize == 2 && exerciseItemInfoData.date!!.removeDayOfTheWeek() == LocalDate.now().prettyString) {
                 ivExerciseEmptyHistory.visibility = View.VISIBLE
@@ -48,8 +43,10 @@ class ExerciseEachDateInfoViewHolder(
                 ivItemExerciseRightImage.visibility = View.GONE
             } else {
                 ivExerciseEmptyHistory.visibility = View.GONE
-                initText(exerciseItemInfoData, bindingBottom, userType)
-                initImage(exerciseItemInfoData, bindingBottom)
+                initText(exerciseItemInfoData, binding, userType)
+                initImage(exerciseItemInfoData, binding)
+                val context = binding.root.context
+                checkStatus(exerciseItemInfoData, binding, context)
             }
         }
     }
@@ -125,31 +122,6 @@ class ExerciseEachDateInfoViewHolder(
         }
     }
 
-    private fun setTodayImageAndBubble(
-        exerciseItemInfoData: ExerciseItemInfo.EachDateItemInfo,
-        binding: ItemExerciseNoticeBinding,
-    ) {
-        fun String.removeDayOfTheWeek(): String = this.removeRange(length - 4 until length)
-        if (exerciseItemInfoData.date!!.removeDayOfTheWeek() == LocalDate.now().prettyString) {
-            if (exerciseItemInfoData.myMissionStatus == STATE_SUCCESS_TYPE) {
-                Log.d("check_test", "성공")
-                binding.ivExerciseTodayBubbleLeft.setImageResource(R.drawable.ic_bubble_success)
-                binding.ivExerciseTodayImageLeft.load(exerciseItemInfoData.myMissionImgUrl)
-            } else {
-                Log.d("check_test", "실패")
-                // 실패 상태인데 이미지 변경이 안되네요...
-                binding.ivExerciseTodayBubbleLeft.setImageResource(R.drawable.ic_bubble_exercising)
-                binding.ivExerciseTodayImageLeft.setImageResource(R.drawable.img_login_after)
-            }
-            if (exerciseItemInfoData.opponentMissionStatus == STATE_SUCCESS_TYPE) {
-                binding.ivExerciseTodayBubbleRight.setImageResource(R.drawable.ic_bubble_success)
-                binding.ivExerciseTodayImageRight.load(exerciseItemInfoData.opponentMissionImgUrl)
-            } else {
-                binding.ivExerciseTodayBubbleRight.setImageResource(R.drawable.ic_bubble_exercising)
-            }
-        }
-    }
-
     companion object {
         const val STATE_SUCCESS_TYPE = "성공"
     }
@@ -207,6 +179,27 @@ class ExerciseNoticeViewHolder(private val binding: ItemExerciseNoticeBinding) :
             tvExerciseTodayExercise.text = context.getString(R.string.exercise_today_exercise)
             clExerciseSelectTodayMission.visibility = View.GONE
             tvExerciseTodayMission.text = exerciseNoticeData.missionContent
+        }
+        setTodayImageAndBubble(exerciseNoticeData)
+    }
+
+    private fun setTodayImageAndBubble(
+        exerciseNoticeData: ExerciseItemInfo.NoticeItemInfo,
+    ) {
+        if (exerciseNoticeData.missionDate == exerciseNoticeData.todayDate) {
+            if (exerciseNoticeData.myMissionStatus == ExerciseEachDateInfoViewHolder.STATE_SUCCESS_TYPE) {
+                binding.ivExerciseTodayBubbleLeft.setImageResource(R.drawable.ic_bubble_success)
+                binding.ivExerciseTodayImageLeft.load(exerciseNoticeData.myMissionImgUrl)
+            } else {
+                binding.ivExerciseTodayBubbleLeft.setImageResource(R.drawable.ic_bubble_exercising)
+                binding.ivExerciseTodayImageLeft.setImageResource(R.drawable.img_unconnection)
+            }
+            if (exerciseNoticeData.opponentMissionStatus == ExerciseEachDateInfoViewHolder.STATE_SUCCESS_TYPE) {
+                binding.ivExerciseTodayBubbleRight.setImageResource(R.drawable.ic_bubble_success)
+                binding.ivExerciseTodayImageRight.load(exerciseNoticeData.opponentMissionImgUrl)
+            } else {
+                binding.ivExerciseTodayBubbleRight.setImageResource(R.drawable.ic_bubble_exercising)
+            }
         }
     }
 }

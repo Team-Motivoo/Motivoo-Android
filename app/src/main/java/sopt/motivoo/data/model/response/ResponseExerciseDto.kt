@@ -41,25 +41,49 @@ data class ResponseExerciseDto(
             if (data.todayMission == null && data.missionHistory?.isEmpty() == true) {
                 mutableListOf()
             } else if (data.todayMission == null) {
-                mutableListOf(ExerciseItemInfo.NoticeItemInfo(null))
+                mutableListOf(
+                    ExerciseItemInfo.NoticeItemInfo(
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null
+                    )
+                )
             } else {
-                mutableListOf(ExerciseItemInfo.NoticeItemInfo(data.todayMission?.missionContent))
+                mutableListOf(
+                    ExerciseItemInfo.NoticeItemInfo(
+                        data.todayMission?.missionContent,
+                        data.missionHistory!![0].myMissionStatus,
+                        data.missionHistory[0]!!.opponentMissionStatus,
+                        data.todayMission.date, data.missionHistory[0]!!.date,
+                        data.missionHistory[0]!!.myMissionImgUrl,
+                        data.missionHistory[0]!!.opponentMissionImgUrl,
+                    )
+                )
             }
 
         data.missionHistory?.forEach {
-            list.add(
-                ExerciseItemInfo.EachDateItemInfo(
-                    date = it.date,
-                    myMissionContent = it.myMissionContent,
-                    myMissionImgUrl = it.myMissionImgUrl,
-                    myMissionStatus = it.myMissionStatus,
-                    opponentMissionContent = it.opponentMissionContent,
-                    opponentMissionImgUrl = it.opponentMissionImgUrl,
-                    opponentMissionStatus = it.opponentMissionStatus
+            if (it.date != data.todayMission!!.date) {
+                list.add(
+                    ExerciseItemInfo.EachDateItemInfo(
+                        date = it.date,
+                        myMissionContent = it.myMissionContent,
+                        myMissionImgUrl = it.myMissionImgUrl,
+                        myMissionStatus = it.myMissionStatus,
+                        opponentMissionContent = it.opponentMissionContent,
+                        opponentMissionImgUrl = it.opponentMissionImgUrl,
+                        opponentMissionStatus = it.opponentMissionStatus
+                    )
                 )
-            )
-        }
 
+            }
+
+        }
         return ExerciseData(data.userType, list)
     }
 }
+
+

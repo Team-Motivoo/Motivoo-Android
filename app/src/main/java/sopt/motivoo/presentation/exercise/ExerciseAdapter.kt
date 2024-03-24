@@ -20,9 +20,8 @@ class ExerciseAdapter(private val userType: String) :
             }
 
             else -> {
-                val bindingTop = ItemExerciseNoticeBinding.inflate(inflater, parent, false)
-                val bindingBottom = ItemExerciseBinding.inflate(inflater, parent, false)
-                ExerciseEachDateInfoViewHolder(bindingBottom, bindingTop)
+                val binding = ItemExerciseBinding.inflate(inflater, parent, false)
+                ExerciseEachDateInfoViewHolder(binding)
             }
         }
     }
