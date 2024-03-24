@@ -21,12 +21,37 @@ class ExerciseEachDateInfoViewHolder(
 ) :
     RecyclerView.ViewHolder(bindingBottom.root) {
 
-    fun onBind(exerciseItemInfoData: ExerciseItemInfo.EachDateItemInfo, userType: String) {
+    fun onBind(
+        exerciseItemInfoData: ExerciseItemInfo.EachDateItemInfo,
+        userType: String,
+        itemSize: Int,
+    ) {
         val context = bindingBottom.root.context
-        initText(exerciseItemInfoData, bindingBottom, userType)
-        initImage(exerciseItemInfoData, bindingBottom)
+        Log.d("itemsize", itemSize.toString())
+        setHistoryOrNot(exerciseItemInfoData, userType, itemSize)
         checkStatus(exerciseItemInfoData, bindingBottom, context)
         setTodayImageAndBubble(exerciseItemInfoData, bindingTop)
+    }
+
+    private fun setHistoryOrNot(
+        exerciseItemInfoData: ExerciseItemInfo.EachDateItemInfo,
+        userType: String,
+        itemSize: Int,
+    ) {
+        with(bindingBottom) {
+            fun String.removeDayOfTheWeek(): String = this.removeRange(length - 4 until length)
+            if (itemSize == 2 && exerciseItemInfoData.date!!.removeDayOfTheWeek() == LocalDate.now().prettyString) {
+                ivExerciseEmptyHistory.visibility = View.VISIBLE
+                ivItemExerciseLeftImage.visibility = View.GONE
+                tvItemExerciseMyExercise.visibility = View.GONE
+                tvItemExerciseOpponentExercise.visibility = View.GONE
+                ivItemExerciseRightImage.visibility = View.GONE
+            } else {
+                ivExerciseEmptyHistory.visibility = View.GONE
+                initText(exerciseItemInfoData, bindingBottom, userType)
+                initImage(exerciseItemInfoData, bindingBottom)
+            }
+        }
     }
 
     private fun initText(
@@ -40,7 +65,7 @@ class ExerciseEachDateInfoViewHolder(
             tvItemExerciseImgBottomTxtRight.text = exerciseItemInfoData.opponentMissionContent
             tvItemExerciseMyState.text = exerciseItemInfoData.myMissionStatus
             tvItemExerciseParentState.text = exerciseItemInfoData.opponentMissionStatus
-            tvItemExerciseParentExercise.text =
+            tvItemExerciseOpponentExercise.text =
                 if (userType == CHILD) root.context.getString(R.string.exercise_parent_exercise) else root.context.getString(
                     R.string.exercise_child_exercise
                 )

@@ -104,7 +104,7 @@
         tools:text="진행중" />
 
     <TextView
-        android:id="@+id/tv_item_exercise_parent_exercise"
+        android:id="@+id/tv_item_exercise_opponent_exercise"
         style="@style/Caption2_re"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -129,10 +129,21 @@
         android:paddingHorizontal="8dp"
         android:paddingVertical="7dp"
         android:textColor="@color/gray_600_707276"
-        app:layout_constraintBottom_toBottomOf="@id/tv_item_exercise_parent_exercise"
-        app:layout_constraintStart_toEndOf="@id/tv_item_exercise_parent_exercise"
-        app:layout_constraintTop_toTopOf="@id/tv_item_exercise_parent_exercise"
+        app:layout_constraintBottom_toBottomOf="@id/tv_item_exercise_opponent_exercise"
+        app:layout_constraintStart_toEndOf="@id/tv_item_exercise_opponent_exercise"
+        app:layout_constraintTop_toTopOf="@id/tv_item_exercise_opponent_exercise"
         tools:text="성공" />
 
+
+    <ImageView
+        android:id="@+id/iv_exercise_empty_history"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/img_notexercise_white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="44dp"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

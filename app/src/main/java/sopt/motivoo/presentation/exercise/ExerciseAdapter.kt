@@ -36,7 +36,7 @@ class ExerciseAdapter(private val userType: String) :
 
             is ExerciseEachDateInfoViewHolder -> {
                 val dateExerciseInfo = exerciseItemInfoList[position]
-                holder.onBind(dateExerciseInfo as ExerciseItemInfo.EachDateItemInfo, userType)
+                holder.onBind(dateExerciseInfo as ExerciseItemInfo.EachDateItemInfo, userType, itemCount)
             }
         }
     }
