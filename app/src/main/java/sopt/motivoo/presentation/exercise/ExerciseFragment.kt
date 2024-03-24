@@ -2,8 +2,6 @@ package sopt.motivoo.presentation.exercise
 
 import android.os.Bundle
 import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -13,7 +11,6 @@ import sopt.motivoo.databinding.FragmentExerciseBinding
 import sopt.motivoo.domain.entity.exercise.ExerciseData
 import sopt.motivoo.util.UiState
 import sopt.motivoo.util.binding.BindingFragment
-import sopt.motivoo.util.extension.setVisible
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -51,16 +48,20 @@ class ExerciseFragment : BindingFragment<FragmentExerciseBinding>(R.layout.fragm
             when (uiState) {
                 is UiState.Success -> {
                     Timber.tag("aaa").e("${uiState.data}")
+                    binding.pvLoading.visibility = View.GONE
                     initViews(uiState.data)
-                    binding.clExerciseRoot.setVisible(VISIBLE)
+                    binding.clExerciseRoot.visibility = View.VISIBLE
                 }
 
                 is UiState.Loading -> {
                     Timber.tag("aaa").e("로딩")
-                    binding.clExerciseRoot.setVisible(GONE)
+                    binding.pvLoading.visibility = View.VISIBLE
+                    binding.clExerciseRoot.visibility = View.GONE
                 }
 
-                else -> Unit
+                else -> {
+                    binding.pvLoading.visibility = View.GONE
+                }
             }
         }
     }
