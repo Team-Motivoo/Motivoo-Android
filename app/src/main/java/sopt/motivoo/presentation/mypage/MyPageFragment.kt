@@ -9,6 +9,7 @@ import android.view.View.VISIBLE
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import dagger.hilt.android.AndroidEntryPoint
 import sopt.motivoo.R
 import sopt.motivoo.databinding.FragmentMypageBinding
@@ -83,7 +84,7 @@ class MyPageFragment : BindingFragment<FragmentMypageBinding>(R.layout.fragment_
         }
 
         binding.clMypageOpenSource.setOnClickListener {
-            navigateToOpenSourceWebView()
+            startActivity(Intent(requireContext(), OssLicensesMenuActivity::class.java))
         }
 
         binding.clMypageAskKakao.setOnClickListener {

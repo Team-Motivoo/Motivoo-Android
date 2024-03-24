@@ -14,6 +14,7 @@ class StepCountLocalDataSource @Inject constructor(
     val myStepCount: Flow<Int> = dataStore.data.map { preferences ->
         preferences[PreferencesKeys.STEP_COUNT] ?: -1
     }
+
     suspend fun addMyStepCount(stepCount: (Int) -> Unit) {
         dataStore.edit { preferences ->
             val currentStepCount = preferences[PreferencesKeys.STEP_COUNT] ?: 0
