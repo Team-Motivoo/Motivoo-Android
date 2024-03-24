@@ -31,7 +31,7 @@ class ExerciseAdapter(private val userType: String) :
         when (holder) {
             is ExerciseNoticeViewHolder -> {
                 val noticeInfo = exerciseItemInfoList[position]
-                holder.onBind(noticeInfo as ExerciseItemInfo.NoticeItemInfo)
+                holder.onBind(noticeInfo as ExerciseItemInfo.NoticeItemInfo, userType)
             }
 
             is ExerciseEachDateInfoViewHolder -> {

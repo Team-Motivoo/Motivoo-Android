@@ -157,7 +157,22 @@ class ExerciseEachDateInfoViewHolder(
 
 class ExerciseNoticeViewHolder(private val binding: ItemExerciseNoticeBinding) :
     RecyclerView.ViewHolder(binding.root) {
-    fun onBind(exerciseNoticeData: ExerciseItemInfo.NoticeItemInfo) {
+    fun onBind(exerciseNoticeData: ExerciseItemInfo.NoticeItemInfo, userType: String) {
+        setCharacterIcon(userType)
+        setText(exerciseNoticeData)
+    }
+
+    private fun setCharacterIcon(userType: String) {
+        if (userType == CHILD) {
+            binding.ivExerciseTodayIconLeft.setImageResource(R.drawable.ic_child_left)
+            binding.ivExerciseTodayIconRight.setImageResource(R.drawable.ic_parent_right)
+        } else {
+            binding.ivExerciseTodayIconLeft.setImageResource(R.drawable.ic_parent_left)
+            binding.ivExerciseTodayIconRight.setImageResource(R.drawable.ic_child_right)
+        }
+    }
+
+    private fun setText(exerciseNoticeData: ExerciseItemInfo.NoticeItemInfo) {
         val context = binding.root.context
         if (exerciseNoticeData.missionContent == null) {
             setTextNoMission(context)
