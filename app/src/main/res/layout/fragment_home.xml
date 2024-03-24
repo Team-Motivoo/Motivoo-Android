@@ -68,10 +68,9 @@
                     android:id="@+id/motivoo_first_mission_card"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
+                    android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="24dp"
-                    android:layout_marginEnd="8dp"
-                    app:layout_constraintEnd_toStartOf="@id/motivoo_second_mission_card"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_unselected_mission_home_today_exercise_mission" />
 
@@ -79,50 +78,11 @@
                     android:id="@+id/motivoo_second_mission_card"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    app:layout_constraintBottom_toBottomOf="@id/motivoo_first_mission_card"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/motivoo_first_mission_card"
-                    app:layout_constraintTop_toTopOf="@id/motivoo_first_mission_card" />
-
-                <TextView
-                    android:id="@+id/tv_step_count"
-                    style="@style/Caption2_re"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="40dp"
-                    android:text="@string/home_step_count"
-                    android:textColor="@color/gray_600_707276"
-                    android:visibility="@{vm.isMissionChoiceFinished() ? View.GONE : View.VISIBLE}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/motivoo_first_mission_card" />
-
-                <com.android.motivoo_design.MotivooStepCountText
-                    android:id="@+id/motivoo_unselected_mission_step_count_text"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:paddingHorizontal="16dp"
-                    android:visibility="@{vm.isPermissionGranted() ? View.VISIBLE : View.GONE}"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_step_count"
-                    app:myStepCountText="@{String.valueOf(vm.stepCount)}"
-                    app:otherStepCountText="@{String.valueOf(vm.otherStepCount)}"
-                    app:userType="@{vm.userType}" />
-
-                <com.android.motivoo_design.MotivooDeniedPermission
-                    android:id="@+id/motivoo_unselected_mission_denied_permission"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="16dp"
-                    android:layout_marginTop="8dp"
-                    android:visibility="@{vm.isPermissionGranted() ? View.GONE : View.VISIBLE}"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/motivoo_unselected_mission_step_count_text"
-                    tools:visibility="invisible" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -135,7 +95,8 @@
                 android:visibility="@{vm.isMissionChoiceFinished() ? View.VISIBLE : View.GONE}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="visible">
 
                 <TextView
                     android:id="@+id/tv_selected_mission_home_today"
@@ -185,7 +146,7 @@
                     android:id="@+id/iv_step_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/img_home"
+                    android:src="@drawable/ic_home_mission_uncomplete"
                     android:visibility="@{vm.isHighFive() ? View.INVISIBLE : View.VISIBLE}"
                     app:layout_constraintBottom_toBottomOf="@id/motivoo_my_pie_chart"
                     app:layout_constraintEnd_toEndOf="@id/motivoo_my_pie_chart"
@@ -197,7 +158,7 @@
                     android:id="@+id/iv_mission_completed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/img_home_mission_complete"
+                    android:src="@drawable/ic_home_mission_complete"
                     android:visibility="@{vm.isHighFive() ? View.VISIBLE : View.INVISIBLE}"
                     app:layout_constraintBottom_toBottomOf="@id/motivoo_my_pie_chart"
                     app:layout_constraintEnd_toEndOf="@id/motivoo_my_pie_chart"
@@ -211,7 +172,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{vm.isHighFive() ? @string/home_success_hifive : @string/home_exercise_percent}"
-                    android:textColor="@{vm.isHighFive() ? @color/blue_700_065066 : @color/gray_600_707276}"
+                    android:textColor="@{vm.isHighFive() ? @color/red_400_FF6259 : @color/gray_600_707276}"
                     app:layout_constraintBottom_toBottomOf="@+id/iv_step_count"
                     app:layout_constraintEnd_toEndOf="@id/iv_step_count"
                     app:layout_constraintStart_toStartOf="@id/iv_step_count"
@@ -220,14 +181,13 @@
 
                 <com.android.motivoo_design.MotivooOtherPieChart
                     android:id="@+id/motivoo_other_pie_chart"
+                    iconEnabled="@{vm.isHighFive}"
                     stepCount="@{vm.otherStepCount}"
                     stepCountGoal="@{vm.otherStepCountGoal}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
-                    app:centerCircleColor="@color/white_FFFFFF"
                     app:chartUserType="@{vm.anotherUserType}"
-                    iconEnabled="@{vm.isHighFive}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_selected_mission_home_today_exercise_mission"
@@ -236,16 +196,16 @@
 
                 <com.android.motivoo_design.MotivooPieChart
                     android:id="@+id/motivoo_my_pie_chart"
+                    iconEnabled="@{vm.isHighFive}"
                     stepCount="@{vm.stepCount}"
                     stepCountGoal="@{vm.stepCountGoal}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:chartUserType="@{vm.userType}"
-                    iconEnabled="@{vm.isHighFive}"
                     app:layout_constraintEnd_toEndOf="@id/motivoo_other_pie_chart"
                     app:layout_constraintStart_toStartOf="@id/motivoo_other_pie_chart"
                     app:layout_constraintTop_toTopOf="@id/motivoo_other_pie_chart"
-                    app:progressBackgroundColor="@color/blue_400_65DBFF" />
+                    app:progressBackgroundColor="@color/red_400_FF6259" />
 
                 <com.android.motivoo_design.MotivooStepCountText
                     android:id="@+id/motivoo_selected_mission_step_count_text"
