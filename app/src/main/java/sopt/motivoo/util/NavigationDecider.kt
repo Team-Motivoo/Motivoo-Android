@@ -33,9 +33,7 @@ sealed class NavigationEvent {
     data object Home : NavigationEvent()
     data object AgeQuestion : NavigationEvent()
     data object StartMotivoo : NavigationEvent()
-
     data object Login : NavigationEvent()
-
     data object Permission : NavigationEvent()
     data object TermsOfUse : NavigationEvent()
     data object Init : NavigationEvent()

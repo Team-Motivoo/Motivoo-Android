@@ -51,7 +51,6 @@ class MyServiceOutFragment :
             .onEach { uiState ->
                 when (uiState) {
                     is UiState.Success -> {
-                        authViewModel.resetWithDrawState()
                         authViewModel.clearLocalDataStore()
                         requireContext().apply {
                             stopService(Intent(this, StepCountService::class.java))

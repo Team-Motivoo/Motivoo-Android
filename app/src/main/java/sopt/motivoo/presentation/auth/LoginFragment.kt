@@ -74,17 +74,24 @@ class LoginFragment : BindingFragment<FragmentLoginBinding>(R.layout.fragment_lo
             .onEach { uiState ->
                 when (uiState) {
                     is UiState.Success -> {
-                        authViewModel.resetLoginState()
+                        binding.pvLoading.visibility = GONE
                         viewLifecycleOwner.lifecycleScope.launch {
                             authViewModel.checkNavigateState()
                         }
                     }
 
                     is UiState.Failure -> {
+                        binding.pvLoading.visibility = GONE
                         showLoginErrorMessage()
                     }
 
-                    else -> Unit
+                    is UiState.Loading -> {
+                        binding.pvLoading.visibility = VISIBLE
+                    }
+
+                    else -> {
+                        binding.pvLoading.visibility = GONE
+                    }
                 }
             }.launchIn(viewLifecycleOwner.lifecycleScope)
 
