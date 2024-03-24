@@ -131,6 +131,7 @@
                 android:id="@+id/iv_exercise_today_image_left"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:padding="1dp"
                 android:adjustViewBounds="true"
                 android:src="@drawable/img_exercise_today_image"/>
 
@@ -180,6 +181,7 @@
                 android:id="@+id/iv_exercise_today_image_right"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:padding="1dp"
                 android:adjustViewBounds="true"
                 android:src="@drawable/img_exercise_today_image"/>
 
