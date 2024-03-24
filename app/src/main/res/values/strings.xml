@@ -158,6 +158,7 @@
     <string name="exercise_empty_content">아직 완료한 운동이 없어요\n운동하고 나만의 앨범을 만들어봐요!</string>
     <string name="exercise_empty_button">오늘의 운동 하러가기</string>
     <string name="exercise_select_today_mission">오늘의 운동 선택하러가기</string>
+    <string name="exercise_please_select_today_mission">오늘 할 운동을 선택하세요!</string>
 
     <!-- connection error -->
     <string name="connection_error_title">잠시 연결이 불안정해요</string>

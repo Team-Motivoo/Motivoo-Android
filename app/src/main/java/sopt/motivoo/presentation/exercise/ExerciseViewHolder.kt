@@ -3,6 +3,9 @@ package sopt.motivoo.presentation.exercise
 import android.content.Context
 import android.view.View
 import androidx.core.content.ContextCompat
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import sopt.motivoo.R
@@ -100,6 +103,38 @@ class ExerciseEachDateInfoViewHolder(private val binding: ItemExerciseBinding) :
 class ExerciseNoticeViewHolder(private val binding: ItemExerciseNoticeBinding) :
     RecyclerView.ViewHolder(binding.root) {
     fun onBind(exerciseNoticeData: ExerciseItemInfo.NoticeItemInfo) {
-        binding.tvExerciseTodayMission.text = exerciseNoticeData.missionContent
+        val context = binding.root.context
+        if (exerciseNoticeData.missionContent == null) {
+            setTextNoMission(context)
+        } else {
+            setTextYesMission(context, exerciseNoticeData)
+        }
+    }
+
+    private fun setTextNoMission(context: Context) {
+        with(binding) {
+            tvExerciseTodayExercise.text =
+                context.getString(R.string.exercise_please_select_today_mission)
+            clExerciseSelectTodayMission.visibility = View.VISIBLE
+            tvExerciseTodayMission.visibility = View.GONE
+            setClickEvents()
+        }
+    }
+
+    private fun setClickEvents() {
+        binding.clExerciseSelectTodayMission.setOnClickListener {
+            it.findNavController().navigate(R.id.action_exerciseFragment_to_homeFragment)
+        }
+    }
+
+    private fun setTextYesMission(
+        context: Context,
+        exerciseNoticeData: ExerciseItemInfo.NoticeItemInfo,
+    ) {
+        with(binding) {
+            tvExerciseTodayExercise.text = context.getString(R.string.exercise_today_exercise)
+            clExerciseSelectTodayMission.visibility = View.GONE
+            tvExerciseTodayMission.text = exerciseNoticeData.missionContent
+        }
     }
 }

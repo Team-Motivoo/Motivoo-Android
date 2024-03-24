@@ -38,9 +38,9 @@ data class ResponseExerciseDto(
 
     fun toExerciseData(): ExerciseData {
         val list: MutableList<ExerciseItemInfo> =
-            if (data.todayMission?.missionContent == null && data.missionHistory?.isEmpty() == true) {
+            if (data.todayMission == null && data.missionHistory?.isEmpty() == true) {
                 mutableListOf()
-            } else if (data.todayMission?.missionContent == null) {
+            } else if (data.todayMission == null) {
                 mutableListOf(ExerciseItemInfo.NoticeItemInfo(null))
             } else {
                 mutableListOf(ExerciseItemInfo.NoticeItemInfo(data.todayMission?.missionContent))
