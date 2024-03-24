@@ -16,6 +16,7 @@
     <string name="onboarding_age">나이</string>
     <string name="onboarding_hint">나이를 입력해주세요</string>
     <string name="onboarding_error_message">14세부터 99세까지 사용 가능해요.</string>
+    <string name="onboarding_null_error_message">나이를 입력해주세요</string>
     <string name="onboarding_parent_or_child">부모 or 자녀</string>
     <string name="do_exercise_title">평소 운동을 하시나요?</string>
     <string name="do_exercise_yes">네</string>

@@ -1,5 +1,6 @@
 package sopt.motivoo.presentation.onboarding
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -37,6 +38,8 @@ class OnboardingViewModel @Inject constructor(
     val userType get() = _userType.asStateFlow()
 
     val age = MutableStateFlow<String?>(null)
+
+    val isFirst = MutableLiveData(true)
 
     val isValidAge: StateFlow<Boolean?> = age.map { ageString ->
         when {

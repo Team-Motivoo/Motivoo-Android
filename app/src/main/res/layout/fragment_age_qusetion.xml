@@ -84,10 +84,22 @@
                 style="@style/Caption2_re"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/onboarding_error_message"
                 android:textColor="@color/red_500_FF473C"
-                android:visibility="gone"
+                android:visibility="invisible"
+                app:layout_constraintStart_toStartOf="@+id/et_age_question"
+                app:layout_constraintTop_toBottomOf="@+id/et_age_question" />
+
+            <TextView
+                android:id="@+id/tv_age_question_null_error_message"
+                style="@style/Caption2_re"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/onboarding_null_error_message"
+                android:textColor="@color/red_500_FF473C"
+                android:visibility="invisible"
                 app:layout_constraintStart_toStartOf="@+id/et_age_question"
                 app:layout_constraintTop_toBottomOf="@+id/et_age_question" />
 
