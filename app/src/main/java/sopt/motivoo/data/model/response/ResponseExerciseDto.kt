@@ -4,6 +4,8 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import sopt.motivoo.domain.entity.exercise.ExerciseData
 import sopt.motivoo.domain.entity.exercise.ExerciseData.ExerciseItemInfo
+import sopt.motivoo.util.extension.prettyString
+import java.time.LocalDate
 
 @Serializable
 data class ResponseExerciseDto(
@@ -66,7 +68,8 @@ data class ResponseExerciseDto(
             }
 
         data.missionHistory?.forEach {
-            if (it.date != data.todayMission!!.date) {
+            fun String.removeDayOfTheWeek(): String = this.removeRange(length - 4 until length)
+            if (it.date.removeDayOfTheWeek() != LocalDate.now().prettyString) {
                 list.add(
                     ExerciseItemInfo.EachDateItemInfo(
                         date = it.date,
@@ -78,12 +81,8 @@ data class ResponseExerciseDto(
                         opponentMissionStatus = it.opponentMissionStatus
                     )
                 )
-
             }
-
         }
         return ExerciseData(data.userType, list)
     }
 }
-
-

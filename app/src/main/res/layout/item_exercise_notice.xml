@@ -131,19 +131,18 @@
                 android:id="@+id/iv_exercise_today_image_left"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="1dp"
                 android:adjustViewBounds="true"
-                android:src="@drawable/img_exercise_today_image"/>
+                android:padding="1dp"
+                android:src="@drawable/img_exercise_today_image" />
 
             <ImageView
                 android:id="@+id/iv_exercise_today_icon_left"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginHorizontal="52dp"
                 android:layout_marginBottom="1dp"
                 android:src="@drawable/ic_child_left"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintDimensionRatio="1"
+                app:layout_constraintDimensionRatio="2.87:1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -181,19 +180,18 @@
                 android:id="@+id/iv_exercise_today_image_right"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="1dp"
                 android:adjustViewBounds="true"
-                android:src="@drawable/img_exercise_today_image"/>
+                android:padding="1dp"
+                android:src="@drawable/img_exercise_today_image" />
 
             <ImageView
                 android:id="@+id/iv_exercise_today_icon_right"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginHorizontal="52dp"
                 android:layout_marginBottom="1dp"
                 android:src="@drawable/ic_parent_right"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintDimensionRatio="1"
+                app:layout_constraintDimensionRatio="2.87:1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 

@@ -1,7 +1,6 @@
 package sopt.motivoo.presentation.exercise
 
 import android.content.Context
-import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
@@ -192,7 +191,6 @@ class ExerciseNoticeViewHolder(private val binding: ItemExerciseNoticeBinding) :
                 binding.ivExerciseTodayImageLeft.load(exerciseNoticeData.myMissionImgUrl)
             } else {
                 binding.ivExerciseTodayBubbleLeft.setImageResource(R.drawable.ic_bubble_exercising)
-                binding.ivExerciseTodayImageLeft.setImageResource(R.drawable.img_notexercise)
             }
             if (exerciseNoticeData.opponentMissionStatus == ExerciseEachDateInfoViewHolder.STATE_SUCCESS_TYPE) {
                 binding.ivExerciseTodayBubbleRight.setImageResource(R.drawable.ic_bubble_success)
