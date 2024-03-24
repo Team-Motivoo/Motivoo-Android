@@ -22,7 +22,6 @@ import javax.inject.Inject
 class PostInviteCodeViewModel @Inject constructor(
     private val motivooStorage: MotivooStorage,
     private val onboardingRepository: OnboardingRepository,
-    private val networkRepository: NetworkRepository,
 ) : ViewModel() {
 
     val postInviteCode = MutableStateFlow("")
@@ -37,7 +36,6 @@ class PostInviteCodeViewModel @Inject constructor(
     fun postInviteCode() {
         viewModelScope.launch {
             resetOnboardingState()
-            networkRepository.setLoading(true)
             onboardingRepository.patchInviteCode(
                 RequestPostInviteCodeDto(
                     postInviteCode.value
@@ -45,11 +43,9 @@ class PostInviteCodeViewModel @Inject constructor(
             ).onSuccess {
                 motivooStorage.isUserMatched = it.isMatched
                 _postInviteCodeState.value = UiState.Success(true)
-                networkRepository.setLoading(false)
             }.onFailure {
                 Timber.e(it.message)
                 _postInviteCodeState.value = UiState.Failure(it.toString())
-                networkRepository.setLoading(false)
             }
         }
     }

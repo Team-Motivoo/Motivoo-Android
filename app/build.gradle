@@ -25,8 +25,8 @@ android {
         applicationId "sopt.motivoo"
         minSdk 24
         targetSdk 34
-        versionCode 1
-        versionName "1.0"
+        versionCode 4
+        versionName "1.0.1"
 
         buildConfigField "String", "BASE_URL", properties["base_url"]
         buildConfigField "String", "FIREBASE_RULE_UID", properties["firebase_rule_uid"]

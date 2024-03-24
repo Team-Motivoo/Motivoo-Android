@@ -74,20 +74,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun collectData() {
-        mainViewModel.isLoading.flowWithLifecycle(
-            lifecycle,
-            Lifecycle.State.STARTED
-        )
-            .distinctUntilChanged()
-            .onEach { isLoading ->
-                val navController: NavController = findNavController(R.id.fc_main)
-                if (isLoading && navController.currentDestination?.id != R.id.loadingFragment) {
-                    navController.navigate(R.id.loadingFragment)
-                } else if (!isLoading && navController.currentDestination?.id == R.id.loadingFragment) {
-                    navController.popBackStack()
-                }
-            }.launchIn(lifecycleScope)
-
         mainViewModel.networkState.flowWithLifecycle(
             lifecycle,
             Lifecycle.State.STARTED

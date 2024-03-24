@@ -24,7 +24,6 @@ import javax.inject.Inject
 class AuthViewModel @Inject constructor(
     private val motivooStorage: MotivooStorage,
     private val authRepository: AuthRepository,
-    private val networkRepository: NetworkRepository,
     private val stepCountRepository: StepCountRepository,
     private val userRepository: UserRepository,
     private val navigationDecider: NavigationDecider
@@ -59,18 +58,15 @@ class AuthViewModel @Inject constructor(
         platformToken: String,
     ) {
         viewModelScope.launch {
-            networkRepository.setLoading(true)
             authRepository.postLogin(
                 RequestLoginDto(
                     platformToken,
                     SocialType.kakao.name,
                 ),
             ).onSuccess { signUpResponse ->
-                networkRepository.setLoading(false)
                 handleLoginSuccess(signUpResponse)
                 motivooStorage.isUserLoggedIn = true
             }.onFailure { throwable ->
-                networkRepository.setLoading(false)
                 Timber.e(throwable.message)
             }
         }
