@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import dagger.hilt.android.AndroidEntryPoint
+import sopt.motivoo.BuildConfig
 import sopt.motivoo.R
 import sopt.motivoo.databinding.FragmentMypageBinding
 import sopt.motivoo.presentation.type.UserType
@@ -28,6 +29,7 @@ class MyPageFragment : BindingFragment<FragmentMypageBinding>(R.layout.fragment_
 
         myPageViewModel.getUserInfo()
         observeLiveData()
+        writeVersionInfo()
         clickButtons()
         overrideOnBackPressed()
     }
@@ -65,6 +67,11 @@ class MyPageFragment : BindingFragment<FragmentMypageBinding>(R.layout.fragment_
         }
     }
 
+    private fun writeVersionInfo() {
+        val version = BuildConfig.VERSION_NAME
+        binding.tvMypageVersion.text = version
+    }
+
     private fun clickButtons() {
 
         binding.tvMypageMyInfo.setOnClickListener {
@@ -89,6 +96,10 @@ class MyPageFragment : BindingFragment<FragmentMypageBinding>(R.layout.fragment_
 
         binding.clMypageAskKakao.setOnClickListener {
             openKakaoChat()
+        }
+
+        binding.clMypageLookMore.setOnClickListener {
+            navigateToAboutMotivooWebView()
         }
     }
 
@@ -118,15 +129,15 @@ class MyPageFragment : BindingFragment<FragmentMypageBinding>(R.layout.fragment_
         findNavController().navigate(action)
     }
 
-    private fun navigateToOpenSourceWebView() {
-        val action =
-            MyPageFragmentDirections.actionMyPageFragmentToWebViewFragment(getString(R.string.open_source_url))
-        findNavController().navigate(action)
-    }
-
     private fun openKakaoChat() {
-        val kakaoOpenChatUrl = "https://open.kakao.com/o/sSCxapcg"
+        val kakaoOpenChatUrl = getString(R.string.mypage_kakao_chat_link)
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(kakaoOpenChatUrl))
         startActivity(intent)
+    }
+
+    private fun navigateToAboutMotivooWebView() {
+        val action =
+            MyPageFragmentDirections.actionMyPageFragmentToWebViewFragment(getString(R.string.about_motivoo_url))
+        findNavController().navigate(action)
     }
 }
