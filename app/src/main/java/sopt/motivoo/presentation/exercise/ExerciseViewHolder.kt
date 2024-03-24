@@ -3,9 +3,7 @@ package sopt.motivoo.presentation.exercise
 import android.content.Context
 import android.view.View
 import androidx.core.content.ContextCompat
-import androidx.navigation.Navigation.findNavController
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import sopt.motivoo.R
@@ -117,6 +115,8 @@ class ExerciseNoticeViewHolder(private val binding: ItemExerciseNoticeBinding) :
                 context.getString(R.string.exercise_please_select_today_mission)
             clExerciseSelectTodayMission.visibility = View.VISIBLE
             tvExerciseTodayMission.visibility = View.GONE
+            ivExerciseTodayBubbleLeft.visibility = View.GONE
+            ivExerciseTodayBubbleRight.visibility = View.GONE
             setClickEvents()
         }
     }
