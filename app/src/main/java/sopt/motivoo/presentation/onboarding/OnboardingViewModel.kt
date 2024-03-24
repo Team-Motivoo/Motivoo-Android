@@ -25,7 +25,6 @@ import sopt.motivoo.presentation.type.UserType
 import sopt.motivoo.presentation.type.WhatActivityType
 import sopt.motivoo.presentation.type.WhatExerciseType
 import sopt.motivoo.util.UiState
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -84,7 +83,7 @@ class OnboardingViewModel @Inject constructor(
         )
     )
 
-    private val _isPostOnboardingInfoSuccess = MutableStateFlow<UiState<Boolean>>(UiState.Loading)
+    private val _isPostOnboardingInfoSuccess = MutableStateFlow<UiState<Boolean>>(UiState.Empty)
     val isPostOnboardingInfoSuccess get() = _isPostOnboardingInfoSuccess.asStateFlow()
     fun setDoExerciseType(doExerciseType: DoExerciseType) {
         _doExerciseType.value = doExerciseType
@@ -166,6 +165,7 @@ class OnboardingViewModel @Inject constructor(
         selectedSoreSpotString: List<String>
     ) {
         viewModelScope.launch {
+            _isPostOnboardingInfoSuccess.value = UiState.Loading
             val exerciseType =
                 if (isDoExercise) whatExerciseTypeString else whatActivityTypeString
             val requestDto = RequestOnboardingDto(
@@ -182,7 +182,7 @@ class OnboardingViewModel @Inject constructor(
                     motivooStorage.isFinishedOnboarding = true
                     _isPostOnboardingInfoSuccess.value = UiState.Success(true)
                 }.onFailure {
-                    Timber.e(it.message)
+                    _isPostOnboardingInfoSuccess.value = UiState.Failure(it.message.toString())
                 }
         }
     }

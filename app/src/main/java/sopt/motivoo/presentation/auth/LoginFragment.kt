@@ -2,8 +2,6 @@ package sopt.motivoo.presentation.auth
 
 import android.os.Bundle
 import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import android.view.animation.AnimationUtils
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
@@ -26,7 +24,6 @@ import sopt.motivoo.util.NavigationEvent
 import sopt.motivoo.util.UiState
 import sopt.motivoo.util.binding.BindingFragment
 import sopt.motivoo.util.extension.setOnSingleClickListener
-import sopt.motivoo.util.extension.setVisible
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -74,23 +71,23 @@ class LoginFragment : BindingFragment<FragmentLoginBinding>(R.layout.fragment_lo
             .onEach { uiState ->
                 when (uiState) {
                     is UiState.Success -> {
-                        binding.pvLoading.visibility = GONE
+                        binding.pvLoading.visibility = View.GONE
                         viewLifecycleOwner.lifecycleScope.launch {
                             authViewModel.checkNavigateState()
                         }
                     }
 
                     is UiState.Failure -> {
-                        binding.pvLoading.visibility = GONE
+                        binding.pvLoading.visibility = View.GONE
                         showLoginErrorMessage()
                     }
 
                     is UiState.Loading -> {
-                        binding.pvLoading.visibility = VISIBLE
+                        binding.pvLoading.visibility = View.VISIBLE
                     }
 
                     else -> {
-                        binding.pvLoading.visibility = GONE
+                        binding.pvLoading.visibility = View.GONE
                     }
                 }
             }.launchIn(viewLifecycleOwner.lifecycleScope)
@@ -116,13 +113,13 @@ class LoginFragment : BindingFragment<FragmentLoginBinding>(R.layout.fragment_lo
     private fun showLoginErrorMessage() {
         val fadeIn = AnimationUtils.loadAnimation(context, R.anim.fade_in)
         binding.tvLoginErrorMessage.startAnimation(fadeIn)
-        binding.tvLoginErrorMessage.setVisible(VISIBLE)
+        binding.tvLoginErrorMessage.visibility = View.VISIBLE
 
         lifecycleScope.launch {
             delay(GetInviteCodeFragment.TWO_SECONDS)
             val fadeOut = AnimationUtils.loadAnimation(context, R.anim.fade_out)
             binding.tvLoginErrorMessage.startAnimation(fadeOut)
-            binding.tvLoginErrorMessage.setVisible(GONE)
+            binding.tvLoginErrorMessage.visibility = View.GONE
         }
     }
 }
