@@ -16,7 +16,7 @@ class ExerciseData(
         ) : ExerciseItemInfo()
 
         data class NoticeItemInfo(
-            val missionContent: String,
+            val missionContent: String?,
         ) : ExerciseItemInfo()
     }
 }
