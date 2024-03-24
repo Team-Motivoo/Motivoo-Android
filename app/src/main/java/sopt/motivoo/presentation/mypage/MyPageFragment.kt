@@ -69,7 +69,7 @@ class MyPageFragment : BindingFragment<FragmentMypageBinding>(R.layout.fragment_
 
     private fun writeVersionInfo() {
         val version = BuildConfig.VERSION_NAME
-        binding.tvMypageVersion.text = version
+        binding.tvMypageVersion.text = getString(R.string.mypage_version)+version
     }
 
     private fun clickButtons() {
