@@ -192,7 +192,7 @@ class ExerciseNoticeViewHolder(private val binding: ItemExerciseNoticeBinding) :
                 binding.ivExerciseTodayImageLeft.load(exerciseNoticeData.myMissionImgUrl)
             } else {
                 binding.ivExerciseTodayBubbleLeft.setImageResource(R.drawable.ic_bubble_exercising)
-                binding.ivExerciseTodayImageLeft.setImageResource(R.drawable.img_unconnection)
+                binding.ivExerciseTodayImageLeft.setImageResource(R.drawable.img_notexercise)
             }
             if (exerciseNoticeData.opponentMissionStatus == ExerciseEachDateInfoViewHolder.STATE_SUCCESS_TYPE) {
                 binding.ivExerciseTodayBubbleRight.setImageResource(R.drawable.ic_bubble_success)
