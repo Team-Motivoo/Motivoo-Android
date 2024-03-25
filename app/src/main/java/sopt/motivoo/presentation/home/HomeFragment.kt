@@ -38,6 +38,8 @@ import timber.log.Timber
 @AndroidEntryPoint
 class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     private val viewModel: HomeViewModel by activityViewModels()
+    val alarmManager = context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
 
     private val requestHomePermissionRequest = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
@@ -45,13 +47,31 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         var permissionGranted = true
         var educationGranted = false
         permissions.entries.forEach {
-            if (it.key in HOME_REQUIRED_PERMISSIONS && it.value == false) {
+            if (it.key in Manifest.permission.POST_NOTIFICATIONS && it.value == false) {
                 permissionGranted = false
             }
-            if (!shouldShowRequestPermissionRationale(it.key) && it.value == false) {
+            if (it.key in Manifest.permission.ACTIVITY_RECOGNITION && it.value == false) {
+                permissionGranted = false
+            }
+
+            if (!shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS) && it.value == false) {
                 educationGranted = true
             }
+            if (!shouldShowRequestPermissionRationale(Manifest.permission.ACTIVITY_RECOGNITION) && it.value == false) {
+                educationGranted = true
+            }
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                if (!alarmManager.canScheduleExactAlarms()) {
+                    permissionGranted = false
+                    educationGranted = false
+                } else {
+                    permissionGranted = true
+                    educationGranted = true
+                }
+            }
         }
+
         if (!permissionGranted) {
             if (educationGranted && viewModel.isMissionChoiceFinished.value == true) intentAppSettings() // TODO :: 교육용 팝업
             else permissionDenied()
@@ -172,7 +192,6 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
 
     private fun checkHomeAlarmPermission(homeState: HomeState.FetchHomeData) {
         if (checkPermission()) {
-            val alarmManager = context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                 if (!alarmManager.canScheduleExactAlarms()) {
                     requireContext().showSnackbar(
@@ -317,6 +336,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
                 }
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                     add(Manifest.permission.POST_NOTIFICATIONS)
+                    add(Manifest.permission.SCHEDULE_EXACT_ALARM)
                 }
             }.toTypedArray()
     }
