@@ -35,16 +35,15 @@
             android:id="@+id/iv_login"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="12dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="99dp"
+            android:layout_marginHorizontal="69dp"
+            android:layout_marginTop="70dp"
+            android:layout_marginBottom="119dp"
             android:adjustViewBounds="true"
             android:src="@drawable/img_login"
             app:layout_constraintBottom_toTopOf="@+id/ll_kakao_login"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_login_description" />
-
 
         <TextView
             android:id="@+id/tv_login_error_message"
@@ -53,7 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:text="@string/login_error_message"
-            android:textColor="@color/pink_FF19A3"
+            android:textColor="@color/red_500_FF473C"
             android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@+id/ll_kakao_login"
             app:layout_constraintEnd_toEndOf="parent"
@@ -95,6 +94,18 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
         </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/pv_loading"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/gray_600_7072764d"
+            android:padding="150dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

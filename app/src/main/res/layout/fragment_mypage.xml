@@ -76,7 +76,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="5dp"
                     android:src="@drawable/ic_shoes"
                     app:layout_constraintBottom_toBottomOf="@id/tv_mypage_check_exercise"
                     app:layout_constraintStart_toStartOf="parent"
@@ -271,7 +271,7 @@
                 app:layout_constraintTop_toBottomOf="@id/cl_mypage_open_source" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl_mypage_developer_info"
+                android:id="@+id/cl_mypage_version_info"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/ripple_gray200_rectangle_bottom_radius8"
@@ -281,28 +281,31 @@
                 app:layout_constraintTop_toBottomOf="@id/view_mypage_bar3">
 
                 <TextView
-                    android:id="@+id/tv_mypage_developer_info"
+                    android:id="@+id/tv_mypage_version_info"
                     style="@style/B5_med"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:paddingVertical="26dp"
                     android:paddingStart="20dp"
-                    android:text="@string/mypage_developer_info"
+                    android:text="@string/mypage_version_info"
                     android:textColor="@color/gray_900_161616"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/iv_mypage_arrow5"
+                <TextView
+                    android:id="@+id/tv_mypage_version"
+                    style="@style/B6_re"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginBottom="2dp"
-                    android:src="@drawable/ic_arrow"
-                    app:layout_constraintBottom_toBottomOf="@id/tv_mypage_developer_info"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="26dp"
+                    android:layout_marginBottom="1dp"
+                    android:text="@string/mypage_version"
+                    android:textColor="@color/gray_900_161616"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/tv_mypage_developer_info" />
+                    app:layout_constraintTop_toTopOf="parent" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -313,10 +316,9 @@
                 android:layout_marginBottom="21dp"
                 android:background="@drawable/ripple_gray200_rectangle_radius8"
                 android:backgroundTint="@color/white_FFFFFF"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@id/cl_mypage_developer_info"
-                app:layout_constraintStart_toStartOf="@id/cl_mypage_developer_info"
-                app:layout_constraintTop_toBottomOf="@id/cl_mypage_developer_info">
+                app:layout_constraintEnd_toEndOf="@id/cl_mypage_version_info"
+                app:layout_constraintStart_toStartOf="@id/cl_mypage_version_info"
+                app:layout_constraintTop_toBottomOf="@id/cl_mypage_version_info">
 
                 <TextView
                     android:id="@+id/tv_mypage_ask_kakao"
@@ -333,7 +335,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
-                    android:id="@+id/iv_mypage_arrow6"
+                    android:id="@+id/iv_mypage_arrow5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="20dp"
@@ -342,6 +344,44 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/tv_mypage_ask_kakao" />
 
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_mypage_look_more"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="32dp"
+                android:background="@drawable/ripple_gray200_rectangle_radius8"
+                android:backgroundTint="@color/white_FFFFFF"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/cl_mypage_ask_kakao"
+                app:layout_constraintStart_toStartOf="@id/cl_mypage_ask_kakao"
+                app:layout_constraintTop_toBottomOf="@id/cl_mypage_ask_kakao">
+
+                <TextView
+                    android:id="@+id/tv_mypage_look_more"
+                    style="@style/B5_med"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="25dp"
+                    android:paddingStart="20dp"
+                    android:text="@string/mypage_look_more_info"
+                    android:textColor="@color/gray_900_161616"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/iv_mypage_arrow6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:src="@drawable/ic_arrow"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_mypage_look_more"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tv_mypage_look_more" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

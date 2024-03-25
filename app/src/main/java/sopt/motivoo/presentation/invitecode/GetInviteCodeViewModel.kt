@@ -21,7 +21,7 @@ class GetInviteCodeViewModel @Inject constructor(
     private val _inviteCode = MutableStateFlow<String?>(null)
     val inviteCode get() = _inviteCode.asStateFlow()
 
-    private val _checkMatchState = MutableStateFlow<UiState<Boolean>>(UiState.Loading)
+    private val _checkMatchState = MutableStateFlow<UiState<Boolean>>(UiState.Empty)
     val checkMatchState get() = _checkMatchState.asStateFlow()
 
     init {

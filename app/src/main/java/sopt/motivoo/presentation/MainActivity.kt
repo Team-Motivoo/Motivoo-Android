@@ -19,6 +19,7 @@ import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -32,6 +33,7 @@ import sopt.motivoo.presentation.onboarding.OnboardingViewModel
 import sopt.motivoo.presentation.onboarding.WhatActivityQuestionFragmentDirections
 import sopt.motivoo.presentation.onboarding.WhatExerciseQuestionFragmentDirections
 import sopt.motivoo.presentation.type.NavigationSourceType
+import sopt.motivoo.util.NetworkState
 import sopt.motivoo.util.extension.checkNetworkState
 import sopt.motivoo.util.extension.colorOf
 import sopt.motivoo.util.extension.hideKeyboard
@@ -56,10 +58,13 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var mainDispatcher: CoroutineDispatcher
 
+    @Inject
+    lateinit var networkState: NetworkState
+
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_MOTIVOOAOS)
-        super.onCreate(savedInstanceState)
         installSplashScreen()
+        super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initView()
@@ -69,26 +74,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun collectData() {
-        mainViewModel.isLoading.flowWithLifecycle(
-            lifecycle,
-            Lifecycle.State.STARTED
-        ).onEach { isLoading ->
-            val navController: NavController = findNavController(R.id.fc_main)
-            if (isLoading && navController.currentDestination?.id != R.id.loadingFragment) {
-                navController.navigate(R.id.loadingFragment)
-            } else if (!isLoading && navController.currentDestination?.id == R.id.loadingFragment) {
-                navController.popBackStack()
-            }
-        }.launchIn(lifecycleScope)
-
         mainViewModel.networkState.flowWithLifecycle(
             lifecycle,
             Lifecycle.State.STARTED
-        ).onEach { isConnected ->
-            if (!isConnected) {
-                showNetworkErrorDialog()
-            }
-        }.launchIn(lifecycleScope)
+        )
+            .distinctUntilChanged()
+            .onEach { isConnected ->
+                if (!isConnected) {
+                    showNetworkErrorDialog()
+                }
+            }.launchIn(lifecycleScope)
 
         onboardingViewModel.navigationEvent.flowWithLifecycle(
             lifecycle,
@@ -137,16 +132,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        val redirectToLogin = intent.getBooleanExtra(REDIRECT_TO_LOGIN, false)
         val navController =
             supportFragmentManager.findFragmentById(R.id.fc_main)?.findNavController()
-
-        if (redirectToLogin) {
-            val bundle = Bundle().apply {
-                putBoolean(REDIRECT_TO_LOGIN, true)
-            }
-            navController?.setGraph(R.navigation.navigation_main, bundle)
-        }
 
         with(binding) {
             bnvMain.itemIconTintList = null
@@ -304,10 +291,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         authTokenRefreshListener.clearOnTokenRefreshFailedCallback()
+        networkErrorListener.clearOnApiCallFailedCallback()
+        networkState.cleanup()
         super.onDestroy()
-    }
-
-    companion object {
-        const val REDIRECT_TO_LOGIN = "redirectToLogin"
     }
 }

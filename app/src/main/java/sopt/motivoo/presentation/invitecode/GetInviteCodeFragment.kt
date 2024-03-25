@@ -6,15 +6,12 @@ import android.content.Context.CLIPBOARD_SERVICE
 import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import android.view.animation.AnimationUtils
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
@@ -28,8 +25,6 @@ import sopt.motivoo.domain.entity.MotivooStorage
 import sopt.motivoo.util.UiState
 import sopt.motivoo.util.binding.BindingFragment
 import sopt.motivoo.util.extension.setOnSingleClickListener
-import sopt.motivoo.util.extension.setVisible
-import sopt.motivoo.util.findStartDestination
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -83,24 +78,14 @@ class GetInviteCodeFragment :
             .onEach { uiState ->
                 when (uiState) {
                     is UiState.Success -> {
-                        val navController = findNavController()
-                        val startDestinationId = navController.findStartDestination().id
-                        val navOptions = NavOptions.Builder()
-                            .setPopUpTo(startDestinationId, true)
-                            .build()
-
-                        findNavController().navigate(
-                            R.id.action_getInviteCodeFragment_to_homeFragment,
-                            null,
-                            navOptions
-                        )
+                        findNavController().navigate(R.id.action_getInviteCodeFragment_to_homeFragment)
                     }
 
                     is UiState.Failure -> {
                         setMatchingToastAnimation()
                     }
 
-                    else -> Unit
+                    else -> {}
                 }
             }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
@@ -121,26 +106,26 @@ class GetInviteCodeFragment :
     private fun setMatchingToastAnimation() {
         val fadeIn = AnimationUtils.loadAnimation(context, R.anim.fade_in)
         binding.tvGetInviteCodeMatchingWaiting.startAnimation(fadeIn)
-        binding.tvGetInviteCodeMatchingWaiting.setVisible(VISIBLE)
+        binding.tvGetInviteCodeMatchingWaiting.visibility = View.VISIBLE
 
         lifecycleScope.launch {
             delay(TWO_SECONDS)
             val fadeOut = AnimationUtils.loadAnimation(context, R.anim.fade_out)
             binding.tvGetInviteCodeMatchingWaiting.startAnimation(fadeOut)
-            binding.tvGetInviteCodeMatchingWaiting.setVisible(GONE)
+            binding.tvGetInviteCodeMatchingWaiting.visibility = View.GONE
         }
     }
 
     private fun setClipBoardToastAnimation() {
         val fadeIn = AnimationUtils.loadAnimation(context, R.anim.fade_in)
         binding.tvGetInviteCodeToast.startAnimation(fadeIn)
-        binding.tvGetInviteCodeToast.setVisible(VISIBLE)
+        binding.tvGetInviteCodeToast.visibility = View.VISIBLE
 
         lifecycleScope.launch {
             delay(TWO_SECONDS)
             val fadeOut = AnimationUtils.loadAnimation(context, R.anim.fade_out)
             binding.tvGetInviteCodeToast.startAnimation(fadeOut)
-            binding.tvGetInviteCodeToast.setVisible(GONE)
+            binding.tvGetInviteCodeToast.visibility = View.GONE
         }
     }
 

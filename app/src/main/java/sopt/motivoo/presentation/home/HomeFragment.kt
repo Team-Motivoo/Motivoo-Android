@@ -115,6 +115,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
                             else -> null
                         }
 
+                        checkPermissionIfUnSelectedMission()
                         checkHomeAlarmPermission(homeState)
                     }
 
@@ -166,6 +167,12 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         }
     }
 
+    private fun checkPermissionIfUnSelectedMission() {
+        if (viewModel.isMissionChoiceFinished.value == false) {
+            requestHomePermissionRequest.launch(HOME_REQUIRED_PERMISSIONS)
+        }
+    }
+
     private fun checkHomeAlarmPermission(homeState: HomeState.FetchHomeData) {
         if (checkPermission()) {
             val alarmManager = context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
@@ -211,10 +218,6 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
 
     private fun onClickPermission() {
         binding.motivooSelectedMissionDeniedPermission.setOnClickListener {
-            requestHomePermissionRequest.launch(HOME_REQUIRED_PERMISSIONS)
-        }
-
-        binding.motivooUnselectedMissionDeniedPermission.setOnClickListener {
             requestHomePermissionRequest.launch(HOME_REQUIRED_PERMISSIONS)
         }
     }

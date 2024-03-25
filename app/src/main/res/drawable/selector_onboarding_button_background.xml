@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_selected="true">
-        <ripple android:color="@color/blue_200_B4EEFF">
+        <ripple android:color="@color/white_FFFFFF">
             <item>
                 <shape android:shape="rectangle">
-                    <solid android:color="@color/blue_100_D7F6FF" />
+                    <solid android:color="@color/white_FFFFFF" />
                     <stroke android:width="1dp" />
-                    <stroke android:color="@color/blue_400_65DBFF" />
+                    <stroke android:color="@color/gray_800_303031" />
                     <corners android:radius="8dp" />
                 </shape>
             </item>
         </ripple>
     </item>
     <item android:state_selected="false">
-        <ripple android:color="@color/gray_200_ECEDF1">
+        <ripple android:color="@color/white_FFFFFF">
             <item>
                 <shape android:shape="rectangle">
                     <solid android:color="@color/gray_100_F4F5F9" />

@@ -50,7 +50,6 @@ class MyLogoutFragment :
             .onEach { uiState ->
                 when (uiState) {
                     is UiState.Success -> {
-                        authViewModel.resetLogoutState()
                         requireContext().redirectToLogin()
                     }
 

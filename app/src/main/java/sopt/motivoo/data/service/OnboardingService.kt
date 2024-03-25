@@ -6,7 +6,6 @@ import retrofit2.http.PATCH
 import retrofit2.http.POST
 import sopt.motivoo.data.model.request.onboarding.RequestOnboardingDto
 import sopt.motivoo.data.model.request.onboarding.RequestPostInviteCodeDto
-import sopt.motivoo.data.model.response.onboarding.ResponseFinishedOnboardingDto
 import sopt.motivoo.data.model.response.onboarding.ResponseGetInviteCodeDto
 import sopt.motivoo.data.model.response.onboarding.ResponseGetMatchedResultDto
 import sopt.motivoo.data.model.response.onboarding.ResponseOnboardingDto
@@ -20,9 +19,6 @@ interface OnboardingService {
 
     @POST("parentchild/invite")
     suspend fun getInviteCode(): ResponseGetInviteCodeDto
-
-    @GET("user/onboarding")
-    suspend fun getOnboardingFinished(): ResponseFinishedOnboardingDto
 
     @PATCH("parentchild/match")
     suspend fun patchInviteCode(

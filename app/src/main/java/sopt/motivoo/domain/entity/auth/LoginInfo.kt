@@ -5,4 +5,6 @@ data class LoginInfo(
     val nickName: String,
     val id: Long,
     val refreshToken: String,
+    val isOnboardingFinished: Boolean,
+    val isMatched: Boolean
 )

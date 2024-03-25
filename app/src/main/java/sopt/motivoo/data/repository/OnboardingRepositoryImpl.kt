@@ -3,7 +3,6 @@ package sopt.motivoo.data.repository
 import sopt.motivoo.data.datasource.remote.OnboardingDataSource
 import sopt.motivoo.data.model.request.onboarding.RequestOnboardingDto
 import sopt.motivoo.data.model.request.onboarding.RequestPostInviteCodeDto
-import sopt.motivoo.data.model.response.onboarding.ResponseFinishedOnboardingDto
 import sopt.motivoo.data.model.response.onboarding.ResponseOnboardingDto
 import sopt.motivoo.domain.entity.onboarding.GetMatchedInfo
 import sopt.motivoo.domain.entity.onboarding.InviteCodeInfo
@@ -22,9 +21,6 @@ class OnboardingRepositoryImpl @Inject constructor(
 
     override suspend fun getInviteCode(): Result<InviteCodeInfo> =
         runCatching { onboardingDataSource.getInviteCode().toGetInviteCode() }
-
-    override suspend fun getOnboardingFinished(): Result<ResponseFinishedOnboardingDto> =
-        runCatching { onboardingDataSource.getOnboardingFinished() }
 
     override suspend fun patchInviteCode(requestPostInviteCodeDto: RequestPostInviteCodeDto): Result<MatchedInfo> =
         runCatching {

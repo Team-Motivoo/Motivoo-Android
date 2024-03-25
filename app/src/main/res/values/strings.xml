@@ -16,6 +16,7 @@
     <string name="onboarding_age">나이</string>
     <string name="onboarding_hint">나이를 입력해주세요</string>
     <string name="onboarding_error_message">14세부터 99세까지 사용 가능해요.</string>
+    <string name="onboarding_null_error_message">나이를 입력해주세요</string>
     <string name="onboarding_parent_or_child">부모 or 자녀</string>
     <string name="do_exercise_title">평소 운동을 하시나요?</string>
     <string name="do_exercise_yes">네</string>
@@ -56,7 +57,6 @@
     <string name="sore_spot_knee">무릎</string>
     <string name="sore_spot_wrist">손목</string>
     <string name="sore_spot_ankle">발목</string>
-    <string name="onboarding_motivoo_start">모티부 시작하기</string>
 
     <!-- home -->
     <string name="home_today_exercise_description">오늘 할 운동을 고르세요!</string>
@@ -88,8 +88,9 @@
     <string name="mypage_service_use">서비스 이용약관</string>
     <string name="mypage_privacy_policy">개인정보 처리방침</string>
     <string name="mypage_open_source">오픈소스 라이선스</string>
-    <string name="mypage_developer_info">개발자 정보</string>
-    <string name="mypage_ask_kakao">카카오채널 문의하기</string>
+    <string name="mypage_version_info">버전 정보</string>
+    <string name="mypage_version">v.</string>
+    <string name="mypage_ask_kakao">문의하기</string>
     <string name="mypage_before">이전</string>
     <string name="mypage_name">이름</string>
     <string name="mypage_age">나이</string>
@@ -105,6 +106,8 @@
     <string name="mypage_service_out_content">회원 탈퇴 시 모든 정보가 삭제되며 복구가 불가능해요.</string>
     <string name="mypage_cancel">취소</string>
     <string name="mypage_logout_check">정말 로그아웃 하시겠어요?</string>
+    <string name="mypage_look_more_info">모티부 더 알아보기</string>
+    <string name="mypage_kakao_chat_link">https://open.kakao.com/o/sSCxapcg</string>
 
     <!-- notification -->
     <string name="step_count_notification_channel_id">step_count_channel</string>
@@ -142,8 +145,11 @@
     <string name="post_invite_code_title">초대받은 코드를\n붙여넣거나 입력해주세요</string>
     <string name="post_invite_code_hint">초대코드를 입력해주세요</string>
     <string name="post_invite_code_error_message">초대코드가 올바르지 않아요</string>
+    <string name="make_invite_code">초대코드 생성하기</string>
     <string name="post_invite_code">초대코드 입력하기</string>
     <string name="clipboard_copy">클립보드에 복사되었습니다</string>
+    <string name="start_motivoo_or">or</string>
+    <string name="motivoo_start">모티부 시작하기</string>
 
     <!-- exercise -->
     <string name="exercise_today_exercise">오늘의 운동</string>
@@ -178,7 +184,7 @@
 
     <!-- login -->
     <string name="login_kakao">카카오 로그인하기</string>
-    <string name="motivoo_start_description">자녀와 부모를 잇는\n매일 한 걸음</string>
+    <string name="motivoo_start_description">자녀님, 부모님을 초대하고\n함께 운동해봐요!</string>
     <string name="login_error_message">로그인을 다시 한 번 시도해주세요</string>
     <string name="yes">예</string>
     <string name="no">아니요</string>
@@ -188,12 +194,13 @@
     <string name="privacy_policy_url">https://gayeong04.notion.site/df1e215e4b2248d28a913ea27788a777?pvs=4</string>
     <string name="open_source_url">https://gayeong04.notion.site/c78b181acf8a41f28f2ed653db998650?pvs=4</string>
     <string name="developer_info_url">https://gayeong04.notion.site/39aa420262384587957479ca4da2ba2e?pvs=4</string>
-    <string name="ask_kakao_url">https://gayeong04.notion.site/08592ddcf3bf4a3b80e3c54110444ebf?pvs=4</string>
+    <string name="about_motivoo_url">https://gayeong04.notion.site/358b03942cc44923886c650ac4485c7b</string>
 
     <!-- withdrawal -->
     <string name="withdrawal_title">매칭이 끊어졌어요</string>
     <string name="withdrawal_desc">매칭이 끊어져 모티부를 이용할 수 없어요\n탈퇴 후 다시 가입해주세요</string>
     <string name="network_error_title">잠시 연결이 불안정해요</string>
     <string name="exercise_our_exercise_history">우리들의 운동 기록</string>
+
 
 </resources>

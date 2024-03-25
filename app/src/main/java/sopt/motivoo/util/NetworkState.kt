@@ -38,4 +38,8 @@ class NetworkState(context: Context) {
 
         connectivityManager.registerDefaultNetworkCallback(networkCallback)
     }
+
+    fun cleanup() {
+        connectivityManager.unregisterNetworkCallback(networkCallback)
+    }
 }

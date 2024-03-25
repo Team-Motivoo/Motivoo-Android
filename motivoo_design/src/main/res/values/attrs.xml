@@ -3,7 +3,6 @@
     <declare-styleable name="MotivooPieChart">
         <attr name="progressInnerColor" format="reference|color"/>
         <attr name="progressBackgroundColor" format="reference|color"/>
-        <attr name="centerCircleColor" format="reference|color"/>
         <attr name="chartUserType" format="enum">
             <enum name="Child" value="1"/>
             <enum name="Parent" value="2"/>

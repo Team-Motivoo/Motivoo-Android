@@ -62,10 +62,17 @@ class SoreSpotQuestionFragment :
             .onEach { uiState ->
                 when (uiState) {
                     is UiState.Success -> {
+                        binding.pvLoading.visibility = View.GONE
                         moveToNextFragment()
                     }
 
-                    else -> Unit
+                    is UiState.Loading -> {
+                        binding.pvLoading.visibility = View.VISIBLE
+                    }
+
+                    else -> {
+                        binding.pvLoading.visibility = View.GONE
+                    }
                 }
             }.launchIn(viewLifecycleOwner.lifecycleScope)
     }

@@ -31,8 +31,7 @@ class MotivooOtherPieChart @JvmOverloads constructor(
     defStyleAttr: Int = 0,
 ) : View(context, attributeSet, defStyleAttr) {
     private val innerProgressBarPaint: Paint = Paint()
-    private val otherProgressBarPaint: Paint = Paint()
-    private val centerCirclePaint: Paint = Paint()
+    var otherProgressBarPaint: Paint = Paint()
     private var percent: Float = 0f
     var degree: Double = 0.0
     private var otherImageBitmap: Bitmap? = null
@@ -89,12 +88,6 @@ class MotivooOtherPieChart @JvmOverloads constructor(
                 style = Paint.Style.STROKE
                 strokeWidth = STROKE_SIZE.px
             }
-            centerCirclePaint.run {
-                color =
-                    typedArray.getColor(R.styleable.MotivooPieChart_centerCircleColor, Color.BLACK)
-                style = Paint.Style.STROKE
-                strokeWidth = 2.px
-            }
             chartUserType =
                 typedArray.getInt(R.styleable.MotivooPieChart_chartUserType, 0).toMotivooUserType
             typedArray.recycle()
@@ -133,8 +126,6 @@ class MotivooOtherPieChart @JvmOverloads constructor(
             drawRectArea,
             START_ANGLE, degree.toFloat(), false, otherProgressBarPaint
         )
-
-        canvas.drawCircle((LAYOUT_SIZE / 2).px, LAYOUT_SPACING.px, 1.px, centerCirclePaint)
 
         otherImageBitmap?.let {
             canvas.drawBitmap(it, x.toFloat(), y.toFloat(), null)
