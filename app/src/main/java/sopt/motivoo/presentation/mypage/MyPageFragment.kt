@@ -1,6 +1,7 @@
 package sopt.motivoo.presentation.mypage
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.view.View.GONE
@@ -10,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import dagger.hilt.android.AndroidEntryPoint
+import sopt.motivoo.BuildConfig
 import sopt.motivoo.R
 import sopt.motivoo.databinding.FragmentMypageBinding
 import sopt.motivoo.presentation.type.UserType
@@ -27,6 +29,7 @@ class MyPageFragment : BindingFragment<FragmentMypageBinding>(R.layout.fragment_
 
         myPageViewModel.getUserInfo()
         observeLiveData()
+        writeVersionInfo()
         clickButtons()
         overrideOnBackPressed()
     }
@@ -46,7 +49,7 @@ class MyPageFragment : BindingFragment<FragmentMypageBinding>(R.layout.fragment_
         myPageViewModel.myPageUserInfo.observe(viewLifecycleOwner) { uiState ->
             when (uiState) {
                 is UiState.Success -> {
-                    if (uiState.data.userType == UserType.CHILD.name) {
+                    if (uiState.data.userType == getString(UserType.CHILD.titleRes)) {
                         binding.tvMypageNickname.text = getString(R.string.mypage_nickname_child)
                     } else {
                         binding.tvMypageNickname.text = getString(R.string.mypage_nickname)
@@ -62,6 +65,11 @@ class MyPageFragment : BindingFragment<FragmentMypageBinding>(R.layout.fragment_
                 else -> Unit
             }
         }
+    }
+
+    private fun writeVersionInfo() {
+        val version = BuildConfig.VERSION_NAME
+        binding.tvMypageVersion.text = getString(R.string.mypage_version) + version
     }
 
     private fun clickButtons() {
@@ -86,12 +94,12 @@ class MyPageFragment : BindingFragment<FragmentMypageBinding>(R.layout.fragment_
             startActivity(Intent(requireContext(), OssLicensesMenuActivity::class.java))
         }
 
-        binding.clMypageDeveloperInfo.setOnClickListener {
-            navigateToDeveloperInfoWebView()
+        binding.clMypageAskKakao.setOnClickListener {
+            openKakaoChat()
         }
 
-        binding.clMypageAskKakao.setOnClickListener {
-            navigateToAskKakaoWebView()
+        binding.clMypageLookMore.setOnClickListener {
+            navigateToAboutMotivooWebView()
         }
     }
 
@@ -121,15 +129,15 @@ class MyPageFragment : BindingFragment<FragmentMypageBinding>(R.layout.fragment_
         findNavController().navigate(action)
     }
 
-    private fun navigateToDeveloperInfoWebView() {
-        val action =
-            MyPageFragmentDirections.actionMyPageFragmentToWebViewFragment(getString(R.string.developer_info_url))
-        findNavController().navigate(action)
+    private fun openKakaoChat() {
+        val kakaoOpenChatUrl = getString(R.string.mypage_kakao_chat_link)
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(kakaoOpenChatUrl))
+        startActivity(intent)
     }
 
-    private fun navigateToAskKakaoWebView() {
+    private fun navigateToAboutMotivooWebView() {
         val action =
-            MyPageFragmentDirections.actionMyPageFragmentToWebViewFragment(getString(R.string.ask_kakao_url))
+            MyPageFragmentDirections.actionMyPageFragmentToWebViewFragment(getString(R.string.about_motivoo_url))
         findNavController().navigate(action)
     }
 }
