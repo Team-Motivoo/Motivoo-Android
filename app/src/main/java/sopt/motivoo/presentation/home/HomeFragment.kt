@@ -257,7 +257,6 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         binding.motivooOtherPieChart.updateBlurEffect()
         binding.ivMissionCompleted.updateBlurEffect()
         binding.ivStepCount.updateBlurEffect()
-        binding.tvExercisePercent.updateBlurEffect()
     }
 
     private fun removeBlurEffect() {
@@ -265,7 +264,6 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         binding.motivooOtherPieChart.removeBlurEffect()
         binding.ivMissionCompleted.removeBlurEffect()
         binding.ivStepCount.removeBlurEffect()
-        binding.tvExercisePercent.removeBlurEffect()
     }
 
     private fun navigateToExerciseMethodNotion() {
