@@ -166,19 +166,6 @@
                     app:layout_constraintTop_toTopOf="@id/motivoo_my_pie_chart"
                     app:layout_constraintVertical_bias="0.3" />
 
-                <TextView
-                    android:id="@+id/tv_exercise_percent"
-                    style="@style/Caption2_re"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{vm.isHighFive() ? @string/home_success_hifive : @string/home_empty_text }"
-                    android:textColor="@{vm.isHighFive() ? @color/red_400_FF6259 : @color/gray_600_707276}"
-                    app:layout_constraintBottom_toBottomOf="@+id/iv_step_count"
-                    app:layout_constraintEnd_toEndOf="@id/iv_step_count"
-                    app:layout_constraintStart_toStartOf="@id/iv_step_count"
-                    app:layout_constraintTop_toTopOf="@id/iv_step_count"
-                    app:layout_constraintVertical_bias="1.1" />
-
                 <com.android.motivoo_design.MotivooOtherPieChart
                     android:id="@+id/motivoo_other_pie_chart"
                     iconEnabled="@{vm.isHighFive}"
@@ -250,7 +237,7 @@
                     android:visibility="@{vm.isPermissionGranted() ? View.GONE : View.VISIBLE}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_exercise_percent"
+                    app:layout_constraintTop_toBottomOf="@id/iv_step_count"
                     tools:visibility="invisible" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
