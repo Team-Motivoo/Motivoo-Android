@@ -87,7 +87,7 @@
         android:id="@+id/pv_loading"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/gray_600_7072764d"
+        android:background="@color/white_FFFFFF4d"
         android:padding="150dp"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
