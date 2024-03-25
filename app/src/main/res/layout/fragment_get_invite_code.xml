@@ -47,7 +47,7 @@
 
             <TextView
                 android:id="@+id/tv_get_invite_code_title"
-                style="@style/B5_med"
+                style="@style/B6_re"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="29dp"
@@ -59,7 +59,7 @@
 
             <TextView
                 android:id="@+id/tv_get_invite_code"
-                style="@style/H3_semi"
+                style="@style/Code_med"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
@@ -81,7 +81,7 @@
                 android:background="@drawable/shape_get_invite_code_copy_button_radius8"
                 android:paddingVertical="19dp"
                 android:text="@string/get_invite_code_copy"
-                android:textColor="@color/black_090909"
+                android:textColor="@color/white_FFFFFF"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -96,7 +96,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
             android:text="@string/toast_waiting_matching"
-            android:textColor="@color/pink_FF19A3"
+            android:textColor="@color/red_500_FF473C"
             android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@+id/btn_get_invite_code_check_matching"
             app:layout_constraintEnd_toEndOf="parent"

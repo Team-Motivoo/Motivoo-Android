@@ -12,7 +12,6 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import sopt.motivoo.data.model.request.onboarding.RequestPostInviteCodeDto
 import sopt.motivoo.domain.entity.MotivooStorage
-import sopt.motivoo.domain.repository.NetworkRepository
 import sopt.motivoo.domain.repository.OnboardingRepository
 import sopt.motivoo.util.UiState
 import timber.log.Timber
@@ -22,7 +21,6 @@ import javax.inject.Inject
 class PostInviteCodeViewModel @Inject constructor(
     private val motivooStorage: MotivooStorage,
     private val onboardingRepository: OnboardingRepository,
-    private val networkRepository: NetworkRepository,
 ) : ViewModel() {
 
     val postInviteCode = MutableStateFlow("")
@@ -36,8 +34,7 @@ class PostInviteCodeViewModel @Inject constructor(
 
     fun postInviteCode() {
         viewModelScope.launch {
-            resetOnboardingState()
-            networkRepository.setLoading(true)
+            _postInviteCodeState.value = UiState.Loading
             onboardingRepository.patchInviteCode(
                 RequestPostInviteCodeDto(
                     postInviteCode.value
@@ -45,16 +42,10 @@ class PostInviteCodeViewModel @Inject constructor(
             ).onSuccess {
                 motivooStorage.isUserMatched = it.isMatched
                 _postInviteCodeState.value = UiState.Success(true)
-                networkRepository.setLoading(false)
             }.onFailure {
                 Timber.e(it.message)
                 _postInviteCodeState.value = UiState.Failure(it.toString())
-                networkRepository.setLoading(false)
             }
         }
-    }
-
-    fun resetOnboardingState() {
-        _postInviteCodeState.value = UiState.Loading
     }
 }

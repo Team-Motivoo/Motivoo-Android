@@ -3,8 +3,6 @@ package sopt.motivoo.presentation.onboarding
 import android.os.Bundle
 import android.transition.TransitionManager
 import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -22,7 +20,6 @@ import sopt.motivoo.util.binding.BindingFragment
 import sopt.motivoo.util.extension.drawableOf
 import sopt.motivoo.util.extension.px
 import sopt.motivoo.util.extension.setOnSingleClickListener
-import sopt.motivoo.util.extension.setVisible
 import sopt.motivoo.util.extension.showKeyboard
 
 class AgeQuestionFragment :
@@ -65,28 +62,45 @@ class AgeQuestionFragment :
         onboardingViewModel.isValidAge.flowWithLifecycle(
             viewLifecycleOwner.lifecycle,
             Lifecycle.State.STARTED
-        ).onEach { isValidAge ->
-            when (isValidAge) {
-                null, true -> {
-                    binding.etAgeQuestion.background =
-                        requireContext().drawableOf(R.drawable.selector_edittext_input)
-                    binding.tvAgeQuestionErrorMessage.setVisible(GONE)
-                }
+        )
+            .distinctUntilChanged()
+            .onEach { isValidAge ->
+                when (isValidAge) {
+                    null -> {
+                        if (onboardingViewModel.isFirst.value == false) {
+                            binding.tvAgeQuestionErrorMessage.visibility = View.INVISIBLE
+                            binding.etAgeQuestion.background =
+                                requireContext().drawableOf(R.drawable.shape_edittext_error_radius8)
+                            binding.tvAgeQuestionNullErrorMessage.visibility = View.VISIBLE
+                        }
+                    }
 
-                false -> {
-                    binding.etAgeQuestion.background =
-                        requireContext().drawableOf(R.drawable.shape_edittext_error_radius8)
-                    binding.tvAgeQuestionErrorMessage.setVisible(VISIBLE)
+                    true -> {
+                        onboardingViewModel.isFirst.value = false
+                        binding.etAgeQuestion.background =
+                            requireContext().drawableOf(R.drawable.selector_edittext_input)
+                        binding.tvAgeQuestionErrorMessage.visibility = View.INVISIBLE
+                        binding.tvAgeQuestionNullErrorMessage.visibility = View.INVISIBLE
+                    }
+
+                    false -> {
+                        onboardingViewModel.isFirst.value = false
+                        binding.tvAgeQuestionNullErrorMessage.visibility = View.INVISIBLE
+                        binding.etAgeQuestion.background =
+                            requireContext().drawableOf(R.drawable.shape_edittext_error_radius8)
+                        binding.tvAgeQuestionErrorMessage.visibility = View.VISIBLE
+                    }
                 }
-            }
-        }.launchIn(viewLifecycleOwner.lifecycleScope)
+            }.launchIn(viewLifecycleOwner.lifecycleScope)
 
         onboardingViewModel.isValidNext.flowWithLifecycle(
             viewLifecycleOwner.lifecycle,
             Lifecycle.State.STARTED
-        ).onEach { isValidNext ->
-            binding.btnAgeQuestionDone.isEnabled = isValidNext
-        }.launchIn(viewLifecycleOwner.lifecycleScope)
+        )
+            .distinctUntilChanged()
+            .onEach { isValidNext ->
+                binding.btnAgeQuestionDone.isEnabled = isValidNext
+            }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
     private fun showAgeLayout(view: View, newTitle: String, newDescription: String) {
@@ -96,7 +110,7 @@ class AgeQuestionFragment :
             requireContext().showKeyboard(binding.etAgeQuestion)
             isAnimationPlayed = true
         }
-        view.setVisible(VISIBLE)
+        view.visibility = View.VISIBLE
         changeTopMarginAfterAnimation()
         changeText(newTitle, newDescription)
     }

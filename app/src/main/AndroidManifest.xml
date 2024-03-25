@@ -15,7 +15,7 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
 
     <uses-permission
         android:name="android.permission.READ_EXTERNAL_STORAGE"
@@ -40,18 +40,22 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".presentation.home.broadcastreceiver.HomeAlarmReceiver"
+        <receiver
+            android:name=".presentation.home.broadcastreceiver.HomeAlarmReceiver"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.app.action.SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED" />
             </intent-filter>
         </receiver>
+
         <service
             android:name=".presentation.home.service.StepCountService"
             android:exported="false"
-            android:foregroundServiceType="dataSync" />
-        <activity android:name=".presentation.SampleDesignActivity"
-            android:exported="false"/>
+            android:foregroundServiceType="health" />
+
+        <activity
+            android:name=".presentation.SampleDesignActivity"
+            android:exported="false" />
         <activity
             android:name=".presentation.MainActivity"
             android:exported="true"

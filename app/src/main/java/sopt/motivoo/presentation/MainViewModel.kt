@@ -12,5 +12,4 @@ class MainViewModel @Inject constructor(
 ) : ViewModel() {
 
     val networkState: SharedFlow<Boolean> = networkRepository.networkStateFlow
-    val isLoading: SharedFlow<Boolean> = networkRepository.isLoading
 }

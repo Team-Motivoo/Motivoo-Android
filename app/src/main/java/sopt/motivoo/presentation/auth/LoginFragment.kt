@@ -2,8 +2,6 @@ package sopt.motivoo.presentation.auth
 
 import android.os.Bundle
 import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import android.view.animation.AnimationUtils
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
@@ -22,11 +20,10 @@ import sopt.motivoo.data.service.KakaoAuthService
 import sopt.motivoo.databinding.FragmentLoginBinding
 import sopt.motivoo.domain.entity.MotivooStorage
 import sopt.motivoo.presentation.invitecode.GetInviteCodeFragment
+import sopt.motivoo.util.NavigationEvent
 import sopt.motivoo.util.UiState
 import sopt.motivoo.util.binding.BindingFragment
 import sopt.motivoo.util.extension.setOnSingleClickListener
-import sopt.motivoo.util.extension.setVisible
-import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -57,14 +54,6 @@ class LoginFragment : BindingFragment<FragmentLoginBinding>(R.layout.fragment_lo
         )
     }
 
-    private fun goToHome() {
-        findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
-    }
-
-    private fun goToStartMotivoo() {
-        findNavController().navigate(R.id.action_loginFragment_to_startMotivooFragment)
-    }
-
     private fun clickKakaoLoginButton() {
         binding.llKakaoLogin.setOnSingleClickListener {
             kakaoAuthService.startKakaoLogin { token ->
@@ -82,26 +71,41 @@ class LoginFragment : BindingFragment<FragmentLoginBinding>(R.layout.fragment_lo
             .onEach { uiState ->
                 when (uiState) {
                     is UiState.Success -> {
-                        authViewModel.resetLoginState()
+                        binding.pvLoading.visibility = View.GONE
                         viewLifecycleOwner.lifecycleScope.launch {
-                            authViewModel.getOnboardingFinished()
-                            if (motivooStorage.isUserMatched) {
-                                goToHome()
-                            } else if (!motivooStorage.isUserMatched && motivooStorage.isFinishedOnboarding) {
-                                Timber.tag("bbb")
-                                    .e("${motivooStorage.isUserMatched}, ${motivooStorage.isUserLoggedIn}, ${motivooStorage.isFinishedOnboarding}")
-                                goToStartMotivoo()
-                            } else {
-                                findNavController().navigate(R.id.action_loginFragment_to_ageQuestionFragment)
-                            }
+                            authViewModel.checkNavigateState()
                         }
                     }
 
                     is UiState.Failure -> {
+                        binding.pvLoading.visibility = View.GONE
                         showLoginErrorMessage()
                     }
 
-                    else -> Unit
+                    is UiState.Loading -> {
+                        binding.pvLoading.visibility = View.VISIBLE
+                    }
+
+                    else -> {
+                        binding.pvLoading.visibility = View.GONE
+                    }
+                }
+            }.launchIn(viewLifecycleOwner.lifecycleScope)
+
+        authViewModel.navigationEvent.flowWithLifecycle(
+            viewLifecycleOwner.lifecycle,
+            Lifecycle.State.STARTED
+        )
+            .distinctUntilChanged()
+            .onEach { event ->
+                when (event) {
+                    NavigationEvent.Home -> findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                    NavigationEvent.AgeQuestion -> findNavController().navigate(R.id.action_loginFragment_to_ageQuestionFragment)
+                    NavigationEvent.StartMotivoo -> findNavController().navigate(R.id.action_loginFragment_to_startMotivooFragment)
+                    NavigationEvent.TermsOfUse -> findNavController().navigate(R.id.action_loginFragment_to_termsOfUseFragment)
+                    NavigationEvent.Permission -> findNavController().navigate(R.id.action_loginFragment_to_permissionFragment)
+                    NavigationEvent.Login -> Unit
+                    NavigationEvent.Init -> Unit
                 }
             }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
@@ -109,13 +113,13 @@ class LoginFragment : BindingFragment<FragmentLoginBinding>(R.layout.fragment_lo
     private fun showLoginErrorMessage() {
         val fadeIn = AnimationUtils.loadAnimation(context, R.anim.fade_in)
         binding.tvLoginErrorMessage.startAnimation(fadeIn)
-        binding.tvLoginErrorMessage.setVisible(VISIBLE)
+        binding.tvLoginErrorMessage.visibility = View.VISIBLE
 
         lifecycleScope.launch {
             delay(GetInviteCodeFragment.TWO_SECONDS)
             val fadeOut = AnimationUtils.loadAnimation(context, R.anim.fade_out)
             binding.tvLoginErrorMessage.startAnimation(fadeOut)
-            binding.tvLoginErrorMessage.setVisible(GONE)
+            binding.tvLoginErrorMessage.visibility = View.GONE
         }
     }
 }

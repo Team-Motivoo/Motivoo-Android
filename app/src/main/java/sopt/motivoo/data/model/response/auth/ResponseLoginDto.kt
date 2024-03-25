@@ -26,7 +26,11 @@ data class ResponseLoginDto(
         @SerialName("refresh_token")
         val refreshToken: String,
         @SerialName("token_type")
-        val tokenType: String
+        val tokenType: String,
+        @SerialName("is_finished_onboarding")
+        val isFinishedOnboarding: Boolean,
+        @SerialName("is_matched")
+        val isMatched: Boolean
     )
 
     fun toLoginInfo(): LoginInfo {
@@ -34,7 +38,9 @@ data class ResponseLoginDto(
             accessToken = data.accessToken,
             nickName = data.nickname,
             id = data.id,
-            refreshToken = data.refreshToken
+            refreshToken = data.refreshToken,
+            isOnboardingFinished = data.isFinishedOnboarding,
+            isMatched = data.isMatched
         )
     }
 }

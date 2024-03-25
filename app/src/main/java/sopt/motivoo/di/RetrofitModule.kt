@@ -13,25 +13,18 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import sopt.motivoo.BuildConfig.BASE_URL
 import sopt.motivoo.BuildConfig.DEBUG
-import sopt.motivoo.data.datasource.local.MotivooStorageImpl
 import sopt.motivoo.data.datasource.remote.intercepter.AuthInterceptor
 import sopt.motivoo.data.datasource.remote.intercepter.ErrorInterceptor
 import sopt.motivoo.data.datasource.remote.listener.AuthTokenRefreshListener
 import sopt.motivoo.data.datasource.remote.listener.AuthTokenRefreshListenerImpl
 import sopt.motivoo.data.datasource.remote.listener.NetworkErrorListener
 import sopt.motivoo.data.datasource.remote.listener.NetworkErrorListenerImpl
-import sopt.motivoo.domain.entity.MotivooStorage
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object RetrofitModule {
-
-    @Provides
-    @Singleton
-    fun provideDataStore(motivooStorageImpl: MotivooStorageImpl): MotivooStorage =
-        motivooStorageImpl
 
     @Provides
     @Singleton

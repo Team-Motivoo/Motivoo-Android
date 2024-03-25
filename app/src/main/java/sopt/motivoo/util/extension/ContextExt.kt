@@ -25,7 +25,6 @@ import coil.request.ImageRequest
 import com.google.android.material.snackbar.Snackbar
 import sopt.motivoo.R
 import sopt.motivoo.presentation.MainActivity
-import sopt.motivoo.presentation.MainActivity.Companion.REDIRECT_TO_LOGIN
 
 private const val NOTIFICATION_ID = 0
 
@@ -106,16 +105,18 @@ fun Context.createUriToBitmap(photoUri: Uri): Bitmap =
     }
 
 fun Context.checkNetworkState(): Boolean {
-    val connectivityManager = this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    val connectivityManager =
+        this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     val network = connectivityManager.activeNetwork ?: return false
     val actNetwork = connectivityManager.getNetworkCapabilities(network) ?: return false
-    return actNetwork.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) || actNetwork.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
+    return actNetwork.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) || actNetwork.hasTransport(
+        NetworkCapabilities.TRANSPORT_WIFI
+    )
 }
 
 fun Context.redirectToLogin() {
     val intent = Intent(this, MainActivity::class.java).apply {
         flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-        putExtra(REDIRECT_TO_LOGIN, true)
     }
     startActivity(intent)
 }

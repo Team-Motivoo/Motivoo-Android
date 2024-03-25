@@ -2,13 +2,10 @@ package sopt.motivoo.presentation.invitecode
 
 import android.os.Bundle
 import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -20,8 +17,6 @@ import sopt.motivoo.util.UiState
 import sopt.motivoo.util.binding.BindingFragment
 import sopt.motivoo.util.extension.drawableOf
 import sopt.motivoo.util.extension.setOnSingleClickListener
-import sopt.motivoo.util.extension.setVisible
-import sopt.motivoo.util.findStartDestination
 
 @AndroidEntryPoint
 class PostInviteCodeFragment :
@@ -68,27 +63,16 @@ class PostInviteCodeFragment :
             .onEach { uiState ->
                 when (uiState) {
                     is UiState.Success -> {
-                        inviteCodeViewModel.resetOnboardingState()
-                        val navController = findNavController()
-                        val startDestinationId = navController.findStartDestination().id
-                        val navOptions = NavOptions.Builder()
-                            .setPopUpTo(startDestinationId, true)
-                            .build()
-
-                        findNavController().navigate(
-                            R.id.action_postInviteCodeFragment_to_homeFragment,
-                            null,
-                            navOptions
-                        )
+                        findNavController().navigate(R.id.action_postInviteCodeFragment_to_homeFragment)
                     }
 
                     is UiState.Failure -> {
                         binding.etPostInviteCode.background =
                             requireContext().drawableOf(R.drawable.shape_edittext_error_radius8)
-                        binding.tvPostInviteCodeErrorMessage.setVisible(VISIBLE)
+                        binding.tvPostInviteCodeErrorMessage.visibility = View.VISIBLE
                     }
 
-                    else -> Unit
+                    else -> {}
                 }
             }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
@@ -96,6 +80,6 @@ class PostInviteCodeFragment :
     private fun setDefaultUi() {
         binding.etPostInviteCode.background =
             requireContext().drawableOf(R.drawable.selector_edittext_input)
-        binding.tvPostInviteCodeErrorMessage.setVisible(GONE)
+        binding.tvPostInviteCodeErrorMessage.visibility = View.GONE
     }
 }
