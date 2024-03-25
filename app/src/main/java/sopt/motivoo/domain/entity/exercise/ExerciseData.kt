@@ -16,7 +16,13 @@ class ExerciseData(
         ) : ExerciseItemInfo()
 
         data class NoticeItemInfo(
-            val missionContent: String,
+            val missionContent: String?,
+            val myMissionStatus: String?,
+            val opponentMissionStatus: String?,
+            val todayDate: String?,
+            val missionDate: String?,
+            val myMissionImgUrl: String?,
+            val opponentMissionImgUrl: String?,
         ) : ExerciseItemInfo()
     }
 }

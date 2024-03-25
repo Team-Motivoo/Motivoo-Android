@@ -88,8 +88,9 @@
     <string name="mypage_service_use">서비스 이용약관</string>
     <string name="mypage_privacy_policy">개인정보 처리방침</string>
     <string name="mypage_open_source">오픈소스 라이선스</string>
-    <string name="mypage_developer_info">개발자 정보</string>
-    <string name="mypage_ask_kakao">카카오채널 문의하기</string>
+    <string name="mypage_version_info">버전 정보</string>
+    <string name="mypage_version">v.</string>
+    <string name="mypage_ask_kakao">문의하기</string>
     <string name="mypage_before">이전</string>
     <string name="mypage_name">이름</string>
     <string name="mypage_age">나이</string>
@@ -105,6 +106,8 @@
     <string name="mypage_service_out_content">회원 탈퇴 시 모든 정보가 삭제되며 복구가 불가능해요.</string>
     <string name="mypage_cancel">취소</string>
     <string name="mypage_logout_check">정말 로그아웃 하시겠어요?</string>
+    <string name="mypage_look_more_info">모티부 더 알아보기</string>
+    <string name="mypage_kakao_chat_link">https://open.kakao.com/o/sSCxapcg</string>
 
     <!-- notification -->
     <string name="step_count_notification_channel_id">step_count_channel</string>
@@ -150,7 +153,7 @@
 
     <!-- exercise -->
     <string name="exercise_today_exercise">오늘의 운동</string>
-    <string name="exercise_today_mission">8천걸음 걷고 \n스쿼트 10번 하기</string>
+    <string name="exercise_today_mission">8천걸음 걷고 \n스탠딩 랫폴다운 20번 하기</string>
     <string name="exercise_notice">운동 기록은 30일간 보관 후 사라져요!</string>
     <string name="exercise_date">2023년 12월 25일 월요일</string>
     <string name="exercise_no_image_before_exercise">다음 운동은\n꼭 성공해요!</string>
@@ -160,6 +163,8 @@
     <string name="exercise_child_exercise">자녀 운동</string>
     <string name="exercise_empty_content">아직 완료한 운동이 없어요\n운동하고 나만의 앨범을 만들어봐요!</string>
     <string name="exercise_empty_button">오늘의 운동 하러가기</string>
+    <string name="exercise_select_today_mission">오늘의 운동 선택하러가기</string>
+    <string name="exercise_please_select_today_mission">오늘 할 운동을 선택하세요!</string>
 
     <!-- connection error -->
     <string name="connection_error_title">잠시 연결이 불안정해요</string>
@@ -189,11 +194,13 @@
     <string name="privacy_policy_url">https://gayeong04.notion.site/df1e215e4b2248d28a913ea27788a777?pvs=4</string>
     <string name="open_source_url">https://gayeong04.notion.site/c78b181acf8a41f28f2ed653db998650?pvs=4</string>
     <string name="developer_info_url">https://gayeong04.notion.site/39aa420262384587957479ca4da2ba2e?pvs=4</string>
-    <string name="ask_kakao_url">https://gayeong04.notion.site/08592ddcf3bf4a3b80e3c54110444ebf?pvs=4</string>
+    <string name="about_motivoo_url">https://gayeong04.notion.site/358b03942cc44923886c650ac4485c7b</string>
 
     <!-- withdrawal -->
     <string name="withdrawal_title">매칭이 끊어졌어요</string>
     <string name="withdrawal_desc">매칭이 끊어져 모티부를 이용할 수 없어요\n탈퇴 후 다시 가입해주세요</string>
     <string name="network_error_title">잠시 연결이 불안정해요</string>
+    <string name="exercise_our_exercise_history">우리들의 운동 기록</string>
+
 
 </resources>
