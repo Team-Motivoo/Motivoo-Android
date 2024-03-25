@@ -38,7 +38,7 @@ class HomeViewModel @Inject constructor(
     val userType = MutableLiveData<MotivooUserType>()
     val anotherUserType = MutableLiveData<MotivooUserType>()
     val isPermissionGranted = MutableLiveData<Boolean>()
-    val isMissionChoiceFinished = MutableLiveData<Boolean>(false)
+    val isMissionChoiceFinished = MutableLiveData<Boolean>()
     val isCompletedStepCount = MutableLiveData<Boolean>()
     val isCompletedMission = MutableLiveData<Boolean>()
     val isHighFive = MutableLiveData<Boolean>()
@@ -109,6 +109,7 @@ class HomeViewModel @Inject constructor(
                     postMissionToday(missionId.toInt())
                 }
             }
+
         }
     }
 

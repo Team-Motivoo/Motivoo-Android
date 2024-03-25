@@ -12,7 +12,6 @@ import android.provider.Settings
 import android.transition.TransitionManager
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
@@ -38,7 +37,6 @@ import timber.log.Timber
 
 @AndroidEntryPoint
 class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home) {
-    private var isCreated = false
     private val viewModel: HomeViewModel by activityViewModels()
 
     private val requestHomePermissionRequest = registerForActivityResult(
@@ -55,7 +53,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
             }
         }
         if (!permissionGranted) {
-            if (educationGranted) intentAppSettings() // TODO :: 교육용 팝업
+            if (educationGranted && viewModel.isMissionChoiceFinished.value == true) intentAppSettings() // TODO :: 교육용 팝업
             else permissionDenied()
         } else {
             permissionGranted()
@@ -64,7 +62,6 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        isCreated = true
         binding.vm = viewModel
         backPressed()
 
@@ -168,7 +165,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
     }
 
     private fun checkPermissionIfUnSelectedMission() {
-        if (viewModel.isMissionChoiceFinished.value == false) {
+        if (viewModel.isMissionChoiceFinished.value != true) {
             requestHomePermissionRequest.launch(HOME_REQUIRED_PERMISSIONS)
         }
     }
@@ -232,16 +229,6 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        if (isCreated) {
-            isCreated = false
-        } else {
-            initHomePermissionsState()
-            viewModel.postMissionTodayChoice()
-        }
-    }
-
     private fun initHomePermissionsState() {
         checkPermission().also {
             if (it) permissionGranted()
@@ -256,11 +243,6 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
     }
 
     private fun permissionDenied() {
-        Toast.makeText(
-            requireContext(),
-            "Permission request denied",
-            Toast.LENGTH_SHORT
-        ).show()
         updateBlurEffect()
         viewModel.isPermissionGranted.value = false
     }
