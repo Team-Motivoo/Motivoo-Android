@@ -109,7 +109,6 @@ class HomeViewModel @Inject constructor(
                     postMissionToday(missionId.toInt())
                 }
             }
-
         }
     }
 
