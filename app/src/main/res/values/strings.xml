@@ -150,7 +150,7 @@
 
     <!-- exercise -->
     <string name="exercise_today_exercise">오늘의 운동</string>
-    <string name="exercise_today_mission">8천걸음 걷고 \n스쿼트 10번 하기</string>
+    <string name="exercise_today_mission">8천걸음 걷고 \n스탠딩 랫폴다운 20번 하기</string>
     <string name="exercise_notice">운동 기록은 30일간 보관 후 사라져요!</string>
     <string name="exercise_date">2023년 12월 25일 월요일</string>
     <string name="exercise_no_image_before_exercise">다음 운동은\n꼭 성공해요!</string>
@@ -160,6 +160,8 @@
     <string name="exercise_child_exercise">자녀 운동</string>
     <string name="exercise_empty_content">아직 완료한 운동이 없어요\n운동하고 나만의 앨범을 만들어봐요!</string>
     <string name="exercise_empty_button">오늘의 운동 하러가기</string>
+    <string name="exercise_select_today_mission">오늘의 운동 선택하러가기</string>
+    <string name="exercise_please_select_today_mission">오늘 할 운동을 선택하세요!</string>
 
     <!-- connection error -->
     <string name="connection_error_title">잠시 연결이 불안정해요</string>
@@ -195,6 +197,7 @@
     <string name="withdrawal_title">매칭이 끊어졌어요</string>
     <string name="withdrawal_desc">매칭이 끊어져 모티부를 이용할 수 없어요\n탈퇴 후 다시 가입해주세요</string>
     <string name="network_error_title">잠시 연결이 불안정해요</string>
+    <string name="exercise_our_exercise_history">우리들의 운동 기록</string>
 
 
 </resources>

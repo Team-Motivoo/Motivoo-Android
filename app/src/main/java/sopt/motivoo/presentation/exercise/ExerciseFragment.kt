@@ -24,7 +24,6 @@ class ExerciseFragment : BindingFragment<FragmentExerciseBinding>(R.layout.fragm
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         exerciseViewModel.getExerciseHistoryInfo()
-        setClickEvents()
         observeLiveData()
         overrideOnBackPressed()
     }
@@ -88,6 +87,7 @@ class ExerciseFragment : BindingFragment<FragmentExerciseBinding>(R.layout.fragm
         binding.ivExerciseEmptyImg.visibility = if (isVisible) View.VISIBLE else View.GONE
         binding.tvExerciseEmptyContent.visibility = if (isVisible) View.VISIBLE else View.GONE
         binding.tvExerciseEmptyBtn.visibility = if (isVisible) View.VISIBLE else View.GONE
+        setClickEvents()
     }
 
     private fun initAdapter(exerciseData: ExerciseData) {
