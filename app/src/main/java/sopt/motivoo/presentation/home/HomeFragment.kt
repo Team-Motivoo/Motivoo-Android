@@ -46,7 +46,12 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
     ) { permissions ->
         var permissionGranted = true
         var educationGranted = false
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            Timber.e("aaa can do it : ${alarmManager.canScheduleExactAlarms()} ")
+        }
         permissions.entries.forEach {
+            Timber.e("aaa it.key : ${it.key} / it.value : ${it.value}")
             if (it.key in Manifest.permission.POST_NOTIFICATIONS && it.value == false) {
                 permissionGranted = false
             }
