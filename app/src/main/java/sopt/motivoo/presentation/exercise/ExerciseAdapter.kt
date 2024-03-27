@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import sopt.motivoo.databinding.ItemExerciseBinding
-import sopt.motivoo.databinding.ItemExerciseNoticeBinding
+import sopt.motivoo.databinding.ItemExerciseTodayBinding
 import sopt.motivoo.domain.entity.exercise.ExerciseData.ExerciseItemInfo
 
 class ExerciseAdapter(private val userType: String) :
@@ -15,7 +15,7 @@ class ExerciseAdapter(private val userType: String) :
         val inflater = LayoutInflater.from(parent.context)
         return when (viewType) {
             NOTICE_INFO_TYPE -> {
-                val binding = ItemExerciseNoticeBinding.inflate(inflater, parent, false)
+                val binding = ItemExerciseTodayBinding.inflate(inflater, parent, false)
                 ExerciseNoticeViewHolder(binding)
             }
 
@@ -30,12 +30,15 @@ class ExerciseAdapter(private val userType: String) :
         when (holder) {
             is ExerciseNoticeViewHolder -> {
                 val noticeInfo = exerciseItemInfoList[position]
-                holder.onBind(noticeInfo as ExerciseItemInfo.NoticeItemInfo, userType)
+                holder.onBind(noticeInfo as ExerciseItemInfo.NoticeItemInfo, userType, itemCount)
             }
 
             is ExerciseEachDateInfoViewHolder -> {
                 val dateExerciseInfo = exerciseItemInfoList[position]
-                holder.onBind(dateExerciseInfo as ExerciseItemInfo.EachDateItemInfo, userType, itemCount)
+                holder.onBind(
+                    dateExerciseInfo as ExerciseItemInfo.EachDateItemInfo,
+                    userType
+                )
             }
         }
     }
