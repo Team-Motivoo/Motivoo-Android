@@ -38,42 +38,19 @@ import timber.log.Timber
 @AndroidEntryPoint
 class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     private val viewModel: HomeViewModel by activityViewModels()
-    val alarmManager = context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-
+    lateinit var alarmManager: AlarmManager
 
     private val requestHomePermissionRequest = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
     ) { permissions ->
         var permissionGranted = true
         var educationGranted = false
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            Timber.e("aaa can do it : ${alarmManager.canScheduleExactAlarms()} ")
-        }
         permissions.entries.forEach {
-            Timber.e("aaa it.key : ${it.key} / it.value : ${it.value}")
-            if (it.key in Manifest.permission.POST_NOTIFICATIONS && it.value == false) {
+            if (it.key in HOME_REQUIRED_PERMISSIONS && it.value == false) {
                 permissionGranted = false
             }
-            if (it.key in Manifest.permission.ACTIVITY_RECOGNITION && it.value == false) {
-                permissionGranted = false
-            }
-
-            if (!shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS) && it.value == false) {
+            if (!shouldShowRequestPermissionRationale(it.key) && it.value == false) {
                 educationGranted = true
-            }
-            if (!shouldShowRequestPermissionRationale(Manifest.permission.ACTIVITY_RECOGNITION) && it.value == false) {
-                educationGranted = true
-            }
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                if (!alarmManager.canScheduleExactAlarms()) {
-                    permissionGranted = false
-                    educationGranted = false
-                } else {
-                    permissionGranted = true
-                    educationGranted = true
-                }
             }
         }
 
@@ -88,6 +65,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.vm = viewModel
+        alarmManager = context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         backPressed()
 
         initHomePermissionsState()
@@ -199,21 +177,25 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         if (checkPermission()) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                 if (!alarmManager.canScheduleExactAlarms()) {
-                    requireContext().showSnackbar(
-                        binding.root,
-                        "자정마다 걸음 수를 초기화하려면 알림 및 리마인더를 허용해주세요.",
-                        "설정으로 이동",
-                        true
-                    ) {
-                        val intent = Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM)
-                        startActivity(intent)
-                    }
+                    requestScheduleExactAlarm()
                 } else {
                     startStepCountService(homeState.homeData.userId.toInt())
                 }
             } else {
                 startStepCountService(homeState.homeData.userId.toInt())
             }
+        }
+    }
+
+    private fun requestScheduleExactAlarm() {
+        requireContext().showSnackbar(
+            binding.root,
+            getString(R.string.home_exact_alarm_denied_reminder),
+            getString(R.string.home_setting),
+            true
+        ) {
+            val intent = Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM)
+            startActivity(intent)
         }
     }
 
@@ -341,7 +323,6 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
                 }
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                     add(Manifest.permission.POST_NOTIFICATIONS)
-                    add(Manifest.permission.SCHEDULE_EXACT_ALARM)
                 }
             }.toTypedArray()
     }

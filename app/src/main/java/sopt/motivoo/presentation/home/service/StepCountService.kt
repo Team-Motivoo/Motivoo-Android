@@ -152,7 +152,7 @@ class StepCountService : LifecycleService() {
                     getString(R.string.notification_title, stepCount),
                     getString(R.string.notification_content)
                 ),
-                ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC
+                ServiceInfo.FOREGROUND_SERVICE_TYPE_HEALTH
             )
         } else {
             startForeground(

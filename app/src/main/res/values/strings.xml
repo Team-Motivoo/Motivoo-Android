@@ -74,6 +74,8 @@
     <string name="home_parent">부모</string>
     <string name="verify_exercise">운동 인증이 완료되었어요!</string>
     <string name="verify_exercise_description">오늘도 멋지게 운동을 해내셨군요</string>
+    <string name="home_exact_alarm_denied_reminder">자정마다 걸음 수를 초기화하려면 알림 및 리마인더를 허용해주세요.</string>
+    <string name="home_setting">설정으로 이동</string>
     <string name="motivoo_logo">motivoo_logo</string>
 
     <!-- my page -->
