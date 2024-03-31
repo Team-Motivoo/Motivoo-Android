@@ -79,7 +79,7 @@ fun Context.sendNotification(
         applicationContext,
         applicationContext.getString(R.string.step_count_notification_channel_id)
     ).apply {
-        setSmallIcon(R.drawable.ic_clap_sound)
+        setSmallIcon(R.mipmap.ic_motivoo)
         setContentTitle(title)
         setContentText(messageBody)
         setContentIntent(contentPendingIntent)
