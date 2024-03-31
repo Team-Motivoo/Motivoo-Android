@@ -1,7 +1,6 @@
 package sopt.mottivoo.domain.entity
 
 interface MotivooStorage {
-    var nickName: String
     var accessToken: String
     var refreshToken: String
     var isUserLoggedIn: Boolean
