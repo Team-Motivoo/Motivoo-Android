@@ -9,7 +9,7 @@
 
         <variable
             name="vm"
-            type="sopt.mottivoo.presentation.home.viewmodel.HomeViewModel" />
+            type="sopt.motivoo.presentation.home.viewmodel.HomeViewModel" />
     </data>
 
     <ScrollView

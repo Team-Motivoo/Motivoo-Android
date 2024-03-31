@@ -6,7 +6,7 @@
 
         <variable
             name="termsOfViewModel"
-            type="sopt.mottivoo.presentation.intro.TermsOfUseViewModel" />
+            type="sopt.motivoo.presentation.intro.TermsOfUseViewModel" />
 
     </data>
 

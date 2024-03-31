@@ -4,11 +4,11 @@
 
     <data>
 
-        <import type="sopt.mottivoo.presentation.type.DoExerciseType" />
+        <import type="sopt.motivoo.presentation.type.DoExerciseType" />
 
         <variable
             name="onboardingViewModel"
-            type="sopt.mottivoo.presentation.onboarding.OnboardingViewModel" />
+            type="sopt.motivoo.presentation.onboarding.OnboardingViewModel" />
 
     </data>
 

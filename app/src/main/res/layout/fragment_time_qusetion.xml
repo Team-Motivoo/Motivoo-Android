@@ -4,11 +4,11 @@
 
     <data>
 
-        <import type="sopt.mottivoo.presentation.type.TimeType" />
+        <import type="sopt.motivoo.presentation.type.TimeType" />
 
         <variable
             name="onboardingViewModel"
-            type="sopt.mottivoo.presentation.onboarding.OnboardingViewModel" />
+            type="sopt.motivoo.presentation.onboarding.OnboardingViewModel" />
 
     </data>
 

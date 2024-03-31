@@ -7,7 +7,7 @@
 
         <variable
             name="whatExerciseType"
-            type="sopt.mottivoo.presentation.type.WhatExerciseType" />
+            type="sopt.motivoo.presentation.type.WhatExerciseType" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
