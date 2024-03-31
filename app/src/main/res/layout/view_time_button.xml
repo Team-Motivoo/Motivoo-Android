@@ -7,7 +7,7 @@
 
         <variable
             name="timeType"
-            type="sopt.motivoo.presentation.type.TimeType" />
+            type="sopt.mottivoo.presentation.type.TimeType" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

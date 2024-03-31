@@ -7,7 +7,7 @@
 
         <variable
             name="whatActivityType"
-            type="sopt.motivoo.presentation.type.WhatActivityType" />
+            type="sopt.mottivoo.presentation.type.WhatActivityType" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

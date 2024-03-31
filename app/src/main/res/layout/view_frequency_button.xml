@@ -7,7 +7,7 @@
 
         <variable
             name="frequencyType"
-            type="sopt.motivoo.presentation.type.FrequencyType" />
+            type="sopt.mottivoo.presentation.type.FrequencyType" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

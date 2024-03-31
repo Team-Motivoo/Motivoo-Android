@@ -6,7 +6,7 @@
 
         <variable
             name="inviteCodeViewModel"
-            type="sopt.motivoo.presentation.invitecode.PostInviteCodeViewModel" />
+            type="sopt.mottivoo.presentation.invitecode.PostInviteCodeViewModel" />
 
     </data>
 
