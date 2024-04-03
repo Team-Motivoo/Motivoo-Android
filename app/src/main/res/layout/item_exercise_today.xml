@@ -22,13 +22,9 @@
             android:id="@+id/iv_exercise_today_shoes"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="-2dp"
-            android:layout_marginTop="-97dp"
-            android:adjustViewBounds="true"
             android:src="@drawable/img_exercise_today_shoes"
-            app:layout_constraintEnd_toEndOf="@id/cl_exercise_today_right"
-            app:layout_constraintStart_toStartOf="@id/cl_exercise_today_right"
-            app:layout_constraintTop_toTopOf="@id/cl_exercise_today_right" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_exercise_today_exercise"
