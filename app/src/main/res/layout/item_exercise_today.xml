@@ -207,14 +207,22 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="32dp"
         android:layout_marginBottom="8dp"
-        android:drawableEnd="@drawable/ic_question"
-        android:drawablePadding="8dp"
         android:paddingVertical="5dp"
         android:text="@string/exercise_our_exercise_history"
         android:textColor="@color/gray_900_161616"
         app:layout_constraintBottom_toTopOf="@id/iv_exercise_today_empty_history"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cl_exercise_today" />
+
+    <ImageView
+        android:id="@+id/iv_exercise_today_icon_question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:src="@drawable/ic_question"
+        app:layout_constraintBottom_toBottomOf="@id/tv_exercise_today_our_history"
+        app:layout_constraintStart_toEndOf="@id/tv_exercise_today_our_history"
+        app:layout_constraintTop_toTopOf="@id/tv_exercise_today_our_history" />
 
     <ImageView
         android:id="@+id/iv_exercise_today_empty_history"
