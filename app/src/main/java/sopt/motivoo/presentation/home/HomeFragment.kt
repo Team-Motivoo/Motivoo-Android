@@ -40,6 +40,7 @@ import timber.log.Timber
 class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     private var isCreated = false
     private val viewModel: HomeViewModel by activityViewModels()
+    lateinit var alarmManager: AlarmManager
 
     private val requestHomePermissionRequest = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
@@ -66,6 +67,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         super.onViewCreated(view, savedInstanceState)
         isCreated = true
         binding.vm = viewModel
+        alarmManager = context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         backPressed()
 
         initHomePermissionsState()
@@ -178,21 +180,25 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
             val alarmManager = context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                 if (!alarmManager.canScheduleExactAlarms()) {
-                    requireContext().showSnackbar(
-                        binding.root,
-                        "자정마다 걸음 수를 초기화하려면 알림 및 리마인더를 허용해주세요.",
-                        "설정으로 이동",
-                        true
-                    ) {
-                        val intent = Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM)
-                        startActivity(intent)
-                    }
+                    requestScheduleExactAlarm()
                 } else {
                     startStepCountService(homeState.homeData.userId.toInt())
                 }
             } else {
                 startStepCountService(homeState.homeData.userId.toInt())
             }
+        }
+    }
+
+    private fun requestScheduleExactAlarm() {
+        requireContext().showSnackbar(
+            binding.root,
+            getString(R.string.home_exact_alarm_denied_reminder),
+            getString(R.string.home_setting),
+            true
+        ) {
+            val intent = Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM)
+            startActivity(intent)
         }
     }
 
