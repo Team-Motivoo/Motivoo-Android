@@ -34,7 +34,6 @@ class ExerciseEachDateInfoViewHolder(
             val context = binding.root.context
             checkStatus(exerciseItemInfoData, binding, context)
         }
-
     }
 
     private fun initText(
