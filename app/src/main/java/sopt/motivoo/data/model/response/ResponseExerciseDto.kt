@@ -46,8 +46,7 @@ data class ResponseExerciseDto(
                 mutableListOf()
             } else if (data.todayMission == null && data.missionHistory!!.size == 1 && data.missionHistory[0].date.removeDayOfTheWeek() == LocalDate.now().prettyString) {
                 mutableListOf()
-            }
-            else if (data.todayMission == null) {
+            } else if (data.todayMission == null) {
                 mutableListOf(
                     ExerciseItemInfo.NoticeItemInfo(
                         null,
