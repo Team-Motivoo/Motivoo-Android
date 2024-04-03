@@ -42,9 +42,12 @@ data class ResponseExerciseDto(
     fun toExerciseData(): ExerciseData {
         fun String.removeDayOfTheWeek(): String = this.removeRange(length - 4 until length)
         val list: MutableList<ExerciseItemInfo> =
-            if (data.todayMission == null && data.missionHistory?.size!! < 1) {
+            if (data.todayMission == null && data.missionHistory!!.isEmpty()) {
                 mutableListOf()
-            } else if (data.todayMission == null) {
+            } else if (data.todayMission == null && data.missionHistory!!.size == 1 && data.missionHistory[0].date.removeDayOfTheWeek() == LocalDate.now().prettyString) {
+                mutableListOf()
+            }
+            else if (data.todayMission == null) {
                 mutableListOf(
                     ExerciseItemInfo.NoticeItemInfo(
                         null,
