@@ -19,17 +19,17 @@ class ExerciseEachDateInfoViewHolder(
 
     fun onBind(
         exerciseItemInfoData: ExerciseItemInfo.EachDateItemInfo,
-        userType: String
+        opponentUserType: String,
     ) {
-        setHistory(exerciseItemInfoData, userType)
+        setHistory(exerciseItemInfoData, opponentUserType)
     }
 
     private fun setHistory(
         exerciseItemInfoData: ExerciseItemInfo.EachDateItemInfo,
-        userType: String
+        opponentUserType: String,
     ) {
         with(binding) {
-            initText(exerciseItemInfoData, binding, userType)
+            initText(exerciseItemInfoData, binding, opponentUserType)
             initImage(exerciseItemInfoData, binding)
             val context = binding.root.context
             checkStatus(exerciseItemInfoData, binding, context)
@@ -40,7 +40,7 @@ class ExerciseEachDateInfoViewHolder(
     private fun initText(
         exerciseItemInfoData: ExerciseItemInfo.EachDateItemInfo,
         binding: ItemExerciseBinding,
-        userType: String,
+        opponentUserType: String,
     ) {
         with(binding) {
             tvItemExerciseDate.text = exerciseItemInfoData.date
@@ -49,8 +49,8 @@ class ExerciseEachDateInfoViewHolder(
             tvItemExerciseMyState.text = exerciseItemInfoData.myMissionStatus
             tvItemExerciseParentState.text = exerciseItemInfoData.opponentMissionStatus
             tvItemExerciseOpponentExercise.text =
-                if (userType == CHILD) root.context.getString(R.string.exercise_parent_exercise) else root.context.getString(
-                    R.string.exercise_child_exercise
+                if (opponentUserType == CHILD) root.context.getString(R.string.exercise_child_exercise) else root.context.getString(
+                    R.string.exercise_parent_exercise
                 )
         }
     }
@@ -115,20 +115,24 @@ class ExerciseEachDateInfoViewHolder(
 
 class ExerciseNoticeViewHolder(private val binding: ItemExerciseTodayBinding) :
     RecyclerView.ViewHolder(binding.root) {
-    fun onBind(exerciseNoticeData: ExerciseItemInfo.NoticeItemInfo, userType: String, itemCount: Int) {
-        setCharacterIcon(userType)
+    fun onBind(
+        exerciseNoticeData: ExerciseItemInfo.NoticeItemInfo,
+        userType: String,
+        opponentUserType: String,
+        itemCount: Int,
+    ) {
+        setCharacterIcon(userType, opponentUserType)
         setText(exerciseNoticeData)
         setEmptyHistory(itemCount)
     }
 
-    private fun setCharacterIcon(userType: String) {
-        if (userType == CHILD) {
-            binding.ivExerciseTodayIconLeft.setImageResource(R.drawable.ic_child_left)
-            binding.ivExerciseTodayIconRight.setImageResource(R.drawable.ic_parent_right)
-        } else {
-            binding.ivExerciseTodayIconLeft.setImageResource(R.drawable.ic_parent_left)
-            binding.ivExerciseTodayIconRight.setImageResource(R.drawable.ic_child_right)
-        }
+    private fun setCharacterIcon(userType: String, opponentUserType: String) {
+        if (userType == CHILD) binding.ivExerciseTodayIconLeft.setImageResource(R.drawable.ic_child_left) else binding.ivExerciseTodayIconLeft.setImageResource(
+            R.drawable.ic_parent_left
+        )
+        if (opponentUserType == CHILD) binding.ivExerciseTodayIconRight.setImageResource(R.drawable.ic_child_right) else binding.ivExerciseTodayIconRight.setImageResource(
+            R.drawable.ic_parent_right
+        )
     }
 
     private fun setText(exerciseNoticeData: ExerciseItemInfo.NoticeItemInfo) {

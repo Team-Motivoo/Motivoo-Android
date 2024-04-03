@@ -7,7 +7,7 @@ import sopt.motivoo.databinding.ItemExerciseBinding
 import sopt.motivoo.databinding.ItemExerciseTodayBinding
 import sopt.motivoo.domain.entity.exercise.ExerciseData.ExerciseItemInfo
 
-class ExerciseAdapter(private val userType: String) :
+class ExerciseAdapter(private val userType: String, private val opponentUserType: String) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var exerciseItemInfoList: List<ExerciseItemInfo> = emptyList()
 
@@ -30,14 +30,18 @@ class ExerciseAdapter(private val userType: String) :
         when (holder) {
             is ExerciseNoticeViewHolder -> {
                 val noticeInfo = exerciseItemInfoList[position]
-                holder.onBind(noticeInfo as ExerciseItemInfo.NoticeItemInfo, userType, itemCount)
+                holder.onBind(
+                    noticeInfo as ExerciseItemInfo.NoticeItemInfo,
+                    userType,
+                    opponentUserType,
+                    itemCount
+                )
             }
 
             is ExerciseEachDateInfoViewHolder -> {
                 val dateExerciseInfo = exerciseItemInfoList[position]
                 holder.onBind(
-                    dateExerciseInfo as ExerciseItemInfo.EachDateItemInfo,
-                    userType
+                    dateExerciseInfo as ExerciseItemInfo.EachDateItemInfo, opponentUserType
                 )
             }
         }
