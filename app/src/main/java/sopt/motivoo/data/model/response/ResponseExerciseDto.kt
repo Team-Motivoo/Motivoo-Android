@@ -41,7 +41,7 @@ data class ResponseExerciseDto(
     fun toExerciseData(): ExerciseData {
         fun String.removeDayOfTheWeek(): String = this.removeRange(length - 4 until length)
         val list: MutableList<ExerciseItemInfo> =
-            if (data.todayMission == null && data.missionHistory?.size!! < 2) {
+            if (data.todayMission == null && data.missionHistory?.size!! < 1) {
                 mutableListOf()
             } else if (data.todayMission == null) {
                 mutableListOf(
