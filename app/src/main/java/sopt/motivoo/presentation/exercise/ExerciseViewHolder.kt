@@ -6,6 +6,7 @@ import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import coil.transform.RoundedCornersTransformation
 import sopt.motivoo.R
 import sopt.motivoo.databinding.ItemExerciseBinding
 import sopt.motivoo.databinding.ItemExerciseTodayBinding
@@ -30,8 +31,8 @@ class ExerciseEachDateInfoViewHolder(
     ) {
         with(binding) {
             initText(exerciseItemInfoData, binding, opponentUserType)
-            initImage(exerciseItemInfoData, binding)
             val context = binding.root.context
+            initImage(context, exerciseItemInfoData, binding)
             checkStatus(exerciseItemInfoData, binding, context)
         }
     }
@@ -54,20 +55,30 @@ class ExerciseEachDateInfoViewHolder(
         }
     }
 
+    private fun dpToPx(context: Context, dp: Float): Float {
+        return dp * (context.resources.displayMetrics.density)
+    }
+
     private fun initImage(
+        context: Context,
         exerciseItemInfoData: ExerciseItemInfo.EachDateItemInfo,
         binding: ItemExerciseBinding,
     ) {
+        val pxValue = dpToPx(context, 8f)
         with(binding) {
             if (exerciseItemInfoData.myMissionImgUrl != null) {
-                ivItemExerciseLeftImage.load(exerciseItemInfoData.myMissionImgUrl)
+                ivItemExerciseLeftImage.load(exerciseItemInfoData.myMissionImgUrl) {
+                    transformations(RoundedCornersTransformation(pxValue))
+                }
             } else if (exerciseItemInfoData.myMissionStatus == "없음") {
                 ivItemExerciseLeftImage.setImageResource(R.drawable.img_choose_exercise)
             } else {
                 ivItemExerciseLeftImage.setImageResource(R.drawable.img_success_next_exercise)
             }
             if (exerciseItemInfoData.opponentMissionImgUrl != null) {
-                ivItemExerciseRightImage.load(exerciseItemInfoData.opponentMissionImgUrl)
+                ivItemExerciseRightImage.load(exerciseItemInfoData.opponentMissionImgUrl) {
+                    transformations(RoundedCornersTransformation(pxValue))
+                }
             } else if (exerciseItemInfoData.opponentMissionStatus == "없음") {
                 ivItemExerciseRightImage.setImageResource(R.drawable.img_choose_exercise)
             } else {
@@ -170,22 +181,32 @@ class ExerciseNoticeViewHolder(private val binding: ItemExerciseTodayBinding) :
             clExerciseTodaySelectTodayMission.visibility = View.GONE
             tvExerciseTodayMission.text = exerciseNoticeData.missionContent
         }
-        setTodayImageAndBubble(exerciseNoticeData)
+        setTodayImageAndBubble(context, exerciseNoticeData)
+    }
+
+    private fun dpToPx(context: Context, dp: Float): Float {
+        return dp * (context.resources.displayMetrics.density)
     }
 
     private fun setTodayImageAndBubble(
+        context: Context,
         exerciseNoticeData: ExerciseItemInfo.NoticeItemInfo,
     ) {
+        val pxValue = dpToPx(context, 8f)
         if (exerciseNoticeData.missionDate == exerciseNoticeData.todayDate) {
             if (exerciseNoticeData.myMissionStatus == ExerciseEachDateInfoViewHolder.STATE_SUCCESS_TYPE) {
                 binding.ivExerciseTodayBubbleLeft.setImageResource(R.drawable.ic_bubble_success)
-                binding.ivExerciseTodayImageLeft.load(exerciseNoticeData.myMissionImgUrl)
+                binding.ivExerciseTodayImageLeft.load(exerciseNoticeData.myMissionImgUrl) {
+                    transformations(RoundedCornersTransformation(pxValue))
+                }
             } else {
                 binding.ivExerciseTodayBubbleLeft.setImageResource(R.drawable.ic_bubble_exercising)
             }
             if (exerciseNoticeData.opponentMissionStatus == ExerciseEachDateInfoViewHolder.STATE_SUCCESS_TYPE) {
                 binding.ivExerciseTodayBubbleRight.setImageResource(R.drawable.ic_bubble_success)
-                binding.ivExerciseTodayImageRight.load(exerciseNoticeData.opponentMissionImgUrl)
+                binding.ivExerciseTodayImageRight.load(exerciseNoticeData.opponentMissionImgUrl) {
+                    transformations(RoundedCornersTransformation(pxValue))
+                }
             } else {
                 binding.ivExerciseTodayBubbleRight.setImageResource(R.drawable.ic_bubble_exercising)
             }

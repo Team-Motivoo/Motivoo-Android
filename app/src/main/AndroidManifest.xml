@@ -51,7 +51,7 @@
         <service
             android:name=".presentation.home.service.StepCountService"
             android:exported="false"
-            android:foregroundServiceType="health|dataSync" />
+            android:foregroundServiceType="health" />
 
         <activity
             android:name=".presentation.SampleDesignActivity"
