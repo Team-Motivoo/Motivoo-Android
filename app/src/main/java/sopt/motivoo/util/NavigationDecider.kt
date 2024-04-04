@@ -8,20 +8,20 @@ class NavigationDecider @Inject constructor(
 ) {
     fun determineNavigationDestination(): NavigationEvent {
         return when {
-            !motivooStorage.isFinishedPermission && motivooStorage.isUserLoggedIn ->
-                NavigationEvent.Permission
-
-            !motivooStorage.isFinishedTermsOfUse && motivooStorage.isUserLoggedIn ->
-                NavigationEvent.TermsOfUse
-
-            !motivooStorage.isUserMatched && !motivooStorage.isFinishedOnboarding && motivooStorage.isUserLoggedIn ->
-                NavigationEvent.AgeQuestion
+            motivooStorage.isUserMatched && motivooStorage.isFinishedOnboarding && motivooStorage.isUserLoggedIn ->
+                NavigationEvent.Home
 
             !motivooStorage.isUserMatched && motivooStorage.isFinishedOnboarding && motivooStorage.isUserLoggedIn ->
                 NavigationEvent.StartMotivoo
 
-            motivooStorage.isUserMatched && motivooStorage.isFinishedOnboarding && motivooStorage.isUserLoggedIn ->
-                NavigationEvent.Home
+            !motivooStorage.isUserMatched && !motivooStorage.isFinishedOnboarding && motivooStorage.isUserLoggedIn ->
+                NavigationEvent.AgeQuestion
+
+            !motivooStorage.isFinishedTermsOfUse && motivooStorage.isUserLoggedIn ->
+                NavigationEvent.TermsOfUse
+
+            !motivooStorage.isFinishedPermission && motivooStorage.isUserLoggedIn ->
+                NavigationEvent.Permission
 
             else ->
                 NavigationEvent.Login
