@@ -214,7 +214,8 @@
         android:id="@+id/iv_exercise_today_icon_question"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="8dp"
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="3dp"
         android:src="@drawable/ic_question"
         app:layout_constraintBottom_toBottomOf="@id/tv_exercise_today_our_history"
         app:layout_constraintStart_toEndOf="@id/tv_exercise_today_our_history"
@@ -229,16 +230,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_exercise_today_our_history" />
-
-    <ImageView
-        android:id="@+id/iv_exercise_today_question_notice"
-        android:layout_width="250dp"
-        android:layout_height="200dp"
-        android:src="@drawable/img_exercise_today_notice_bubble"
-        app:layout_constraintTop_toBottomOf="@id/iv_exercise_today_icon_question"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

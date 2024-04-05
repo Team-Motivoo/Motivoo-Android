@@ -1,12 +1,20 @@
 package sopt.motivoo.presentation.exercise
 
 import android.content.Context
+import android.graphics.Color
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
 import android.view.View
+import android.widget.FrameLayout
 import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.RoundedCornersTransformation
+import com.skydoves.balloon.ArrowPositionRules
+import com.skydoves.balloon.Balloon
+import com.skydoves.balloon.BalloonAnimation
+import com.skydoves.balloon.createBalloon
 import sopt.motivoo.R
 import sopt.motivoo.databinding.ItemExerciseBinding
 import sopt.motivoo.databinding.ItemExerciseTodayBinding
@@ -131,10 +139,27 @@ class ExerciseNoticeViewHolder(private val binding: ItemExerciseTodayBinding) :
         opponentUserType: String,
         itemCount: Int,
     ) {
+        clickQuestionMark()
         setCharacterIcon(userType, opponentUserType)
         setText(exerciseNoticeData)
         setEmptyHistory(itemCount)
     }
+
+    private fun clickQuestionMark() {
+        val context = binding.root.context
+        val balloon = Balloon.Builder(context)
+            .setLayout(R.layout.view_exercise_today_question_notice)
+            .setBackgroundColorResource(android.R.color.transparent)
+            .setArrowPositionRules(ArrowPositionRules.ALIGN_ANCHOR)
+            .setArrowPosition(0.5f)
+            .setArrowSize(0)
+            .build()
+
+        binding.ivExerciseTodayIconQuestion.setOnClickListener {
+            balloon.showAlignBottom(binding.ivExerciseTodayIconQuestion,0,-15)
+        }
+    }
+
 
     private fun setCharacterIcon(userType: String, opponentUserType: String) {
         if (userType == CHILD) binding.ivExerciseTodayIconLeft.setImageResource(R.drawable.ic_child_left) else binding.ivExerciseTodayIconLeft.setImageResource(
