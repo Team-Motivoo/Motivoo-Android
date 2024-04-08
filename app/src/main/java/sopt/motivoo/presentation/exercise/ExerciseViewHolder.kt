@@ -6,13 +6,15 @@ import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import coil.transform.RoundedCornersTransformation
+import com.skydoves.balloon.ArrowPositionRules
+import com.skydoves.balloon.Balloon
+import com.skydoves.balloon.BalloonSizeSpec
 import sopt.motivoo.R
 import sopt.motivoo.databinding.ItemExerciseBinding
-import sopt.motivoo.databinding.ItemExerciseNoticeBinding
+import sopt.motivoo.databinding.ItemExerciseTodayBinding
 import sopt.motivoo.domain.entity.exercise.ExerciseData.ExerciseItemInfo
 import sopt.motivoo.presentation.exercise.ExerciseFragment.Companion.CHILD
-import sopt.motivoo.util.extension.prettyString
-import java.time.LocalDate
 
 class ExerciseEachDateInfoViewHolder(
     private val binding: ItemExerciseBinding,
@@ -21,39 +23,27 @@ class ExerciseEachDateInfoViewHolder(
 
     fun onBind(
         exerciseItemInfoData: ExerciseItemInfo.EachDateItemInfo,
-        userType: String,
-        itemSize: Int,
+        opponentUserType: String,
     ) {
-        setHistoryOrNot(exerciseItemInfoData, userType, itemSize)
+        setHistory(exerciseItemInfoData, opponentUserType)
     }
 
-    private fun setHistoryOrNot(
+    private fun setHistory(
         exerciseItemInfoData: ExerciseItemInfo.EachDateItemInfo,
-        userType: String,
-        itemSize: Int,
+        opponentUserType: String,
     ) {
         with(binding) {
-            fun String.removeDayOfTheWeek(): String = this.removeRange(length - 4 until length)
-            if (itemSize == 2 && exerciseItemInfoData.date!!.removeDayOfTheWeek() == LocalDate.now().prettyString) {
-                ivExerciseEmptyHistory.visibility = View.VISIBLE
-                ivItemExerciseLeftImage.visibility = View.GONE
-                tvItemExerciseMyExercise.visibility = View.GONE
-                tvItemExerciseOpponentExercise.visibility = View.GONE
-                ivItemExerciseRightImage.visibility = View.GONE
-            } else {
-                ivExerciseEmptyHistory.visibility = View.GONE
-                initText(exerciseItemInfoData, binding, userType)
-                initImage(exerciseItemInfoData, binding)
-                val context = binding.root.context
-                checkStatus(exerciseItemInfoData, binding, context)
-            }
+            initText(exerciseItemInfoData, binding, opponentUserType)
+            val context = binding.root.context
+            initImage(context, exerciseItemInfoData, binding)
+            checkStatus(exerciseItemInfoData, binding, context)
         }
     }
 
     private fun initText(
         exerciseItemInfoData: ExerciseItemInfo.EachDateItemInfo,
         binding: ItemExerciseBinding,
-        userType: String,
+        opponentUserType: String,
     ) {
         with(binding) {
             tvItemExerciseDate.text = exerciseItemInfoData.date
@@ -62,26 +52,36 @@ class ExerciseEachDateInfoViewHolder(
             tvItemExerciseMyState.text = exerciseItemInfoData.myMissionStatus
             tvItemExerciseParentState.text = exerciseItemInfoData.opponentMissionStatus
             tvItemExerciseOpponentExercise.text =
-                if (userType == CHILD) root.context.getString(R.string.exercise_parent_exercise) else root.context.getString(
-                    R.string.exercise_child_exercise
+                if (opponentUserType == CHILD) root.context.getString(R.string.exercise_child_exercise) else root.context.getString(
+                    R.string.exercise_parent_exercise
                 )
         }
     }
 
+    private fun dpToPx(context: Context, dp: Float): Float {
+        return dp * (context.resources.displayMetrics.density)
+    }
+
     private fun initImage(
+        context: Context,
         exerciseItemInfoData: ExerciseItemInfo.EachDateItemInfo,
         binding: ItemExerciseBinding,
     ) {
+        val pxValue = dpToPx(context, 8f)
         with(binding) {
             if (exerciseItemInfoData.myMissionImgUrl != null) {
-                ivItemExerciseLeftImage.load(exerciseItemInfoData.myMissionImgUrl)
+                ivItemExerciseLeftImage.load(exerciseItemInfoData.myMissionImgUrl) {
+                    transformations(RoundedCornersTransformation(pxValue))
+                }
             } else if (exerciseItemInfoData.myMissionStatus == "없음") {
                 ivItemExerciseLeftImage.setImageResource(R.drawable.img_choose_exercise)
             } else {
                 ivItemExerciseLeftImage.setImageResource(R.drawable.img_success_next_exercise)
             }
             if (exerciseItemInfoData.opponentMissionImgUrl != null) {
-                ivItemExerciseRightImage.load(exerciseItemInfoData.opponentMissionImgUrl)
+                ivItemExerciseRightImage.load(exerciseItemInfoData.opponentMissionImgUrl) {
+                    transformations(RoundedCornersTransformation(pxValue))
+                }
             } else if (exerciseItemInfoData.opponentMissionStatus == "없음") {
                 ivItemExerciseRightImage.setImageResource(R.drawable.img_choose_exercise)
             } else {
@@ -126,21 +126,56 @@ class ExerciseEachDateInfoViewHolder(
     }
 }
 
-class ExerciseNoticeViewHolder(private val binding: ItemExerciseNoticeBinding) :
+class ExerciseNoticeViewHolder(private val binding: ItemExerciseTodayBinding) :
     RecyclerView.ViewHolder(binding.root) {
-    fun onBind(exerciseNoticeData: ExerciseItemInfo.NoticeItemInfo, userType: String) {
-        setCharacterIcon(userType)
+    fun onBind(
+        exerciseNoticeData: ExerciseItemInfo.NoticeItemInfo,
+        userType: String,
+        opponentUserType: String,
+        itemCount: Int,
+    ) {
+        clickQuestionMark()
+        setCharacterIcon(userType, opponentUserType)
         setText(exerciseNoticeData)
+        setEmptyHistory(itemCount)
     }
 
-    private fun setCharacterIcon(userType: String) {
-        if (userType == CHILD) {
-            binding.ivExerciseTodayIconLeft.setImageResource(R.drawable.ic_child_left)
-            binding.ivExerciseTodayIconRight.setImageResource(R.drawable.ic_parent_right)
-        } else {
-            binding.ivExerciseTodayIconLeft.setImageResource(R.drawable.ic_parent_left)
-            binding.ivExerciseTodayIconRight.setImageResource(R.drawable.ic_child_right)
+    private fun clickQuestionMark() {
+        val context = binding.root.context
+        val balloon = Balloon.Builder(context)
+            .setHeight(BalloonSizeSpec.WRAP)
+            .setWidth(BalloonSizeSpec.WRAP)
+            .setTextResource(R.string.exercise_today_question_notice)
+            .setArrowColorResource(R.color.white_FFFFFF)
+            .setBackgroundColorResource(R.color.white_FFFFFF)
+            .setTextColorResource(R.color.gray_800_303031)
+            .setTextSize(15f)
+            .setTextTypeface(R.font.pretendard)
+            .setPaddingLeft(11)
+            .setPaddingRight(15)
+            .setPaddingTop(14)
+            .setPaddingBottom(15)
+            .setMarginTop(3)
+            .setArrowPositionRules(ArrowPositionRules.ALIGN_ANCHOR)
+            .setIconDrawableResource(R.drawable.ic_notice)
+            .setCornerRadius(6f)
+            .setArrowPosition(0.5f)
+            .setElevation(5)
+            .setArrowSize(13)
+            .build()
+
+        binding.ivExerciseTodayIconQuestion.setOnClickListener {
+            balloon.showAlignTop(binding.ivExerciseTodayIconQuestion)
         }
+    }
+
+    private fun setCharacterIcon(userType: String, opponentUserType: String) {
+        if (userType == CHILD) binding.ivExerciseTodayIconLeft.setImageResource(R.drawable.ic_child_left) else binding.ivExerciseTodayIconLeft.setImageResource(
+            R.drawable.ic_parent_left
+        )
+        if (opponentUserType == CHILD) binding.ivExerciseTodayIconRight.setImageResource(R.drawable.ic_child_right) else binding.ivExerciseTodayIconRight.setImageResource(
+            R.drawable.ic_parent_right
+        )
     }
 
     private fun setText(exerciseNoticeData: ExerciseItemInfo.NoticeItemInfo) {
@@ -156,7 +191,7 @@ class ExerciseNoticeViewHolder(private val binding: ItemExerciseNoticeBinding) :
         with(binding) {
             tvExerciseTodayExercise.text =
                 context.getString(R.string.exercise_please_select_today_mission)
-            clExerciseSelectTodayMission.visibility = View.VISIBLE
+            clExerciseTodaySelectTodayMission.visibility = View.VISIBLE
             tvExerciseTodayMission.visibility = View.GONE
             ivExerciseTodayBubbleLeft.visibility = View.GONE
             ivExerciseTodayBubbleRight.visibility = View.GONE
@@ -165,7 +200,7 @@ class ExerciseNoticeViewHolder(private val binding: ItemExerciseNoticeBinding) :
     }
 
     private fun setClickEvents() {
-        binding.clExerciseSelectTodayMission.setOnClickListener {
+        binding.clExerciseTodaySelectTodayMission.setOnClickListener {
             it.findNavController().navigate(R.id.action_exerciseFragment_to_homeFragment)
         }
     }
@@ -176,28 +211,44 @@ class ExerciseNoticeViewHolder(private val binding: ItemExerciseNoticeBinding) :
     ) {
         with(binding) {
             tvExerciseTodayExercise.text = context.getString(R.string.exercise_today_exercise)
-            clExerciseSelectTodayMission.visibility = View.GONE
+            clExerciseTodaySelectTodayMission.visibility = View.GONE
             tvExerciseTodayMission.text = exerciseNoticeData.missionContent
         }
-        setTodayImageAndBubble(exerciseNoticeData)
+        setTodayImageAndBubble(context, exerciseNoticeData)
+    }
+
+    private fun dpToPx(context: Context, dp: Float): Float {
+        return dp * (context.resources.displayMetrics.density)
     }
 
     private fun setTodayImageAndBubble(
+        context: Context,
         exerciseNoticeData: ExerciseItemInfo.NoticeItemInfo,
     ) {
+        val pxValue = dpToPx(context, 8f)
         if (exerciseNoticeData.missionDate == exerciseNoticeData.todayDate) {
             if (exerciseNoticeData.myMissionStatus == ExerciseEachDateInfoViewHolder.STATE_SUCCESS_TYPE) {
                 binding.ivExerciseTodayBubbleLeft.setImageResource(R.drawable.ic_bubble_success)
-                binding.ivExerciseTodayImageLeft.load(exerciseNoticeData.myMissionImgUrl)
+                binding.ivExerciseTodayImageLeft.load(exerciseNoticeData.myMissionImgUrl) {
+                    transformations(RoundedCornersTransformation(pxValue))
+                }
             } else {
                 binding.ivExerciseTodayBubbleLeft.setImageResource(R.drawable.ic_bubble_exercising)
             }
             if (exerciseNoticeData.opponentMissionStatus == ExerciseEachDateInfoViewHolder.STATE_SUCCESS_TYPE) {
                 binding.ivExerciseTodayBubbleRight.setImageResource(R.drawable.ic_bubble_success)
-                binding.ivExerciseTodayImageRight.load(exerciseNoticeData.opponentMissionImgUrl)
+                binding.ivExerciseTodayImageRight.load(exerciseNoticeData.opponentMissionImgUrl) {
+                    transformations(RoundedCornersTransformation(pxValue))
+                }
             } else {
                 binding.ivExerciseTodayBubbleRight.setImageResource(R.drawable.ic_bubble_exercising)
             }
+        }
+    }
+
+    private fun setEmptyHistory(itemCount: Int) {
+        if (itemCount >= 2) {
+            binding.ivExerciseTodayEmptyHistory.visibility = View.GONE
         }
     }
 }

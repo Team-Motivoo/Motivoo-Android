@@ -2,6 +2,7 @@ package sopt.motivoo.domain.entity.exercise
 
 class ExerciseData(
     val userType: String,
+    val opponentUserType: String,
     val exerciseItemInfoList: List<ExerciseItemInfo>,
 ) {
     sealed class ExerciseItemInfo {
