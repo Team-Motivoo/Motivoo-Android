@@ -9,6 +9,7 @@ import coil.load
 import coil.transform.RoundedCornersTransformation
 import com.skydoves.balloon.ArrowPositionRules
 import com.skydoves.balloon.Balloon
+import com.skydoves.balloon.BalloonSizeSpec
 import sopt.motivoo.R
 import sopt.motivoo.databinding.ItemExerciseBinding
 import sopt.motivoo.databinding.ItemExerciseTodayBinding
@@ -142,15 +143,29 @@ class ExerciseNoticeViewHolder(private val binding: ItemExerciseTodayBinding) :
     private fun clickQuestionMark() {
         val context = binding.root.context
         val balloon = Balloon.Builder(context)
-            .setLayout(R.layout.view_exercise_today_question_notice)
-            .setBackgroundColorResource(android.R.color.transparent)
+            .setHeight(BalloonSizeSpec.WRAP)
+            .setWidth(BalloonSizeSpec.WRAP)
+            .setTextResource(R.string.exercise_today_question_notice)
+            .setArrowColorResource(R.color.white_FFFFFF)
+            .setBackgroundColorResource(R.color.white_FFFFFF)
+            .setTextColorResource(R.color.gray_800_303031)
+            .setTextSize(15f)
+            .setTextTypeface(R.font.pretendard)
+            .setPaddingLeft(11)
+            .setPaddingRight(15)
+            .setPaddingTop(14)
+            .setPaddingBottom(15)
+            .setMarginTop(3)
             .setArrowPositionRules(ArrowPositionRules.ALIGN_ANCHOR)
+            .setIconDrawableResource(R.drawable.ic_notice)
+            .setCornerRadius(6f)
             .setArrowPosition(0.5f)
-            .setArrowSize(0)
+            .setElevation(5)
+            .setArrowSize(13)
             .build()
 
         binding.ivExerciseTodayIconQuestion.setOnClickListener {
-            balloon.showAlignBottom(binding.ivExerciseTodayIconQuestion, 0, -15)
+            balloon.showAlignTop(binding.ivExerciseTodayIconQuestion)
         }
     }
 
