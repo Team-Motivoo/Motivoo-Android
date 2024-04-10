@@ -17,6 +17,7 @@ data class ResponseExerciseDto(
     @Serializable
     data class ExerciseHistoryData(
         @SerialName("user_type") val userType: String,
+        @SerialName("opponent_user_type") val opponentUserType: String,
         @SerialName("today_mission") val todayMission: MissionContent?,
         @SerialName("mission_history") val missionHistory: List<MissionHistory>?,
     ) {
@@ -39,8 +40,11 @@ data class ResponseExerciseDto(
     }
 
     fun toExerciseData(): ExerciseData {
+        fun String.removeDayOfTheWeek(): String = this.removeRange(length - 4 until length)
         val list: MutableList<ExerciseItemInfo> =
-            if (data.todayMission == null && data.missionHistory?.isEmpty() == true) {
+            if (data.todayMission == null && data.missionHistory!!.isEmpty()) {
+                mutableListOf()
+            } else if (data.todayMission == null && data.missionHistory!!.size == 1 && data.missionHistory[0].date.removeDayOfTheWeek() == LocalDate.now().prettyString) {
                 mutableListOf()
             } else if (data.todayMission == null) {
                 mutableListOf(
@@ -68,7 +72,6 @@ data class ResponseExerciseDto(
             }
 
         data.missionHistory?.forEach {
-            fun String.removeDayOfTheWeek(): String = this.removeRange(length - 4 until length)
             if (it.date.removeDayOfTheWeek() != LocalDate.now().prettyString) {
                 list.add(
                     ExerciseItemInfo.EachDateItemInfo(
@@ -83,6 +86,6 @@ data class ResponseExerciseDto(
                 )
             }
         }
-        return ExerciseData(data.userType, list)
+        return ExerciseData(data.userType, data.opponentUserType, list)
     }
 }

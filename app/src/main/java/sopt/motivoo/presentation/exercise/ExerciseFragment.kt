@@ -92,7 +92,10 @@ class ExerciseFragment : BindingFragment<FragmentExerciseBinding>(R.layout.fragm
     }
 
     private fun initAdapter(exerciseData: ExerciseData) {
-        val adapter = ExerciseAdapter(userType = exerciseData.userType)
+        val adapter = ExerciseAdapter(
+            userType = exerciseData.userType,
+            opponentUserType = exerciseData.opponentUserType
+        )
         adapter.updateItemList(exerciseList = exerciseData.exerciseItemInfoList)
         binding.rvExerciseEachDateExercise.adapter = adapter
     }
