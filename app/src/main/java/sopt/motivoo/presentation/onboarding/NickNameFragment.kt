@@ -42,9 +42,7 @@ class NickNameFragment : BindingFragment<FragmentNicknameBinding>(R.layout.fragm
         )
             .distinctUntilChanged()
             .onEach { nickName ->
-                if (!nickName.isNullOrEmpty()) {
-                    binding.btnNicknameDone.isEnabled = true
-                }
+                binding.btnNicknameDone.isEnabled = !nickName.isNullOrEmpty()
             }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 

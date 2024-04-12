@@ -180,7 +180,8 @@ class OnboardingViewModel @Inject constructor(
                 exerciseTime = timeTypeString,
                 exerciseType = exerciseType,
                 isExercise = isDoExercise,
-                type = userTypeString
+                type = userTypeString,
+                nickname = nickName.toString()
             )
             onboardingRepository.postOnboardingInfo(requestDto)
                 .onSuccess {
