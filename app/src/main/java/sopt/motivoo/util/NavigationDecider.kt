@@ -15,7 +15,7 @@ class NavigationDecider @Inject constructor(
                 NavigationEvent.StartMotivoo
 
             !motivooStorage.isUserMatched && !motivooStorage.isFinishedOnboarding && motivooStorage.isUserLoggedIn && motivooStorage.isFinishedTermsOfUse && motivooStorage.isFinishedPermission ->
-                NavigationEvent.AgeQuestion
+                NavigationEvent.NickName
 
             !motivooStorage.isFinishedTermsOfUse && motivooStorage.isFinishedPermission && motivooStorage.isUserLoggedIn ->
                 NavigationEvent.TermsOfUse
@@ -31,7 +31,7 @@ class NavigationDecider @Inject constructor(
 
 sealed class NavigationEvent {
     data object Home : NavigationEvent()
-    data object AgeQuestion : NavigationEvent()
+    data object NickName : NavigationEvent()
     data object StartMotivoo : NavigationEvent()
     data object Login : NavigationEvent()
     data object Permission : NavigationEvent()

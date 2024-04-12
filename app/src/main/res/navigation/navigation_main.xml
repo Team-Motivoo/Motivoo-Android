@@ -21,11 +21,11 @@
             android:id="@+id/action_splashFragment_to_startMotivooFragment"
             app:destination="@id/startMotivooFragment" />
         <action
-            android:id="@+id/action_splashFragment_to_ageQuestionFragment"
-            app:destination="@id/ageQuestionFragment" />
-        <action
             android:id="@+id/action_splashFragment_to_termsOfUseFragment"
             app:destination="@id/termsOfUseFragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_nickNameFragment"
+            app:destination="@id/nickNameFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -46,13 +46,6 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
         <action
-            android:id="@+id/action_loginFragment_to_ageQuestionFragment"
-            app:destination="@id/ageQuestionFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-        <action
             android:id="@+id/action_loginFragment_to_termsOfUseFragment"
             app:destination="@id/termsOfUseFragment"
             app:enterAnim="@anim/slide_in_right"
@@ -62,6 +55,13 @@
         <action
             android:id="@+id/action_loginFragment_to_permissionFragment"
             app:destination="@id/permissionFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_loginFragment_to_nickNameFragment"
+            app:destination="@id/nickNameFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -293,8 +293,8 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
         <action
-            android:id="@+id/action_termsOfUseFragment_to_AgeQuestionFragment"
-            app:destination="@id/ageQuestionFragment"
+            android:id="@+id/action_termsOfUseFragment_to_nickNameFragment"
+            app:destination="@id/nickNameFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -372,4 +372,16 @@
         android:id="@+id/networkErrorFragment"
         android:name="sopt.motivoo.presentation.NetworkErrorFragment"
         android:label="NetworkErrorFragment" />
+    <fragment
+        android:id="@+id/nickNameFragment"
+        android:name="sopt.motivoo.presentation.onboarding.NickNameFragment"
+        android:label="NickNameFragment">
+        <action
+            android:id="@+id/action_nickNameFragment_to_ageQuestionFragment"
+            app:destination="@id/ageQuestionFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
 </navigation>
