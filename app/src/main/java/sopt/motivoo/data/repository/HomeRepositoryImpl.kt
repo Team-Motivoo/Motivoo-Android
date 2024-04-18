@@ -1,7 +1,6 @@
 package sopt.motivoo.data.repository
 
 import android.graphics.Bitmap
-import okhttp3.RequestBody.Companion.toRequestBody
 import sopt.motivoo.data.datasource.remote.HomeDataSource
 import sopt.motivoo.data.model.request.home.RequestMissionTodayDto
 import sopt.motivoo.domain.entity.error.ResponseHandler
@@ -10,7 +9,7 @@ import sopt.motivoo.domain.entity.home.MissionChoiceData
 import sopt.motivoo.domain.entity.home.MissionImageData
 import sopt.motivoo.domain.error.UserErrorHandler
 import sopt.motivoo.domain.repository.HomeRepository
-import java.io.ByteArrayOutputStream
+import sopt.motivoo.util.BitmapRequestBody
 import javax.inject.Inject
 
 class HomeRepositoryImpl @Inject constructor(
@@ -53,9 +52,7 @@ class HomeRepositoryImpl @Inject constructor(
     }
 
     override suspend fun uploadPhoto(url: String, bitmap: Bitmap): Unit? = try {
-        val outputStream = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.PNG, 80, outputStream)
-        val requestBody = outputStream.toByteArray().toRequestBody()
+        val requestBody = BitmapRequestBody(bitmap).create(50)
         homeDataSource.uploadPhoto(url, requestBody)
     } catch (e: Exception) {
         null

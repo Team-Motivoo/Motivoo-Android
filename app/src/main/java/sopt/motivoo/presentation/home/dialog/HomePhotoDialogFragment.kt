@@ -17,9 +17,10 @@ import sopt.motivoo.R
 import sopt.motivoo.databinding.DialogHomePhotoBinding
 import sopt.motivoo.presentation.home.HomePictureState
 import sopt.motivoo.presentation.home.viewmodel.HomeViewModel
+import sopt.motivoo.util.BitmapUtil
 import sopt.motivoo.util.Constants.S3_BUCKET_NAME
 import sopt.motivoo.util.binding.BindingDialogFragment
-import sopt.motivoo.util.extension.createUriToBitmap
+import sopt.motivoo.util.extension.showToast
 
 @AndroidEntryPoint
 class HomePhotoDialogFragment :
@@ -27,10 +28,12 @@ class HomePhotoDialogFragment :
 
     private val viewModel: HomeViewModel by viewModels()
     private lateinit var photoUri: Uri
+    private lateinit var bitmapUtil: BitmapUtil
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setLayoutSizeRatio(widthPercent = 1f, heightPercent = 1f)
+        bitmapUtil = BitmapUtil(requireContext())
 
         val safeArgs: HomePhotoDialogFragmentArgs by navArgs()
         photoUri = safeArgs.photoUri
@@ -38,11 +41,12 @@ class HomePhotoDialogFragment :
         binding.ivPhoto.load(photoUri)
 
         binding.tvConfirm.setOnClickListener {
-            binding.pvLoading.visibility = View.VISIBLE
-            viewModel.getMissionImage(
-                S3_BUCKET_NAME,
-                requireContext().createUriToBitmap(safeArgs.photoUri)
-            )
+            bitmapUtil.createUriToBitmap(photoUri, size = 4)?.let { bitmap ->
+                binding.pvLoading.visibility = View.VISIBLE
+                viewModel.getMissionImage(
+                    S3_BUCKET_NAME, bitmap
+                )
+            } ?: requireContext().showToast("createUriToBitmap is null")
         }
 
         viewLifecycleOwner.lifecycleScope.launch {

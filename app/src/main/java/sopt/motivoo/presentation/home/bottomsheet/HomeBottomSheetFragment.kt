@@ -27,9 +27,9 @@ import sopt.motivoo.R
 import sopt.motivoo.databinding.BottomSheetHomeBinding
 import sopt.motivoo.presentation.home.HomePictureState
 import sopt.motivoo.presentation.home.viewmodel.HomeViewModel
+import sopt.motivoo.util.BitmapUtil
 import sopt.motivoo.util.Constants.S3_BUCKET_NAME
 import sopt.motivoo.util.UriManager
-import sopt.motivoo.util.extension.createUriToBitmap
 
 @AndroidEntryPoint
 class HomeBottomSheetFragment : BottomSheetDialogFragment() {
@@ -39,6 +39,7 @@ class HomeBottomSheetFragment : BottomSheetDialogFragment() {
     private val viewModel: HomeViewModel by viewModels()
 
     var pictureUri: Uri? = null
+    private lateinit var bitmapUtil: BitmapUtil
 
     private val isCameraPermissionResult =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
@@ -60,8 +61,10 @@ class HomeBottomSheetFragment : BottomSheetDialogFragment() {
         registerForActivityResult(ActivityResultContracts.TakePicture()) { isSuccess ->
             if (isSuccess) {
                 binding.pvLoading.visibility = View.VISIBLE
-                pictureUri?.let {
-                    viewModel.getMissionImage(S3_BUCKET_NAME, requireContext().createUriToBitmap(it))
+                pictureUri?.let { uri ->
+                    bitmapUtil.createUriToBitmap(uri, size = 4)?.let { bitmap ->
+                        viewModel.getMissionImage(S3_BUCKET_NAME, bitmap)
+                    }
                 }
             }
         }
@@ -92,6 +95,7 @@ class HomeBottomSheetFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        bitmapUtil = BitmapUtil(requireContext())
         setLayoutSize()
         collectHomePictureState()
         onClickTakePicture()
