@@ -62,7 +62,7 @@ class HomeBottomSheetFragment : BottomSheetDialogFragment() {
             if (isSuccess) {
                 binding.pvLoading.visibility = View.VISIBLE
                 pictureUri?.let { uri ->
-                    bitmapUtil.createUriToBitmap(uri, size = 4)?.let { bitmap ->
+                    bitmapUtil.createUriToBitmap(uri, size = 2)?.let { bitmap ->
                         viewModel.getMissionImage(S3_BUCKET_NAME, bitmap)
                     }
                 }

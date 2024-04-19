@@ -41,7 +41,7 @@ class HomePhotoDialogFragment :
         binding.ivPhoto.load(photoUri)
 
         binding.tvConfirm.setOnClickListener {
-            bitmapUtil.createUriToBitmap(photoUri, size = 4)?.let { bitmap ->
+            bitmapUtil.createUriToBitmap(photoUri, size = 2)?.let { bitmap ->
                 binding.pvLoading.visibility = View.VISIBLE
                 viewModel.getMissionImage(
                     S3_BUCKET_NAME, bitmap
