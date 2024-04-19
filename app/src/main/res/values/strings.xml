@@ -10,6 +10,7 @@
     <string name="nickname_title">별명을 알려주세요</string>
     <string name="nickname">별명</string>
     <string name="nickname_hint">별명을 입력해주세요</string>
+    <string name="nickname_error">8자 이내로 입력해주세요.</string>
     <string name="age_question_title_first">당신은\n부모인가요 자녀인가요?</string>
     <string name="age_question_description_first">맞춤 운동을 제공해드려요!</string>
     <string name="age_question_title_second">나이를 알려주세요</string>
