@@ -146,7 +146,7 @@
                     android:id="@+id/iv_step_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_home_mission_uncomplete"
+                    android:src="@drawable/img_home_mission_uncomplete"
                     android:visibility="@{vm.isHighFive() ? View.INVISIBLE : View.VISIBLE}"
                     app:layout_constraintBottom_toBottomOf="@id/motivoo_my_pie_chart"
                     app:layout_constraintEnd_toEndOf="@id/motivoo_my_pie_chart"
