@@ -120,8 +120,6 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
                     }
 
                     is HomeState.SelectedMissionData -> {
-                        TransitionManager.beginDelayedTransition(binding.root as? ViewGroup)
-
                         binding.tvSelectedMissionHomeToday.text =
                             getString(R.string.home_today_exercise)
                         binding.tvSelectedMissionHomeTodayExerciseMission.text =
@@ -129,8 +127,6 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
                     }
 
                     is HomeState.UnSelectedMissionData -> {
-                        TransitionManager.beginDelayedTransition(binding.root as? ViewGroup)
-
                         binding.tvUnselectedMissionHomeToday.text = homeState.date
                         binding.tvUnselectedMissionHomeTodayExerciseMission.text =
                             getString(R.string.home_today_exercise_description)
