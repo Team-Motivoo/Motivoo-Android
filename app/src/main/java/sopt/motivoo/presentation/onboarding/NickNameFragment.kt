@@ -94,7 +94,8 @@ class NickNameFragment : BindingFragment<FragmentNicknameBinding>(R.layout.fragm
                 override fun handleOnBackPressed() {
                     requireActivity().finishAffinity()
                 }
-            })
+            }
+        )
     }
 
     companion object {
