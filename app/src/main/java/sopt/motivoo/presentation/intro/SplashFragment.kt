@@ -46,7 +46,7 @@ class SplashFragment : BindingFragment<FragmentSplashBinding>(R.layout.fragment_
             .onEach { event ->
                 when (event) {
                     NavigationEvent.Home -> navigateToFragment(R.id.action_splashFragment_to_homeFragment)
-                    NavigationEvent.AgeQuestion -> navigateToFragment(R.id.action_splashFragment_to_ageQuestionFragment)
+                    NavigationEvent.NickName -> navigateToFragment(R.id.action_splashFragment_to_nickNameFragment)
                     NavigationEvent.StartMotivoo -> navigateToFragment(R.id.action_splashFragment_to_startMotivooFragment)
                     NavigationEvent.Login -> navigateToFragment(R.id.action_splashFragment_to_loginFragment)
                     NavigationEvent.TermsOfUse -> navigateToFragment(R.id.action_splashFragment_to_termsOfUseFragment)

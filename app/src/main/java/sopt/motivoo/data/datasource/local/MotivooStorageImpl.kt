@@ -31,10 +31,6 @@ class MotivooStorageImpl @Inject constructor(@ApplicationContext context: Contex
         }
     }
 
-    override var nickName: String
-        get() = pref.getString(NAME, "") ?: ""
-        set(value) = pref.edit { putString(NAME, value) }
-
     override var userId: Long
         set(value) = pref.edit { putLong(USER_ID, value) }
         get() = pref.getLong(USER_ID, 0L)
@@ -83,7 +79,15 @@ class MotivooStorageImpl @Inject constructor(@ApplicationContext context: Contex
 
     override fun clear() {
         pref.edit {
-            clear()
+            remove(ACCESS_TOKEN)
+            remove(REFRESH_TOKEN)
+            remove(IS_LOGIN)
+            remove(IS_MATCHED)
+            remove(USER_ID)
+            remove(MY_GOAL_STEP_COUNT)
+            remove(OTHER_GOAL_STEP_COUNT)
+            remove(IS_ONBOARDING_FINISHED)
+            remove(IS_TERMS_FINISHED)
         }
     }
 
@@ -93,12 +97,13 @@ class MotivooStorageImpl @Inject constructor(@ApplicationContext context: Contex
             remove(ACCESS_TOKEN)
             remove(REFRESH_TOKEN)
             remove(IS_LOGIN)
+            remove(IS_MATCHED)
+            remove(IS_ONBOARDING_FINISHED)
         }
     }
 
     companion object {
         private const val FILE_NAME = "MtDataStore"
-        private const val NAME = "name"
         const val ACCESS_TOKEN = "accessToken"
         const val REFRESH_TOKEN = "refreshToken"
         private const val IS_LOGIN = "isLogin"
