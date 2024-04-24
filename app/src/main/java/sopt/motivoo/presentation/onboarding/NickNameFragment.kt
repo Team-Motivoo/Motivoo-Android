@@ -16,7 +16,6 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import sopt.motivoo.R
 import sopt.motivoo.databinding.FragmentNicknameBinding
-import sopt.motivoo.presentation.invitecode.GetInviteCodeFragment
 import sopt.motivoo.util.binding.BindingFragment
 import sopt.motivoo.util.extension.drawableOf
 import sopt.motivoo.util.extension.setOnSingleClickListener
@@ -63,7 +62,7 @@ class NickNameFragment : BindingFragment<FragmentNicknameBinding>(R.layout.fragm
         binding.tvNicknameErrorMessage.visibility = View.VISIBLE
 
         lifecycleScope.launch {
-            delay(GetInviteCodeFragment.TWO_SECONDS)
+            delay(FOUR_SECONDS)
             val fadeOut = AnimationUtils.loadAnimation(context, R.anim.fade_out)
             binding.tvNicknameErrorMessage.startAnimation(fadeOut)
             binding.tvNicknameErrorMessage.visibility = View.INVISIBLE
@@ -81,5 +80,9 @@ class NickNameFragment : BindingFragment<FragmentNicknameBinding>(R.layout.fragm
                 }
             }
         )
+    }
+
+    companion object {
+        const val FOUR_SECONDS = 4000L
     }
 }

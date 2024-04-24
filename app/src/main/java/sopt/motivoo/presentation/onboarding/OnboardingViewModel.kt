@@ -181,7 +181,7 @@ class OnboardingViewModel @Inject constructor(
                 exerciseType = exerciseType,
                 isExercise = isDoExercise,
                 type = userTypeString,
-                nickname = nickName.toString()
+                nickname = nickName.value.toString()
             )
             onboardingRepository.postOnboardingInfo(requestDto)
                 .onSuccess {

@@ -51,6 +51,7 @@
             android:hint="@string/nickname_hint"
             android:imeOptions="actionDone"
             android:maxLength="8"
+            android:maxLines="1"
             android:paddingHorizontal="20dp"
             android:paddingVertical="18dp"
             android:text="@={onboardingViewModel.nickName}"
