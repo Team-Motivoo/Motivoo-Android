@@ -97,6 +97,8 @@ class MotivooStorageImpl @Inject constructor(@ApplicationContext context: Contex
             remove(ACCESS_TOKEN)
             remove(REFRESH_TOKEN)
             remove(IS_LOGIN)
+            remove(IS_MATCHED)
+            remove(IS_ONBOARDING_FINISHED)
         }
     }
 
