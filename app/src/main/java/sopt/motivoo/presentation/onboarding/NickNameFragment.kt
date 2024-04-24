@@ -23,11 +23,11 @@ import sopt.motivoo.util.extension.setOnSingleClickListener
 class NickNameFragment : BindingFragment<FragmentNicknameBinding>(R.layout.fragment_nickname) {
 
     private val onboardingViewModel by activityViewModels<OnboardingViewModel>()
+    private var lastNickNameLength = 0
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.onboardingViewModel = onboardingViewModel
-
         collectData()
         clickNextButton()
         overrideOnBackPressed()
@@ -45,30 +45,46 @@ class NickNameFragment : BindingFragment<FragmentNicknameBinding>(R.layout.fragm
             Lifecycle.State.STARTED
         )
             .distinctUntilChanged()
-            .onEach { nickName ->
-                binding.btnNicknameDone.isEnabled = !nickName.isNullOrEmpty()
+            .onEach { it?.let { it1 -> handleNickNameChange(it1) } }
+            .launchIn(viewLifecycleOwner.lifecycleScope)
+    }
 
-                if (nickName.toString().length >= 8) {
-                    setErrorAnimation()
-                }
-            }.launchIn(viewLifecycleOwner.lifecycleScope)
+    private fun handleNickNameChange(nickName: String) {
+        val currentLength = nickName.length
+        binding.btnNicknameDone.isEnabled = nickName.isNotEmpty()
+
+        if (currentLength >= 8 && lastNickNameLength != currentLength) {
+            setErrorAnimation()
+        } else if (currentLength < 8) {
+            resetErrorState()
+        }
+
+        lastNickNameLength = currentLength
     }
 
     private fun setErrorAnimation() {
         val fadeIn = AnimationUtils.loadAnimation(context, R.anim.fade_in)
-        binding.tvNicknameErrorMessage.startAnimation(fadeIn)
-        binding.etNickname.background =
-            requireContext().drawableOf(R.drawable.shape_edittext_error_radius8)
-        binding.tvNicknameErrorMessage.visibility = View.VISIBLE
+        with(binding) {
+            tvNicknameErrorMessage.startAnimation(fadeIn)
+            etNickname.background =
+                requireContext().drawableOf(R.drawable.shape_edittext_error_radius8)
+            tvNicknameErrorMessage.visibility = View.VISIBLE
 
-        lifecycleScope.launch {
-            delay(FOUR_SECONDS)
-            val fadeOut = AnimationUtils.loadAnimation(context, R.anim.fade_out)
-            binding.tvNicknameErrorMessage.startAnimation(fadeOut)
-            binding.tvNicknameErrorMessage.visibility = View.INVISIBLE
-            binding.etNickname.background =
-                requireContext().drawableOf(R.drawable.selector_edittext_input)
+            lifecycleScope.launch {
+                delay(FOUR_SECONDS)
+                val fadeOut = AnimationUtils.loadAnimation(context, R.anim.fade_out)
+                binding.tvNicknameErrorMessage.startAnimation(fadeOut)
+                binding.tvNicknameErrorMessage.visibility = View.INVISIBLE
+                binding.etNickname.background =
+                    requireContext().drawableOf(R.drawable.selector_edittext_input)
+            }
         }
+    }
+
+    private fun resetErrorState() {
+        binding.tvNicknameErrorMessage.visibility = View.INVISIBLE
+        binding.etNickname.background =
+            requireContext().drawableOf(R.drawable.selector_edittext_input)
     }
 
     private fun overrideOnBackPressed() {
@@ -78,8 +94,7 @@ class NickNameFragment : BindingFragment<FragmentNicknameBinding>(R.layout.fragm
                 override fun handleOnBackPressed() {
                     requireActivity().finishAffinity()
                 }
-            }
-        )
+            })
     }
 
     companion object {
