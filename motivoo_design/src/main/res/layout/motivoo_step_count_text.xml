@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/home_my_step_count"
-        android:textColor="@color/gray_700_464747"
+        android:textColor="@color/red_400_FF6259"
         app:layout_constraintEnd_toEndOf="@id/view_line_divider"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
