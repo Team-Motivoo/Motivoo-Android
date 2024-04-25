@@ -93,10 +93,10 @@ class GetInviteCodeFragment :
     private fun setClipboard() {
         val clipboard: ClipboardManager =
             requireContext().getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
-        val inviteCode = binding.tvGetInviteCode.text
-        val clip = ClipData.newPlainText(INVITE_CODE, inviteCode)
 
         binding.btnGetInviteCodeCopy.setOnSingleClickListener {
+            val inviteCode = binding.tvGetInviteCode.text
+            val clip = ClipData.newPlainText(INVITE_CODE, inviteCode)
             clipboard.setPrimaryClip(clip)
             if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S_V2)
                 setClipBoardToastAnimation()

@@ -39,6 +39,8 @@ class OnboardingViewModel @Inject constructor(
 
     val age = MutableStateFlow<String?>(null)
 
+    val nickName = MutableStateFlow<String?>(null)
+
     val isFirst = MutableLiveData(true)
 
     val isValidAge: StateFlow<Boolean?> = age.map { ageString ->
@@ -178,7 +180,8 @@ class OnboardingViewModel @Inject constructor(
                 exerciseTime = timeTypeString,
                 exerciseType = exerciseType,
                 isExercise = isDoExercise,
-                type = userTypeString
+                type = userTypeString,
+                nickname = nickName.value.toString()
             )
             onboardingRepository.postOnboardingInfo(requestDto)
                 .onSuccess {

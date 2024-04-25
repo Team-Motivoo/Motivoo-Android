@@ -18,5 +18,7 @@ data class RequestOnboardingDto(
     @SerialName("is_exercise")
     val isExercise: Boolean,
     @SerialName("type")
-    val type: String
+    val type: String,
+    @SerialName("nickname")
+    val nickname: String
 )

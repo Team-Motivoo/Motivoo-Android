@@ -207,6 +207,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setTopVisible(navController: NavController) {
         val topVisibleDestinations = setOf(
+            R.id.nickNameFragment,
             R.id.ageQuestionFragment,
             R.id.doExerciseQuestionFragment,
             R.id.frequencyQuestionFragment,
@@ -215,7 +216,7 @@ class MainActivity : AppCompatActivity() {
             R.id.whatExerciseQuestionFragment,
             R.id.whatActivityQuestionFragment
         )
-        val backInvisibleDestinations = setOf(R.id.ageQuestionFragment)
+        val backInvisibleDestinations = setOf(R.id.nickNameFragment)
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             binding.clOnboardingToolbar.visibility =
@@ -228,13 +229,14 @@ class MainActivity : AppCompatActivity() {
 
     private fun getProgressValue(destinationId: Int): Float {
         return when (destinationId) {
-            R.id.ageQuestionFragment -> 1f
-            R.id.doExerciseQuestionFragment -> 2f
-            R.id.whatExerciseQuestionFragment -> 3f
-            R.id.whatActivityQuestionFragment -> 3f
-            R.id.frequencyQuestionFragment -> 4f
-            R.id.timeQuestionFragment -> 5f
-            R.id.soreSpotQuestionFragment -> 6f
+            R.id.nickNameFragment -> 1f
+            R.id.ageQuestionFragment -> 2f
+            R.id.doExerciseQuestionFragment -> 3f
+            R.id.whatExerciseQuestionFragment -> 4f
+            R.id.whatActivityQuestionFragment -> 4f
+            R.id.frequencyQuestionFragment -> 5f
+            R.id.timeQuestionFragment -> 6f
+            R.id.soreSpotQuestionFragment -> 7f
             else -> 0f
         }
     }

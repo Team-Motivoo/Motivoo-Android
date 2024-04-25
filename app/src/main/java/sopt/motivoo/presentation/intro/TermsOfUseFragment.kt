@@ -92,7 +92,7 @@ class TermsOfUseFragment :
     private fun clickDoneButton() {
         binding.btnTermsOfUseDone.setOnSingleClickListener {
             motivooStorage.isFinishedTermsOfUse = true
-            findNavController().navigate(R.id.action_termsOfUseFragment_to_AgeQuestionFragment)
+            findNavController().navigate(R.id.action_termsOfUseFragment_to_nickNameFragment)
         }
     }
 

@@ -8,20 +8,20 @@ class NavigationDecider @Inject constructor(
 ) {
     fun determineNavigationDestination(): NavigationEvent {
         return when {
-            !motivooStorage.isFinishedPermission && motivooStorage.isUserLoggedIn ->
-                NavigationEvent.Permission
+            motivooStorage.isUserMatched ->
+                NavigationEvent.Home
 
-            !motivooStorage.isFinishedTermsOfUse && motivooStorage.isUserLoggedIn ->
-                NavigationEvent.TermsOfUse
-
-            !motivooStorage.isUserMatched && !motivooStorage.isFinishedOnboarding && motivooStorage.isUserLoggedIn ->
-                NavigationEvent.AgeQuestion
-
-            !motivooStorage.isUserMatched && motivooStorage.isFinishedOnboarding && motivooStorage.isUserLoggedIn ->
+            !motivooStorage.isUserMatched && motivooStorage.isFinishedOnboarding && motivooStorage.isUserLoggedIn && motivooStorage.isFinishedTermsOfUse && motivooStorage.isFinishedPermission ->
                 NavigationEvent.StartMotivoo
 
-            motivooStorage.isUserMatched && motivooStorage.isFinishedOnboarding && motivooStorage.isUserLoggedIn ->
-                NavigationEvent.Home
+            !motivooStorage.isUserMatched && !motivooStorage.isFinishedOnboarding && motivooStorage.isUserLoggedIn && motivooStorage.isFinishedTermsOfUse && motivooStorage.isFinishedPermission ->
+                NavigationEvent.NickName
+
+            !motivooStorage.isFinishedTermsOfUse && motivooStorage.isFinishedPermission && motivooStorage.isUserLoggedIn ->
+                NavigationEvent.TermsOfUse
+
+            !motivooStorage.isFinishedPermission && motivooStorage.isUserLoggedIn ->
+                NavigationEvent.Permission
 
             else ->
                 NavigationEvent.Login
@@ -31,7 +31,7 @@ class NavigationDecider @Inject constructor(
 
 sealed class NavigationEvent {
     data object Home : NavigationEvent()
-    data object AgeQuestion : NavigationEvent()
+    data object NickName : NavigationEvent()
     data object StartMotivoo : NavigationEvent()
     data object Login : NavigationEvent()
     data object Permission : NavigationEvent()
