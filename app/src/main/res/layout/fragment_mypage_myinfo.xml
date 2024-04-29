@@ -52,7 +52,7 @@
             android:paddingHorizontal="1dp"
             android:paddingVertical="25dp"
             android:paddingStart="20dp"
-            android:text="@string/mypage_name"
+            android:text="@string/nickname"
             android:textColor="@color/gray_700_464747"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
