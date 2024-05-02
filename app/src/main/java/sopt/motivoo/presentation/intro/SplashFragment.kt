@@ -46,7 +46,7 @@ class SplashFragment : BindingFragment<FragmentSplashBinding>(R.layout.fragment_
             .onEach { event ->
                 when (event) {
                     NavigationEvent.Home -> navigateToFragment(R.id.action_splashFragment_to_homeFragment)
-                    NavigationEvent.NickName -> navigateToFragment(R.id.action_splashFragment_to_nickNameFragment)
+                    NavigationEvent.Description -> navigateToFragment(R.id.action_splashFragment_to_descriptionFragment)
                     NavigationEvent.StartMotivoo -> navigateToFragment(R.id.action_splashFragment_to_startMotivooFragment)
                     NavigationEvent.Login -> navigateToFragment(R.id.action_splashFragment_to_loginFragment)
                     NavigationEvent.TermsOfUse -> navigateToFragment(R.id.action_splashFragment_to_termsOfUseFragment)
@@ -67,6 +67,6 @@ class SplashFragment : BindingFragment<FragmentSplashBinding>(R.layout.fragment_
     }
 
     companion object {
-        private const val SPLASH_DISPLAY_LENGTH = 2000L
+        const val SPLASH_DISPLAY_LENGTH = 2000L
     }
 }
