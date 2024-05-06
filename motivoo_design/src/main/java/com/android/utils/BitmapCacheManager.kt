@@ -30,6 +30,8 @@ class BitmapCacheManager(
         bitmapCache.get(key)
     }
 
+    fun removeBitmapFromMemoryCache(key: String) = bitmapCache.remove(key)
+
     companion object {
         const val MY_IMAGE = "MY_IMAGE"
         const val OTHER_IMAGE = "OTHER_IMAGE"

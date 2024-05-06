@@ -12,6 +12,7 @@ import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
 import com.android.utils.BitmapCacheManager
+import com.android.utils.BitmapCacheManager.Companion.MY_IMAGE
 import com.android.utils.Child
 import com.android.utils.MotivooUserType
 import com.android.utils.Parent
@@ -175,6 +176,7 @@ class MotivooPieChart @JvmOverloads constructor(
 
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
+        BitmapCacheManager.getInstance().removeBitmapFromMemoryCache(MY_IMAGE)
         myImageBitmap = null
         scope.cancel()
     }

@@ -15,6 +15,10 @@
             <enum name="Child" value="1"/>
             <enum name="Parent" value="2"/>
         </attr>
+        <attr name="otherUserType" format="enum">
+            <enum name="Child" value="1"/>
+            <enum name="Parent" value="2"/>
+        </attr>
     </declare-styleable>
     <declare-styleable name="MotivooMissionCard">
     </declare-styleable>

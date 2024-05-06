@@ -206,7 +206,8 @@
                     app:layout_constraintTop_toBottomOf="@id/iv_mission_completed"
                     app:myStepCountText="@{String.valueOf(vm.stepCount)}"
                     app:otherStepCountText="@{String.valueOf(vm.otherStepCount)}"
-                    app:userType="@{vm.userType}" />
+                    app:userType="@{vm.userType}"
+                    app:otherUserType="@{vm.anotherUserType}"/>
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_verify_exercise"
