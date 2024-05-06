@@ -109,9 +109,9 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
                             requireContext().getString(R.string.home_parent) -> Parent
                             else -> null
                         }
-                        viewModel.anotherUserType.value = when (homeState.homeData.userType) {
-                            requireContext().getString(R.string.home_child) -> Parent
-                            requireContext().getString(R.string.home_parent) -> Child
+                        viewModel.anotherUserType.value = when (homeState.homeData.opponentUserType) {
+                            requireContext().getString(R.string.home_child) -> Child
+                            requireContext().getString(R.string.home_parent) -> Parent
                             else -> null
                         }
 

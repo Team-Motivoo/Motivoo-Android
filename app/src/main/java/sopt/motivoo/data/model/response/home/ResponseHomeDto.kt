@@ -19,6 +19,8 @@ data class ResponseHomeDto(
     data class ResponseHomeDataDto(
         @SerialName("user_type")
         val userType: String,
+        @SerialName("opponent_user_type")
+        val opponentUserType: String,
         @SerialName("user_id")
         val userId: Long,
         @SerialName("user_goal_step_count")
@@ -37,6 +39,7 @@ data class ResponseHomeDto(
 
     fun toHomeData(): HomeData = HomeData(
         userType = data.userType,
+        opponentUserType = data.opponentUserType,
         userId = data.userId,
         userGoalStepCount = data.userGoalStepCount,
         opponentUserGoalStepCount = data.opponentUserGoalStepCount,

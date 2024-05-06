@@ -22,16 +22,26 @@ class MotivooStepCountText @JvmOverloads constructor(
                 Child -> {
                     binding.tvStepCountTitle.text =
                         context.getString(R.string.home_my_step_count)
-                    binding.tvOtherStepCountTitle.text =
-                        context.getString(R.string.home_parent_step_count)
                 }
 
                 Parent -> {
                     binding.tvStepCountTitle.text =
                         context.getString(R.string.home_my_step_count)
-                    binding.tvOtherStepCountTitle.text =
-                        context.getString(R.string.home_child_step_count)
                 }
+
+                else -> Unit
+            }
+            field = value
+        }
+
+    var otherUserType: MotivooUserType? = null
+        set(value) {
+            when (value) {
+                Child -> binding.tvOtherStepCountTitle.text =
+                    context.getString(R.string.home_child_step_count)
+
+                Parent -> binding.tvOtherStepCountTitle.text =
+                    context.getString(R.string.home_parent_step_count)
 
                 else -> Unit
             }
@@ -47,6 +57,7 @@ class MotivooStepCountText @JvmOverloads constructor(
             binding.tvOtherStepCount.text =
                 getString(R.styleable.MotivooStepCountText_otherStepCountText)
             userType = getInt(R.styleable.MotivooStepCountText_userType, 0).toMotivooUserType
+            otherUserType = getInt(R.styleable.MotivooStepCountText_otherStepCountText, 0).toMotivooUserType
             recycle()
         }
     }
