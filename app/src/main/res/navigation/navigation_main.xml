@@ -24,8 +24,10 @@
             android:id="@+id/action_splashFragment_to_termsOfUseFragment"
             app:destination="@id/termsOfUseFragment" />
         <action
-            android:id="@+id/action_splashFragment_to_nickNameFragment"
-            app:destination="@id/nickNameFragment" />
+            android:id="@+id/action_splashFragment_to_descriptionFragment"
+            app:destination="@id/descriptionFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"/>
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -60,10 +62,10 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
         <action
-            android:id="@+id/action_loginFragment_to_nickNameFragment"
-            app:destination="@id/nickNameFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
+            android:id="@+id/action_loginFragment_to_descriptionFragment"
+            app:destination="@id/descriptionFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
     </fragment>
@@ -293,10 +295,10 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
         <action
-            android:id="@+id/action_termsOfUseFragment_to_nickNameFragment"
-            app:destination="@id/nickNameFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
+            android:id="@+id/action_termsOfUseFragment_to_descriptionFragment"
+            app:destination="@id/descriptionFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
     </fragment>
@@ -383,5 +385,17 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/descriptionFragment"
+        android:name="sopt.motivoo.presentation.onboarding.DescriptionFragment"
+        android:label="DescriptionFragment">
+        <action
+            android:id="@+id/action_descriptionFragment_to_nickNameFragment"
+            app:destination="@id/nickNameFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
     </fragment>
 </navigation>

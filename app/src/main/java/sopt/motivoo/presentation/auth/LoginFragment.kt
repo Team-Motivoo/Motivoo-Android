@@ -100,7 +100,7 @@ class LoginFragment : BindingFragment<FragmentLoginBinding>(R.layout.fragment_lo
             .onEach { event ->
                 when (event) {
                     NavigationEvent.Home -> findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
-                    NavigationEvent.NickName -> findNavController().navigate(R.id.action_loginFragment_to_nickNameFragment)
+                    NavigationEvent.Description -> findNavController().navigate(R.id.action_loginFragment_to_descriptionFragment)
                     NavigationEvent.StartMotivoo -> findNavController().navigate(R.id.action_loginFragment_to_startMotivooFragment)
                     NavigationEvent.TermsOfUse -> findNavController().navigate(R.id.action_loginFragment_to_termsOfUseFragment)
                     NavigationEvent.Permission -> findNavController().navigate(R.id.action_loginFragment_to_permissionFragment)

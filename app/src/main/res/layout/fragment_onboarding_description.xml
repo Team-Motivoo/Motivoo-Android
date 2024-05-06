@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_onboarding_descriprion_title"
+            style="@style/H3_semi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="133dp"
+            android:text="@string/onboarding_descriprion_title"
+            android:textColor="@color/gray_900_161616"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_onboarding_descriprion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="83dp"
+            android:layout_marginEnd="3dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_onboarding_description"
+            app:layout_constraintEnd_toEndOf="@+id/tv_onboarding_descriprion_title"
+            app:layout_constraintTop_toBottomOf="@+id/tv_onboarding_descriprion_title" />
+
+        <TextView
+            android:id="@+id/tv_onboarding_descriprion"
+            style="@style/B3_med"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="91dp"
+            android:text="@string/onboarding_descriprion"
+            android:textColor="@color/gray_800_303031"
+            app:layout_constraintEnd_toEndOf="@+id/tv_onboarding_descriprion_title"
+            app:layout_constraintStart_toStartOf="@+id/tv_onboarding_descriprion_title"
+            app:layout_constraintTop_toBottomOf="@+id/iv_onboarding_descriprion" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

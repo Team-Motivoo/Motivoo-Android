@@ -1,5 +1,6 @@
 package sopt.motivoo.presentation.invitecode
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,8 +19,8 @@ class GetInviteCodeViewModel @Inject constructor(
     private val onboardingRepository: OnboardingRepository,
 ) : ViewModel() {
 
-    private val _inviteCode = MutableStateFlow<String?>(null)
-    val inviteCode get() = _inviteCode.asStateFlow()
+    private val _inviteCode = MutableLiveData<String>()
+    val inviteCode get() = _inviteCode
 
     private val _checkMatchState = MutableStateFlow<UiState<Boolean>>(UiState.Empty)
     val checkMatchState get() = _checkMatchState.asStateFlow()

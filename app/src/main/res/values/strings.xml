@@ -7,6 +7,8 @@
     <string name="withdrawal">탈퇴하기</string>
 
     <!--onboarding-->
+    <string name="onboarding_descriprion_title">맞춤 운동을 위한\n질문을 준비중이에요</string>
+    <string name="onboarding_descriprion">모든 정보는 수정이 어려워요!\n신중하게 입력해주세요.</string>
     <string name="nickname_title">별명을 알려주세요</string>
     <string name="nickname">별명</string>
     <string name="nickname_hint">별명을 입력해주세요</string>
