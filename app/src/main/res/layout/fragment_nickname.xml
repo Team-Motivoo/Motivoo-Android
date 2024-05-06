@@ -54,6 +54,7 @@
             android:maxLines="1"
             android:paddingHorizontal="20dp"
             android:paddingVertical="18dp"
+            android:inputType="text"
             android:text="@={onboardingViewModel.nickName}"
             android:textColor="@color/gray_900_161616"
             app:layout_constraintEnd_toEndOf="parent"
