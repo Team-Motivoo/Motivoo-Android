@@ -18,11 +18,11 @@ properties.load(project.rootProject.file('local.properties').newDataInputStream(
 
 
 android {
-    namespace 'sopt.motivoo'
+    namespace 'sopt.teammotivoo'
     compileSdk 34
 
     defaultConfig {
-        applicationId "sopt.motivoo"
+        applicationId "sopt.teammotivoo"
         minSdk 24
         targetSdk 34
         versionCode 1

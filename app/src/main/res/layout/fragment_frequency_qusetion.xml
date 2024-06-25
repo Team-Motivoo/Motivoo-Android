@@ -4,11 +4,11 @@
 
     <data>
 
-        <import type="sopt.motivoo.presentation.type.FrequencyType" />
+        <import type="sopt.teammotivoo.presentation.type.FrequencyType" />
 
         <variable
             name="onboardingViewModel"
-            type="sopt.motivoo.presentation.onboarding.OnboardingViewModel" />
+            type="sopt.teammotivoo.presentation.onboarding.OnboardingViewModel" />
 
     </data>
 
