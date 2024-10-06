@@ -7,7 +7,7 @@
 
         <variable
             name="userType"
-            type="sopt.motivoo.presentation.type.UserType" />
+            type="sopt.teammotivoo.presentation.type.UserType" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

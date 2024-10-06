@@ -6,7 +6,7 @@
 
         <variable
             name="onboardingViewModel"
-            type="sopt.motivoo.presentation.onboarding.OnboardingViewModel" />
+            type="sopt.teammotivoo.presentation.onboarding.OnboardingViewModel" />
 
 
     </data>
